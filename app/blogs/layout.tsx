@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
-import { Analytics } from "@vercel/analytics/react";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "👀Aditya Oswal",
-  description: "Personal Portfolio | Aditya Oswal",
+  title: "🤖Aditya Oswal",
+  description: "Work | Aditya Oswal",
 };
 
 export default function RootLayout({
@@ -19,9 +18,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
         {children}
-        <Analytics />
+        <Footer/>
       </body>
     </html>
   );
