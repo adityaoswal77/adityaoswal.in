@@ -1,11 +1,17 @@
+'use client'
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
 
+
+import Spline from '@splinetool/react-spline';
+
+
 export default function Home() {
   return (
     <>
-      <main className="flex min-h-screen flex-col items-center justify-between p-12">
+      <main className="relative flex min-h-screen flex-col items-center justify-between p-12">
+      {/* <Spline className="absolute md:hidden" scene="https://prod.spline.design/nAmsQ4yvH25fl-bD/scene.splinecode" /> */}
         <section className="relative overflow-hidden">
           <div className="relative pt-16 pb-24">
             <div className="relative z-10 container px-4 mx-auto">
@@ -16,10 +22,10 @@ export default function Home() {
                 <span className="inline-flex items-center mb-5 rounded-md bg-green-200/20 px-2 py-1 text-s font-medium text-green-600 ring-1 ring-inset ring-green-600/60">
                   Personal Website
                 </span>
-                <h1 className="mb-8 text-7xl lg:text-8xl text-white tracking-tighter">
+                <h1 className="mb-8 text-7xl lg:text-8xl text-slate-100 tracking-tighter">
                   Aditya Oswal
                 </h1>
-                <p className="mb-10 text-lg text-white md:max-w-sm mx-auto">
+                <p className="mb-10 text-lg text-slate-100 md:max-w-sm mx-auto">
                   Product Designer | Webflow Developer
                 </p>
                 <div className="flex flex-wrap justify-center -m-2">
@@ -27,7 +33,7 @@ export default function Home() {
                     <a
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-block px-8 py-4 mx-2  text-white hover:text-black tracking-tighter hover:bg-blue-500 border-2 border-white focus:border-green-400 focus:border-opacity-40 hover:border-blue-500 focus:ring-4 focus:ring-green-400 focus:ring-opacity-40 rounded-full transition duration-300"
+                      className="inline-block px-8 py-4 mx-2  text-slate-100 hover:text-black tracking-tighter hover:bg-blue-500 border-2 border-slate-50 focus:border-green-400 focus:border-opacity-40 hover:border-blue-500 focus:ring-4 focus:ring-green-400 focus:ring-opacity-40 rounded-full transition duration-300"
                       href="https://www.figma.com/proto/upYjzU2eQ4hDYXVhhvSqPn/Portfolio-Deck?page-id=0%3A1&type=design&node-id=415-443&viewport=-2824%2C-1072%2C0.19&t=ctFdwdz4IBYm11gK-1&scaling=contain&mode=design"
                     >
                       Portfolio Link
@@ -35,7 +41,7 @@ export default function Home() {
                     <a
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-block px-8 py-4 mx-2 text-white hover:text-black tracking-tighter hover:bg-blue-500 border-2 border-white focus:border-green-400 focus:border-opacity-40 hover:border-blue-500 focus:ring-4 focus:ring-green-400 focus:ring-opacity-40 rounded-full transition duration-300"
+                      className="inline-block px-8 py-4 mx-2 text-slate-100 hover:text-black tracking-tighter hover:bg-blue-500 border-2 border-slate-50 focus:border-green-400 focus:border-opacity-40 hover:border-blue-500 focus:ring-4 focus:ring-green-400 focus:ring-opacity-40 rounded-full transition duration-300"
                       href="https://drive.google.com/drive/folders/1d7JqAFL_SbR3dN9wo7B32x3Uzu-dpfzp?usp=sharing"
                     >
                       Resume
@@ -45,7 +51,7 @@ export default function Home() {
                 <div className="flex flex-wrap justify-center -m-2 pt-8">
                   <div className="w-auto p-2">
                     <a
-                      className="flex items-center justify-center text-white hover:text-black font-medium tracking-tighter hover:bg-green-400 border-2 border-white focus:border-green-400 focus:border-opacity-40 hover:border-green-400 focus:ring-4 focus:ring-green-400 focus:ring-opacity-40 rounded-full transition duration-300"
+                      className="flex items-center justify-center text-slate-100 hover:text-black font-medium tracking-tighter hover:bg-green-400 border-2 border-slate-50 focus:border-green-400 focus:border-opacity-40 hover:border-green-400 focus:ring-4 focus:ring-green-400 focus:ring-opacity-40 rounded-full transition duration-300"
                       href="https://www.linkedin.com/in/oswaladitya/"
                       style={{ width: 60, height: 60 }}
                     >
@@ -65,7 +71,7 @@ export default function Home() {
                   </div>
                   <div className="w-auto p-2">
                     <a
-                      className="flex items-center justify-center text-white hover:text-black font-medium tracking-tighter hover:bg-green-400 border-2 border-white focus:border-green-400 focus:border-opacity-40 hover:border-green-400 focus:ring-4 focus:ring-green-400 focus:ring-opacity-40 rounded-full transition duration-300"
+                      className="flex items-center justify-center text-slate-100 hover:text-black font-medium tracking-tighter hover:bg-green-400 border-2 border-slate-50 focus:border-green-400 focus:border-opacity-40 hover:border-green-400 focus:ring-4 focus:ring-green-400 focus:ring-opacity-40 rounded-full transition duration-300"
                       href="https://github.com/adityaoswal77"
                       style={{ width: 60, height: 60 }}
                     >

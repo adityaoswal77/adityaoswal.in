@@ -29,10 +29,10 @@ export default function BlogArticle() {
         <img className="absolute top-0 left-0" src="" alt="" />
         <div className="container px-4 mx-auto">
           <div className="mb-12 md:max-w-md text-center mx-auto">
-            <h2 className="mb-4 text-3xl text-white tracking-3xl">
+            <h2 className="mb-4 text-3xl text-gray-100 tracking-3xl">
               Experiences
             </h2>
-            <p className="mb-6 text-white text-opacity-60">
+            <p className="mb-6 text-gray-100 text-opacity-60">
               Random musings & A bit about me.
             </p>
             <div className="flex flex-wrap justify-center items-center -m-2">
@@ -43,7 +43,7 @@ export default function BlogArticle() {
                 />
               </div>
               <div className="w-auto p-2">
-                <p className="text-sm text-white font-medium tracking-tighter">
+                <p className="text-sm text-gray-100 font-medium tracking-tighter">
                   Aditya Oswal
                 </p>
               </div>
@@ -59,7 +59,7 @@ export default function BlogArticle() {
                 </svg>
               </div>
               <div className="w-auto p-2">
-                <p className="text-sm text-white font-medium tracking-tighter">
+                <p className="text-sm text-gray-100 font-medium tracking-tighter">
                   Short read
                 </p>
               </div>
@@ -212,7 +212,7 @@ export default function BlogArticle() {
                 <div className="flex flex-wrap justify-center -m-2">
                   <div className="w-auto p-2">
                     <a
-                      className="flex items-center justify-center text-white hover:text-black font-medium tracking-tighter hover:bg-green-400 border-2 border-white focus:border-green-400 focus:border-opacity-40 hover:border-green-400 focus:ring-4 focus:ring-green-400 focus:ring-opacity-40 rounded-full transition duration-300"
+                      className="flex items-center justify-center text-gray-100 hover:text-black font-medium tracking-tighter hover:bg-green-400 border-2 border-white focus:border-green-400 focus:border-opacity-40 hover:border-green-400 focus:ring-4 focus:ring-green-400 focus:ring-opacity-40 rounded-full transition duration-300"
                       href="https://www.linkedin.com/in/oswaladitya/"
                       style={{ width: 60, height: 60 }}
                     >
@@ -232,7 +232,7 @@ export default function BlogArticle() {
                   </div>
                   <div className="w-auto p-2">
                     <a
-                      className="flex items-center justify-center text-white hover:text-black font-medium tracking-tighter hover:bg-green-400 border-2 border-white focus:border-green-400 focus:border-opacity-40 hover:border-green-400 focus:ring-4 focus:ring-green-400 focus:ring-opacity-40 rounded-full transition duration-300"
+                      className="flex items-center justify-center text-gray-100 hover:text-black font-medium tracking-tighter hover:bg-green-400 border-2 border-white focus:border-green-400 focus:border-opacity-40 hover:border-green-400 focus:ring-4 focus:ring-green-400 focus:ring-opacity-40 rounded-full transition duration-300"
                       href="https://github.com/adityaoswal77"
                       style={{ width: 60, height: 60 }}
                     >
@@ -252,7 +252,7 @@ export default function BlogArticle() {
                   </div>
                   <div className="w-auto p-2">
                     <a
-                      className="flex items-center justify-center text-white hover:text-black font-medium tracking-tighter hover:bg-green-400 border-2 border-white focus:border-green-400 focus:border-opacity-40 hover:border-green-400 focus:ring-4 focus:ring-green-400 focus:ring-opacity-40 rounded-full transition duration-300"
+                      className="flex items-center justify-center text-gray-100 hover:text-black font-medium tracking-tighter hover:bg-green-400 border-2 border-white focus:border-green-400 focus:border-opacity-40 hover:border-green-400 focus:ring-4 focus:ring-green-400 focus:ring-opacity-40 rounded-full transition duration-300"
                       href="https://twitter.com/oswaluxd"
                       style={{ width: 60, height: 60 }}
                     >
@@ -279,7 +279,7 @@ export default function BlogArticle() {
             <span className="inline-block mb-4 text-sm text-green-400 font-medium tracking-tighter">
               The latest news
             </span>
-            <h2 className="mb-16 text-5xl lg:text-7xl xl:text-8xl text-white tracking-5xl lg:tracking-7xl xl:tracking-8xl">
+            <h2 className="mb-16 text-5xl lg:text-7xl xl:text-8xl text-gray-100 tracking-5xl lg:tracking-7xl xl:tracking-8xl">
               From the blog
             </h2>
             <div className="flex flex-wrap -m-4"> */}
@@ -293,7 +293,7 @@ export default function BlogArticle() {
                 </div>
                 <div className="flex flex-wrap items-center -m-2 mb-4">
                   <div className="w-auto p-2">
-                    <span className="text-sm text-white font-medium tracking-tighter">
+                    <span className="text-sm text-gray-100 font-medium tracking-tighter">
                       Blog Post
                     </span>
                   </div>
@@ -309,33 +309,33 @@ export default function BlogArticle() {
                     </svg>
                   </div>
                   <div className="w-auto p-2">
-                    <span className="text-sm text-white font-medium tracking-tighter">
+                    <span className="text-sm text-gray-100 font-medium tracking-tighter">
                       9 min read
                     </span>
                   </div>
                 </div> */}
           {/* <a className="group block" href="#">
-                  <h3 className="mb-4 text-3xl text-white tracking-3xl hover:underline">
+                  <h3 className="mb-4 text-3xl text-gray-100 tracking-3xl hover:underline">
                     Women in business
                   </h3>
                 </a>
-                <p className="mb-6 text-white text-opacity-60">
+                <p className="mb-6 text-gray-100 text-opacity-60">
                   Nightsable is a strategic branding agency focused on brand
                   creation
                 </p>
                 <div className="flex flex-wrap -m-1.5">
                   <div className="w-auto p-1.5">
-                    <span className="inline-block px-6 py-3.5 text-sm text-white font-medium bg-blueGray-900 hover:bg-blueGray-900 bg-opacity-30 hover:bg-opacity-40 rounded-full transition duration-300">
+                    <span className="inline-block px-6 py-3.5 text-sm text-gray-100 font-medium bg-blueGray-900 hover:bg-blueGray-900 bg-opacity-30 hover:bg-opacity-40 rounded-full transition duration-300">
                       Corporate Gifting
                     </span>
                   </div>
                   <div className="w-auto p-1.5">
-                    <span className="inline-block px-6 py-3.5 text-sm text-white font-medium bg-blueGray-900 hover:bg-blueGray-900 bg-opacity-30 hover:bg-opacity-40 rounded-full transition duration-300">
+                    <span className="inline-block px-6 py-3.5 text-sm text-gray-100 font-medium bg-blueGray-900 hover:bg-blueGray-900 bg-opacity-30 hover:bg-opacity-40 rounded-full transition duration-300">
                       Sales
                     </span>
                   </div>
                   <div className="w-auto p-1.5">
-                    <span className="inline-block px-6 py-3.5 text-sm text-white font-medium bg-blueGray-900 hover:bg-blueGray-900 bg-opacity-30 hover:bg-opacity-40 rounded-full transition duration-300">
+                    <span className="inline-block px-6 py-3.5 text-sm text-gray-100 font-medium bg-blueGray-900 hover:bg-blueGray-900 bg-opacity-30 hover:bg-opacity-40 rounded-full transition duration-300">
                       Marketing
                     </span>
                   </div>
