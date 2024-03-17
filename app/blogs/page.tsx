@@ -127,15 +127,24 @@ export default function BlogArticle() {
                   </p>
                 </div> */}
                 <h2 className="mb-4 text-3xl text-blueGray-50 tracking-3xl">
-                  A lil bit about me
+                  A bit about me.
                 </h2>
                 <h3 className="mb-9 text-xl text-gray-100 tracking-2xl">
-                  I am currently freelancing between interviews & travel.{" "}
+                  Working as a Product Designer at
+                  <span className="text-bold">
+                    <a
+                      className="text-bold text-teal-500"
+                      href="https://www.alivecor.com/"
+                    >
+                     {" "} Alivecor. {" "}
+                    </a>
+                  </span>{" "}
+                  with a stellar Product & engineering team. 
                   <span className="text-bold">
                     <a
                       className="text-bold text-teal-500"
                       href="https://www.figma.com/proto/upYjzU2eQ4hDYXVhhvSqPn/Portfolio-Deck?page-id=0%3A1&type=design&node-id=415-443&viewport=-2824%2C-1072%2C0.19&t=ctFdwdz4IBYm11gK-1&scaling=contain&mode=design"
-                    >
+                    > {" "}
                       Worked at a Design studio{" "}
                     </a>
                   </span>{" "}

@@ -27,7 +27,7 @@ export default function Footer() {
               <li className="p-5">
                 <a
                   className="inline-block text-lg font-medium text-gray-300 hover:text-white transition duration-300"
-                  href="https://github.com/adityaoswal77#"
+                  href="https://github.com/adityaoswal77"
                 >
                   GitHub
                 </a>

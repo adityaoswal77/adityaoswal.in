@@ -20,7 +20,7 @@ export default function Home() {
                   Aditya Oswal
                 </h1>
                 <p className="mb-10 text-lg text-white md:max-w-sm mx-auto">
-                  UX Designer | Webflow Developer
+                  Product Designer | Webflow Developer
                 </p>
                 <div className="flex flex-wrap justify-center -m-2">
                   <div className="w-auto mx-2">
@@ -30,7 +30,7 @@ export default function Home() {
                       className="inline-block px-8 py-4 mx-2  text-white hover:text-black tracking-tighter hover:bg-blue-500 border-2 border-white focus:border-green-400 focus:border-opacity-40 hover:border-blue-500 focus:ring-4 focus:ring-green-400 focus:ring-opacity-40 rounded-full transition duration-300"
                       href="https://www.figma.com/proto/upYjzU2eQ4hDYXVhhvSqPn/Portfolio-Deck?page-id=0%3A1&type=design&node-id=415-443&viewport=-2824%2C-1072%2C0.19&t=ctFdwdz4IBYm11gK-1&scaling=contain&mode=design"
                     >
-                      Portfolio
+                      Portfolio Link
                     </a>
                     <a
                       target="_blank"
