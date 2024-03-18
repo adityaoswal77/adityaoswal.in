@@ -115,7 +115,14 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <Footer />
+      <div className="flex flex-wrap items-center justify-between -m-8">
+          <Link href={"https://twitter.com/oswaluxd"}>
+            <div className="w-auto p-8">
+              @oswaluxd
+              {/* <img src="nightsable-assets/logos/logo.svg" alt=""/> */}
+            </div>
+          </Link>
+        </div>
     </>
   );
 }
