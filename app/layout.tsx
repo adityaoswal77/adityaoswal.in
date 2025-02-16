@@ -7,8 +7,21 @@ import Navbar from "@/components/Navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "👀Aditya Oswal",
+  title: "Aditya Oswal",
   description: "Personal Portfolio | Aditya Oswal",
+  icons: {
+    icon: [
+      {
+        url: "/icon.png",  // This should be in your public folder
+        type: "image/png",
+      },
+    ],
+    // Optional: Add apple touch icon if you want iOS support
+    apple: {
+      url: "/icon.png",  // This should be in your public folder
+      type: "image/png",
+    },
+  },
 };
 
 export default function RootLayout({

@@ -33,7 +33,7 @@ export default function BlogArticle() {
               Experiences
             </h2>
             <p className="mb-6 text-gray-100 text-opacity-60">
-              Random musings & A bit about me.
+              Random musings & A bit about me
             </p>
             <div className="flex flex-wrap justify-center items-center -m-2">
               <div className="w-auto p-2">
@@ -127,7 +127,7 @@ export default function BlogArticle() {
                   </p>
                 </div> */}
                 <h2 className="mb-4 text-3xl text-blueGray-50 tracking-3xl">
-                  A bit about me.
+                  A bit about me
                 </h2>
                 <h3 className="mb-9 text-xl text-gray-100 tracking-2xl">
                   Working as a Product Designer at
@@ -136,31 +136,33 @@ export default function BlogArticle() {
                       className="text-bold text-teal-500"
                       href="https://www.alivecor.com/"
                     >
-                     {" "} Alivecor. {" "}
+                      {" "}
+                      Alivecor.{" "}
                     </a>
                   </span>{" "}
-                  with a stellar Product & engineering team. 
+                  with a stellar Product & engineering team.
                   <span className="text-bold">
                     <a
                       className="text-bold text-teal-500"
                       href="https://www.figma.com/proto/upYjzU2eQ4hDYXVhhvSqPn/Portfolio-Deck?page-id=0%3A1&type=design&node-id=415-443&viewport=-2824%2C-1072%2C0.19&t=ctFdwdz4IBYm11gK-1&scaling=contain&mode=design"
-                    > {" "}
+                    >
+                      {" "}
                       Worked at a Design studio{" "}
                     </a>
                   </span>{" "}
                   for a short while before that.
                 </h3>
-                <h3 className="mb-9 text-xl text-gray-100 tracking-2xl">
+                {/* <h3 className="mb-9 text-xl text-gray-100 tracking-2xl">
                   I am a big fan of Sahil Bloom and his thinking & a particular
                   thing that he preaches a lot about is the concept of Luck
                   Surface Area. If I had to sum up the thinking behind LSA (yeah
                   we are doing acronyms now) It will be -
-                </h3>
+                </h3> */}
                 <div className="flex flex-wrap mb-9">
                   <div className="w-auto p-3">
                     <div className="w-0.5 bg-green-400 h-full rounded-md" />
                   </div>
-                  <div className="flex-1 mb-5 p-3">
+                  {/* <div className="flex-1 mb-5 p-3">
                     <h3 className="mb-4 text-2xl text-gray-200 tracking-2xl">
                       Your luck increases the more you work towards it. The more
                       you work, the bigger your Luck Surface Area, the more
@@ -171,12 +173,12 @@ export default function BlogArticle() {
                     {/* What this means is, what differentiates you from all the other people are out there?
                     Do peole know you ? WHY WOULD PEOPLE KNOW YOU? 
                     You have to give something to the people to remember you by. Something that shouts - This is your work, Be awed by it! */}
-                  </p>
+                  {/* </p> */}
                 </div>
-                <p className="text-xl mt-2 text-blue Gray-200 mb-9">
+                {/* <p className="text-xl mt-2 text-blue Gray-200 mb-9">
                   So yeah, This website is my try at increasing my Luck Surface
                   Area.
-                </p>
+                </p> */}
                 <p className="text-xl mt-2 text-blue Gray-200 mb-9">
                   Reachout if you want to just talk. Always up for helping :){" "}
                 </p>
@@ -256,6 +258,22 @@ export default function BlogArticle() {
                       href="https://twitter.com/oswaluxd"
                       style={{ width: 60, height: 60 }}
                     >
+                      {/* <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        shape-rendering="geometricPrecision"
+                        text-rendering="geometricPrecision"
+                        image-rendering="optimizeQuality"
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        viewBox="0 0 512 512"
+                      >
+                        <path d="M256 0c141.385 0 256 114.615 256 256S397.385 512 256 512 0 397.385 0 256 114.615 0 256 0z" />
+                        <path
+                          fill="#fff"
+                          fill-rule="nonzero"
+                          d="M318.64 157.549h33.401l-72.973 83.407 85.85 113.495h-67.222l-52.647-68.836-60.242 68.836h-33.423l78.052-89.212-82.354-107.69h68.924l47.59 62.917 55.044-62.917zm-11.724 176.908h18.51L205.95 176.493h-19.86l120.826 157.964z"
+                        />
+                      </svg> */}
                       <svg
                         width={18}
                         height={14}
@@ -275,6 +293,7 @@ export default function BlogArticle() {
               </div>
             </div>
           </div>
+
           {/* <div className="pt-16">
             <span className="inline-block mb-4 text-sm text-green-400 font-medium tracking-tighter">
               The latest news
