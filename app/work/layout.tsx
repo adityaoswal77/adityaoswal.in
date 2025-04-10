@@ -1,26 +1,29 @@
-// import type { Metadata } from "next";
-// import { Inter } from "next/font/google";
-// import Navbar from "@/components/Navbar";
-// import Footer from "@/components/Footer";
+import type { Metadata } from "next";
+import { Raleway, Roboto } from "next/font/google";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
-// const inter = Inter({ subsets: ["latin"] });
+const inter = Raleway({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"], //font weights you want to include
+});
 
-// export const metadata: Metadata = {
-//   title: "Aditya Oswal",
-//   description: "Work | Aditya Oswal",
-// };
+export const metadata: Metadata = {
+  title: "Aditya Oswal",
+  description: "Work | Aditya Oswal",
+};
 
-// export default function RootLayout({
-//   children,
-// }: {
-//   children: React.ReactNode;
-// }) {
-//   return (
-//     <html lang="en">
-//       <body className={inter.className}>
-//         {children}
-//         <Footer/>
-//       </body>
-//     </html>
-//   );
-// }
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body className={inter.className}>
+        {children}
+        <Footer/>
+      </body>
+    </html>
+  );
+}

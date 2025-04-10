@@ -1,3 +1,336 @@
+// pages/case-studies/project-name.js
+import Footer from '@/components/Footer';
+import Head from 'next/head';
+import Image from 'next/image';
+
+export default function CaseStudy() {
+  return (
+    <div className="min-h-screen bg-white text-gray-900">
+      <Head>
+        <title>Project Name - Case Study</title>
+        <meta name="description" content="A case study for Project Name" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      {/* Hero Section */}
+      <section className="pt-32 pb-16 px-6">
+        <div className="max-w-3xl mx-auto">
+          <h1 className="text-5xl font-bold mb-6">Project Name</h1>
+          <p className="text-xl text-gray-600 mb-8">
+            A brief description of the project and its significance.
+          </p>
+          <div className="grid grid-cols-2 gap-12">
+            <div>
+              <h3 className="text-sm font-medium text-gray-500 mb-2">ROLE</h3>
+              <p>Product Designer</p>
+            </div>
+            <div>
+              <h3 className="text-sm font-medium text-gray-500 mb-2">TIMELINE</h3>
+              <p>2023 - 2024</p>
+            </div>
+            <div>
+              <h3 className="text-sm font-medium text-gray-500 mb-2">CLIENT</h3>
+              <p>Company Name</p>
+            </div>
+            <div>
+              <h3 className="text-sm font-medium text-gray-500 mb-2">TEAM</h3>
+              <p>3 Designers, 4 Engineers</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Full-width Image */}
+      <section className="mb-24">
+        <div className="w-full h-[50vh] relative">
+          <Image 
+            src="/images/hero-image.jpg" 
+            alt="Project hero image"
+            fill
+            className="object-cover bg-gray-400" 
+          />
+        </div>
+      </section>
+
+      {/* Overview */}
+      <section className="px-6 mb-24">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-3xl font-semibold mb-6">Overview</h2>
+          <p className="text-lg mb-6">
+            This project aimed to solve [specific problem] for [target audience]. 
+            The main challenge was to create a solution that was both intuitive 
+            and powerful enough to handle complex workflows.
+          </p>
+          <p className="text-lg">
+            Working closely with the engineering team, we developed a system that 
+            could scale with the company &apos s growth while maintaining the simplicity 
+            that users loved about the original product.
+          </p>
+        </div>
+      </section>
+
+      {/* Problem Statement */}
+      <section className="px-6 mb-24 bg-gray-50 py-24">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-3xl font-semibold mb-6">The Problem</h2>
+          <p className="text-lg mb-6">
+            Users were struggling with [specific issues], which led to frustration 
+            and decreased productivity. The existing solution was:
+          </p>
+          <ul className="list-disc pl-6 mb-6 text-lg space-y-2">
+            <li>Too complex for new users</li>
+            <li>Missing key features needed by power users</li>
+            <li>Unable to integrate with other tools in their workflow</li>
+          </ul>
+          <p className="text-lg">
+            Our team was tasked with reimagining the experience while preserving 
+            what users already loved about the product.
+          </p>
+        </div>
+      </section>
+
+      {/* Process Section */}
+      <section className="px-6 mb-24">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-3xl font-semibold mb-12">Process</h2>
+          
+          {/* Research */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-medium mb-4">Research</h3>
+            <p className="text-lg mb-6">
+              We conducted interviews with 20 users across different segments to 
+              understand their workflows, pain points, and desired outcomes.
+            </p>
+            <div className="grid grid-cols-2 gap-6 mb-6">
+              <div className="aspect-video bg-gray-200 relative">
+                <Image 
+                  src="/images/research-1.jpg" 
+                  alt="Research session"
+                  fill
+                  className="object-cover" 
+                />
+              </div>
+              <div className="aspect-video bg-gray-200 relative">
+                <Image 
+                  src="/images/research-2.jpg" 
+                  alt="Research artifacts"
+                  fill
+                  className="object-cover" 
+                />
+              </div>
+            </div>
+            <p className="text-lg">
+              Key insights included the need for better onboarding, simplified 
+              navigation, and more powerful batch processing capabilities.
+            </p>
+          </div>
+          
+          {/* Ideation */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-medium mb-4">Ideation</h3>
+            <p className="text-lg mb-6">
+              We ran multiple design sprints to explore different approaches, 
+              focusing on the core workflows identified during research.
+            </p>
+            <div className="aspect-video bg-gray-200 mb-6 relative">
+              <Image 
+                src="/images/sketches.jpg" 
+                alt="Sketches and wireframes"
+                fill
+                className="object-cover" 
+              />
+            </div>
+            <p className="text-lg">
+              Through rapid prototyping and feedback sessions, we narrowed down to 
+              three concepts that showed the most promise.
+            </p>
+          </div>
+          
+          {/* Design System */}
+          <div>
+            <h3 className="text-2xl font-medium mb-4">Design System</h3>
+            <p className="text-lg mb-6">
+              We developed a comprehensive design system to ensure consistency 
+              across the product while enabling the team to work efficiently.
+            </p>
+            <div className="grid grid-cols-3 gap-6 mb-6">
+              <div className="aspect-square bg-gray-200 relative">
+                <Image 
+                  src="/images/components-1.jpg" 
+                  alt="Design components"
+                  fill
+                  className="object-cover" 
+                />
+              </div>
+              <div className="aspect-square bg-gray-200 relative">
+                <Image 
+                  src="/images/components-2.jpg" 
+                  alt="Color system"
+                  fill
+                  className="object-cover" 
+                />
+              </div>
+              <div className="aspect-square bg-gray-200 relative">
+                <Image 
+                  src="/images/components-3.jpg" 
+                  alt="Typography system"
+                  fill
+                  className="object-cover" 
+                />
+              </div>
+            </div>
+            <p className="text-lg">
+              The system included color palettes, typography, component libraries, 
+              and interaction patterns that could scale across multiple platforms.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Solution */}
+      <section className="px-6 mb-24 bg-gray-50 py-24">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-3xl font-semibold mb-6">The Solution</h2>
+          <p className="text-lg mb-12">
+            After multiple iterations and user testing sessions, we landed on a 
+            solution that addressed the core problems while introducing new 
+            capabilities that users didn&apos;t know they needed.
+          </p>
+          
+          <div className="mb-12">
+            <h3 className="text-2xl font-medium mb-4">Key Features</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+              <div>
+                <div className="aspect-video bg-gray-200 mb-4 relative">
+                  <Image 
+                    src="/images/feature-1.jpg" 
+                    alt="Feature 1 screenshot"
+                    fill
+                    className="object-cover" 
+                  />
+                </div>
+                <h4 className="text-xl font-medium mb-2">Smart Dashboard</h4>
+                <p className="text-lg">
+                  A personalized dashboard that adapts to the user&apos;s role and 
+                  frequently used features.
+                </p>
+              </div>
+              <div>
+                <div className="aspect-video bg-gray-200 mb-4 relative">
+                  <Image 
+                    src="/images/feature-2.jpg" 
+                    alt="Feature 2 screenshot"
+                    fill
+                    className="object-cover" 
+                  />
+                </div>
+                <h4 className="text-xl font-medium mb-2">Batch Processing</h4>
+                <p className="text-lg">
+                  Powerful tools for handling multiple items at once, with 
+                  intelligent suggestions based on past behavior.
+                </p>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              <div>
+                <div className="aspect-video bg-gray-200 mb-4 relative">
+                  <Image 
+                    src="/images/feature-3.jpg" 
+                    alt="Feature 3 screenshot"
+                    fill
+                    className="object-cover" 
+                  />
+                </div>
+                <h4 className="text-xl font-medium mb-2">Integration Hub</h4>
+                <p className="text-lg">
+                  Seamless connections with other tools in the workflow, reducing 
+                  context switching and data duplication.
+                </p>
+              </div>
+              <div>
+                <div className="aspect-video bg-gray-200 mb-4 relative">
+                  <Image 
+                    src="/images/feature-4.jpg" 
+                    alt="Feature 4 screenshot"
+                    fill
+                    className="object-cover" 
+                  />
+                </div>
+                <h4 className="text-xl font-medium mb-2">Guided Onboarding</h4>
+                <p className="text-lg">
+                  An interactive tutorial system that helps new users get 
+                  productive quickly while discovering advanced features.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Results */}
+      <section className="px-6 mb-24">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-3xl font-semibold mb-6">Impact & Results</h2>
+          <p className="text-lg mb-12">
+            The redesigned product launched in phases over six months, with careful 
+            monitoring of user adoption and feedback.
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <div className="bg-gray-50 p-8 rounded-lg">
+              <h3 className="text-4xl font-bold text-blue-500 mb-4">87%</h3>
+              <p className="text-lg">Increase in user engagement with the platform</p>
+            </div>
+            <div className="bg-gray-50 p-8 rounded-lg">
+              <h3 className="text-4xl font-bold text-blue-500 mb-4">42%</h3>
+              <p className="text-lg">Reduction in support tickets related to UX issues</p>
+            </div>
+            <div className="bg-gray-50 p-8 rounded-lg">
+              <h3 className="text-4xl font-bold text-blue-500 mb-4">3.2x</h3>
+              <p className="text-lg">Increase in user retention after the first month</p>
+            </div>
+          </div>
+          
+          <div className="bg-gray-100 p-8 rounded-lg mb-12">
+            <blockquote className="text-xl italic mb-4">
+            &quot;The new interface has completely transformed how our team works. 
+              What used to take days now takes hours, and the learning curve for 
+              new team members has dropped dramatically&quot;
+            </blockquote>
+            <cite className="text-lg">
+              — Sarah Johnson, Director of Operations at Client Company
+            </cite>
+          </div>
+          
+          <p className="text-lg">
+            The project has been recognized with industry awards for its innovative 
+            approach to complex workflow management, and has become a case study 
+            for effective user-centered design in enterprise software.
+          </p>
+        </div>
+      </section>
+
+      {/* Next Project */}
+      {/* <section className="px-6 mb-24 bg-gray-900 text-white py-24">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-4xl font-semibold mb-6">Next Case Study</h2>
+          <h3 className="text-2xl mb-4">Project Name</h3>
+          <p className="text-xl mb-8">
+            A brief description of the next project to entice the reader to continue exploring your work.
+          </p>
+          <a 
+            href="/case-studies/next-project" 
+            className="inline-block py-3 px-8 bg-white text-gray-900 rounded-lg font-medium hover:bg-gray-100 transition-colors"
+          >
+            View Case Study
+          </a>
+        </div>
+      </section> */}
+    </div>
+  )
+}
+
+
 // // // pages/work.js
 // // import Head from 'next/head';
 // // import Link from 'next/link';
