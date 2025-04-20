@@ -5,6 +5,7 @@ import React from "react";
 
 export default function Footer() {
   return (
+    <>
     <div className="flex flex-col min">
       <main className="flex-grow">
         
@@ -16,7 +17,7 @@ export default function Footer() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             <div>
-              <h4 className="text-lg font-semibold mb-4">Aditya Oswal</h4>
+              <h4 className="text-lg font-light mb-4">Aditya Oswal</h4>
               <p className="text-gray-400 mb-4">
                 Product Designer based in Bangalore, focusing on creating
                 meaningful digital experiences.
@@ -84,7 +85,7 @@ export default function Footer() {
               </div>
             </div>
             <div>
-              <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+              <h4 className="text-lg font-medium mb-4">Quick Links</h4>
               <ul className="space-y-2">
                 {/* <li>
                   <a href="/work" className="text-gray-400 hover:text-gray-200">
@@ -105,7 +106,7 @@ export default function Footer() {
               </ul>
             </div>
             <div>
-              <h4 className="text-lg font-semibold mb-4">Get in Touch</h4>
+              <h4 className="text-lg font-medium mb-4">Get in Touch</h4>
               <p className="text-gray-400 mb-4">
                 Interested in working together? Feel free to reach out.
               </p>
@@ -133,5 +134,6 @@ export default function Footer() {
         </div>
       </footer>
     </div>
+    </>
   );
 }

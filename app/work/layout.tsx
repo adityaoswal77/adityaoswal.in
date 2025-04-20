@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
-import { Raleway, Roboto } from "next/font/google";
-import Navbar from "@/components/Navbar";
+// import { Raleway } from "next/font/google";
 import Footer from "@/components/Footer";
+import '../../globals.css';
 
-const inter = Raleway({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"], //font weights you want to include
-});
+// const raleway = Raleway({
+//   subsets: ["latin"],
+//   weight: ["400", "500", "700"],
+//   display: 'swap',
+//   variable: '--font-raleway',
+// });
 
 export const metadata: Metadata = {
   title: "Aditya Oswal",
@@ -19,8 +21,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" >
+    {/* <html lang="en" className={raleway.variable}> */}
+      <body>
+      {/* <body className={`${raleway.className} font-sans`}> */}
         {children}
         <Footer/>
       </body>
