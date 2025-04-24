@@ -1,18 +1,18 @@
-'use client'
+"use client";
 
-import { ReactNode, Suspense } from 'react';
+import { ReactNode, Suspense } from "react";
 import Footer from "@/components/Footer";
-import dynamic from 'next/dynamic';
-import { FadeIn } from '@/components/animations/FadeIn';
-import { SlideIn } from '@/components/animations/SlideIn';
-import { HoverScale } from '@/components/animations/HoverScale';
-import VariableFontHoverByRandomLetter from "@/fancy/components/text/variable-font-hover-by-random-letter"
-import { BreathingText } from '@/components/animations/BreathingText';
-import { AnimatedGradient } from '@/components/background/AnimatedGradient';
+import dynamic from "next/dynamic";
+import { FadeIn } from "@/components/animations/FadeIn";
+import { SlideIn } from "@/components/animations/SlideIn";
+import { HoverScale } from "@/components/animations/HoverScale";
+import VariableFontHoverByRandomLetter from "@/fancy/components/text/variable-font-hover-by-random-letter";
+import { BreathingText } from "@/components/animations/BreathingText";
+import { AnimatedGradient } from "@/components/background/AnimatedGradient";
 
-const Spline = dynamic(() => import('@splinetool/react-spline'), {
+const Spline = dynamic(() => import("@splinetool/react-spline"), {
   ssr: false,
-  loading: () => <div className="absolute inset-0 bg-black/5" />
+  loading: () => <div className="absolute inset-0 bg-black/5" />,
 });
 
 interface SocialButtonProps {
@@ -64,7 +64,10 @@ const ActionButton = ({ href, children }: ActionButtonProps) => (
 const SocialLinks = () => (
   <FadeIn delay={0.4}>
     <div className="flex flex-wrap justify-center gap-6 pt-8">
-      <SocialButton href="https://www.linkedin.com/in/oswaladitya/" ariaLabel="LinkedIn Profile">
+      <SocialButton
+        href="https://www.linkedin.com/in/oswaladitya/"
+        ariaLabel="LinkedIn Profile"
+      >
         <svg
           width="20"
           height="20"
@@ -78,7 +81,10 @@ const SocialLinks = () => (
           />
         </svg>
       </SocialButton>
-      <SocialButton href="https://github.com/adityaoswal77" ariaLabel="GitHub Profile">
+      <SocialButton
+        href="https://github.com/adityaoswal77"
+        ariaLabel="GitHub Profile"
+      >
         <svg
           width="20"
           height="20"
@@ -108,12 +114,11 @@ export default function Home() {
             <h1 className="text-4xl md:text-6xl font-medium mb-6">
               <div className="flex items-center justify-center gap-2">
                 <span>Aditya</span>
-                <span className="w-4" />
                 <span>Oswal</span>
               </div>
             </h1>
           </FadeIn>
-          
+
           <SlideIn direction="up" delay={0.3}>
             <p className="text-xl md:text-lg mb-8 text-gray-300">
               Product Designer by the day, Dev by the night
@@ -122,8 +127,12 @@ export default function Home() {
 
           <FadeIn delay={0.4}>
             <div className="flex justify-center gap-4 mb-8">
-              <ActionButton href="https://www.figma.com/proto/upYjzU2eQ4hDYXVhhvSqPn/Portfolio-Deck?page-id=0%3A1&type=design&node-id=415-443&viewport=-2824%2C-1072%2C0.19&t=ctFdwdz4IBYm11gK-1&scaling=contain">View Portfolio</ActionButton>
-              <ActionButton href="https://drive.google.com/drive/folders/1d7JqAFL_SbR3dN9wo7B32x3Uzu-dpfzp">Resume</ActionButton>
+              <ActionButton href="https://www.figma.com/proto/upYjzU2eQ4hDYXVhhvSqPn/Portfolio-Deck?page-id=0%3A1&type=design&node-id=415-443&viewport=-2824%2C-1072%2C0.19&t=ctFdwdz4IBYm11gK-1&scaling=contain">
+                View Portfolio
+              </ActionButton>
+              <ActionButton href="https://drive.google.com/drive/folders/1d7JqAFL_SbR3dN9wo7B32x3Uzu-dpfzp">
+                Resume
+              </ActionButton>
             </div>
           </FadeIn>
 
