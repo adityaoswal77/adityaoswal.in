@@ -109,7 +109,7 @@ export default function Home() {
     <div className="min-h-screen flex flex-col">
       <main className="flex-grow flex items-center justify-center p-4 md:p-12 relative">
         <AnimatedGradient className="pointer-events-none" />
-        <div className="max-w-4xl w-full text-center relative z-10">
+        <div className="max-w-4xl w-full text-center pt-24 relative z-10">
           <FadeIn delay={0.2}>
             <h1 className="text-4xl md:text-6xl font-medium mb-6">
               <div className="flex items-center justify-center gap-2">
