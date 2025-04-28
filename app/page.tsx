@@ -113,8 +113,7 @@ export default function Home() {
           <FadeIn delay={0.2}>
             <h1 className="text-4xl md:text-6xl font-medium mb-6">
               <div className="flex items-center justify-center gap-2">
-                <span>Aditya</span>
-                <span>Oswal</span>
+                <span>Aditya ✹ Oswal</span>
               </div>
             </h1>
           </FadeIn>
