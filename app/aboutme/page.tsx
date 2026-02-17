@@ -422,7 +422,7 @@ const EducationAndRecognition = () => {
         <div className="p-8 bg-[var(--card)] rounded-[2.5rem] border border-[var(--border)]">
           <h3 className="text-[12px] uppercase tracking-[0.2em] font-bold text-indigo-500 mb-6">Achievements</h3>
           <p className="text-lg font-bold text-[var(--foreground)] leading-tight italic">
-            "{achievement}"
+            &ldquo;{achievement}&rdquo;
           </p>
         </div>
       </div>
