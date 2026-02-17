@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { PROJECTS } from '../page';
+import { PROJECTS } from '@/lib/data';
 import { ArrowUpRight } from 'lucide-react';
 
 export default function WorkPage() {

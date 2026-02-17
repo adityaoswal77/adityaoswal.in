@@ -28,6 +28,7 @@ uniform float waveFrequency;
 uniform float waveAmplitude;
 uniform vec3 waveColor;
 uniform vec3 baseColor;
+uniform vec3 hoverColor;
 uniform vec2 mousePos;
 uniform int enableMouseInteraction;
 uniform float mouseRadius;
@@ -88,14 +89,16 @@ void main() {
   uv -= 0.5;
   uv.x *= resolution.x / resolution.y;
   float f = pattern(uv, time, waveSpeed, waveFrequency, waveAmplitude);
+  vec3 col = mix(baseColor, waveColor, f);
+  
   if (enableMouseInteraction == 1) {
     vec2 mouseNDC = (mousePos / resolution - 0.5) * vec2(1.0, -1.0);
     mouseNDC.x *= resolution.x / resolution.y;
     float dist = length(uv - mouseNDC);
     float effect = 1.0 - smoothstep(0.0, mouseRadius, dist);
-    f -= 0.5 * effect;
+    col = mix(col, hoverColor, effect);
   }
-  vec3 col = mix(baseColor, waveColor, f);
+  
   gl_FragColor = vec4(col, 1.0);
 }
 `;
@@ -187,6 +190,7 @@ interface WaveUniforms {
     waveAmplitude: THREE.Uniform<number>;
     waveColor: THREE.Uniform<THREE.Color>;
     baseColor: THREE.Uniform<THREE.Color>;
+    hoverColor: THREE.Uniform<THREE.Color>;
     mousePos: THREE.Uniform<THREE.Vector2>;
     enableMouseInteraction: THREE.Uniform<number>;
     mouseRadius: THREE.Uniform<number>;
@@ -198,6 +202,7 @@ interface DitheredWavesProps {
     waveAmplitude: number;
     waveColor: [number, number, number];
     baseColor: [number, number, number];
+    hoverColor: [number, number, number];
     colorNum: number;
     pixelSize: number;
     disableAnimation: boolean;
@@ -211,6 +216,7 @@ function DitheredWaves({
     waveAmplitude,
     waveColor,
     baseColor,
+    hoverColor,
     colorNum,
     pixelSize,
     disableAnimation,
@@ -229,6 +235,7 @@ function DitheredWaves({
         waveAmplitude: new THREE.Uniform(waveAmplitude),
         waveColor: new THREE.Uniform(new THREE.Color(...waveColor)),
         baseColor: new THREE.Uniform(new THREE.Color(...baseColor)),
+        hoverColor: new THREE.Uniform(new THREE.Color(...hoverColor)),
         mousePos: new THREE.Uniform(new THREE.Vector2(0, 0)),
         enableMouseInteraction: new THREE.Uniform(enableMouseInteraction ? 1 : 0),
         mouseRadius: new THREE.Uniform(mouseRadius)
@@ -263,6 +270,10 @@ function DitheredWaves({
 
         if (u.baseColor.value.r !== baseColor[0] || u.baseColor.value.g !== baseColor[1] || u.baseColor.value.b !== baseColor[2]) {
             u.baseColor.value.set(...baseColor);
+        }
+
+        if (u.hoverColor.value.r !== hoverColor[0] || u.hoverColor.value.g !== hoverColor[1] || u.hoverColor.value.b !== hoverColor[2]) {
+            u.hoverColor.value.set(...hoverColor);
         }
 
         u.enableMouseInteraction.value = enableMouseInteraction ? 1 : 0;
@@ -314,6 +325,7 @@ interface DitherProps {
     waveAmplitude?: number;
     waveColor?: [number, number, number];
     baseColor?: [number, number, number];
+    hoverColor?: [number, number, number];
     colorNum?: number;
     pixelSize?: number;
     disableAnimation?: boolean;
@@ -327,6 +339,7 @@ export default function Dither({
     waveAmplitude = 0.3,
     waveColor = [0.5, 0.5, 0.5],
     baseColor = [0, 0, 0],
+    hoverColor = [0, 0, 0],
     colorNum = 4,
     pixelSize = 4,
     disableAnimation = false,
@@ -339,26 +352,26 @@ export default function Dither({
     return (
         <div ref={containerRef} className="w-full h-full relative">
             <Canvas
+
                 className="w-full h-full"
                 camera={{ position: [0, 0, 6] }}
                 dpr={1}
-                gl={{ antialias: true, preserveDrawingBuffer: true }}
+                gl={{ antialias: true, preserveDrawingBuffer: true, alpha: true }}
                 frameloop={isInView ? "always" : "never"}
             >
-                {isInView && (
-                    <DitheredWaves
-                        waveSpeed={waveSpeed}
-                        waveFrequency={waveFrequency}
-                        waveAmplitude={waveAmplitude}
-                        waveColor={waveColor}
-                        baseColor={baseColor}
-                        colorNum={colorNum}
-                        pixelSize={pixelSize}
-                        disableAnimation={disableAnimation}
-                        enableMouseInteraction={enableMouseInteraction}
-                        mouseRadius={mouseRadius}
-                    />
-                )}
+                <DitheredWaves
+                    waveSpeed={waveSpeed}
+                    waveFrequency={waveFrequency}
+                    waveAmplitude={waveAmplitude}
+                    waveColor={waveColor}
+                    baseColor={baseColor}
+                    hoverColor={hoverColor}
+                    colorNum={colorNum}
+                    pixelSize={pixelSize}
+                    disableAnimation={disableAnimation || !isInView}
+                    enableMouseInteraction={enableMouseInteraction}
+                    mouseRadius={mouseRadius}
+                />
             </Canvas>
         </div>
     );

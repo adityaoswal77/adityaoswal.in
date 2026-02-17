@@ -14,70 +14,11 @@ import { useTheme } from "next-themes";
 import dynamic from "next/dynamic";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { PROJECTS } from "@/lib/data";
 
 const Dither = dynamic(() => import("@/components/background/Dither"), {
   ssr: false,
 });
-
-
-
-// --- Type Declarations ---
-declare global {
-  interface Window {
-    gsap?: any;
-    ScrollTrigger?: any;
-  }
-}
-
-// --- Constants & Data ---
-
-export const PROJECTS = [
-  {
-    id: 1,
-    title: "Guest User EKG Recording",
-    category: "0 → 1 Product Design",
-    span: "md:col-span-2",
-    description: "Designing a new way to record EKG readings for patients.",
-    color: "from-neutral-900",
-    text: "text-white",
-    href: "/work/guest-user",
-    image: "/assets/img1.jpg",
-  },
-  {
-    id: 2,
-    title: "Year In Review",
-    category: "Growth Design",
-    span: "md:col-span-1",
-    description: "Year in review design for our Premium subscribers.",
-    color: "from-indigo-600",
-    text: "text-black",
-    href: "/work/year-in-review",
-    image: "/assets/img2.jpg",
-  },
-  {
-    id: 3,
-    title: "Kardia Design System",
-    category: "Design System",
-    span: "md:col-span-1",
-    description: "Consumer mobile app design system.",
-    color: "from-blue-600",
-    text: "text-black",
-    href: "/work/kardia-design-system",
-    image: "/assets/img3.jpg",
-  },
-  {
-    id: 4,
-    title: "Website Redesign",
-    category: "Design & Development",
-    span: "md:col-span-2",
-    description:
-      "Redesign and Webflow development of the website for a software company.",
-    color: "from-stone-800",
-    text: "text-white",
-    href: "/work/website-redesign",
-    image: "/assets/img4.jpg",
-  },
-];
 
 // --- Sub-Components ---
 
@@ -99,7 +40,8 @@ const Hero = () => {
 
   // Dither colors
   const baseColor: [number, number, number] = isLight ? [0.976, 0.973, 0.965] : [0, 0, 0]; // #f9f8f6 vs #000000
-  const waveColor: [number, number, number] = isLight ? [0.86, 0.86, 0.82] : [0.3, 0.4, 0.5]; // light gray vs indigo/blue
+  const waveColor: [number, number, number] = isLight ? [0.45, 0.45, 0.45] : [0.3, 0.4, 0.5]; // darker gray for visibility
+  const hoverColor: [number, number, number] = isLight ? [0.3, 0.3, 0.3] : [0.4, 0.5, 0.8];
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -125,11 +67,14 @@ const Hero = () => {
         <Dither
           baseColor={baseColor}
           waveColor={waveColor}
-          colorNum={isLight ? 4 : 5}
-          waveSpeed={isLight ? 0.02 : 0.03}
-          waveFrequency={isLight ? 1.0 : 1.2}
-          waveAmplitude={isLight ? 0.1 : 0.15}
-          pixelSize={isLight ? 8 : 6}
+          hoverColor={hoverColor}
+          waveSpeed={0.01}
+          waveFrequency={isLight ? 3 : 3}
+          waveAmplitude={isLight ? 0.6 : 0.6}
+          colorNum={8}
+          pixelSize={2}
+          enableMouseInteraction={true}
+          mouseRadius={0.4}
         />
       </div>
       <div className="atmospheric-glow z-[1]" />
@@ -142,7 +87,7 @@ const Hero = () => {
         >
           <div className="w-1.5 h-1.5 rounded-full bg-violet-900 animate-pulse" />
           <span className="text-[14px]  uppercase tracking-[0.1em] font-bold text-[var(--muted)]">
-            Available for znew projects
+            Available for new projects
           </span>
         </div>
 
@@ -257,27 +202,19 @@ const BentoGrid = () => {
           {PROJECTS.map((project) => {
             const CardContent = (
               <div className="relative h-full w-full p-8 flex flex-col justify-end overflow-hidden group">
-                {/* Hover Gradient Background */}
-                <div className={`absolute inset-0 z-0 bg-gradient-to-br ${project.color} to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 ease-out`} />
+                {/* Background Color Base */}
+                <div className={`absolute inset-0 z-0 bg-[var(--card)] transition-colors duration-700`} />
 
-                {/* Commented out Image for future use */}
-                {/* 
-                <div className={`absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-110 ${project.color} opacity-40`}>
-                  {(project as any).image && (
-                    <Image
-                      src={(project as any).image}
-                      alt={project.title}
-                      fill
-                      className="object-cover"
-                    />
-                  )}
-                </div>
-                */}
+                {/* Hover Gradient Background - Increased z-index and removed blend mode for visibility */}
+                <div className={`absolute inset-0 z-20 bg-gradient-to-br ${project.color} to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 ease-out`} />
 
-                {/* Overlay Gradient (static) */}
-                <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 via-black/10 to-transparent group-hover:opacity-50 transition-opacity duration-700" />
+                {/* Secondary Glowing Effect on Hover */}
+                <div className={`absolute -inset-[100%] z-20 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08),transparent_50%)] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none`} />
 
-                <div className="relative z-20">
+                {/* Static Overlay Gradient - Moved to z-10 so it's behind the hover gradient */}
+                <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/90 via-black/20 to-transparent transition-opacity duration-700" />
+
+                <div className="relative z-30">
                   {/* Refined Pill Container */}
                   <div className="mb-4 w-fit px-4 py-1.5 rounded-full border border-white/20 bg-white/[0.08] backdrop-blur-md flex items-center gap-2 opacity-0 -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out">
                     <span className="text-[12px] font-mono font-bold uppercase tracking-widest text-white">
@@ -289,8 +226,8 @@ const BentoGrid = () => {
                   </h3>
                 </div>
 
-                <div className="absolute top-8 right-8 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-black">
+                <div className="absolute top-8 right-8 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]">
                     <ArrowUpRight className="w-6 h-6" />
                   </div>
                 </div>
@@ -301,9 +238,11 @@ const BentoGrid = () => {
               <Link
                 key={project.id}
                 href={project.href || "#"}
-                className={`project-card block relative h-[500px] overflow-hidden rounded-[.5rem] border border-[var(--border)] bg-[var(--card)] transition-all duration-500 hover:border-[var(--foreground)]/20 hover:shadow-2xl ${project.span}`}
+                className={`project-card block relative h-[500px] overflow-hidden rounded-[1rem] border border-[var(--border)] bg-[var(--card)] transition-all duration-500 hover:border-[var(--foreground)]/30 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] ${project.span}`}
               >
-                {CardContent}
+                <div className="h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.02]">
+                  {CardContent}
+                </div>
               </Link>
             );
           })}
@@ -457,13 +396,13 @@ const Contact = () => {
 export default function Home() {
 
   return (
-    <div className="font-sans antialiased text-[var(--foreground)] selection:bg-indigo-500 selection:text-white">
+    <div className="font-sans antialiased text-[var(--foreground)] selection:bg-indigo-500 selection:text-white" >
       <main className="w-full">
         <Hero />
         <BentoGrid />
         {/* <Expertise /> */}
         {/* <Contact /> */}
       </main>
-    </div>
+    </div >
   );
 }

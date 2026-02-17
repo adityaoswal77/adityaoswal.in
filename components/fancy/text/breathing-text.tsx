@@ -1,7 +1,7 @@
 "use client"
 
 import { ElementType } from "react"
-import { motion, Transition, Variants } from "motion/react"
+import { motion, Transition, Variants } from "framer-motion"
 
 import { cn } from "@/lib/utils"
 
@@ -96,7 +96,7 @@ const BreathingText = ({
   }
 
   const letters = String(children).split("")
-  const ElementTag = as
+  const ElementTag = as as any
 
   return (
     <ElementTag

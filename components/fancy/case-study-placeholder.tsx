@@ -30,7 +30,9 @@ const CaseStudyPlaceholder = () => {
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                     <a
-                        href="mailto:contact@adityaoswal.in"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href="https://www.linkedin.com/in/oswaladitya/"
                         className="group relative flex items-center gap-3 px-8 py-4 bg-[var(--foreground)] text-[var(--background)] rounded-full font-bold uppercase tracking-widest text-sm hover:scale-105 transition-all duration-300"
                     >
                         <Mail className="w-5 h-5" />

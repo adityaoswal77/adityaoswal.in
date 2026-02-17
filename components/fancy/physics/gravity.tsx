@@ -96,7 +96,8 @@ export const MatterBody = ({
 
   useEffect(() => {
     if (!elementRef.current || !context) return
-    context.registerElement(idRef.current, elementRef.current, {
+    const id = idRef.current
+    context.registerElement(id, elementRef.current, {
       children,
       matterBodyOptions,
       bodyType,
@@ -108,8 +109,8 @@ export const MatterBody = ({
       ...props,
     })
 
-    return () => context.unregisterElement(idRef.current)
-  }, [props, children, matterBodyOptions, isDraggable])
+    return () => context.unregisterElement(id)
+  }, [props, children, matterBodyOptions, isDraggable, angle, bodyType, context, sampleLength, x, y])
 
   return (
     <div
@@ -198,7 +199,7 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
           })
         } else {
           body = Bodies.rectangle(x, y, width, height, {
-            ...props.matterBodyOptions,
+            ...(props.matterBodyOptions as any),
             angle: angle,
             render: {
               fillStyle: debug ? "#888888" : "#00000000",
@@ -231,9 +232,8 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
         const { x, y } = body.position
         const rotation = body.angle * (180 / Math.PI)
 
-        element.style.transform = `translate(${
-          x - element.offsetWidth / 2
-        }px, ${y - element.offsetHeight / 2}px) rotate(${rotation}deg)`
+        element.style.transform = `translate(${x - element.offsetWidth / 2
+          }px, ${y - element.offsetHeight / 2}px) rotate(${rotation}deg)`
       })
 
       frameId.current = requestAnimationFrame(updateElements)
@@ -304,13 +304,13 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
 
       const topWall = addTopWall
         ? Bodies.rectangle(width / 2, -10, width, 20, {
-            isStatic: true,
-            friction: 1,
-            render: {
-              visible: debug,
-            },
-          })
-        : null
+          isStatic: true,
+          friction: 1,
+          render: {
+            visible: debug,
+          },
+        })
+        : undefined
 
       if (topWall) {
         walls.push(topWall)
@@ -463,7 +463,7 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
       })
       updateElements()
       handleResize()
-    }, [])
+    }, [canvasSize.height, canvasSize.width, handleResize, stopEngine, updateElements])
 
     useImperativeHandle(
       ref,
@@ -472,7 +472,7 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
         stop: stopEngine,
         reset,
       }),
-      [startEngine, stopEngine]
+      [startEngine, stopEngine, reset]
     )
 
     useEffect(() => {
