@@ -165,11 +165,17 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
         const x = calculatePosition(props.x, canvasRect.width, width)
         const y = calculatePosition(props.y, canvasRect.height, height)
 
+        // Filter out null values from matterBodyOptions
+        const bodyOptions = props.matterBodyOptions ? 
+          Object.fromEntries(
+            Object.entries(props.matterBodyOptions).filter(([_, v]) => v !== null)
+          ) as Matter.IBodyDefinition : {}
+
         let body
         if (props.bodyType === "circle") {
           const radius = Math.max(width, height) / 2
           body = Bodies.circle(x, y, radius, {
-            ...props.matterBodyOptions,
+            ...bodyOptions,
             angle: angle,
             render: {
               fillStyle: debug ? "#888888" : "#00000000",
@@ -188,7 +194,7 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
           })
 
           body = Bodies.fromVertices(x, y, vertexSets, {
-            ...props.matterBodyOptions,
+            ...bodyOptions,
             angle: angle,
             render: {
               fillStyle: debug ? "#888888" : "#00000000",
@@ -198,7 +204,7 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
           })
         } else {
           body = Bodies.rectangle(x, y, width, height, {
-            ...props.matterBodyOptions,
+            ...bodyOptions,
             angle: angle,
             render: {
               fillStyle: debug ? "#888888" : "#00000000",
