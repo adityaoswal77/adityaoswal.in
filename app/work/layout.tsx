@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 // import { Raleway } from "next/font/google";
-import Footer from "@/components/Footer";
 
 // const raleway = Raleway({
 //   subsets: ["latin"],
@@ -14,19 +13,14 @@ export const metadata: Metadata = {
   description: "Work | Aditya Oswal",
 };
 
-export default function RootLayout({
+export default function WorkLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" >
-    {/* <html lang="en" className={raleway.variable}> */}
-      <body>
-      {/* <body className={`${raleway.className} font-sans`}> */}
-        {children}
-        <Footer/>
-      </body>
-    </html>
+    <>
+      {children}
+    </>
   );
 }

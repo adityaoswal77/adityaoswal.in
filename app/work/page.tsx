@@ -1,118 +1,79 @@
 'use client';
 
-// pages/index.js
-import Head from 'next/head';
+import Link from 'next/link';
+import { PROJECTS } from '../page';
+import { ArrowUpRight } from 'lucide-react';
 
-export default function Home() {
+export default function WorkPage() {
   return (
-    <div className="min-h-screen bg-gray-100">
-      <Head>
-        <title>Aditya Oswal</title>
-        <meta name="description" content="Aditya Oswal's personal page" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] selection:bg-indigo-500 selection:text-white transition-colors duration-300">
+      <div className="atmospheric-glow opacity-50" />
 
-      <main className="min-h-screen flex flex-col">
-        {/* Top navigation */}
-        <nav className="w-full py-6 px-8">
-          <div className="flex justify-between items-center text-sm text-gray-500">
-            <div className="flex space-x-24">
-              <div>1. Bio</div>
-              <div>2. Projects</div>
-            </div>
-            <div className="flex-grow text-center">3. CV</div>
-            <div className="flex space-x-24">
-              <div>4. Contact</div>
-              <div>5. Social</div>
-            </div>
+      <div className="max-w-7xl mx-auto px-6 pt-32 pb-24 relative z-10">
+        <div className="mb-20">
+          <div className="flex items-center gap-2 mb-6">
+            <div className="w-1.5 h-1.5 rounded-full bg-violet-500" />
+            <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-[var(--muted)]">
+              Portfolio
+            </span>
           </div>
-        </nav>
-
-        {/* Main content - centered text */}
-        <div className="flex-grow flex items-end justify-center pb-16">
-          <h1 className="text-8xl font-bold tracking-tight text-gray-900">
-            ADITYA OSWAL
+          <h1 className="text-6xl md:text-[8rem] font-black uppercase tracking-normal leading-[0.85] text-[var(--foreground)]">
+            Selected
+            <br />
+            <span className="italic font-light text-[var(--muted)]">Works</span>
           </h1>
+          <p className="mt-12 text-xl text-[var(--muted)] font-medium max-w-lg">
+            A deep dive into my process, from initial concepts to polished digital products.
+          </p>
         </div>
-      </main>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {PROJECTS.map((project) => {
+            const CardContent = (
+              <div className="relative h-full w-full p-10 flex flex-col justify-end overflow-hidden group">
+                {/* Hover Gradient Background */}
+                <div className={`absolute inset-0 z-0 bg-gradient-to-br ${project.color} to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 ease-out`} />
+
+                {/* Commented out Background Image for future use */}
+                {/* 
+                <div className={`absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-110 ${project.color} opacity-40`} />
+                */}
+
+                {/* Overlay Gradient (static) */}
+                <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 via-black/10 to-transparent group-hover:opacity-50 transition-opacity duration-700" />
+
+                <div className="relative z-20">
+                  {/* Refined Pill Container */}
+                  <div className="mb-4 w-fit px-4 py-1.5 rounded-full border border-white/20 bg-white/[0.08] backdrop-blur-md flex items-center gap-2 opacity-0 -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out">
+                    <span className="text-[12px] font-mono font-bold uppercase tracking-widest text-white">
+                      {project.category}
+                    </span>
+                  </div>
+                  <h3 className="text-4xl font-black uppercase leading-none tracking-tighter text-white group-hover:translate-x-1 transition-transform duration-300">
+                    {project.title}
+                  </h3>
+                </div>
+
+                <div className="absolute top-10 right-10 z-20 opacity-0 group-hover:opacity-100 duration-300 translate-y-2 group-hover:translate-y-0 transition-all">
+                  <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center text-black shadow-xl">
+                    <ArrowUpRight className="w-7 h-7" />
+                  </div>
+                </div>
+              </div>
+            );
+
+            return (
+              <Link
+                key={project.id}
+                href={project.href || "#"}
+                className={`block relative h-[550px] overflow-hidden rounded-[.5rem] border border-[var(--border)] bg-[var(--card)] transition-all duration-500 hover:border-[var(--foreground)]/20 hover:shadow-2xl ${project.span}`}
+              >
+                {CardContent}
+              </Link>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 }
-
-// import Link from 'next/link';
-// import Image from 'next/image';
-
-// const caseStudies = [
-//   {
-//     id: 'project-name',
-//     title: 'Kardia Guest Recording flow',
-//     description: 'Kardia Guest Recording flow.',
-//     image: '/images/hero-image.jpg',
-//     tags: ['UX Design', 'Product Design', 'Web Development'],
-//     year: '2023'
-//   },
-//   {
-//     id: 'project-2',
-//     title: 'Project 2',
-//     description: 'Another project description showcasing different work.',
-//     image: '/images/hero-image.jpg',
-//     tags: ['UI Design', 'Mobile App', 'User Research'],
-//     year: '2022'
-//   },
-//   {
-//     id: 'project-3',
-//     title: 'Project 3',
-//     description: 'A third project highlighting diverse skills and experience.',
-//     image: '/images/hero-image.jpg',
-//     tags: ['Branding', 'Visual Design', 'Strategy'],
-//     year: '2021'
-//   }
-// ];
-
-// export default function Work() {
-//   return (
-//     <div className="min-h-screen bg-white text-gray-900">
-//       <div className="max-w-7xl mx-auto px-6 py-24">
-//         <h1 className="text-4xl font-bold mb-12">Selected Work</h1>
-        
-//         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-//           {caseStudies.map((project) => (
-//             <Link 
-//               href={`/work/${project.id}`} 
-//               key={project.id}
-//               className="group"
-//             >
-//               <div className="relative aspect-video mb-4 overflow-hidden rounded-lg">
-//                 <Image
-//                   src={project.image}
-//                   alt={project.title}
-//                   fill
-//                   className="object-cover transition-transform duration-300 group-hover:scale-105"
-//                 />
-//               </div>
-//               <div className="space-y-2">
-//                 <div className="flex justify-between items-start">
-//                   <h2 className="text-xl font-semibold group-hover:text-blue-600 transition-colors">
-//                     {project.title}
-//                   </h2>
-//                   <span className="text-sm text-gray-500">{project.year}</span>
-//                 </div>
-//                 <p className="text-gray-600">{project.description}</p>
-//                 <div className="flex flex-wrap gap-2">
-//                   {project.tags.map((tag) => (
-//                     <span 
-//                       key={tag}
-//                       className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded"
-//                     >
-//                       {tag}
-//                     </span>
-//                   ))}
-//                 </div>
-//               </div>
-//             </Link>
-//           ))}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
