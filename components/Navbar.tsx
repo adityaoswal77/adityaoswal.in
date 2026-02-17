@@ -37,7 +37,7 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-4xl px-4 pointer-events-none">
-      <div className="flex items-center justify-between w-full h-14 px-6 bg-[var(--card)] backdrop-blur-md border border-[var(--border)] rounded-full pointer-events-auto shadow-2xl transition-colors duration-300">
+      <div className="flex items-center justify-between w-full h-14 px-6 bg-[var(--card)]/90 md:bg-[var(--card)] backdrop-blur-xl border border-[var(--border)] rounded-full pointer-events-auto shadow-2xl transition-colors duration-300">
         {/* Logo Container */}
         <div className="flex items-center text-[var(--foreground)]">
           <Link href="/" className="flex items-center font-bold text-lg tracking-tighter uppercase">
@@ -165,7 +165,7 @@ export default function Navbar() {
                         initial={{ opacity: 0, scale: 0.95, y: -20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: -20 }}
-                        className="absolute top-full left-0 right-0 mt-4 p-4 bg-[var(--background)]/90 backdrop-blur-xl rounded-3xl border border-[var(--border)] shadow-2xl"
+                        className="absolute top-full left-0 right-0 mt-4 p-4 bg-white/70 dark:bg-black/10 backdrop-blur-3xl rounded-3xl border border-[var(--border)] shadow-2xl transition-colors duration-300"
                       >
                         <div className="space-y-1">
                           {navigation.map((item) => (

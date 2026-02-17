@@ -54,6 +54,36 @@ body {
   color: var(--foreground);
   font-family: var(--font-inter);
   transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: default;
+}
+
+/* Base interactive elements */
+a,
+button,
+[role="button"],
+.interactive-element {
+  cursor: pointer;
+}
+
+/* Input elements that SHOULD show text cursor */
+input,
+textarea,
+[contenteditable="true"] {
+  cursor: text;
+}
+
+/* Ensure headings and text don't trigger text cursor */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+div,
+li {
+  cursor: inherit;
 }
 
 /* Large Headings - Instrument Serif */

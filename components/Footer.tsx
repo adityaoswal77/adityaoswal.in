@@ -9,7 +9,7 @@ export default function Footer() {
       <div className="atmospheric-glow opacity-30" />
 
       <div className="relative z-10 flex flex-col gap-12 pt-12">
-        <h2 className="max-w-5xl text-6xl md:text-9xl lg:text-[11rem] font-black uppercase leading-[0.8] tracking-tighter text-[var(--foreground)]">
+        <h2 className="max-w-5xl text-6xl md:text-9xl lg:text-[11rem] font-black uppercase leading-[0.8] tracking-tight text-[var(--foreground)]">
           Let&apos;s build <br />
           <span
             className="cursor-pointer italic font-light text-[var(--muted)] hover:text-[var(--foreground)] transition-colors duration-500 underline decoration-indigo-500 decoration-[6px] underline-offset-8"
@@ -19,8 +19,8 @@ export default function Footer() {
         </h2>
       </div>
 
-      <div className="relative z-10 mt-32 flex flex-col items-start justify-between gap-16 border-t border-[var(--border)] pt-16 md:flex-row md:items-end">
-        <div className="flex flex-col gap-6">
+      <div className="relative z-10 mt-32 flex flex-col items-center justify-between gap-16 border-t border-[var(--border)] pt-16 md:flex-row md:items-end">
+        <div className="flex flex-col gap-6 items-center md:items-start">
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] font-bold text-[var(--muted)]">
             Say Hello
           </span>
@@ -57,7 +57,7 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="text-right space-y-2">
+        <div className="text-center md:text-right space-y-2">
           <p className="font-mono text-[10px] text-[var(--muted)] uppercase tracking-widest">
             © {new Date().getFullYear()} Aditya Oswal
           </p>

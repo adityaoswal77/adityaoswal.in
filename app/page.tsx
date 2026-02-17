@@ -15,6 +15,7 @@ import dynamic from "next/dynamic";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { PROJECTS } from "@/lib/data";
+import Collaborations from "@/components/Collaborations";
 
 const Dither = dynamic(() => import("@/components/background/Dither"), {
   ssr: false,
@@ -79,7 +80,7 @@ const Hero = () => {
       </div>
       <div className="atmospheric-glow z-[1]" />
 
-      <div className="relative z-10 flex flex-col items-center text-center max-w-4xl">
+      <div className="relative z-10 flex flex-col items-center text-center max-w-4xl pointer-events-none">
         {/* Badge */}
         <div
           ref={badgeRef}
@@ -114,7 +115,7 @@ const Hero = () => {
           Senior UI/UX Designer & Frontend Architect specialized in building high-end interfaces that define the future of the web.
         </p> */}
         {/* Actions */}
-        <div ref={actionsRef} className="flex flex-col sm:flex-row items-center gap-4">
+        <div ref={actionsRef} className="flex flex-col sm:flex-row items-center gap-4 pointer-events-auto">
           <Link
             href="/#work"
             className="group relative flex items-center gap-2 bg-[var(--foreground)] text-[var(--background)] px-8 py-4 rounded-2xl font-bold uppercase text-[14px] tracking-wider hover:opacity-90 transition-all"
@@ -143,7 +144,7 @@ const Hero = () => {
           const bentoGrid = document.querySelector(".bento-grid-section");
           bentoGrid?.scrollIntoView({ behavior: "smooth" });
         }}
-        className="absolute bottom-10 animate-bounce text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
+        className="absolute bottom-10 animate-bounce text-[var(--muted)] hover:text-[var(--foreground)] transition-colors z-20 pointer-events-auto"
       >
         <ArrowDown className="w-6 h-6" />
       </button>
@@ -194,7 +195,7 @@ const BentoGrid = () => {
             </h2>
           </div>
           <p className="max-w-xs text-[var(--muted)] font-medium md:text-right">
-            Some projects where design meets functionality to solve complex problems.
+            Some projects are work in progress, Reachout to know more!
           </p>
         </div>
 
@@ -399,6 +400,7 @@ export default function Home() {
     <div className="font-sans antialiased text-[var(--foreground)] selection:bg-indigo-500 selection:text-white" >
       <main className="w-full">
         <Hero />
+        <Collaborations />
         <BentoGrid />
         {/* <Expertise /> */}
         {/* <Contact /> */}
