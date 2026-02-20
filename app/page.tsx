@@ -95,7 +95,7 @@ const Hero = () => {
         {/* Headline */}
         <div ref={headingRef} className="mb-8">
           <h1 className="text-6xl md:text-8xl lg:text-[8rem] font-semibold leading-[0.9] tracking-wide text-[var(--foreground)]">
-            I'm Aditya,
+            I&apos;m Aditya,
             <br />
             <span className="italic font-light text-[var(--muted)] tracking-normal capitalize"> Product designer + Engineer</span>
           </h1>

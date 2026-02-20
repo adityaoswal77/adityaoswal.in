@@ -22,7 +22,7 @@ const Collaborations = () => {
         <div className="w-full py-32 bg-[var(--background)] border-y border-[var(--border)] overflow-hidden">
             <div className="max-w-7xl mx-auto px-6 mb-12 text-center md:text-left">
                 <h2 className="text-xl flex justify-center  tracking-[0.1em] font-bold text-[var(--muted)]">
-                    Some companies I've had the pleasure to work with
+                    Some companies I&apos;ve had the pleasure to work with
                 </h2>
             </div>
 
