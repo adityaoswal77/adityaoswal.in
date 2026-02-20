@@ -2,7 +2,7 @@ export const PROJECTS = [
     {
         id: 1,
         title: "Guest User EKG Recording",
-        category: "0 → 1 Product Design",
+        category: "Mobile Design",
         span: "md:col-span-2",
         description: "Designing a new way to record EKG readings for patients.",
         color: "from-amber-600",
@@ -35,7 +35,7 @@ export const PROJECTS = [
     {
         id: 4,
         title: "Website Redesign",
-        category: "Design & Development",
+        category: "Web Design",
         span: "md:col-span-2",
         description:
             "Redesign and Webflow development of the website for a software company.",

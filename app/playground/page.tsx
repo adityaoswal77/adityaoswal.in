@@ -1,371 +1,269 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
-import { ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
-import VariableFontHoverByRandomLetter from '@/fancy/components/text/variable-font-hover-by-random-letter';
-import CircularText from '@/components/CircularText';
+import React, { useState } from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
 
-// --- Type Declarations ---
-declare global {
-  interface Window {
-    gsap?: any;
-    ScrollTrigger?: any;
-  }
-}
+// --- Gallery Data ---
+// To add/remove items: edit this array.
+// 'span' can be 1, 2, or 3 for column width in the masonry grid.
+// 'tall' makes a card taller.
 
-// --- Components ---
+const GALLERY_ITEMS = [
+  {
+    id: 1,
+    src: "/assets/img1.jpg",
+    alt: "EKG Guest User Flow",
+    label: "Guest EKG Flow",
+    tag: "Mobile Design",
+    tall: true,
+    span: 2,
+  },
+  {
+    id: 2,
+    src: "/assets/img2.jpg",
+    alt: "Year In Review",
+    label: "Year In Review",
+    tag: "Growth Design",
+    tall: false,
+    span: 1,
+  },
+  {
+    id: 3,
+    src: "/assets/img3.jpg",
+    alt: "Kardia Design System",
+    label: "Design System Tokens",
+    tag: "Design System",
+    tall: false,
+    span: 1,
+  },
+  {
+    id: 4,
+    src: "/assets/img4.jpg",
+    alt: "Website Redesign",
+    label: "Website Redesign",
+    tag: "Web Design",
+    tall: true,
+    span: 2,
+  },
+  {
+    id: 5,
+    src: "/assets/img1.jpg",
+    alt: "Exploration",
+    label: "Motion Exploration",
+    tag: "Motion",
+    tall: false,
+    span: 1,
+  },
+  {
+    id: 6,
+    src: "/assets/img2.jpg",
+    alt: "Illustration",
+    label: "Brand Illustration",
+    tag: "Illustration",
+    tall: true,
+    span: 1,
+  },
+  {
+    id: 7,
+    src: "/assets/img3.jpg",
+    alt: "Prototype",
+    label: "Interactive Prototype",
+    tag: "Mobile Design",
+    tall: false,
+    span: 2,
+  },
+  {
+    id: 8,
+    src: "/assets/img4.jpg",
+    alt: "3D Render",
+    label: "3D Exploration",
+    tag: "3D",
+    tall: false,
+    span: 1,
+  },
+];
 
-const Hero = () => {
-  const containerRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const descriptionRef = useRef<HTMLParagraphElement>(null);
+const ALL_TAGS = ["All", ...Array.from(new Set(GALLERY_ITEMS.map((i) => i.tag)))];
 
-  useLayoutEffect(() => {
-    const gsap = window.gsap;
-    if (!gsap) return;
+// --- Lightbox ---
 
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power4.out", duration: 1.2 } });
-
-      tl.from(titleRef.current, { y: 100, skewY: 5, opacity: 0 }, "-=0.6")
-        .from(descriptionRef.current, { y: 30, opacity: 0 }, "-=0.8");
-    }, containerRef);
-    return () => ctx.revert();
-  }, []);
-
+function Lightbox({
+  item,
+  onClose,
+}: {
+  item: (typeof GALLERY_ITEMS)[0] | null;
+  onClose: () => void;
+}) {
+  if (!item) return null;
   return (
-    <section
-      ref={containerRef}
-      aria-label="Playground hero section"
-      className="relative flex min-h-screen w-full flex-col justify-center px-6 pt-32 pb-12 overflow-hidden bg-[var(--background)] text-[var(--foreground)] transition-colors duration-300"
-    >
-      <div className="atmospheric-glow opacity-50" />
-
-      <div className="max-w-7xl mx-auto w-full relative z-10">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 mb-16 text-[var(--muted)] hover:text-[var(--foreground)] transition-colors font-mono text-xs uppercase tracking-widest"
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
+        onClick={onClose}
+      >
+        <motion.div
+          initial={{ scale: 0.92, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.92, opacity: 0 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="relative max-w-5xl w-full"
+          onClick={(e) => e.stopPropagation()}
         >
-          <ArrowLeft className="h-4 w-4" />
-          <span>Back to Home</span>
-        </Link>
-
-        <div className="space-y-12">
-          <div className="flex items-center gap-2">
-            <div className="w-1.5 h-1.5 rounded-full bg-violet-500" />
-            <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-[var(--muted)]">
-              Lab & Experiments
-            </span>
-          </div>
-
-          <h1
-            ref={titleRef}
-            className="text-7xl sm:text-8xl md:text-[10rem] lg:text-[12rem] font-black leading-[0.8] tracking-tighter uppercase text-[var(--foreground)]"
+          <button
+            onClick={onClose}
+            className="absolute -top-12 right-0 text-white/60 hover:text-white transition-colors z-10"
+            aria-label="Close lightbox"
           >
-            Play
-            <br />
-            <span className="italic font-light text-[var(--muted)] text-[0.85em]">ground</span>
-          </h1>
+            <X className="w-8 h-8" />
+          </button>
 
-          <p
-            ref={descriptionRef}
-            className="text-lg md:text-2xl font-medium leading-relaxed text-[var(--muted)] max-w-2xl"
-          >
-            My space for design experiments, interactive prototypes, and testing out technical edge of my creative process.
-          </p>
-        </div>
-      </div>
-
-      {/* Background Decorative Text */}
-      <div className="absolute -bottom-20 -right-1 pointer-events-none opacity-[0.04] select-none">
-        <span className="text-[25rem] font-black leading-none tracking-tighter italic uppercase">
-          Lab
-        </span>
-      </div>
-    </section>
-  );
-};
-
-const Section = ({ title, children, className = "" }: { title?: string; children: React.ReactNode; className?: string }) => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-
-  useLayoutEffect(() => {
-    const gsap = window.gsap;
-    if (!gsap) return;
-
-    const ctx = gsap.context(() => {
-      const elementsToAnimate = [contentRef.current].filter(Boolean);
-      if (titleRef.current) {
-        elementsToAnimate.unshift(titleRef.current);
-      }
-
-      if (elementsToAnimate.length > 0) {
-        gsap.fromTo(
-          elementsToAnimate,
-          { y: 50, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.8,
-            stagger: 0.2,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 80%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      }
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
-
-  return (
-    <section
-      ref={sectionRef}
-      aria-labelledby={title ? `section-${title.toLowerCase().replace(/\s+/g, '-')}` : undefined}
-      className={`px-6 py-32 bg-[var(--background)] border-t border-[var(--border)] transition-colors duration-300 ${className}`}
-    >
-      <div className="max-w-6xl mx-auto">
-        {title && (
-          <h2
-            id={`section-${title.toLowerCase().replace(/\s+/g, '-')}`}
-            ref={titleRef}
-            className="text-5xl md:text-7xl font-black uppercase tracking-[0.01em] text-[var(--foreground)] mb-16 leading-[0.9]"
-          >
-            {title}
-          </h2>
-        )}
-        <div ref={contentRef}>
-          {children}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const VariableFontExperiment = () => {
-  return (
-    <Section title="Dynamic Type">
-      <div className="grid lg:grid-cols-[1fr,1.5fr] gap-20 items-center">
-        <div className="space-y-8">
-          <p className="text-xl text-[var(--muted)] leading-relaxed font-medium">
-            An experiment in fluid typography. Using variable font weights and interactive delays to create a text component that feels alive and responsive to user presence.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <span className="px-4 py-1.5 rounded-full border border-[var(--border)] text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">React Bits</span>
-            <span className="px-4 py-1.5 rounded-full border border-[var(--border)] text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">GSAP</span>
-            <span className="px-4 py-1.5 rounded-full border border-[var(--border)] text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">Variable Fonts</span>
-          </div>
-        </div>
-
-        <div className="bg-[var(--card)] p-12 md:p-24 rounded-[3rem] border border-[var(--border)] backdrop-blur-sm min-h-[400px] flex items-center justify-center group overflow-hidden relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-transparent to-violet-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-          <div className="text-center relative z-10">
-            <VariableFontHoverByRandomLetter
-              label="MORPH"
-              fromFontVariationSettings="'wght' 300, 'slnt' 0"
-              toFontVariationSettings="'wght' 900, 'slnt' -10"
-              className="text-7xl sm:text-8xl md:text-9xl lg:text-[12rem] font-black uppercase tracking-tighter text-[var(--foreground)] cursor-pointer select-none"
+          <div className="relative w-full overflow-hidden rounded-2xl">
+            <Image
+              src={item.src}
+              alt={item.alt}
+              width={1400}
+              height={900}
+              className="w-full h-auto object-contain"
+              priority
             />
           </div>
-        </div>
-      </div>
-    </Section>
-  );
-};
 
-const InteractiveGrid = () => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
-  const gridItems = Array.from({ length: 12 }, (_, i) => ({
-    id: i,
-    title: `Experiment ${i + 1}`,
-    description: "Coming soon",
-  }));
-
-  return (
-    <Section title="Experiments Grid">
-      <div className="space-y-8 md:space-y-12">
-        <p className="text-base md:text-lg leading-relaxed text-[var(--muted)] max-w-4xl">
-          A grid of experimental components and design explorations. More experiments coming soon.
-        </p>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-          {gridItems.map((item) => (
-            <div
-              key={item.id}
-              className="aspect-square bg-[var(--card)] border border-[var(--border)] p-4 md:p-6 flex flex-col justify-between cursor-pointer transition-all duration-300 hover:border-[var(--foreground)]/20 hover:shadow-lg group"
-              onMouseEnter={() => setHoveredIndex(item.id)}
-              onMouseLeave={() => setHoveredIndex(null)}
-              role="button"
-              tabIndex={0}
-              aria-label={`${item.title} - ${item.description}`}
-            >
-              <div className="text-3xl md:text-4xl font-black text-[var(--foreground)]/10 group-hover:text-[var(--foreground)]/20 transition-colors">
-                {String(item.id + 1).padStart(2, '0')}
-              </div>
-              <div>
-                <h3 className="text-sm md:text-base font-bold uppercase tracking-tighter text-[var(--foreground)] mb-1">
-                  {item.title}
-                </h3>
-                <p className="text-xs md:text-sm text-[var(--muted)] font-mono">
-                  {item.description}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </Section>
-  );
-};
-
-const ColorPalette = () => {
-  const colors = [
-    { name: "Primary", value: "var(--primary)", hex: "#1A1A1A" },
-    { name: "Background", value: "#F9F8F6", hex: "#F9F8F6" },
-    { name: "White", value: "#FFFFFF", hex: "#FFFFFF" },
-    { name: "Text", value: "#1A1A1A", hex: "#1A1A1A" },
-    { name: "Text Muted", value: "#1A1A1A/60", hex: "#1A1A1A" },
-  ];
-
-  return (
-    <Section title="Color Palette">
-      <div className="space-y-8 md:space-y-12">
-        <p className="text-base md:text-lg leading-relaxed text-[var(--muted)] max-w-4xl">
-          The color system used across the portfolio. Each color is carefully chosen to maintain consistency and accessibility.
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {colors.map((color) => (
-            <div
-              key={color.name}
-              className="bg-[var(--card)] border border-[var(--border)] p-6 md:p-8"
-            >
-              <div
-                className="w-full h-24 md:h-32 mb-4 border border-[var(--border)]"
-                style={{ backgroundColor: color.value }}
-                aria-label={`${color.name} color sample`}
-              />
-              <h3 className="text-lg md:text-xl font-bold uppercase tracking-tighter mb-2 text-[var(--foreground)]">
-                {color.name}
-              </h3>
-              <p className="text-sm md:text-base text-[var(--muted)] font-mono">
-                {color.hex}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </Section>
-  );
-};
-
-const TypographyShowcase = () => {
-  return (
-    <Section title="Typography">
-      <div className="space-y-12 md:space-y-16">
-        <div>
-          <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter mb-6 text-[var(--foreground)]">
-            Heading Styles
-          </h3>
-          <div className="space-y-6 md:space-y-8">
+          <div className="mt-5 flex items-center justify-between">
             <div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-[var(--foreground)] mb-2">
-                Heading 1
-              </h1>
-              <p className="text-sm md:text-base text-[var(--muted)] font-mono">
-                font-black • uppercase • tracking-tighter
-              </p>
-            </div>
-            <div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter text-[var(--foreground)] mb-2">
-                Heading 2
-              </h2>
-              <p className="text-sm md:text-base text-[var(--muted)] font-mono">
-                font-black • uppercase • tracking-tighter
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl md:text-2xl font-bold uppercase tracking-tighter text-[var(--foreground)] mb-2">
-                Heading 3
-              </h3>
-              <p className="text-sm md:text-base text-[var(--muted)] font-mono">
-                font-bold • uppercase • tracking-tighter
-              </p>
+              <p className="text-white font-bold text-lg">{item.label}</p>
+              <p className="text-white/40 text-sm font-mono uppercase tracking-widest">{item.tag}</p>
             </div>
           </div>
-        </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
 
-        <div>
-          <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter mb-6 text-[var(--foreground)]">
-            Body Text
-          </h3>
-          <div className="space-y-4">
-            <p className="text-base md:text-lg leading-relaxed text-[var(--foreground)] opacity-80">
-              This is body text with regular weight. It&apos;s designed for readability and comfortable reading across all devices. The line height is relaxed to ensure proper spacing between lines.
-            </p>
-            <p className="text-sm md:text-base leading-relaxed text-[var(--muted)] font-mono">
-              This is monospace text, typically used for code, metadata, or technical information.
-            </p>
-          </div>
+// --- Gallery Item Card ---
+
+function GalleryCard({
+  item,
+  onClick,
+}: {
+  item: (typeof GALLERY_ITEMS)[0];
+  onClick: () => void;
+}) {
+  const spanClass =
+    item.span === 2
+      ? "md:col-span-2"
+      : item.span === 3
+        ? "md:col-span-3"
+        : "col-span-1";
+
+  const heightClass = item.tall ? "md:row-span-2" : "row-span-1";
+
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      className={`${spanClass} ${heightClass} group cursor-pointer relative overflow-hidden rounded-lg bg-[var(--card)]`}
+      onClick={onClick}
+    >
+      <div className="relative w-full h-full min-h-[240px]">
+        <Image
+          src={item.src}
+          alt={item.alt}
+          fill
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
+
+        {/* Hover overlay */}
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-400" />
+
+        {/* Label — slides up on hover */}
+        <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-400 ease-out">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-white/50 font-mono">
+            {item.tag}
+          </span>
+          <p className="text-white font-bold text-lg leading-tight mt-1">{item.label}</p>
         </div>
       </div>
-    </Section>
+    </motion.div>
   );
-};
+}
 
-// --- Utils ---
-const useGsapLoader = () => {
-  const [ready, setReady] = useState(false);
-  useEffect(() => {
-    const load = async () => {
-      if (window.gsap && window.ScrollTrigger) {
-        setReady(true);
-        return;
-      }
-      const loadScript = (src: string) => {
-        return new Promise((resolve, reject) => {
-          const script = document.createElement('script');
-          script.src = src;
-          script.onload = resolve;
-          script.onerror = reject;
-          document.body.appendChild(script);
-        });
-      };
-
-      try {
-        await loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js");
-        await loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js");
-        window.gsap?.registerPlugin(window.ScrollTrigger);
-        setReady(true);
-      } catch (err) {
-        console.error("Failed to load GSAP", err);
-        setReady(true); // Continue even if GSAP fails
-      }
-    };
-    load();
-  }, []);
-  return ready;
-};
-
-// --- Main Component ---
+// --- Main Page ---
 
 export default function PlaygroundPage() {
-  const isGsapReady = useGsapLoader();
+  const [activeTag, setActiveTag] = useState("All");
+  const [lightboxItem, setLightboxItem] = useState<(typeof GALLERY_ITEMS)[0] | null>(null);
+
+  const filtered =
+    activeTag === "All"
+      ? GALLERY_ITEMS
+      : GALLERY_ITEMS.filter((i) => i.tag === activeTag);
 
   return (
-    <div className="font-sans antialiased bg-[var(--background)] text-[var(--foreground)] selection:bg-indigo-500 selection:text-white min-h-screen transition-colors duration-300">
-      <main id="main-content" className="w-full relative" role="main">
-        <Hero />
-        <VariableFontExperiment />
-      </main>
+    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] selection:bg-[var(--primary)] selection:text-white">
+      {/* Header */}
+      <div className="max-w-7xl mx-auto px-6 pt-32 pb-16">
+        <div className="flex items-center gap-2 mb-6">
+          <div className="w-1.5 h-1.5 rounded-full bg-[var(--primary)]" />
+          <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-[var(--muted)]">
+            Playground
+          </span>
+        </div>
+
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-10">
+          <div>
+            <h1 className="text-6xl md:text-[8rem] font-black uppercase tracking-normal leading-[0.85] text-[var(--foreground)]">
+              All
+              <br />
+              <span className="italic font-light text-[var(--primary)]">Works</span>
+            </h1>
+            <p className="mt-6 text-xl text-[var(--muted)] font-medium max-w-lg">
+              A collection of design explorations — mockups, illustrations, motion, and experiments.
+            </p>
+          </div>
+
+
+        </div>
+      </div>
+
+      {/* Masonry Gallery */}
+      <div className="max-w-7xl mx-auto px-6 pb-32">
+        <motion.div
+          layout
+          className="grid grid-cols-1 md:grid-cols-3 auto-rows-[280px] gap-3"
+        >
+          <AnimatePresence mode="popLayout">
+            {filtered.map((item) => (
+              <GalleryCard
+                key={item.id}
+                item={item}
+                onClick={() => setLightboxItem(item)}
+              />
+            ))}
+          </AnimatePresence>
+        </motion.div>
+
+        {filtered.length === 0 && (
+          <div className="text-center py-32 text-[var(--muted)]">
+            <p className="text-2xl font-bold uppercase tracking-tighter">Nothing here yet</p>
+            <p className="text-sm mt-2 font-mono">Check back soon</p>
+          </div>
+        )}
+      </div>
+
+      {/* Lightbox */}
+      {lightboxItem && (
+        <Lightbox item={lightboxItem} onClose={() => setLightboxItem(null)} />
+      )}
     </div>
   );
 }
-

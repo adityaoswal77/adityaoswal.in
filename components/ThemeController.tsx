@@ -16,6 +16,13 @@ export const ThemeController = () => {
   const [activeColor, setActiveColor] = useState(THEMES[0].hex);
   const [mounted, setMounted] = useState(false);
 
+  const hexToRgb = (hex: string) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `${r}, ${g}, ${b}`;
+  };
+
   // Initialize from localStorage after mount to avoid hydration mismatch
   useEffect(() => {
     setMounted(true);
@@ -23,14 +30,17 @@ export const ThemeController = () => {
     if (saved && THEMES.some(t => t.hex === saved)) {
       setActiveColor(saved);
       document.documentElement.style.setProperty("--primary", saved);
+      document.documentElement.style.setProperty("--primary-rgb", hexToRgb(saved));
     } else {
       document.documentElement.style.setProperty("--primary", THEMES[0].hex);
+      document.documentElement.style.setProperty("--primary-rgb", hexToRgb(THEMES[0].hex));
     }
   }, []);
 
   useEffect(() => {
     if (mounted) {
       document.documentElement.style.setProperty("--primary", activeColor);
+      document.documentElement.style.setProperty("--primary-rgb", hexToRgb(activeColor));
       localStorage.setItem(STORAGE_KEY, activeColor);
     }
   }, [activeColor, mounted]);

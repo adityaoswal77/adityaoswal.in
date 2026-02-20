@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Aditya Oswal" }],
   openGraph: {
     title: "Aditya Oswal | Product Designer & Design Engineer",
-    description: "Building digital experiences that feel alive.",
+    description: "Product Designer and Design Engineer specializing in healthcare experiences, interactive design, and product strategy. Currently at Alivecor.",
     url: "https://adityaoswal.in",
     siteName: "Aditya Oswal's Portfolio",
     locale: "en_US",
@@ -21,12 +21,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Aditya Oswal | Product Designer & Design Engineer",
-    description: "Building digital experiences that feel alive.",
+    description: "Product Designer and Design Engineer specializing in healthcare experiences, interactive design, and product strategy. Currently at Alivecor.",
     creator: "@oswaluxd",
-  },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.ico",
   },
 };
 

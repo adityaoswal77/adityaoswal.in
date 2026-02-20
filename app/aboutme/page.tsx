@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Palette, TestTube2, Cpu, PenTool, Wind, Code2, Zap, Triangle, Layers } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -194,7 +195,7 @@ const AboutOverview = () => {
             {/* I build digital experiences that feel human. By blending technical precision with creative experimentation, I create solutions that simplify complex challenges. */}
           </p>
           <p className="text-lg text-[var(--muted)] leading-relaxed font-medium">
-            Currently at Alivecor, I lead design initiatives for heart health monitoring systems. My goal is to bridge the gap between advanced medical technology and intuitive user experiences.
+            If not working, you will find me exploring the cafe culture in Bangalore, planning my next workout split, the next trip or geeking out over the latest AI developments.
           </p>
         </div>
 
@@ -239,7 +240,7 @@ const WorkExperience = () => {
       description: "Taught foundational 'Introduction to UX' course for 2nd-year B.Tech students."
     },
     {
-      role: "Freelance Design Engineer",
+      role: "Design Engineer",
       company: "Self-Employed",
       period: "Jul '23 - Dec '23",
       description: "Redesigned and implemented client websites (Shiftlinkapp, Aibiliti.co, Dualite.dev) focusing on performance."
@@ -266,23 +267,49 @@ const WorkExperience = () => {
 
   return (
     <Section title="Experience">
-      <div className="flex-col gap-4 my-2">
+      <div className="flex flex-col gap-4 my-2">
         {experience.map((exp, i) => (
-          <div key={i} className="p-8 bg-[var(--card)] rounded-[.5rem] border border-[var(--border)] hover:border-indigo-500/30 transition-all duration-500 group relative overflow-hidden mt-2">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 blur-3xl -mr-16 -mt-16 group-hover:bg-indigo-500/10 transition-colors" />
-            <span className="text-[12px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-4 block">
-              {exp.period}
-            </span>
-            <h3 className="text-2xl font-bold text-[var(--foreground)] mb-1 group-hover:text-indigo-400 transition-colors">
-              {exp.role}
-            </h3>
-            <p className="text-[14px] font-bold uppercase tracking-widest text-indigo-500/80 mb-6">
-              {exp.company}
-            </p>
-            <p className="text-[var(--muted)] text-sm font-medium leading-relaxed">
-              {exp.description}
-            </p>
-          </div>
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1 }}
+            whileHover={{ y: -5 }}
+            className="p-8 bg-[var(--card)] rounded-[.5rem] border border-[var(--border)] hover:border-indigo-500/30 transition-all duration-500 group relative overflow-hidden mt-2"
+          >
+            {/* Animated background glow */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 blur-3xl -mr-32 -mt-32 group-hover:bg-indigo-500/15 transition-colors duration-700" />
+
+            <div className="relative z-10">
+              <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
+                <div>
+                  <h3 className="text-2xl font-bold text-[var(--foreground)] mb-1 group-hover:text-indigo-400 transition-colors duration-300">
+                    {exp.role}
+                  </h3>
+                  <p className="text-[14px] font-bold uppercase tracking-widest text-indigo-500/80">
+                    {exp.company}
+                  </p>
+                </div>
+
+                <div className="flex flex-col items-end">
+                  <span className="text-[12px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] whitespace-nowrap md:mt-1">
+                    {exp.period}
+                  </span>
+                  <motion.div
+                    className="h-[2px] bg-indigo-500 mt-1 rounded-full"
+                    initial={{ width: 0 }}
+                    whileHover={{ width: "100%" }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </div>
+              </div>
+
+              <p className="text-[var(--muted)] text-lg font-medium leading-relaxed max-w-4xl group-hover:text-[var(--foreground)]/80 transition-colors duration-300">
+                {exp.description}
+              </p>
+            </div>
+          </motion.div>
         ))}
       </div>
     </Section>
@@ -566,9 +593,9 @@ export default function AboutPage() {
         <Hero />
         <AboutOverview />
         <Collaborations />
-        <InteractiveSkills />
         <Toolstack />
         <WorkExperience />
+        <InteractiveSkills />
         {/* <EducationAndRecognition /> */}
       </main>
     </div>

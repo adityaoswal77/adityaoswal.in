@@ -42,7 +42,7 @@ const Hero = () => {
   // Dither colors
   const baseColor: [number, number, number] = isLight ? [0.976, 0.973, 0.965] : [0, 0, 0]; // #f9f8f6 vs #000000
   const waveColor: [number, number, number] = isLight ? [0.45, 0.45, 0.45] : [0.3, 0.4, 0.5]; // darker gray for visibility
-  const hoverColor: [number, number, number] = isLight ? [0.3, 0.3, 0.3] : [0.4, 0.5, 0.8];
+  const hoverColor: [number, number, number] = isLight ? [1, 1, 1] : [0, 0, 0]; // White in light, black in dark
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -88,26 +88,26 @@ const Hero = () => {
         >
           <div className="w-1.5 h-1.5 rounded-full bg-violet-900 animate-pulse" />
           <span className="text-[14px]  uppercase tracking-[0.1em] font-bold text-[var(--muted)]">
-            Available for new projects
+            Based in Bangalore | Pune
           </span>
         </div>
 
         {/* Headline */}
         <div ref={headingRef} className="mb-8">
           <h1 className="text-6xl md:text-8xl lg:text-[8rem] font-semibold leading-[0.9] tracking-wide text-[var(--foreground)]">
-            Crafting
+            I'm Aditya,
             <br />
-            <span className="italic font-light text-[var(--muted)] tracking-normal capitalize"> experiences</span>
+            <span className="italic font-light text-[var(--muted)] tracking-normal capitalize"> Product designer + Engineer</span>
           </h1>
         </div>
 
         {/* Description */}
-        <p
+        {/* <p
           ref={descriptionRef}
           className="text-lg md:text-xl text-[var(--foreground)] max-w-2xl mb-12 font-medium"
         >
-          Product Designer + Design Engineer + Webflow Developer
-        </p>
+          Based in Bangalore
+        </p> */}
         {/* <p
           ref={descriptionRef}
           className="text-lg md:text-xl text-[var(--muted)] max-w-2xl mb-12 font-medium"
@@ -124,7 +124,9 @@ const Hero = () => {
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
           </Link>
           <Link
-            href="/#contact"
+            rel="noopener noreferrer"
+            target="_blank"
+            href="https://www.linkedin.com/in/oswaladitya/"
             className="flex items-center gap-2 bg-[var(--foreground)]/5 backdrop-blur-md border border-[var(--border)] text-[var(--foreground)] px-8 py-4 rounded-2xl font-bold uppercase text-[14px] tracking-wider hover:bg-[var(--foreground)]/10 transition-all"
           >
             Contact Me
@@ -202,13 +204,13 @@ const BentoGrid = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {PROJECTS.map((project) => {
             const CardContent = (
+
               <div className="relative h-full w-full p-8 flex flex-col justify-end overflow-hidden group">
                 {/* Background Color Base */}
                 <div className={`absolute inset-0 z-0 bg-[var(--card)] transition-colors duration-700`} />
 
                 {/* Hover Gradient Background - Increased z-index and removed blend mode for visibility */}
-                <div className={`absolute inset-0 z-20 bg-gradient-to-br ${project.color} to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 ease-out`} />
-
+                <div className={`absolute inset-0 z-0 bg-gradient-to-br ${project.color} to-transparent opacity-[0.2] group-hover:opacity-100 transition-all duration-700 ease-out`} />
                 {/* Secondary Glowing Effect on Hover */}
                 <div className={`absolute -inset-[100%] z-20 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08),transparent_50%)] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none`} />
 
