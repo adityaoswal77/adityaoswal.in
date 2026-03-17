@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Twitter, Linkedin, Github, Instagram, Mail, Check, Copy } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 
 export default function Footer() {
   const [copied, setCopied] = useState(false);
@@ -98,6 +99,12 @@ export default function Footer() {
           <p className="font-mono text-[10px] text-[var(--muted)] opacity-60 uppercase tracking-widest">
             Engineered with <span className="text-indigo-500">♥</span> & Next.js
           </p>
+          <Link
+            href="/changelog"
+            className="font-mono text-[10px] text-[var(--muted)] opacity-40 hover:opacity-100 uppercase tracking-widest transition-opacity"
+          >
+            Changelog
+          </Link>
         </div>
       </div>
     </footer>
