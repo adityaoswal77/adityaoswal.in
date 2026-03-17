@@ -5,7 +5,6 @@ import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { ArrowUpRight, ArrowDown, Earth, Club, Component } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import Footer from "@/components/Footer";
 import VariableFontHoverByRandomLetter from "@/fancy/components/text/variable-font-hover-by-random-letter";
 import BreathingText from "@/components/fancy/text/breathing-text";
 import GradientBlinds from "@/components/GradientBlinds";
@@ -15,6 +14,8 @@ import dynamic from "next/dynamic";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { PROJECTS } from "@/lib/data";
+
+gsap.registerPlugin(ScrollTrigger);
 import Collaborations from "@/components/Collaborations";
 
 const Dither = dynamic(() => import("@/components/background/Dither"), {
@@ -45,7 +46,6 @@ const Hero = () => {
   const hoverColor: [number, number, number] = isLight ? [1, 1, 1] : [0, 0, 0]; // White in light, black in dark
 
   useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         defaults: { ease: "power4.out", duration: 1 },
@@ -70,8 +70,8 @@ const Hero = () => {
           waveColor={waveColor}
           hoverColor={hoverColor}
           waveSpeed={0.01}
-          waveFrequency={isLight ? 3 : 3}
-          waveAmplitude={isLight ? 0.6 : 0.6}
+          waveFrequency={3}
+          waveAmplitude={0.6}
           colorNum={8}
           pixelSize={2}
           enableMouseInteraction={true}
@@ -88,7 +88,7 @@ const Hero = () => {
         >
           <div className="w-1.5 h-1.5 rounded-full bg-violet-900 animate-pulse" />
           <span className="text-[14px]  uppercase tracking-[0.1em] font-bold text-[var(--muted)]">
-            Based in Bangalore | Pune
+            Based in Bangalore | Working Globally
           </span>
         </div>
 
@@ -142,9 +142,9 @@ const Hero = () => {
       </div>
 
       <button
+        title="projects button"
         onClick={() => {
-          const bentoGrid = document.querySelector(".bento-grid-section");
-          bentoGrid?.scrollIntoView({ behavior: "smooth" });
+          document.getElementById("work")?.scrollIntoView({ behavior: "smooth" });
         }}
         className="absolute bottom-10 animate-bounce text-[var(--muted)] hover:text-[var(--foreground)] transition-colors z-20 pointer-events-auto"
       >
@@ -197,7 +197,7 @@ const BentoGrid = () => {
             </h2>
           </div>
           <p className="max-w-xs text-[var(--muted)] font-medium md:text-right">
-            Some projects are work in progress, Reachout to know more!
+            Some projects are work in progress, reach out to know more!
           </p>
         </div>
 
@@ -399,14 +399,10 @@ const Contact = () => {
 export default function Home() {
 
   return (
-    <div className="font-sans antialiased text-[var(--foreground)] selection:bg-indigo-500 selection:text-white" >
-      <main className="w-full">
-        <Hero />
-        <Collaborations />
-        <BentoGrid />
-        {/* <Expertise /> */}
-        {/* <Contact /> */}
-      </main>
-    </div >
+    <div className="font-sans antialiased text-[var(--foreground)] selection:bg-indigo-500 selection:text-white">
+      <Hero />
+      <Collaborations />
+      <BentoGrid />
+    </div>
   );
 }

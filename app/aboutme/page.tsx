@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import React, { useState, useRef, useLayoutEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Palette, TestTube2, Cpu, PenTool, Wind, Code2, Zap, Triangle, Layers } from 'lucide-react';
 import Link from 'next/link';
@@ -10,13 +10,10 @@ import Gravity, { MatterBody } from "@/components/fancy/physics/gravity";
 import GlassIcons from '@/components/GlassIcons';
 import Collaborations from '@/components/Collaborations';
 
-// --- Type Declarations ---
-declare global {
-  interface Window {
-    gsap?: any;
-    ScrollTrigger?: any;
-  }
-}
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 // --- Components ---
 
@@ -28,8 +25,6 @@ const Hero = () => {
   const imageRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    const gsap = window.gsap;
-    if (!gsap) return;
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power4.out", duration: 1.2 } });
@@ -123,8 +118,6 @@ const Section = ({ title, children, className = "", rightHeader }: { title?: str
   const contentRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    const gsap = window.gsap;
-    if (!gsap) return;
 
     const ctx = gsap.context(() => {
       const elementsToAnimate = [contentRef.current].filter(Boolean);
@@ -445,8 +438,7 @@ const Toolstack = () => {
   ];
 
   useLayoutEffect(() => {
-    const gsap = window.gsap;
-    if (!gsap || !containerRef.current) return;
+    if (!containerRef.current) return;
 
     const ctx = gsap.context(() => {
       const items = containerRef.current?.querySelectorAll('.tool-item');
@@ -548,48 +540,13 @@ const EducationAndRecognition = () => {
   );
 };
 
-// --- Utils ---
-const useGsapLoader = () => {
-  const [ready, setReady] = useState(false);
-  useEffect(() => {
-    const load = async () => {
-      if (window.gsap && window.ScrollTrigger) {
-        setReady(true);
-        return;
-      }
-      const loadScript = (src: string) => {
-        return new Promise((resolve, reject) => {
-          const script = document.createElement('script');
-          script.src = src;
-          script.onload = resolve;
-          script.onerror = reject;
-          document.body.appendChild(script);
-        });
-      };
-
-      try {
-        await loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js");
-        await loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js");
-        window.gsap?.registerPlugin(window.ScrollTrigger);
-        setReady(true);
-      } catch (err) {
-        console.error("Failed to load GSAP", err);
-        setReady(true); // Continue even if GSAP fails
-      }
-    };
-    load();
-  }, []);
-  return ready;
-};
-
 // --- Main Component ---
 
 export default function AboutPage() {
-  const isGsapReady = useGsapLoader();
 
   return (
     <div className="font-sans antialiased bg-[var(--background)] text-[var(--foreground)] selection:bg-indigo-500 selection:text-white min-h-screen transition-colors duration-300">
-      <main id="main-content" className="w-full relative" role="main">
+      <div className="w-full relative">
         <Hero />
         <AboutOverview />
         <Collaborations />
@@ -597,7 +554,7 @@ export default function AboutPage() {
         <WorkExperience />
         <InteractiveSkills />
         {/* <EducationAndRecognition /> */}
-      </main>
+      </div>
     </div>
   );
 }

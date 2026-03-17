@@ -9,8 +9,10 @@ import type { Metadata } from "next";
 // });
 
 export const metadata: Metadata = {
-  title: "Aditya Oswal",
-  description: "Work | Aditya Oswal",
+  title: "Work & Case Studies | UX Designer & Product Designer",
+  description:
+    "Selected work by Aditya Oswal — UX Designer and Product Designer. Case studies in healthcare UX, fintech design, design systems, and interactive web experiences.",
+  alternates: { canonical: "https://adityaoswal.in/work" },
 };
 
 export default function WorkLayout({

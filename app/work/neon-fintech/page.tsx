@@ -1,18 +1,14 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import React, { useRef, useLayoutEffect } from 'react';
 import { ArrowLeft, ArrowUpRight, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import CaseStudyPlaceholder from '@/components/fancy/case-study-placeholder';
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// --- Type Declarations ---
-declare global {
-  interface Window {
-    gsap?: any;
-    ScrollTrigger?: any;
-  }
-}
+gsap.registerPlugin(ScrollTrigger);
 
 // --- Components ---
 
@@ -23,8 +19,6 @@ const Hero = () => {
   const descriptionRef = useRef<HTMLParagraphElement>(null);
 
   useLayoutEffect(() => {
-    const gsap = window.gsap;
-    if (!gsap) return;
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power4.out", duration: 1.2 } });
@@ -105,8 +99,6 @@ const Section = ({ title, children, className = "" }: { title?: string; children
   const contentRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    const gsap = window.gsap;
-    if (!gsap) return;
 
     const ctx = gsap.context(() => {
       const elementsToAnimate = [contentRef.current].filter(Boolean);
@@ -434,44 +426,9 @@ const NextProject = () => {
   );
 };
 
-// --- Utils ---
-const useGsapLoader = () => {
-  const [ready, setReady] = useState(false);
-  useEffect(() => {
-    const load = async () => {
-      if (window.gsap && window.ScrollTrigger) {
-        setReady(true);
-        return;
-      }
-      const loadScript = (src: string) => {
-        return new Promise((resolve, reject) => {
-          const script = document.createElement('script');
-          script.src = src;
-          script.onload = resolve;
-          script.onerror = reject;
-          document.body.appendChild(script);
-        });
-      };
-
-      try {
-        await loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js");
-        await loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js");
-        window.gsap?.registerPlugin(window.ScrollTrigger);
-        setReady(true);
-      } catch (err) {
-        console.error("Failed to load GSAP", err);
-        setReady(true); // Continue even if GSAP fails
-      }
-    };
-    load();
-  }, []);
-  return ready;
-};
-
 // --- Main Component ---
 
 export default function NeonFinTech() {
-  const isGsapReady = useGsapLoader();
 
   return (
     <div className="font-sans antialiased text-[var(--foreground)] selection:bg-[var(--primary)] selection:text-white min-h-screen bg-[var(--background)]">
@@ -491,7 +448,7 @@ export default function NeonFinTech() {
         <Impact />
         <NextProject />
         */}
-      </main>
+      </div>
     </div>
   );
 }
