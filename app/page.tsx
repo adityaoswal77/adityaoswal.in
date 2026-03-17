@@ -2,13 +2,12 @@
 
 import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 
-import { ArrowUpRight, ArrowDown, Earth, Club, Component } from "lucide-react";
+import { ArrowUpRight, ArrowDown } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import VariableFontHoverByRandomLetter from "@/fancy/components/text/variable-font-hover-by-random-letter";
 import BreathingText from "@/components/fancy/text/breathing-text";
 import GradientBlinds from "@/components/GradientBlinds";
-import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import dynamic from "next/dynamic";
 import { gsap } from "gsap";
@@ -101,19 +100,6 @@ const Hero = () => {
           </h1>
         </div>
 
-        {/* Description */}
-        {/* <p
-          ref={descriptionRef}
-          className="text-lg md:text-xl text-[var(--foreground)] max-w-2xl mb-12 font-medium"
-        >
-          Based in Bangalore
-        </p> */}
-        {/* <p
-          ref={descriptionRef}
-          className="text-lg md:text-xl text-[var(--muted)] max-w-2xl mb-12 font-medium"
-        >
-          Senior UI/UX Designer & Frontend Architect specialized in building high-end interfaces that define the future of the web.
-        </p> */}
         {/* Actions */}
         <div ref={actionsRef} className="flex flex-col sm:flex-row items-center gap-4 pointer-events-auto">
           <Link
@@ -133,12 +119,6 @@ const Hero = () => {
           </Link>
         </div>
 
-        {/* Social Icons Overlay (optional hint from design)
-        <div className="mt-12 flex items-center gap-6 text-[var(--muted)]">
-          <Link href="/work" className="hover:text-white transition-colors"><Club className="w-5 h-5" /></Link>
-          <Link href="#" className="hover:text-white transition-colors"><Earth className="w-5 h-5" /></Link>
-          <Link href="#" className="hover:text-white transition-colors"><ArrowUpRight className="w-5 h-5" /></Link>
-        </div> */}
       </div>
 
       <button
@@ -254,145 +234,6 @@ const BentoGrid = () => {
     </section>
   );
 };
-
-const Expertise = () => {
-  const skills = [
-    { name: "UI/UX Design", level: 95 },
-    { name: "Frontend Architecture", level: 90 },
-    { name: "System Engineering", level: 85 },
-    { name: "Product Design", level: 88 },
-  ];
-
-  return (
-    <section className="px-6 py-32 bg-[var(--background)] border-t border-[var(--border)]">
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-20">
-        <div className="flex-1">
-          <span className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-4 block">
-            My Expertise
-          </span>
-          <h2 className="text-5xl md:text-7xl font-black uppercase leading-[0.9] tracking-tighter text-[var(--foreground)] mb-12">
-            I Build Solutions
-            <br />
-            That Scale
-          </h2>
-
-          <div className="space-y-10">
-            {skills.map((skill) => (
-              <div key={skill.name} className="group">
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-xl font-bold text-[var(--foreground)] group-hover:text-indigo-400 transition-colors">
-                    {skill.name}
-                  </h3>
-                  <span className="text-[var(--muted)] font-mono">{skill.level}%</span>
-                </div>
-                <div className="h-1.5 w-full bg-[var(--foreground)]/10 rounded-full overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${skill.level}%` }}
-                    transition={{ duration: 1.5, ease: "circOut" }}
-                    className="h-full bg-indigo-600 rounded-full"
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="flex-1">
-          <div className="relative p-10 bg-[var(--card)] rounded-[3rem] border border-[var(--border)] backdrop-blur-sm h-full">
-            <div className="flex justify-between items-start mb-12">
-              <div>
-                <h3 className="text-2xl font-bold text-[var(--foreground)] mb-2">Growth Matrix</h3>
-                <p className="text-[var(--muted)] text-[14px]">Project delivery efficiency over time</p>
-              </div>
-              <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center text-green-500">
-                <ArrowUpRight className="w-6 h-6 rotate-45" />
-              </div>
-            </div>
-
-            {/* Simple SVG Chart Representation */}
-            <div className="h-64 flex items-end gap-2 mb-12">
-              {[40, 70, 45, 90, 65, 80, 55, 95].map((h, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ height: 0 }}
-                  whileInView={{ height: `${h}%` }}
-                  transition={{ duration: 1, delay: i * 0.1 }}
-                  className="flex-1 bg-gradient-to-t from-indigo-900/40 to-indigo-500/40 rounded-t-lg"
-                />
-              ))}
-            </div>
-
-            <div className="grid grid-cols-2 gap-6">
-              <div className="p-6 bg-[var(--foreground)]/5 rounded-3xl border border-[var(--border)]">
-                <span className="text-[var(--muted)] text-[14px] font-bold uppercase tracking-widest block mb-2">Completed</span>
-                <span className="text-4xl font-black text-[var(--foreground)]">124+</span>
-              </div>
-              <div className="p-6 bg-[var(--foreground)]/5 rounded-3xl border border-[var(--border)]">
-                <span className="text-[var(--muted)] text-[14px] font-bold uppercase tracking-widest block mb-2">Satisfaction</span>
-                <span className="text-4xl font-black text-[var(--foreground)]">99%</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const Contact = () => {
-  return (
-    <section id="contact" className="px-6 py-32 bg-[var(--background)] border-t border-[var(--border)]">
-      <div className="max-w-4xl mx-auto text-center">
-        <span className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-4 block">
-          Get in touch
-        </span>
-        <h2 className="text-6xl md:text-9xl font-black uppercase leading-[0.9] tracking-tighter text-[var(--foreground)] mb-8">
-          Start A Project
-        </h2>
-        <p className="text-xl text-[var(--muted)] font-medium mb-16">
-          Got a great idea? Let&apos;s turn it into reality. Send me a message and I&apos;ll get back to you within 24 hours.
-        </p>
-
-        <form className="space-y-6 text-left">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <label className="text-[14px] uppercase tracking-widest font-bold text-[var(--muted)] ml-4">Full Name</label>
-              <input
-                type="text"
-                placeholder="John Doe"
-                className="w-full bg-[var(--foreground)]/5 border border-[var(--border)] rounded-[2rem] px-8 py-5 text-[var(--foreground)] focus:outline-none focus:border-indigo-500 transition-colors"
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="text-[14px] uppercase tracking-widest font-bold text-[var(--muted)] ml-4">Email Address</label>
-              <input
-                type="email"
-                placeholder="john@example.com"
-                className="w-full bg-[var(--foreground)]/5 border border-[var(--border)] rounded-[2rem] px-8 py-5 text-[var(--foreground)] focus:outline-none focus:border-indigo-500 transition-colors"
-              />
-            </div>
-          </div>
-          <div className="space-y-2">
-            <label className="text-[14px] uppercase tracking-widest font-bold text-[var(--muted)] ml-4">Message</label>
-            <textarea
-              rows={5}
-              placeholder="Tell me about your project..."
-              className="w-full bg-[var(--foreground)]/5 border border-[var(--border)] rounded-[2rem] px-8 py-6 text-[var(--foreground)] focus:outline-none focus:border-indigo-500 transition-colors"
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full bg-[var(--foreground)] text-[var(--background)] font-black uppercase tracking-widest py-6 rounded-[2rem] hover:opacity-90 transition-all mt-8"
-          >
-            Send Message
-          </button>
-        </form>
-      </div>
-    </section>
-  );
-};
-
 
 // --- Main Application ---
 

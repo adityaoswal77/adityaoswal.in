@@ -185,25 +185,24 @@ const AboutOverview = () => {
         <div className="space-y-8">
           <p className="text-2xl md:text-3xl font-medium leading-[1.3] text-[var(--foreground)] opacity-80">
             My background in engineering and design has shaped my approach to problem-solving. I believe in creating solutions that are both functional and beautiful.
-            {/* I build digital experiences that feel human. By blending technical precision with creative experimentation, I create solutions that simplify complex challenges. */}
           </p>
           <p className="text-lg text-[var(--muted)] leading-relaxed font-medium">
             If not working, you will find me exploring the cafe culture in Bangalore, planning my next workout split, the next trip or geeking out over the latest AI developments.
           </p>
         </div>
 
-        <div className="space-y-12">
+        <div className="space-y-12 pt-2">
           <div>
-            <h3 className="text-[14px] uppercase tracking-[0.2em] font-bold text-indigo-500 mb-6 underline underline-offset-8">What I Do</h3>
-            <p className="text-lg text-[var(--muted)] font-medium">
+            <p className="text-[13px] uppercase tracking-[0.15em] font-bold text-[var(--muted)] mb-3">What I Do</p>
+            <p className="text-lg text-[var(--foreground)]/70 font-medium leading-relaxed">
               Specialize in Product Design & Design Systems. I enjoy solving problems that require both analytical and visual thinking.
             </p>
           </div>
 
           <div>
-            <h3 className="text-[14px] uppercase tracking-[0.2em] font-bold text-indigo-500 mb-6 underline underline-offset-8">QUOTe to live by</h3>
-            <p className="text-lg text-[var(--muted)] font-medium">
-              Thinking about design is hard, but not thinking about it can be disastrous.
+            <p className="text-[13px] uppercase tracking-[0.15em] font-bold text-[var(--muted)] mb-3">Quote to live by</p>
+            <p className="text-lg text-[var(--foreground)]/70 font-medium leading-relaxed italic">
+              &ldquo;Thinking about design is hard, but not thinking about it can be disastrous.&rdquo;
             </p>
           </div>
         </div>
@@ -260,48 +259,26 @@ const WorkExperience = () => {
 
   return (
     <Section title="Experience">
-      <div className="flex flex-col gap-4 my-2">
+      <div className="divide-y divide-[var(--border)]">
         {experience.map((exp, i) => (
           <motion.div
             key={i}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            whileHover={{ y: -5 }}
-            className="p-8 bg-[var(--card)] rounded-[.5rem] border border-[var(--border)] hover:border-indigo-500/30 transition-all duration-500 group relative overflow-hidden mt-2"
+            transition={{ delay: i * 0.06, duration: 0.5, ease: "easeOut" }}
+            className="group py-8 grid grid-cols-1 md:grid-cols-[1fr,auto] gap-3 md:gap-16 items-start"
           >
-            {/* Animated background glow */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 blur-3xl -mr-32 -mt-32 group-hover:bg-indigo-500/15 transition-colors duration-700" />
-
-            <div className="relative z-10">
-              <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
-                <div>
-                  <h3 className="text-2xl font-bold text-[var(--foreground)] mb-1 group-hover:text-indigo-400 transition-colors duration-300">
-                    {exp.role}
-                  </h3>
-                  <p className="text-[14px] font-bold uppercase tracking-widest text-indigo-500/80">
-                    {exp.company}
-                  </p>
-                </div>
-
-                <div className="flex flex-col items-end">
-                  <span className="text-[12px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] whitespace-nowrap md:mt-1">
-                    {exp.period}
-                  </span>
-                  <motion.div
-                    className="h-[2px] bg-indigo-500 mt-1 rounded-full"
-                    initial={{ width: 0 }}
-                    whileHover={{ width: "100%" }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </div>
+            <div>
+              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-3">
+                <h3 className="text-xl font-semibold text-[var(--foreground)]">{exp.role}</h3>
+                <span className="text-sm text-[var(--muted)] font-medium">@ {exp.company}</span>
               </div>
-
-              <p className="text-[var(--muted)] text-lg font-medium leading-relaxed max-w-4xl group-hover:text-[var(--foreground)]/80 transition-colors duration-300">
-                {exp.description}
-              </p>
+              <p className="text-[var(--muted)] leading-relaxed">{exp.description}</p>
             </div>
+            <span className="text-xs font-mono text-[var(--muted)] whitespace-nowrap md:pt-1.5 opacity-60">
+              {exp.period}
+            </span>
           </motion.div>
         ))}
       </div>
@@ -493,53 +470,6 @@ const Toolstack = () => {
   );
 };
 
-const EducationAndRecognition = () => {
-  const education = {
-    school: "MIT Pune - Avantika University",
-    degree: "B.Tech in Computer Science & Engineering",
-    period: "2018 - 2022"
-  };
-
-  const certifications = [
-    "Enterprise Design Thinking Practitioner (IBM)",
-    "Foundations of User Experience Design (Google/Coursera)",
-    "Product Management: Building a Product Roadmap (LinkedIn Learning)"
-  ];
-
-  const achievement = "2nd Runner Up | CodeOffDuty Hackathon (Google DSC Wow | Dec '20)";
-
-  return (
-    <Section title="Education & More">
-      <div className="grid lg:grid-cols-3 gap-8">
-        <div className="p-8 bg-indigo-500/5 rounded-[2.5rem] border border-indigo-500/20">
-          <h3 className="text-[12px] uppercase tracking-[0.2em] font-bold text-indigo-500 mb-6">Education</h3>
-          <p className="text-xl font-bold text-[var(--foreground)] mb-2">{education.school}</p>
-          <p className="text-[var(--muted)] font-medium mb-4">{education.degree}</p>
-          <span className="text-[14px] font-bold text-indigo-500/60 uppercase tracking-widest">{education.period}</span>
-        </div>
-
-        <div className="p-8 bg-[var(--card)] rounded-[2.5rem] border border-[var(--border)]">
-          <h3 className="text-[12px] uppercase tracking-[0.2em] font-bold text-indigo-500 mb-6">Certifications</h3>
-          <ul className="space-y-4">
-            {certifications.map((cert, i) => (
-              <li key={i} className="text-[15px] font-medium text-[var(--muted)] border-l-2 border-indigo-500/30 pl-4">
-                {cert}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="p-8 bg-[var(--card)] rounded-[2.5rem] border border-[var(--border)]">
-          <h3 className="text-[12px] uppercase tracking-[0.2em] font-bold text-indigo-500 mb-6">Achievements</h3>
-          <p className="text-lg font-bold text-[var(--foreground)] leading-tight italic">
-            &quot;{achievement}&quot;
-          </p>
-        </div>
-      </div>
-    </Section>
-  );
-};
-
 // --- Main Component ---
 
 export default function AboutPage() {
@@ -553,7 +483,6 @@ export default function AboutPage() {
         <Toolstack />
         <WorkExperience />
         <InteractiveSkills />
-        {/* <EducationAndRecognition /> */}
       </div>
     </div>
   );

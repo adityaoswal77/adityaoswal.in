@@ -24,7 +24,7 @@ vercel --prod    # deploy to production
 
 ## Project Structure
 
-```
+```text
 app/           # Next.js App Router pages
   page.tsx     # Home
   aboutme/
