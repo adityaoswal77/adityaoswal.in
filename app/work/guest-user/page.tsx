@@ -237,7 +237,7 @@ export default function GuestEKGRecording() {
 
               <h3 className="text-[16px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-4">The Bottleneck</h3>
               <p className="text-xl text-[var(--muted)] font-medium leading-relaxed">
-                By forcing a "Save & Close" action at the end of a personal medical analysis, the app failed to account for shared users (guests), forcing them to pollute the primary user's data or abandon the flow entirely.
+                By forcing a &ldquo;Save &amp; Close&rdquo; action at the end of a personal medical analysis, the app failed to account for shared users (guests), forcing them to pollute the primary user&apos;s data or abandon the flow entirely.
               </p>
 
             </div>
@@ -508,7 +508,7 @@ export default function GuestEKGRecording() {
               <div className="space-y-8 h-full">
                 <div className="p-12 bg-indigo-500/5 rounded-[2.5rem] border border-indigo-500/20 h-full flex flex-col justify-center shadow-inner relative overflow-hidden">
                   <div className="absolute top-0 right-0 p-8 opacity-10">
-                    <span className="text-9xl font-serif">"</span>
+                    <span className="text-9xl font-serif">&ldquo;</span>
                   </div>
                   <h4 className="text-[14px] font-bold uppercase tracking-widest mb-8 text-indigo-500">The Pre-Recording Dilemma</h4>
                   <p className="text-xl md:text-2xl text-[var(--foreground)] font-medium leading-relaxed relative z-10">

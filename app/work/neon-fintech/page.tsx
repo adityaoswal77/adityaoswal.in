@@ -438,7 +438,7 @@ export default function NeonFinTech() {
       >
         Skip to main content
       </a>
-      <main id="main-content" className="w-full overflow-hidden" role="main">
+      <div className="w-full overflow-hidden">
         <Hero />
         <CaseStudyPlaceholder />
         {/*
