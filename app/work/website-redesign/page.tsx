@@ -1,10 +1,9 @@
 "use client";
 
 import React, { useRef, useLayoutEffect } from 'react';
-import { ArrowLeft, ArrowUpRight, ExternalLink } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import CaseStudyPlaceholder from '@/components/fancy/case-study-placeholder';
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -50,7 +49,7 @@ const Hero = () => {
         <div className="space-y-12">
           <div ref={metaRef} className="flex items-center gap-6">
             <div className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
+              <div className="w-1.5 h-1.5 rounded-full bg-[var(--muted)]" />
               <span className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)]">
                 Design & Development
               </span>
@@ -188,32 +187,31 @@ const ProblemStatement = () => {
           <p className="text-xl md:text-2xl text-[var(--foreground)] opacity-80 leading-relaxed font-medium">
             A static heritage in a dynamic software market.
           </p>
-          <ul className="space-y-8 text-[var(--muted)] font-medium">
+          <ul className="divide-y divide-[var(--border)] text-[var(--muted)] font-medium">
             {[
               { label: 'Outdated Identity', desc: 'Design language failed to communicate technical sophistication.' },
               { label: 'Conversion Gaps', desc: 'Fragmented flows leading to high bounce rates on key product pages.' },
               { label: 'Stiff Architecture', desc: 'Marketing team unable to pivot content without engineering debt.' }
             ].map((item, i) => (
-              <li key={i} className="flex gap-6 group">
-                <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 mt-2.5 group-hover:scale-150 transition-transform" />
-                <div className="space-y-1">
-                  <span className="text-[var(--foreground)] font-bold uppercase tracking-widest text-[14px] block">{item.label}</span>
-                  <span>{item.desc}</span>
-                </div>
+              <li key={i} className="py-6">
+                <span className="text-[var(--foreground)] font-bold uppercase tracking-widest text-[14px] block mb-1">{item.label}</span>
+                <span>{item.desc}</span>
               </li>
             ))}
           </ul>
         </div>
-        <div className="bg-[var(--card)] p-12 rounded-[2.5rem] border border-[var(--border)] backdrop-blur-sm">
-          <p className="text-[var(--foreground)] text-xl md:text-2xl font-bold leading-relaxed mb-10 italic">
-            &quot;We needed a digital storefront that reflected our evolution from a utility to a category leader.&quot;
-          </p>
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-px bg-indigo-500" />
-            <span className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)]">
-              Marketing Director
-            </span>
-          </div>
+        <div>
+          <blockquote className="border-l-2 border-[var(--border)] pl-8">
+            <p className="text-[var(--foreground)] text-xl md:text-2xl font-bold leading-relaxed mb-10 italic">
+              &quot;We needed a digital storefront that reflected our evolution from a utility to a category leader.&quot;
+            </p>
+            <footer className="flex items-center gap-4">
+              <div className="w-10 h-px bg-[var(--border)]" />
+              <span className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)]">
+                Marketing Director
+              </span>
+            </footer>
+          </blockquote>
         </div>
       </div>
     </Section>
@@ -224,14 +222,14 @@ const Approach = () => {
   return (
     <Section title="The Strategy" className="bg-[var(--foreground)]/5">
       <div className="space-y-24">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[var(--border)]">
           {[
             { step: '01', title: 'Discovery', desc: 'Stakeholder alignment and competitive terrain mapping.' },
             { step: '02', title: 'Design', desc: 'Developing a conversion-first visual design system.' },
             { step: '03', title: 'Dev', desc: 'High-fidelity Webflow build with custom interactions.' }
           ].map((item, i) => (
-            <div key={i} className="space-y-8 p-10 bg-[var(--card)] rounded-[2.5rem] border border-[var(--border)] backdrop-blur-sm">
-              <span className="text-5xl font-black text-indigo-500 opacity-20 block leading-none">{item.step}</span>
+            <div key={i} className="space-y-8 py-10 md:py-0 md:px-10 first:md:pl-0 last:md:pr-0">
+              <span className="text-sm font-bold text-[var(--muted)] block leading-none">{item.step}</span>
               <div className="space-y-4">
                 <h3 className="text-xl font-bold uppercase tracking-widest text-[var(--foreground)]">{item.title}</h3>
                 <p className="text-[var(--muted)] font-medium leading-relaxed">{item.desc}</p>
@@ -247,7 +245,7 @@ const Approach = () => {
         />
 
         <div className="pt-24 border-t border-[var(--border)]">
-          <h3 className="text-[14px] uppercase tracking-[0.3em] font-bold text-indigo-500 mb-16">Design Principles</h3>
+          <h3 className="text-[14px] uppercase tracking-[0.3em] font-bold text-[var(--muted)] mb-16">Design Principles</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             {[
               { title: 'Conversion', desc: 'Every pixel serving a business objective.' },
@@ -280,7 +278,7 @@ const Features = () => {
           ].map((feature, i) => (
             <div key={i} className="space-y-10 group">
               <div className="space-y-4">
-                <h3 className="text-3xl font-black uppercase tracking-tighter text-[var(--foreground)] group-hover:text-indigo-400 transition-colors">{feature.title}</h3>
+                <h3 className="text-3xl font-black uppercase tracking-tighter text-[var(--foreground)] group-hover:opacity-70 transition-opacity">{feature.title}</h3>
                 <p className="text-lg text-[var(--muted)] font-medium leading-relaxed">{feature.desc}</p>
               </div>
               <ImageSection src={feature.src} alt={feature.title} />
@@ -289,15 +287,15 @@ const Features = () => {
         </div>
 
         <div className="pt-24 border-t border-[var(--border)]">
-          <h3 className="text-[14px] uppercase tracking-[0.3em] font-bold text-indigo-500 mb-16">Technical Highlights</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <h3 className="text-[14px] uppercase tracking-[0.3em] font-bold text-[var(--muted)] mb-16">Technical Highlights</h3>
+          <div className="divide-y divide-[var(--border)]">
             {[
               { title: 'CMS Architecture', desc: 'Dynamic logic for global resources and blog systems.' },
               { title: 'Custom Motion', desc: 'High-performance interactions that enhance the user experience.' },
               { title: 'Responsive Edge', desc: 'Native-feel experience across all device breakpoints.' }
             ].map((item, i) => (
-              <div key={i} className="space-y-4 p-8 bg-[var(--card)] rounded-[2rem] border border-[var(--border)]">
-                <h4 className="text-[var(--foreground)] font-bold uppercase tracking-widest text-[14px]">{item.title}</h4>
+              <div key={i} className="py-6 flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-8">
+                <h4 className="text-[var(--foreground)] font-bold uppercase tracking-widest text-[14px] sm:w-48 shrink-0">{item.title}</h4>
                 <p className="text-[var(--muted)] text-[14px] font-medium leading-relaxed">{item.desc}</p>
               </div>
             ))}
@@ -323,10 +321,10 @@ const Impact = () => {
           The transformation delivered immediate business value, turning the website into a primary driver for lead generation.
         </p>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-[var(--border)] border border-[var(--border)]">
           {metrics.map((metric) => (
-            <div key={metric.label} className="space-y-4 p-8 bg-[var(--card)] rounded-[2.5rem] border border-[var(--border)] backdrop-blur-sm">
-              <div className="text-4xl md:text-6xl font-black text-indigo-400">
+            <div key={metric.label} className="space-y-4 p-8">
+              <div className="text-4xl md:text-6xl font-black text-[var(--foreground)]">
                 {metric.value}
               </div>
               <p className="text-[14px] font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
@@ -338,30 +336,18 @@ const Impact = () => {
 
         <div className="pt-24 border-t border-[var(--border)]">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
-            <div className="space-y-10">
-              <h4 className="text-[14px] uppercase tracking-[0.3em] font-bold text-indigo-500">User Experience</h4>
-              <ul className="space-y-6 text-[var(--muted)] font-medium">
-                <li className="flex items-center gap-4">
-                  <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
-                  <span>Fluid navigation and intuitive IA</span>
-                </li>
-                <li className="flex items-center gap-4">
-                  <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
-                  <span>Mobile-first conversion funnels</span>
-                </li>
+            <div className="space-y-6">
+              <h4 className="text-[14px] uppercase tracking-[0.3em] font-bold text-[var(--muted)]">User Experience</h4>
+              <ul className="divide-y divide-[var(--border)] text-[var(--muted)] font-medium">
+                <li className="py-4">Fluid navigation and intuitive IA</li>
+                <li className="py-4">Mobile-first conversion funnels</li>
               </ul>
             </div>
-            <div className="space-y-10">
-              <h4 className="text-[14px] uppercase tracking-[0.3em] font-bold text-indigo-500">Business Growth</h4>
-              <ul className="space-y-6 text-[var(--muted)] font-medium">
-                <li className="flex items-center gap-4">
-                  <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
-                  <span>Significant increase in organic SEO</span>
-                </li>
-                <li className="flex items-center gap-4">
-                  <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
-                  <span>Reduced marketing operational overhead</span>
-                </li>
+            <div className="space-y-6">
+              <h4 className="text-[14px] uppercase tracking-[0.3em] font-bold text-[var(--muted)]">Business Growth</h4>
+              <ul className="divide-y divide-[var(--border)] text-[var(--muted)] font-medium">
+                <li className="py-4">Significant increase in organic SEO</li>
+                <li className="py-4">Reduced marketing operational overhead</li>
               </ul>
             </div>
           </div>
@@ -396,17 +382,14 @@ const NextProject = () => {
 export default function WebsiteRedesign() {
 
   return (
-    <div className="font-sans antialiased bg-[var(--background)] text-[var(--foreground)] selection:bg-indigo-500 selection:text-white min-h-screen transition-colors duration-300">
+    <div className="font-sans antialiased bg-[var(--background)] text-[var(--foreground)] selection:bg-[var(--foreground)] selection:text-[var(--background)] min-h-screen transition-colors duration-300">
       <div className="w-full relative">
         <Hero />
-        <CaseStudyPlaceholder />
-        {/*
         <ProblemStatement />
         <Approach />
         <Features />
         <Impact />
         <NextProject />
-        */}
       </div>
     </div>
   );

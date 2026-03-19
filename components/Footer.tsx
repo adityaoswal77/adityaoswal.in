@@ -24,7 +24,7 @@ export default function Footer() {
         <h2 className="max-w-5xl text-6xl md:text-9xl lg:text-[11rem] font-black uppercase leading-[1.1] tracking-tight text-[var(--foreground)]">
           Let&apos;s build <br />
           <span
-            className="cursor-pointer italic font-light text-[var(--muted)] hover:text-[var(--foreground)] transition-colors duration-500 underline decoration-indigo-500 decoration-[6px] underline-offset-8"
+            className="cursor-pointer italic font-light text-[var(--muted)] hover:text-[var(--foreground)] transition-colors duration-500 underline decoration-[var(--border)] decoration-[6px] underline-offset-8"
           >
             something crazy.
           </span>
@@ -40,12 +40,12 @@ export default function Footer() {
             <a
               href={`mailto:${email}`}
               onClick={handleCopy}
-              className="group flex items-center gap-4 text-3xl font-bold text-[var(--foreground)] transition-all hover:text-indigo-400 md:text-5xl tracking-tighter"
+              className="group flex items-center gap-4 text-3xl font-bold text-[var(--foreground)] transition-all hover:opacity-70 md:text-5xl tracking-tighter"
             >
-              <Mail className="h-8 w-8 text-indigo-500 transition-transform group-hover:scale-110" />
+              <Mail className="h-8 w-8 text-[var(--muted)] transition-transform group-hover:scale-110" />
               {email}
               <div className="hidden md:flex ml-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                {copied ? <Check className="w-5 h-5 text-green-500" /> : <Copy className="w-5 h-5 text-indigo-500" />}
+                {copied ? <Check className="w-5 h-5 text-emerald-500" /> : <Copy className="w-5 h-5 text-[var(--muted)]" />}
               </div>
             </a>
 
@@ -55,7 +55,7 @@ export default function Footer() {
                   initial={{ opacity: 0, y: 10, x: "-50%" }}
                   animate={{ opacity: 1, y: 0, x: "-50%" }}
                   exit={{ opacity: 0, y: 10, x: "-50%" }}
-                  className="absolute -top-12 left-1/2 bg-indigo-600 text-white text-xs font-bold py-2 px-4 rounded-full shadow-lg pointer-events-none whitespace-nowrap"
+                  className="absolute -top-12 left-1/2 bg-[var(--foreground)] text-[var(--background)] text-xs font-bold py-2 px-4 rounded-full shadow-lg pointer-events-none whitespace-nowrap"
                 >
                   Email Copied!
                 </motion.div>
@@ -63,7 +63,7 @@ export default function Footer() {
             </AnimatePresence>
 
             <div className="hidden md:block absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover/email:opacity-100 transition-opacity pointer-events-none">
-              {!copied && <span className="text-[10px] font-mono tracking-widest text-indigo-500 uppercase bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Click to copy</span>}
+              {!copied && <span className="text-[10px] font-mono tracking-widest text-[var(--muted)] uppercase bg-[var(--foreground)]/5 px-3 py-1 rounded-full border border-[var(--border)]">Click to copy</span>}
             </div>
           </div>
         </div>
@@ -82,8 +82,8 @@ export default function Footer() {
               aria-label={`Visit ${social.label} profile`}
               className="group flex flex-col items-center gap-3"
             >
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[var(--border)] bg-[var(--card)] backdrop-blur-md transition-all duration-500 group-hover:-translate-y-3 group-hover:bg-indigo-500/20 group-hover:border-indigo-500/50">
-                <social.icon size={24} className="text-[var(--foreground)] transition-colors group-hover:text-indigo-400" />
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[var(--border)] bg-[var(--card)] backdrop-blur-md transition-all duration-500 group-hover:-translate-y-3 group-hover:bg-[var(--foreground)]/5 group-hover:border-[var(--foreground)]/20">
+                <social.icon size={24} className="text-[var(--muted)] transition-colors group-hover:text-[var(--foreground)]" />
               </div>
               <span className="font-mono text-[9px] uppercase tracking-widest text-[var(--muted)] opacity-0 transition-all duration-300 group-hover:opacity-100">
                 {social.label}
@@ -97,7 +97,7 @@ export default function Footer() {
             © {new Date().getFullYear()} Aditya Oswal
           </p>
           <p className="font-mono text-[10px] text-[var(--muted)] opacity-60 uppercase tracking-widest">
-            Engineered with <span className="text-indigo-500">♥</span> & Next.js
+            Engineered with ♥ & Next.js
           </p>
           <Link
             href="/changelog"

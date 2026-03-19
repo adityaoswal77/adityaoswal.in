@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useRef, useLayoutEffect } from 'react';
-import { ArrowLeft, ArrowUpRight, ExternalLink } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
-import CaseStudyPlaceholder from '@/components/fancy/case-study-placeholder';
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -49,7 +48,7 @@ const Hero = () => {
         <div className="space-y-12">
           <div ref={metaRef} className="flex items-center gap-6">
             <div className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
+              <div className="w-1.5 h-1.5 rounded-full bg-[var(--muted)]" />
               <span className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)]">
                 Design System
               </span>
@@ -166,35 +165,29 @@ const ProblemStatement = () => {
   return (
     <Section title="The Problem">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
-        <div className="space-y-8">
+        <div className="space-y-12">
           <p className="text-xl md:text-2xl text-[var(--foreground)] opacity-80 leading-relaxed font-medium">
             Fragmented design systems across mobile platforms were creating friction for developers and a disjointed experience for users.
           </p>
-          <ul className="space-y-6 text-[var(--muted)] font-medium">
-            <li className="flex items-center gap-4">
-              <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
-              <span>Inconsistent UI patterns across iOS and Android</span>
-            </li>
-            <li className="flex items-center gap-4">
-              <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
-              <span>Slow development velocity due to lack of reusable components</span>
-            </li>
-            <li className="flex items-center gap-4">
-              <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
-              <span>Accessibility gaps affecting medical compliance</span>
-            </li>
-          </ul>
+          <div className="space-y-0">
+            {[
+              "Inconsistent UI patterns across iOS and Android left teams rebuilding the same components in isolation.",
+              "Slow development velocity due to lack of reusable, documented components shared between squads.",
+              "Accessibility gaps affecting medical compliance and excluding users with visual or motor impairments.",
+            ].map((text, i) => (
+              <p key={i} className="border-t border-[var(--border)] py-5 text-[var(--muted)] font-medium leading-relaxed">
+                {text}
+              </p>
+            ))}
+          </div>
         </div>
-        <div className="bg-[var(--card)] p-12 rounded-[2.5rem] border border-[var(--border)] backdrop-blur-sm self-start">
-          <p className="text-[var(--foreground)] text-xl md:text-2xl font-bold leading-relaxed mb-10 italic">
+        <div className="self-start space-y-6">
+          <p className="text-[var(--foreground)] text-xl md:text-2xl font-bold leading-relaxed italic border-l-2 border-[var(--border)] pl-6">
             &quot;We needed a single source of truth that could scale with our product while maintaining the precision required for medical grade hardware.&quot;
           </p>
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-px bg-indigo-500" />
-            <span className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)]">
-              Product Design Lead
-            </span>
-          </div>
+          <p className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] pl-6">
+            Product Design Lead
+          </p>
         </div>
       </div>
     </Section>
@@ -203,16 +196,16 @@ const ProblemStatement = () => {
 
 const Approach = () => {
   return (
-    <Section title="Approach" className="bg-[var(--foreground)]/5">
+    <Section title="Approach">
       <div className="space-y-24">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[var(--border)]">
           {[
-            { step: '01', title: 'Research', desc: 'Audited existing components and identified fragmented patterns across platforms.' },
-            { step: '02', title: 'Systemize', desc: 'Created foundational tokens and a modular component library in Figma.' },
-            { step: '03', title: 'Implement', desc: 'Built React Native components with TypeScript for maximum type-safety.' }
+            { step: '01', title: 'Research', desc: 'Audited existing components across iOS and Android codebases, mapped fragmented patterns, and ran stakeholder interviews to surface pain points and alignment gaps.' },
+            { step: '02', title: 'Systemize', desc: 'Created foundational design tokens — spacing, color, typography, radius — then built a modular component library in Figma with documented usage rules and variant logic.' },
+            { step: '03', title: 'Implement', desc: 'Shipped React Native components with TypeScript for full type-safety, wired design tokens to code via Style Dictionary, and established a contribution workflow for ongoing team adoption.' }
           ].map((item, i) => (
-            <div key={i} className="space-y-6">
-              <span className="text-4xl md:text-6xl font-black text-indigo-500 opacity-20 block">{item.step}</span>
+            <div key={i} className="space-y-5 py-8 md:py-0 md:px-10 first:md:pl-0 last:md:pr-0">
+              <span className="text-[13px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] block">{item.step}</span>
               <h3 className="text-2xl font-bold uppercase tracking-tighter text-[var(--foreground)]">{item.title}</h3>
               <p className="text-[var(--muted)] font-medium leading-relaxed">{item.desc}</p>
             </div>
@@ -220,18 +213,30 @@ const Approach = () => {
         </div>
 
         <div className="pt-24 border-t border-[var(--border)]">
-          <h3 className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-16 font-geist">Design Principles</h3>
+          <h3 className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-16">Design Principles</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
             <div>
-              <h4 className="text-xl font-bold text-indigo-400 mb-4 uppercase tracking-[0.05em]">Accessibility First</h4>
+              <h4 className="text-xl font-bold text-[var(--foreground)] mb-4 uppercase tracking-[0.05em]">Accessibility First</h4>
               <p className="text-[var(--muted)] font-medium leading-relaxed">
-                Every component meets WCAG 2.1 AA standards. Healthcare applications demand absolute clarity and inclusive design.
+                Every component meets WCAG 2.1 AA standards. Healthcare applications demand absolute clarity and inclusive design — there is no room for ambiguity when a user is reading their heart data.
               </p>
             </div>
             <div>
-              <h4 className="text-xl font-bold text-indigo-400 mb-4 uppercase tracking-[0.05em]">Precision</h4>
+              <h4 className="text-xl font-bold text-[var(--foreground)] mb-4 uppercase tracking-[0.05em]">Precision</h4>
               <p className="text-[var(--muted)] font-medium leading-relaxed">
-                Mathematical rhythm and consistent grids lead to predictable experiences that build user trust in medical data.
+                Mathematical rhythm and consistent grids lead to predictable experiences that build user trust in medical data. Every spacing value, type scale, and touch target is deliberate and documented.
+              </p>
+            </div>
+            <div>
+              <h4 className="text-xl font-bold text-[var(--foreground)] mb-4 uppercase tracking-[0.05em]">Token-Driven</h4>
+              <p className="text-[var(--muted)] font-medium leading-relaxed">
+                Design decisions live in tokens, not component code. This keeps Figma and production in sync and allows theming — dark mode, high contrast, future brand variants — without touching component logic.
+              </p>
+            </div>
+            <div>
+              <h4 className="text-xl font-bold text-[var(--foreground)] mb-4 uppercase tracking-[0.05em]">Contributor-Friendly</h4>
+              <p className="text-[var(--muted)] font-medium leading-relaxed">
+                Clear documentation, naming conventions, and a contribution checklist mean any engineer or designer can extend the system without breaking existing patterns or introducing inconsistency.
               </p>
             </div>
           </div>
@@ -243,34 +248,37 @@ const Approach = () => {
 
 const Components = () => {
   const components = [
-    { name: "Tokens", count: "32 variables" },
-    { name: "Buttons", count: "12 variants" },
-    { name: "Forms", count: "8 types" },
-    { name: "Cards", count: "6 layouts" },
-    { name: "Nav", count: "4 patterns" },
-    { name: "Typo", count: "10 scales" },
-    { name: "Icons", count: "200+ assets" },
-    { name: "Data", count: "React Charts" },
+    { name: "Tokens", count: "32 variables", detail: "Color, spacing, radius, shadow, motion" },
+    { name: "Buttons", count: "12 variants", detail: "Primary, ghost, destructive, loading states" },
+    { name: "Forms", count: "8 types", detail: "Input, select, toggle, date, range, OTP" },
+    { name: "Cards", count: "6 layouts", detail: "Stat, media, list, action, ECG strip, alert" },
+    { name: "Navigation", count: "4 patterns", detail: "Tab bar, drawer, bottom sheet, breadcrumb" },
+    { name: "Typography", count: "10 scales", detail: "Display, heading, body, label, mono, caption" },
+    { name: "Icons", count: "200+ assets", detail: "Custom medical set + Lucide base library" },
+    { name: "Data Viz", count: "React Charts", detail: "ECG, heart rate trend, histogram, gauge" },
   ];
 
   return (
     <Section title="Library">
       <div className="space-y-16">
         <p className="text-xl text-[var(--muted)] font-medium max-w-2xl leading-relaxed">
-          A comprehensive suite of React Native and Figma components, built for scalability and medical-grade reliability.
+          A comprehensive suite of React Native and Figma components built for scalability and medical-grade reliability. Every component ships with usage docs, accessibility notes, and Storybook stories — so engineers can ship confidently and designers can prototype at full fidelity.
         </p>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="border-t border-[var(--border)]">
           {components.map((component, index) => (
             <div
               key={component.name}
-              className="p-8 bg-[var(--card)] rounded-[2rem] border border-[var(--border)] hover:border-[var(--foreground)]/10 transition-all group"
+              className="grid grid-cols-[auto,1fr,auto] items-baseline gap-8 border-b border-[var(--border)] py-5"
             >
-              <span className="text-[14px] font-bold text-indigo-500 opacity-40 mb-4 block group-hover:opacity-100 transition-opacity">
+              <span className="text-[13px] font-bold text-[var(--muted)] w-6 tabular-nums">
                 {String(index + 1).padStart(2, '0')}
               </span>
-              <h4 className="text-xl font-black uppercase tracking-tighter text-[var(--foreground)] transition-transform group-hover:translate-x-1">{component.name}</h4>
-              <p className="text-[14px] font-bold uppercase tracking-widest text-[var(--muted)] mt-1">{component.count}</p>
+              <div>
+                <span className="text-lg font-black uppercase tracking-tighter text-[var(--foreground)]">{component.name}</span>
+                <span className="ml-4 text-[14px] text-[var(--muted)] font-medium">{component.detail}</span>
+              </div>
+              <span className="text-[13px] font-bold uppercase tracking-widest text-[var(--muted)] whitespace-nowrap">{component.count}</span>
             </div>
           ))}
         </div>
@@ -283,36 +291,43 @@ const Impact = () => {
   const metrics = [
     { value: "40%", label: "Faster Dev" },
     { value: "95%", label: "Consistency" },
-    { value: "60+", label: "Features" },
+    { value: "60+", label: "Features Shipped" },
     { value: "AA", label: "WCAG Level" },
   ];
 
   return (
-    <Section title="Impact" className="bg-[var(--foreground)]/5">
-      <div className="grid lg:grid-cols-[1fr,auto] gap-20">
-        <div className="grid grid-cols-2 gap-8">
+    <Section title="Impact">
+      <div className="space-y-20">
+        <div className="border-t border-b border-[var(--border)] divide-x divide-[var(--border)] grid grid-cols-2 md:grid-cols-4">
           {metrics.map((metric) => (
-            <div key={metric.label} className="p-10 bg-[var(--card)] rounded-[2.5rem] border border-[var(--border)]">
-              <div className="text-5xl md:text-7xl font-black text-[var(--foreground)] mb-2">
+            <div key={metric.label} className="px-8 py-10 first:pl-0 last:pr-0">
+              <div className="text-5xl md:text-6xl font-black text-[var(--foreground)] mb-2 tabular-nums">
                 {metric.value}
               </div>
-              <p className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)]">
+              <p className="text-[13px] uppercase tracking-[0.2em] font-bold text-[var(--muted)]">
                 {metric.label}
               </p>
             </div>
           ))}
         </div>
-        <div className="max-w-md space-y-12">
-          <div>
-            <h4 className="text-lg font-bold text-[var(--foreground)] mb-4 uppercase tracking-[0.1em]">For Designers</h4>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 divide-y md:divide-y-0 md:divide-x divide-[var(--border)]">
+          <div className="md:pr-10 pb-10 md:pb-0 space-y-4">
+            <h4 className="text-lg font-bold text-[var(--foreground)] uppercase tracking-[0.1em]">For Designers</h4>
             <p className="text-[var(--muted)] font-medium leading-relaxed">
-              Reduced design debt by 70% and accelerated prototyping time with synced design-to-code tokens.
+              Reduced design debt by 70% and cut prototyping time significantly with synced design-to-code tokens. Designers went from rebuilding components each sprint to composing screens from a shared Figma library that matched production exactly.
             </p>
           </div>
-          <div>
-            <h4 className="text-lg font-bold text-[var(--foreground)] mb-4 uppercase tracking-[0.1em]">For Developers</h4>
+          <div className="md:px-10 py-10 md:py-0 space-y-4">
+            <h4 className="text-lg font-bold text-[var(--foreground)] uppercase tracking-[0.1em]">For Developers</h4>
             <p className="text-[var(--muted)] font-medium leading-relaxed">
-              Achieved 40% reduction in code duplication across mobile apps, with zero accessibility regression.
+              Achieved a 40% reduction in component code duplication across mobile apps with zero accessibility regression. TypeScript types and Storybook stories eliminated entire categories of implementation questions at code review.
+            </p>
+          </div>
+          <div className="md:pl-10 pt-10 md:pt-0 space-y-4">
+            <h4 className="text-lg font-bold text-[var(--foreground)] uppercase tracking-[0.1em]">For the Product</h4>
+            <p className="text-[var(--muted)] font-medium leading-relaxed">
+              Shipped 60+ features in the system&apos;s lifetime without breaking existing surfaces. Enabled confident expansion to new form factors — tablet, watch, web — because the token layer abstracted platform differences cleanly.
             </p>
           </div>
         </div>
@@ -346,17 +361,14 @@ const NextProject = () => {
 export default function KardiaDesignSystem() {
 
   return (
-    <div className="font-sans antialiased bg-[var(--background)] text-[var(--foreground)] selection:bg-indigo-500 selection:text-white min-h-screen transition-colors duration-300">
+    <div className="font-sans antialiased bg-[var(--background)] text-[var(--foreground)] selection:bg-[var(--foreground)] selection:text-[var(--background)] min-h-screen transition-colors duration-300">
       <div className="w-full relative">
         <Hero />
-        <CaseStudyPlaceholder />
-        {/*
         <ProblemStatement />
         <Approach />
         <Components />
         <Impact />
         <NextProject />
-        */}
       </div>
     </div>
   );
