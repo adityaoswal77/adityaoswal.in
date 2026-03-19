@@ -2,7 +2,7 @@
 
 **Date:** 2026-03-19
 **File:** `app/work/guest-user/page.tsx`
-**Status:** Approved
+**Status:** Draft
 
 ---
 
@@ -16,24 +16,48 @@ The hero section is NOT modified.
 
 ## Layout Structure
 
-Everything below the `<Hero />` component gets wrapped in a two-column grid container:
+Everything below the `<Hero />` component (all `<Section>` calls and the final footer `<section>`) gets wrapped in a two-column grid container:
 
-```
+```jsx
 <div className="relative lg:grid lg:grid-cols-[1fr_200px]">
-  <div>{/* all Section components */}</div>
+  <div className="min-w-0">
+    {/* all Section components */}
+    {/* footer "Return to All" section */}
+  </div>
   <StagesSidebar />
 </div>
 ```
 
-- Left column: all existing `<Section>` components, unchanged in structure
-- Right column: `<StagesSidebar />`, `hidden lg:block`, `sticky top-24 self-start h-screen`
+- Left column: `min-w-0` prevents overflow at browser zoom; contains all existing `<Section>` components and the footer `<section>`, unchanged in structure. The footer call-to-action is **inside** the left column, not full-bleed.
+- Right column: `<StagesSidebar />`, `hidden lg:block`, `self-start sticky top-24 max-h-[calc(100vh-6rem)] overflow-y-auto` — `self-start` prevents the grid child from stretching to the full left-column height, which would break the sticky behavior
 - No changes to max-width or padding of individual sections
 
 ---
 
 ## Section ID Props
 
-Each `<Section>` call gets an `id` prop that maps to a stage slug:
+The `<Section>` component accepts an optional `id?: string` prop. This `id` is applied to the **outer `<section>` element** (for scroll targeting), while the existing `aria-labelledby` id on the inner `<h2>` remains unchanged.
+
+The `Section` props type and destructuring must be updated:
+```ts
+// Before
+{ title, children, className = "" }: { title?: string; children: React.ReactNode; className?: string }
+
+// After
+{ title, id, children, className = "" }: { title?: string; id?: string; children: React.ReactNode; className?: string }
+```
+
+Example of the updated `<section>` element signature:
+```jsx
+<section
+  id={id}  // new — scroll target id, e.g. "context"
+  ref={sectionRef}
+  aria-labelledby={title ? `section-${title.toLowerCase().replace(/\s+/g, '-')}` : undefined}
+  // ...
+>
+```
+
+Each `<Section>` call gets an `id` prop:
 
 | Section title            | id                  |
 |--------------------------|---------------------|
@@ -49,13 +73,26 @@ Each `<Section>` call gets an `id` prop that maps to a stage slug:
 | Results                  | `results`           |
 | Learnings & Challenges   | `learnings`         |
 
-The `<Section>` component receives an optional `id?: string` prop and passes it to the underlying `<section>` element.
+---
+
+## React Imports
+
+The existing import line:
+```ts
+import React, { useRef, useLayoutEffect } from 'react';
+```
+must be updated to:
+```ts
+import React, { useRef, useLayoutEffect, useState, useEffect } from 'react';
+```
+
+`useState` and `useEffect` are required by `StagesSidebar`.
 
 ---
 
 ## StagesSidebar Component
 
-New component defined in the same file (or extracted to `components/StagesSidebar.tsx` if preferred).
+New component defined in the same file (`page.tsx`).
 
 ### Stage list
 
@@ -78,18 +115,48 @@ const STAGES = [
 ### Scroll tracking
 
 - `useEffect` sets up a single `IntersectionObserver` watching all section ids
-- `threshold: 0.2` — section is "active" when 20% visible
-- `activeSection` state (string) holds the current active id
+- Use `rootMargin: "-20% 0px -60% 0px"` and `threshold: 0` to trigger when a section enters the middle band of the viewport — this correctly handles tall sections that can never reach a percentage-of-element threshold in a smaller viewport
+- `activeSection` state (`string`) holds the current active id, initialized to `'context'`
 - Observer cleaned up on unmount
+
+Use a `useRef` Set to track all currently-intersecting section ids and always resolve the active stage to the first one in `STAGES` order. This correctly handles simultaneous entries during both downward and upward scroll:
+
+```ts
+const intersectingRef = useRef<Set<string>>(new Set());
+
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        intersectingRef.current.add(entry.target.id);
+      } else {
+        intersectingRef.current.delete(entry.target.id);
+      }
+    });
+    // Pick the topmost intersecting stage in STAGES order
+    const active = STAGES.find((s) => intersectingRef.current.has(s.id));
+    if (active) setActiveSection(active.id);
+  },
+  { rootMargin: '-20% 0px -60% 0px', threshold: 0 }
+);
+
+// Attach observer — null-guard required; a missing id silently skips, not throws
+STAGES.forEach((s) => {
+  const el = document.getElementById(s.id);
+  if (el) observer.observe(el);
+});
+```
 
 ### Visual structure
 
-- Vertical list, each item: dot + label side by side
-- Thin `1px` vertical line in `var(--border)` connecting dots (positioned behind via absolute/relative)
-- Active item: filled dot (`bg-[var(--foreground)]`), label at full opacity
-- Inactive items: hollow dot (`border border-[var(--muted)]`), label at `opacity-40`
-- Typography: `font-mono text-[11px] uppercase tracking-[0.15em]`
-- Transition: `transition-colors duration-300` and `transition-opacity duration-300`
+- Sidebar positioned: `self-start sticky top-24 max-h-[calc(100vh-6rem)] overflow-y-auto` (applied on the `<StagesSidebar>` wrapper or its outermost element)
+- Padding: `px-6 py-8` — compact navigator, no attempt to visually align with section content start (reliable alignment across viewport heights is not possible via padding alone)
+- Vertical list, each item: dot + label side by side, `gap-3`
+- Thin `1px` vertical line in `var(--border)` running through dot centers (absolutely positioned behind)
+- Active item: filled dot `w-1.5 h-1.5 bg-[var(--foreground)]`, label `opacity-100 text-[var(--foreground)]`
+- Inactive items: hollow dot `w-1.5 h-1.5 border border-[var(--muted)]`, label `opacity-40 text-[var(--muted)]`
+- Typography: `font-mono text-[14px] uppercase tracking-[0.15em]` — note: `text-[11px]` is overridden to 14px by a global CSS rule in `globals.css`, so `text-[14px]` is used explicitly
+- Transitions: `motion-safe:transition-colors motion-safe:duration-300` on dot, `motion-safe:transition-opacity motion-safe:duration-300` on label — uses Tailwind's `motion-safe:` prefix to respect `prefers-reduced-motion` (no global handler exists in the project)
 
 ### Click to jump
 
@@ -100,23 +167,17 @@ onClick={() => document.getElementById(stage.id)?.scrollIntoView({ behavior: 'sm
 ### Accessibility
 
 - Sidebar wrapped in `<nav aria-label="Design process stages">`
-- Each item is a `<button>` with descriptive `aria-label`
-- `aria-current="true"` on the active stage button
+- Each item is a `<button>` with `aria-label={stage.label}`
+- `aria-current="step"` on the active stage button (most semantically correct for sequential design process steps)
 
 ### Reduced motion
 
-```css
-@media (prefers-reduced-motion: reduce) {
-  * { transition-duration: 0ms !important; }
-}
-```
-
-Already handled globally in most setups; no extra code needed if the project already respects this.
+Handled via the `motion-safe:` Tailwind prefix on all transition classes (see Visual structure above). No global handler exists in the project; the prefix ensures no transitions fire when the OS motion preference is set to reduce.
 
 ### Mobile
 
 - Sidebar column is `hidden lg:block` — not shown on mobile or tablet
-- No fallback component for mobile in this iteration
+- No mobile fallback in this iteration
 
 ---
 
@@ -124,9 +185,9 @@ Already handled globally in most setups; no extra code needed if the project alr
 
 | File | Change |
 |------|--------|
-| `app/work/guest-user/page.tsx` | Add `id` prop to `Section`, add `StagesSidebar` component, wrap post-hero content in two-column grid |
+| `app/work/guest-user/page.tsx` | Update React imports; add `id` prop to `Section` component; add `StagesSidebar` component; wrap post-hero content in two-column grid |
 
-No new files required (sidebar can live in the same page file).
+No new files required.
 
 ---
 
