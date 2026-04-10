@@ -232,9 +232,7 @@ const StagesSidebar = () => {
       aria-label="Design process stages"
       className="hidden lg:block self-start sticky top-24 max-h-[calc(100vh-6rem)] overflow-y-auto px-6 py-8"
     >
-      <div className="relative flex flex-col gap-5">
-        <div className="absolute left-[3px] top-2 bottom-2 w-px bg-[var(--border)]" aria-hidden="true" />
-
+      <div className="flex flex-col gap-5">
         {STAGES.map((stage) => {
           const isActive = activeSection === stage.id;
           return (
@@ -246,17 +244,10 @@ const StagesSidebar = () => {
               onClick={() =>
                 document.getElementById(stage.id)?.scrollIntoView({ behavior: 'smooth' })
               }
-              className="relative flex items-center gap-3 text-left group"
+              className="text-left group"
             >
               <span
-                className={`relative z-10 flex-shrink-0 w-1.5 h-1.5 rounded-full motion-safe:transition-colors motion-safe:duration-300 ${
-                  isActive
-                    ? 'bg-[var(--foreground)]'
-                    : 'border border-[var(--muted)] bg-[var(--background)]'
-                }`}
-              />
-              <span
-                className={`font-mono text-[14px] uppercase tracking-[0.15em] leading-none motion-safe:transition-opacity motion-safe:duration-300 ${
+                className={`font-mono text-[14px] uppercase tracking-[0.15em] leading-none motion-safe:transition-all motion-safe:duration-300 ${
                   isActive
                     ? 'text-[var(--foreground)] opacity-100'
                     : 'text-[var(--muted)] opacity-40 group-hover:opacity-70'
@@ -280,7 +271,8 @@ export default function GuestEKGRecording() {
       <div className="w-full relative">
         <Hero />
 
-        <div className="relative lg:grid lg:grid-cols-[1fr_200px]">
+        <div className="relative lg:grid lg:grid-cols-[200px_1fr]">
+          <StagesSidebar />
           <div className="min-w-0">
             <Section title="Context" id="context">
           <div className="space-y-12">
@@ -582,7 +574,6 @@ export default function GuestEKGRecording() {
           </div>
         </section>
           </div>
-          <StagesSidebar />
         </div>
       </div>
     </div>

@@ -76,6 +76,7 @@ export default function WorkPage() {
               >
                 <Link
                   href={project.href || "#"}
+                  {...('external' in project && project.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                   className="block relative h-[550px] overflow-hidden rounded-[.5rem] border border-[var(--border)] bg-[var(--card)] transition-all duration-500 hover:border-[var(--foreground)]/20 hover:shadow-2xl group"
                 >
                   <div className="relative h-full w-full p-10 flex flex-col justify-end overflow-hidden">

@@ -2,8 +2,9 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+import { X, ArrowUpRight } from "lucide-react";
 
 // --- Gallery Data ---
 // To add/remove items: edit this array.
@@ -11,81 +12,144 @@ import { X } from "lucide-react";
 // 'tall' makes a card taller.
 
 const GALLERY_ITEMS = [
+  // Network School
   {
-    id: 1,
-    src: "/assets/img1.jpg",
-    alt: "EKG Guest User Flow",
-    label: "Guest EKG Flow",
-    tag: "Mobile Design",
-    tall: true,
-    span: 2,
-  },
-  {
-    id: 2,
-    src: "/assets/img2.jpg",
-    alt: "Year In Review",
-    label: "Year In Review",
-    tag: "Growth Design",
-    tall: false,
-    span: 1,
-  },
-  {
-    id: 3,
-    src: "/assets/img3.jpg",
-    alt: "Kardia Design System",
-    label: "Design System Tokens",
-    tag: "Design System",
-    tall: false,
-    span: 1,
-  },
-  {
-    id: 4,
-    src: "/assets/img4.jpg",
-    alt: "Website Redesign",
-    label: "Website Redesign",
-    tag: "Web Design",
-    tall: true,
-    span: 2,
-  },
-  {
-    id: 5,
-    src: "/assets/img1.jpg",
-    alt: "Exploration",
-    label: "Motion Exploration",
-    tag: "Motion",
-    tall: false,
-    span: 1,
-  },
-  {
-    id: 6,
-    src: "/assets/img2.jpg",
-    alt: "Illustration",
-    label: "Brand Illustration",
-    tag: "Illustration",
-    tall: true,
-    span: 1,
-  },
-  {
-    id: 7,
-    src: "/assets/img3.jpg",
-    alt: "Prototype",
-    label: "Interactive Prototype",
-    tag: "Mobile Design",
+    id: 9,
+    src: "/assets/network-school/IMG_8335.jpg",
+    alt: "Network School sign through bushes",
+    label: "Network School",
+    tag: "Photography",
     tall: false,
     span: 2,
   },
   {
-    id: 8,
-    src: "/assets/img4.jpg",
-    alt: "3D Render",
-    label: "3D Exploration",
-    tag: "3D",
+    id: 10,
+    src: "/assets/network-school/IMG_8822.jpg",
+    alt: "Grand venue lobby with chandelier",
+    label: "Late night at Cafe",
+    tag: "Photography",
+    tall: true,
+    span: 1,
+  },
+  {
+    id: 11,
+    src: "/assets/network-school/IMG_9120.jpg",
+    alt: "Laptop open in a moody lounge with light-up trees",
+    label: "Work @ Network School",
+    tag: "Photography",
+    tall: false,
+    span: 2,
+  },
+  {
+    id: 12,
+    src: "/assets/network-school/IMG_9219.jpg",
+    alt: "Welcome to the World of Design glass door",
+    label: "Red Dot Design Museum Singapore",
+    tag: "Photography",
+    tall: true,
+    span: 1,
+  },
+  {
+    id: 13,
+    src: "/assets/network-school/IMG_9399.jpg",
+    alt: "Gardens by the Bay supertrees lit up at night",
+    label: "Gardens by the Bay",
+    tag: "Photography",
+    tall: false,
+    span: 2,
+  },
+  {
+    id: 14,
+    src: "/assets/network-school/IMG_9577.jpg",
+    alt: "Grain bowl with chickpeas and avocado",
+    label: "Lunch @ Network School",
+    tag: "Photography",
+    tall: true,
+    span: 1,
+  },
+  {
+    id: 15,
+    src: "/assets/network-school/IMG_9724.jpg",
+    alt: "Singapore CBD skyline reflected in the water at night",
+    label: "Singapore Skyline",
+    tag: "Photography",
+    tall: false,
+    span: 3,
+  },
+  {
+    id: 16,
+    src: "/assets/network-school/IMG_9765.jpg",
+    alt: "Latte art with bold illustration mural in background",
+    label: "Coffee @Apartment Singapore",
+    tag: "Photography",
+    tall: true,
+    span: 1,
+  },
+  {
+    id: 17,
+    src: "/assets/network-school/IMG_9800.jpg",
+    alt: "Latte in a grey ceramic mug",
+    label: "Coffee @Kurasu Singapore",
+    tag: "Photography",
+    tall: true,
+    span: 1,
+  },
+  {
+    id: 18,
+    src: "/assets/network-school/IMG_9987.jpeg",
+    alt: "Forest City Marina Hotel with sea view and lush greenery",
+    label: "Network School stay",
+    tag: "Photography",
+    tall: false,
+    span: 2,
+  },
+  {
+    id: 19,
+    src: "/assets/network-school/7B8566F6-F28F-4695-A934-E2EAABA2CD65.jpg",
+    alt: "Hot chocolate with Malaysia Semai menu card",
+    label: "Apartment Coffee",
+    tag: "Photography",
+    tall: true,
+    span: 1,
+  },
+  // Singapore — drop images into public/assets/singapore/
+  {
+    id: 20,
+    src: "/assets/singapore/01.jpg",
+    alt: "Singapore",
+    label: "Singapore",
+    tag: "Singapore",
+    tall: false,
+    span: 2,
+  },
+  {
+    id: 21,
+    src: "/assets/singapore/02.jpg",
+    alt: "Singapore",
+    label: "Singapore",
+    tag: "Singapore",
+    tall: true,
+    span: 1,
+  },
+  {
+    id: 22,
+    src: "/assets/singapore/03.jpg",
+    alt: "Singapore",
+    label: "Singapore",
+    tag: "Singapore",
     tall: false,
     span: 1,
+  },
+  {
+    id: 23,
+    src: "/assets/singapore/04.jpg",
+    alt: "Singapore",
+    label: "Singapore",
+    tag: "Singapore",
+    tall: false,
+    span: 2,
   },
 ];
-
-const ALL_TAGS = ["All", ...Array.from(new Set(GALLERY_ITEMS.map((i) => i.tag)))];
 
 // --- Lightbox ---
 
@@ -115,6 +179,7 @@ function Lightbox({
           onClick={(e) => e.stopPropagation()}
         >
           <button
+            type="button"
             onClick={onClose}
             className="absolute -top-12 right-0 text-white/60 hover:text-white transition-colors z-10"
             aria-label="Close lightbox"
@@ -122,14 +187,14 @@ function Lightbox({
             <X className="w-8 h-8" />
           </button>
 
-          <div className="relative w-full overflow-hidden rounded-2xl">
+          <div className="relative w-full rounded-2xl overflow-hidden" style={{ height: '80vh' }}>
             <Image
               src={item.src}
               alt={item.alt}
-              width={1400}
-              height={900}
-              className="w-full h-auto object-contain"
+              fill
+              className="object-contain"
               priority
+              sizes="(max-width: 768px) 100vw, 1200px"
             />
           </div>
 
@@ -200,13 +265,9 @@ function GalleryCard({
 // --- Main Page ---
 
 export default function PlaygroundPage() {
-  const [activeTag, setActiveTag] = useState("All");
   const [lightboxItem, setLightboxItem] = useState<(typeof GALLERY_ITEMS)[0] | null>(null);
 
-  const filtered =
-    activeTag === "All"
-      ? GALLERY_ITEMS
-      : GALLERY_ITEMS.filter((i) => i.tag === activeTag);
+  const filtered = GALLERY_ITEMS;
 
   return (
     <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] selection:bg-[var(--primary)] selection:text-white">
@@ -235,8 +296,64 @@ export default function PlaygroundPage() {
         </div>
       </div>
 
+      {/* Side Projects */}
+      <div className="max-w-7xl mx-auto px-6 pb-20">
+        <div className="flex items-center gap-3 mb-8">
+          <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-[var(--muted)]">Side Projects</span>
+          <div className="h-px flex-1 bg-[var(--border)]" />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            {
+              href: "/playground/freshfolios",
+              title: "Freshfolios",
+              desc: "A curated platform for designers to build and share work that gets noticed.",
+              tag: "Web Design & Dev",
+              accent: "group-hover:text-rose-400",
+              dot: "bg-rose-400",
+            },
+            {
+              href: "/playground/interestingplaces",
+              title: "Interesting Places",
+              desc: "A curated atlas of the world's most fascinating and overlooked locations.",
+              tag: "Web Design & Dev",
+              accent: "group-hover:text-emerald-400",
+              dot: "bg-emerald-400",
+            },
+          ].map((project) => (
+            <Link
+              key={project.href}
+              href={project.href}
+              className="group flex items-start justify-between gap-6 p-8 rounded-lg border border-[var(--border)] bg-[var(--card)] hover:border-[var(--foreground)]/20 transition-all duration-300"
+            >
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <div className={`w-1.5 h-1.5 rounded-full ${project.dot}`} />
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[var(--muted)]">
+                    {project.tag}
+                  </span>
+                </div>
+                <h3 className={`text-2xl font-black uppercase tracking-tight text-[var(--foreground)] transition-colors duration-300 ${project.accent}`}>
+                  {project.title}
+                </h3>
+                <p className="text-[var(--muted)] font-medium leading-relaxed text-sm max-w-sm">
+                  {project.desc}
+                </p>
+              </div>
+              <div className="shrink-0 w-10 h-10 rounded-full border border-[var(--border)] flex items-center justify-center text-[var(--muted)] group-hover:bg-[var(--foreground)] group-hover:text-[var(--background)] group-hover:border-transparent transition-all duration-300 mt-1">
+                <ArrowUpRight className="w-5 h-5" />
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+
       {/* Masonry Gallery */}
       <div className="max-w-7xl mx-auto px-6 pb-32">
+        <div className="flex items-center gap-3 mb-8">
+          <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-[var(--muted)]">Gallery</span>
+          <div className="h-px flex-1 bg-[var(--border)]" />
+        </div>
         <motion.div
           layout
           className="grid grid-cols-1 md:grid-cols-3 auto-rows-[280px] gap-3"

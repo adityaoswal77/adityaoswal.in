@@ -12,6 +12,7 @@ import { Sun, Moon } from "lucide-react";
 const navigation = [
   { name: "Home", href: "/", current: false },
   { name: "Work", href: "/work", current: false },
+  { name: "Playground", href: "/playground", current: false },
   { name: "About", href: "/aboutme", current: false },
 ];
 
