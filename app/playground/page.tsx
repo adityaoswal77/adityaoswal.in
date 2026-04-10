@@ -111,44 +111,7 @@ const GALLERY_ITEMS = [
     tag: "Photography",
     tall: true,
     span: 1,
-  },
-  // Singapore — drop images into public/assets/singapore/
-  {
-    id: 20,
-    src: "/assets/singapore/01.jpg",
-    alt: "Singapore",
-    label: "Singapore",
-    tag: "Singapore",
-    tall: false,
-    span: 2,
-  },
-  {
-    id: 21,
-    src: "/assets/singapore/02.jpg",
-    alt: "Singapore",
-    label: "Singapore",
-    tag: "Singapore",
-    tall: true,
-    span: 1,
-  },
-  {
-    id: 22,
-    src: "/assets/singapore/03.jpg",
-    alt: "Singapore",
-    label: "Singapore",
-    tag: "Singapore",
-    tall: false,
-    span: 1,
-  },
-  {
-    id: 23,
-    src: "/assets/singapore/04.jpg",
-    alt: "Singapore",
-    label: "Singapore",
-    tag: "Singapore",
-    tall: false,
-    span: 2,
-  },
+  },  
 ];
 
 // --- Lightbox ---

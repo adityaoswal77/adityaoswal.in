@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useLayoutEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Palette, TestTube2, Cpu, PenTool, Wind, Code2, Zap, Triangle, Layers } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, Palette, TestTube2, Cpu, PenTool, Wind, Code2, Zap, Triangle, Layers } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import VariableFontHoverByRandomLetter from "@/fancy/components/text/variable-font-hover-by-random-letter";
@@ -206,6 +206,60 @@ const AboutOverview = () => {
             </p>
           </div>
         </div>
+
+      </div>
+    </Section>
+  );
+};
+
+const SideProjects = () => {
+  const projects = [
+    {
+      href: "/playground/freshfolios",
+      title: "Freshfolios",
+      desc: "A curated platform for designers to build and share work that gets noticed.",
+      tag: "Web Design & Dev",
+      accent: "group-hover:text-rose-400",
+      dot: "bg-rose-400",
+    },
+    {
+      href: "/playground/interestingplaces",
+      title: "Interesting Places",
+      desc: "A curated atlas of the world's most fascinating and overlooked locations.",
+      tag: "Web Design & Dev",
+      accent: "group-hover:text-emerald-400",
+      dot: "bg-emerald-400",
+    },
+  ];
+
+  return (
+    <Section title="Side Projects">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {projects.map((project) => (
+          <Link
+            key={project.href}
+            href={project.href}
+            className="group flex items-start justify-between gap-6 p-8 rounded-lg border border-[var(--border)] bg-[var(--card)] hover:border-[var(--foreground)]/20 transition-all duration-300"
+          >
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <div className={`w-1.5 h-1.5 rounded-full ${project.dot}`} />
+                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[var(--muted)]">
+                  {project.tag}
+                </span>
+              </div>
+              <h3 className={`text-2xl font-black uppercase tracking-tight text-[var(--foreground)] transition-colors duration-300 ${project.accent}`}>
+                {project.title}
+              </h3>
+              <p className="text-[var(--muted)] font-medium leading-relaxed text-sm max-w-sm">
+                {project.desc}
+              </p>
+            </div>
+            <div className="shrink-0 w-10 h-10 rounded-full border border-[var(--border)] flex items-center justify-center text-[var(--muted)] group-hover:bg-[var(--foreground)] group-hover:text-[var(--background)] group-hover:border-transparent transition-all duration-300 mt-1">
+              <ArrowUpRight className="w-5 h-5" />
+            </div>
+          </Link>
+        ))}
       </div>
     </Section>
   );
@@ -479,6 +533,7 @@ export default function AboutPage() {
       <div className="w-full relative">
         <Hero />
         <AboutOverview />
+        <SideProjects />
         <Collaborations />
         <Toolstack />
         <WorkExperience />

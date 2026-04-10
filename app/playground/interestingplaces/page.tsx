@@ -69,7 +69,7 @@ const Hero = () => {
             ref={descriptionRef}
             className="text-lg md:text-2xl font-medium leading-relaxed text-[var(--muted)] max-w-3xl"
           >
-            A curated atlas of the world's most fascinating, offbeat, and overlooked locations — built for curious people who travel to feel something.
+            A curated atlas of the world&apos;s most fascinating, offbeat, and overlooked locations — built for curious people who travel to feel something.
           </p>
 
           <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 pt-16 border-t border-[var(--border)]">
@@ -167,7 +167,7 @@ export default function InterestingPlaces() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-24">
             <div className="space-y-8">
               <p className="text-xl md:text-2xl text-[var(--foreground)] opacity-80 leading-relaxed font-medium">
-                I've always been drawn to places that don't make the top-ten lists — the ones that have a story, a strangeness, or a quiet that makes you stop. I couldn't find a single place online that collected them well.
+                I&apos;ve always been drawn to places that don&apos;t make the top-ten lists — the ones that have a story, a strangeness, or a quiet that makes you stop. I couldn&apos;t find a single place online that collected them well.
               </p>
               <p className="text-lg text-[var(--muted)] leading-relaxed font-medium">
                 Most travel content is algorithm-driven — optimised for clicks, not curiosity. Interesting Places is the opposite: a slow, deliberate collection of places worth knowing about, designed to make you want to go.
