@@ -111,7 +111,7 @@ const GALLERY_ITEMS = [
     tag: "Photography",
     tall: true,
     span: 1,
-  },  
+  },
 ];
 
 // --- Lightbox ---
@@ -214,12 +214,15 @@ function GalleryCard({
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-400" />
 
         {/* Label — slides up on hover */}
-        <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-400 ease-out">
-          <span className="text-[10px] font-bold uppercase tracking-widest text-white/50 font-mono">
+        <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-400 ease-out z-20">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-white/50 font-mono group-hover:text-[var(--primary)] transition-colors duration-300">
             {item.tag}
           </span>
           <p className="text-white font-bold text-lg leading-tight mt-1">{item.label}</p>
         </div>
+
+        {/* Themed Glow/Tint on hover */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 bg-[var(--primary)] pointer-events-none" />
       </div>
     </motion.div>
   );
@@ -246,12 +249,12 @@ export default function PlaygroundPage() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-10">
           <div>
             <h1 className="text-6xl md:text-[8rem] font-black uppercase tracking-normal leading-[0.85] text-[var(--foreground)]">
-              All
+              Play
               <br />
-              <span className="italic font-light text-[var(--primary)]">Works</span>
+              <span className="italic font-light text-[var(--primary)] drop-shadow-[0_0_15px_rgba(var(--primary-rgb),0.3)]">Ground</span>
             </h1>
             <p className="mt-6 text-xl text-[var(--muted)] font-medium max-w-lg">
-              A collection of design explorations — mockups, illustrations, motion, and experiments.
+              A collection of side projects, experiments, and personal travel.
             </p>
           </div>
 
@@ -270,18 +273,18 @@ export default function PlaygroundPage() {
             {
               href: "/playground/freshfolios",
               title: "Freshfolios",
-              desc: "A curated platform for designers to build and share work that gets noticed.",
+              desc: "A curated digital library profiling world-class portfolios, exceptional design work, and essential creative resources.",
               tag: "Web Design & Dev",
-              accent: "group-hover:text-rose-400",
-              dot: "bg-rose-400",
+              accent: "group-hover:text-[var(--primary)]",
+              dot: "bg-[var(--primary)] shadow-[0_0_10px_rgba(var(--primary-rgb),0.5)]",
             },
             {
               href: "/playground/interestingplaces",
               title: "Interesting Places",
               desc: "A curated atlas of the world's most fascinating and overlooked locations.",
               tag: "Web Design & Dev",
-              accent: "group-hover:text-emerald-400",
-              dot: "bg-emerald-400",
+              accent: "group-hover:text-[var(--primary)]",
+              dot: "bg-[var(--primary)] shadow-[0_0_10px_rgba(var(--primary-rgb),0.5)]",
             },
           ].map((project) => (
             <Link
@@ -303,7 +306,7 @@ export default function PlaygroundPage() {
                   {project.desc}
                 </p>
               </div>
-              <div className="shrink-0 w-10 h-10 rounded-full border border-[var(--border)] flex items-center justify-center text-[var(--muted)] group-hover:bg-[var(--foreground)] group-hover:text-[var(--background)] group-hover:border-transparent transition-all duration-300 mt-1">
+              <div className="shrink-0 w-10 h-10 rounded-full border border-[var(--border)] flex items-center justify-center text-[var(--muted)] group-hover:bg-[var(--primary)] group-hover:text-white group-hover:border-transparent transition-all duration-300 mt-1">
                 <ArrowUpRight className="w-5 h-5" />
               </div>
             </Link>

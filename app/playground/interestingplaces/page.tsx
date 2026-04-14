@@ -36,7 +36,7 @@ const Hero = () => {
       <div className="max-w-7xl mx-auto w-full relative z-10">
         <Link
           href="/playground"
-          className="inline-flex items-center gap-2 mb-16 text-[var(--muted)] hover:text-[var(--foreground)] transition-colors font-mono text-[14px] uppercase tracking-widest"
+          className="inline-flex items-center gap-2 mb-16 text-[var(--muted)] hover:text-[var(--primary)] transition-colors font-mono text-[14px] uppercase tracking-widest"
         >
           <ArrowLeft className="h-4 w-4" />
           <span>Back to Playground</span>
@@ -45,7 +45,7 @@ const Hero = () => {
         <div className="space-y-12">
           <div ref={metaRef} className="flex items-center gap-6">
             <div className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <div className="w-1.5 h-1.5 rounded-full bg-[var(--primary)] shadow-[0_0_10px_rgba(var(--primary-rgb),0.5)]" />
               <span className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)]">
                 Side Project
               </span>
@@ -62,14 +62,14 @@ const Hero = () => {
           >
             Interesting
             <br />
-            <span className="italic font-light text-[var(--muted)]">Places</span>
+            <span className="italic font-light text-[var(--muted)] drop-shadow-[0_0_20px_rgba(var(--primary-rgb),0.1)] transition-all duration-300">Places</span>
           </h1>
 
           <p
             ref={descriptionRef}
             className="text-lg md:text-2xl font-medium leading-relaxed text-[var(--muted)] max-w-3xl"
           >
-            A curated atlas of the world&apos;s most fascinating, offbeat, and overlooked locations — built for curious people who travel to feel something.
+            A curated atlas of places to eat and visit, across India, Singapore & Malaysia
           </p>
 
           <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 pt-16 border-t border-[var(--border)]">
@@ -92,7 +92,7 @@ const Hero = () => {
                   href="https://interestingplaces.in"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 hover:text-emerald-400 transition-colors"
+                  className="inline-flex items-center gap-1 hover:text-[var(--primary)] transition-colors"
                 >
                   interestingplaces.in
                   <ArrowUpRight className="w-5 h-5" />
@@ -103,8 +103,11 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="absolute -bottom-20 -right-20 pointer-events-none opacity-[0.02] select-none">
-        <span className="text-[25rem] font-black leading-none tracking-tighter italic uppercase">
+      <div className="absolute -bottom-20 -right-20 pointer-events-none opacity-[0.03] select-none">
+        <span
+          className="text-[25rem] font-black leading-none tracking-tighter italic uppercase transition-colors duration-500"
+          style={{ WebkitTextStroke: '1px var(--primary)' }}
+        >
           Places
         </span>
       </div>
@@ -159,7 +162,7 @@ const Section = ({ title, children, className = "" }: { title?: string; children
 
 export default function InterestingPlaces() {
   return (
-    <div className="font-sans antialiased bg-[var(--background)] text-[var(--foreground)] selection:bg-[var(--foreground)] selection:text-[var(--background)] min-h-screen transition-colors duration-300">
+    <div className="font-sans antialiased bg-[var(--background)] text-[var(--foreground)] selection:bg-[var(--primary)] selection:text-white min-h-screen transition-colors duration-300">
       <div className="w-full relative">
         <Hero />
 
@@ -167,15 +170,15 @@ export default function InterestingPlaces() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-24">
             <div className="space-y-8">
               <p className="text-xl md:text-2xl text-[var(--foreground)] opacity-80 leading-relaxed font-medium">
-                I&apos;ve always been drawn to places that don&apos;t make the top-ten lists — the ones that have a story, a strangeness, or a quiet that makes you stop. I couldn&apos;t find a single place online that collected them well.
+                Good vegetarian food is hard to find.
               </p>
               <p className="text-lg text-[var(--muted)] leading-relaxed font-medium">
-                Most travel content is algorithm-driven — optimised for clicks, not curiosity. Interesting Places is the opposite: a slow, deliberate collection of places worth knowing about, designed to make you want to go.
+                Most travel content is algorithm-driven — optimised for clicks. Interesting Places is the opposite: a curated collection of places worth knowing about, designed to make you want to go.
               </p>
             </div>
             <div className="space-y-0">
               {[
-                { label: 'Discovery gap', desc: 'Travel apps surface the same 50 destinations. The genuinely interesting places — the ones with texture — are invisible.' },
+                { label: 'Discovery gap', desc: 'Travel apps surface the same 10-20 destinations. The genuinely interesting places - for food & travel - are invisible.' },
                 { label: 'Context over coordinates', desc: 'A pin on a map tells you nothing. Every place needs its history, its mood, its reason to exist.' },
                 { label: 'Design as editorial', desc: 'The way a place is presented shapes how you feel about visiting it. Most travel sites treat this as an afterthought.' },
               ].map((item, i) => (
@@ -188,34 +191,47 @@ export default function InterestingPlaces() {
           </div>
         </Section>
 
-        <Section title="The Experience" className="bg-[var(--foreground)]/5">
-          <div className="space-y-20">
+        <Section title="The Experience" className="bg-[var(--primary)]/5">
+          <div className="space-y-32">
             <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[var(--border)]">
               {[
                 { step: '01', title: 'Discover', desc: "Browse a hand-curated collection of places across the world — filtered by mood, geography, and the kind of experience you're after." },
                 { step: '02', title: 'Read', desc: "Each place gets an editorial entry: what makes it interesting, its history, and the context that makes it worth caring about." },
                 { step: '03', title: 'Go', desc: "Practical links and context when you're ready to move from curious to committed." },
               ].map((item, i) => (
-                <div key={i} className="py-10 md:py-0 md:px-12 first:md:pl-0 last:md:pr-0 space-y-6">
-                  <span className="text-[13px] font-bold text-[var(--muted)] uppercase tracking-widest">{item.step}</span>
-                  <h3 className="text-2xl font-bold uppercase tracking-tight text-[var(--foreground)]">{item.title}</h3>
+                <div key={i} className="group/step py-10 md:py-0 md:px-12 first:md:pl-0 last:md:pr-0 space-y-6 transition-all duration-300">
+                  <span className="text-[13px] font-bold text-[var(--muted)] uppercase tracking-widest group-hover/step:text-[var(--primary)] transition-colors duration-300">
+                    {item.step}
+                  </span>
+                  <h3 className="text-2xl font-bold uppercase tracking-tight text-[var(--foreground)] group-hover/step:translate-x-1 transition-transform duration-300">
+                    {item.title}
+                  </h3>
                   <p className="text-[var(--muted)] font-medium leading-relaxed">{item.desc}</p>
                 </div>
               ))}
             </div>
 
-            {/* Mockup placeholder — drop your image at /assets/interestingplaces-mockup.png */}
-            <figure className="relative w-full overflow-hidden rounded-[2.5rem] border border-[var(--border)] bg-zinc-900/50">
-              <div className="relative aspect-video w-full">
-                <Image
-                  src="/assets/interestingplaces-mockup.png"
-                  alt="Interesting Places platform mockup"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-                />
-              </div>
-            </figure>
+            {/* Project Video Demo */}
+            <a href='https://interestingplaces.in' target="_blank" className="block mt-24">
+              <figure className="group/demo relative w-full overflow-hidden rounded-[2.5rem] border border-[var(--border)] bg-zinc-900/50 hover:border-[var(--primary)]/30 transition-all duration-500 shadow-2xl">
+                <div className="relative aspect-video w-full">
+                  <video
+                    src="/assets/interestingplaces-video.mov"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover/demo:scale-[1.02]"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+
+                  {/* Themed Glow Overlay */}
+                  <div className="absolute inset-0 opacity-0 group-hover/demo:opacity-10 transition-opacity duration-500 bg-[var(--primary)] pointer-events-none" />
+                </div>
+
+                {/* Subtle bottom glow */}
+                <div className="absolute -bottom-10 left-10 right-10 h-20 bg-[var(--primary)]/20 blur-[100px] opacity-0 group-hover/demo:opacity-100 transition-opacity duration-700" />
+              </figure>
+            </a>
           </div>
         </Section>
 
@@ -226,7 +242,7 @@ export default function InterestingPlaces() {
                 Content-first products require a different design instinct. The editorial quality of each entry shapes the entire platform feel — a single poorly described place pulls the whole experience down.
               </p>
               <p className="text-lg text-[var(--muted)] leading-relaxed font-medium">
-                Building for curiosity rather than conversion removed a lot of typical product anxieties and let me focus on what actually makes a great reading experience.
+                Building for curation rather than conversion removed a lot of typical product anxieties and let me focus on what actually makes a great discovery experience.
               </p>
             </div>
             <div className="space-y-0">
@@ -257,7 +273,7 @@ export default function InterestingPlaces() {
                 <span className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-[var(--foreground)] group-hover:italic transition-all duration-500 group-hover:opacity-70">
                   interestingplaces.in
                 </span>
-                <div className="w-16 h-16 rounded-full bg-[var(--foreground)] flex items-center justify-center text-[var(--background)] group-hover:scale-110 transition-transform duration-500 shrink-0">
+                <div className="w-16 h-16 rounded-full bg-[var(--foreground)] flex items-center justify-center text-[var(--background)] group-hover:bg-[var(--primary)] group-hover:text-white group-hover:scale-110 transition-all duration-500 shrink-0">
                   <ArrowUpRight className="w-8 h-8" />
                 </div>
               </a>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ThemeController } from "@/components/ThemeController";
+import { ScrollProgress } from "@/components/ScrollProgress";
 
 export const metadata: Metadata = {
   title: "Playground | Aditya Oswal",
@@ -13,6 +14,7 @@ export default function PlaygroundLayout({
 }) {
   return (
     <>
+      <ScrollProgress />
       {children}
       <ThemeController />
     </>

@@ -36,7 +36,7 @@ const Hero = () => {
       <div className="max-w-7xl mx-auto w-full relative z-10">
         <Link
           href="/playground"
-          className="inline-flex items-center gap-2 mb-16 text-[var(--muted)] hover:text-[var(--foreground)] transition-colors font-mono text-[14px] uppercase tracking-widest"
+          className="inline-flex items-center gap-2 mb-16 text-[var(--muted)] hover:text-[var(--primary)] transition-colors font-mono text-[14px] uppercase tracking-widest"
         >
           <ArrowLeft className="h-4 w-4" />
           <span>Back to Playground</span>
@@ -45,7 +45,7 @@ const Hero = () => {
         <div className="space-y-12">
           <div ref={metaRef} className="flex items-center gap-6">
             <div className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-rose-400" />
+              <div className="w-1.5 h-1.5 rounded-full bg-[var(--primary)] shadow-[0_0_10px_rgba(var(--primary-rgb),0.5)]" />
               <span className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)]">
                 Side Project
               </span>
@@ -62,14 +62,14 @@ const Hero = () => {
           >
             Fresh
             <br />
-            <span className="italic font-light text-[var(--muted)]">Folios</span>
+            <span className="italic font-light text-[var(--muted)] drop-shadow-[0_0_20px_rgba(var(--primary-rgb),0.1)] transition-all duration-300">Folios</span>
           </h1>
 
           <p
             ref={descriptionRef}
             className="text-lg md:text-2xl font-medium leading-relaxed text-[var(--muted)] max-w-3xl"
           >
-            A curated platform for designers to build and share work that actually gets noticed — not another cluttered portfolio graveyard.
+            A curated digital library for the modern designer — profiling world-class portfolios, exceptional design work, and essential creative resources.
           </p>
 
           <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 pt-16 border-t border-[var(--border)]">
@@ -92,7 +92,7 @@ const Hero = () => {
                   href="https://freshfolios.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 hover:text-rose-400 transition-colors"
+                  className="inline-flex items-center gap-1 hover:text-[var(--primary)] transition-colors"
                 >
                   freshfolios.com
                   <ArrowUpRight className="w-5 h-5" />
@@ -103,8 +103,11 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="absolute -bottom-20 -right-20 pointer-events-none opacity-[0.02] select-none">
-        <span className="text-[25rem] font-black leading-none tracking-tighter italic uppercase">
+      <div className="absolute -bottom-20 -right-20 pointer-events-none opacity-[0.03] select-none">
+        <span
+          className="text-[25rem] font-black leading-none tracking-tighter italic uppercase transition-colors duration-500"
+          style={{ WebkitTextStroke: '1px var(--primary)' }}
+        >
           Fresh
         </span>
       </div>
@@ -159,7 +162,7 @@ const Section = ({ title, children, className = "" }: { title?: string; children
 
 export default function Freshfolios() {
   return (
-    <div className="font-sans antialiased bg-[var(--background)] text-[var(--foreground)] selection:bg-[var(--foreground)] selection:text-[var(--background)] min-h-screen transition-colors duration-300">
+    <div className="font-sans antialiased bg-[var(--background)] text-[var(--foreground)] selection:bg-[var(--primary)] selection:text-white min-h-screen transition-colors duration-300">
       <div className="w-full relative">
         <Hero />
 
@@ -167,10 +170,10 @@ export default function Freshfolios() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-24">
             <div className="space-y-8">
               <p className="text-xl md:text-2xl text-[var(--foreground)] opacity-80 leading-relaxed font-medium">
-                Every designer I know has the same problem — great work, terrible visibility. Most portfolio platforms are either too generic or too complex to maintain. I wanted to fix that.
+                The internet is flooded with noise, but the best design work often remains hidden.
               </p>
               <p className="text-lg text-[var(--muted)] leading-relaxed font-medium">
-                Freshfolios started from a simple frustration: the tools designers use to show their work rarely reflect the quality of the work itself. I wanted a platform that felt as considered as the portfolios it hosts.
+                I built Freshfolios to bridge that gap — creating a high-signal space where the most impactful portfolios and resources are meticulously curated, not just stored in a builder.
               </p>
             </div>
             <div className="space-y-0">
@@ -188,33 +191,46 @@ export default function Freshfolios() {
           </div>
         </Section>
 
-        <Section title="The Product" className="bg-[var(--foreground)]/5">
-          <div className="space-y-20">
+        <Section title="The Product" className="bg-[var(--primary)]/5">
+          <div className="space-y-32">
             <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[var(--border)]">
               {[
-                { step: '01', title: 'Build', desc: 'Designers create focused, structured portfolios with an editor built for showcasing process — not just final screens.' },
-                { step: '02', title: 'Curate', desc: 'Projects are organized to tell a story. The platform guides designers to present context, decisions, and outcomes.' },
-                { step: '03', title: 'Share', desc: 'A clean public profile and shareable case study links — built to impress recruiters and clients at first glance.' },
+                { step: '01', title: 'Discover', desc: 'A hand-picked selection of portfolios and case studies from the world’s most talented designers, sorted by industry and style.' },
+                { step: '02', title: 'Resources', desc: 'A growing hub of premium design assets, tools, and inspirations meticulously vetted for quality and utility.' },
+                { step: '03', title: 'Inspire', desc: 'Designed to be the starting point for your next project, offering a high-fidelity look into how the best work is built.' },
               ].map((item, i) => (
-                <div key={i} className="py-10 md:py-0 md:px-12 first:md:pl-0 last:md:pr-0 space-y-6">
-                  <span className="text-[13px] font-bold text-[var(--muted)] uppercase tracking-widest">{item.step}</span>
-                  <h3 className="text-2xl font-bold uppercase tracking-tight text-[var(--foreground)]">{item.title}</h3>
+                <div key={i} className="group/step py-10 md:py-0 md:px-12 first:md:pl-0 last:md:pr-0 space-y-6 transition-all duration-300">
+                  <span className="text-[13px] font-bold text-[var(--muted)] uppercase tracking-widest group-hover/step:text-[var(--primary)] transition-colors duration-300">
+                    {item.step}
+                  </span>
+                  <h3 className="text-2xl font-bold uppercase tracking-tight text-[var(--foreground)] group-hover/step:translate-x-1 transition-transform duration-300">
+                    {item.title}
+                  </h3>
                   <p className="text-[var(--muted)] font-medium leading-relaxed">{item.desc}</p>
                 </div>
               ))}
             </div>
 
-            {/* Mockup placeholder — drop your image at /assets/freshfolios-mockup.png */}
-            <figure className="relative w-full overflow-hidden rounded-[2.5rem] border border-[var(--border)] bg-zinc-900/50">
+            {/* Mockup placeholder */}
+            <figure className="group/demo relative w-full overflow-hidden rounded-[2.5rem] border border-[var(--border)] bg-zinc-900/50 hover:border-[var(--primary)]/30 transition-all duration-500 shadow-2xl mt-32">
               <div className="relative aspect-video w-full">
-                <Image
-                  src="/assets/freshfolios-mockup.png"
-                  alt="Freshfolios platform mockup"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-                />
+                <a href='https://freshfolios.com' target="_blank">
+                  <Image
+
+                    src="/assets/Freshfolios.png"
+                    alt="Freshfolios platform mockup"
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover/demo:scale-[1.02]"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+                  />
+                </a>
+
+                {/* Themed Glow Overlay */}
+                <div className="absolute inset-0 opacity-0 group-hover/demo:opacity-10 transition-opacity duration-500 bg-[var(--primary)] pointer-events-none" />
               </div>
+
+              {/* Subtle bottom glow */}
+              <div className="absolute -bottom-10 left-10 right-10 h-20 bg-[var(--primary)]/20 blur-[100px] opacity-0 group-hover/demo:opacity-100 transition-opacity duration-700" />
             </figure>
           </div>
         </Section>
@@ -257,7 +273,7 @@ export default function Freshfolios() {
                 <span className="text-5xl md:text-7xl font-black uppercase tracking-tighter text-[var(--foreground)] group-hover:italic transition-all duration-500 group-hover:opacity-70">
                   freshfolios.com
                 </span>
-                <div className="w-16 h-16 rounded-full bg-[var(--foreground)] flex items-center justify-center text-[var(--background)] group-hover:scale-110 transition-transform duration-500 shrink-0">
+                <div className="w-16 h-16 rounded-full bg-[var(--foreground)] flex items-center justify-center text-[var(--background)] group-hover:bg-[var(--primary)] group-hover:text-white group-hover:scale-110 transition-all duration-500 shrink-0">
                   <ArrowUpRight className="w-8 h-8" />
                 </div>
               </a>
