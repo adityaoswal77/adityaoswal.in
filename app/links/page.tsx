@@ -24,6 +24,7 @@ import {
   type BookmarkCategory,
   type Community,
 } from "@/lib/links";
+import AnimatedGradient from "@/components/fancy/background/animated-gradient-with-svg";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -103,6 +104,17 @@ export default function LinksPage() {
       b.tags?.some((t) => t.toLowerCase().includes(q)) ||
       b.category.toLowerCase().includes(q);
     return matchCat && matchSearch;
+  });
+
+  const filteredCommunities = COMMUNITIES.filter((c) => {
+    const q = search.toLowerCase();
+    if (!q) return true;
+    return (
+      c.title.toLowerCase().includes(q) ||
+      c.tagline.toLowerCase().includes(q) ||
+      c.description.toLowerCase().includes(q) ||
+      c.tags.some((t) => t.toLowerCase().includes(q))
+    );
   });
 
   // Group by category for the "All" view
@@ -186,21 +198,23 @@ export default function LinksPage() {
       </div>
 
       {/* Communities Section */}
-      <div className="max-w-5xl mx-auto px-6 mb-16">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-lg border border-indigo-500/20 bg-indigo-500/10 text-indigo-400 text-sm font-semibold">
-            <Users className="w-3.5 h-3.5" />
-            Communities
+      {activeCategory === "All" && filteredCommunities.length > 0 && (
+        <div className="max-w-5xl mx-auto px-6 mb-16">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-1.5 px-3 py-1 rounded-lg border border-lime-700/20 bg-lime-700/10 text-lime-600 text-sm font-semibold">
+              <Users className="w-3.5 h-3.5" />
+              Communities
+            </div>
+            <div className="flex-1 h-px bg-[var(--border)]" />
+            <span className="text-xs text-[var(--muted)] opacity-60 font-medium">DM me for a Referral</span>
           </div>
-          <div className="flex-1 h-px bg-[var(--border)]" />
-          <span className="text-xs text-[var(--muted)] opacity-60 font-medium">DM me to join</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {filteredCommunities.map((c) => (
+              <CommunityCard key={c.id} community={c} />
+            ))}
+          </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {COMMUNITIES.map((c) => (
-            <CommunityCard key={c.id} community={c} />
-          ))}
-        </div>
-      </div>
+      )}
 
       {/* Grid */}
       <div className="max-w-5xl mx-auto px-6" ref={gridRef}>
@@ -265,42 +279,45 @@ function BookmarkCard({
       rel="noopener noreferrer"
       className="bookmark-card group relative flex flex-col justify-between gap-4 p-5 rounded-2xl border border-[var(--border)] bg-[var(--card)] hover:border-[var(--foreground)]/20 hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-300 overflow-hidden"
     >
-      {/* Hover gradient shimmer */}
+      {/* Background Layers */}
+      <div className="absolute inset-0 bg-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-[var(--primary)]/5 to-transparent pointer-events-none" />
 
-      {/* Top: title + arrow */}
-      <div className="flex items-start justify-between gap-3 relative z-10">
-        <div>
-          <p className="font-semibold text-[var(--foreground)] text-[15px] leading-snug group-hover:text-white transition-colors">
-            {bookmark.title}
-          </p>
-          <p className="text-xs text-[var(--muted)] mt-0.5 font-mono opacity-60">
-            {domain}
-          </p>
+      <div className="relative z-10 flex flex-col justify-between gap-4 h-full">
+        {/* Top: title + arrow */}
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <p className="font-semibold text-[var(--foreground)] text-[15px] leading-snug group-hover:text-white transition-colors">
+              {bookmark.title}
+            </p>
+            <p className="text-xs text-[var(--muted)] mt-0.5 font-mono opacity-60 group-hover:text-zinc-500 transition-colors">
+              {domain}
+            </p>
+          </div>
+          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--foreground)]/5 border border-[var(--border)] flex items-center justify-center group-hover:bg-white group-hover:border-white transition-all duration-300">
+            <ArrowUpRight className="w-3.5 h-3.5 text-[var(--muted)] group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
+          </div>
         </div>
-        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--foreground)]/5 border border-[var(--border)] flex items-center justify-center group-hover:bg-[var(--foreground)] group-hover:border-[var(--foreground)] transition-all duration-300">
-          <ArrowUpRight className="w-3.5 h-3.5 text-[var(--muted)] group-hover:text-[var(--background)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
-        </div>
+
+        {/* Description */}
+        <p className="text-sm text-[var(--muted)] leading-relaxed line-clamp-2 group-hover:text-zinc-400 transition-colors">
+          {bookmark.description}
+        </p>
+
+        {/* Tags */}
+        {bookmark.tags && bookmark.tags.length > 0 && (
+          <div className="flex flex-wrap gap-1.5">
+            {bookmark.tags.map((tag) => (
+              <span
+                key={tag}
+                className="px-2 py-0.5 rounded-md bg-[var(--foreground)]/5 border border-[var(--border)] text-xs text-[var(--muted)] font-medium group-hover:border-white/10 group-hover:bg-white/5 group-hover:text-zinc-300 transition-colors"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
-
-      {/* Description */}
-      <p className="text-sm text-[var(--muted)] leading-relaxed line-clamp-2 relative z-10">
-        {bookmark.description}
-      </p>
-
-      {/* Tags */}
-      {bookmark.tags && bookmark.tags.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 relative z-10">
-          {bookmark.tags.map((tag) => (
-            <span
-              key={tag}
-              className="px-2 py-0.5 rounded-md bg-[var(--foreground)]/5 border border-[var(--border)] text-xs text-[var(--muted)] font-medium"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      )}
     </a>
   );
 }
@@ -309,70 +326,85 @@ function CommunityCard({ community }: { community: Community }) {
   return (
     <div
       id={`community-${community.id}`}
-      className="group relative flex flex-col gap-5 p-6 rounded-2xl border border-indigo-500/20 bg-gradient-to-br from-indigo-500/5 via-[var(--card)] to-[var(--card)] hover:border-indigo-500/40 hover:shadow-[0_8px_40px_rgba(99,102,241,0.12)] transition-all duration-300 overflow-hidden"
+      className="group relative flex flex-col gap-5 p-6 rounded-2xl border border-lime-500/20 bg-[var(--card)] hover:border-lime-500/40 hover:shadow-[0_8px_40px_rgba(132,204,22,0.12)] transition-all duration-300 overflow-hidden"
     >
-      {/* Glow on hover */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-indigo-500/8 to-transparent pointer-events-none" />
+      {/* Background Layers */}
+      {/* Lime Tint */}
+      <div className="absolute inset-0 bg-gradient-to-br from-lime-500/[0.05] via-transparent to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300 pointer-events-none" />
 
-      {/* Header */}
-      <div className="flex items-start justify-between gap-3 relative z-10">
-        <div>
-          <div className="flex items-center gap-2 mb-1">
-            <p className="font-bold text-[var(--foreground)] text-lg leading-none">
-              {community.title}
-            </p>
-            <span className="px-2 py-0.5 rounded-full bg-indigo-500/15 border border-indigo-500/30 text-indigo-400 text-[11px] font-bold uppercase tracking-wider">
-              {community.memberBadge}
-            </span>
+      {/* 2. Special Effect: Animated Gradient */}
+      <AnimatedGradient
+        colors={["#84cc16", "#10b981", "#06b6d4"]}
+        speed={10}
+        blur="medium"
+        className="opacity-0 group-hover:opacity-40 transition-opacity duration-500"
+      />
+
+      {/* 3. Hover Glow */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-lime-500/8 to-transparent pointer-events-none" />
+
+      {/* Content wrapper */}
+      <div className="relative z-10 flex flex-col gap-5 h-full">
+        {/* Header */}
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <p className="font-bold text-[var(--foreground)] text-lg leading-none transition-colors">
+                {community.title}
+              </p>
+              <span className="px-2 py-0.5 rounded-full bg-lime-500/15 border border-lime-500/30 text-lime-800 text-[11px] font-bold uppercase tracking-wider group-hover:bg-lime-500 group-hover:text-white group-hover:border-lime-500 transition-colors">
+                {community.memberBadge}
+              </span>
+            </div>
+            <p className="text-sm text-[var(--muted)] italic transition-colors">{community.tagline}</p>
           </div>
-          <p className="text-sm text-[var(--muted)] italic">{community.tagline}</p>
+          <a
+            href={community.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Visit ${community.title}`}
+            className="flex-shrink-0 w-9 h-9 rounded-full bg-[var(--foreground)]/5 border border-[var(--border)] flex items-center justify-center hover:bg-lime-500 hover:border-lime-500 transition-all duration-300 group/btn"
+          >
+            <ExternalLink className="w-3.5 h-3.5 text-[var(--muted)] group-hover/btn:text-white transition-colors" />
+          </a>
         </div>
-        <a
-          href={community.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Visit ${community.title}`}
-          className="flex-shrink-0 w-9 h-9 rounded-full bg-[var(--foreground)]/5 border border-[var(--border)] flex items-center justify-center hover:bg-indigo-500 hover:border-indigo-500 transition-all duration-300 group/btn"
-        >
-          <ExternalLink className="w-3.5 h-3.5 text-[var(--muted)] group-hover/btn:text-white transition-colors" />
-        </a>
-      </div>
 
-      {/* Description */}
-      <p className="text-sm text-[var(--muted)] leading-relaxed relative z-10">
-        {community.description}
-      </p>
+        {/* Description */}
+        <p className="text-sm text-[var(--muted)] leading-relaxed transition-colors">
+          {community.description}
+        </p>
 
-      {/* Tags + DM CTA */}
-      <div className="flex items-center justify-between gap-3 relative z-10 mt-auto">
-        <div className="flex flex-wrap gap-1.5">
-          {community.tags.map((tag) => (
-            <span
-              key={tag}
-              className="px-2 py-0.5 rounded-md bg-[var(--foreground)]/5 border border-[var(--border)] text-xs text-[var(--muted)] font-medium"
-            >
-              {tag}
-            </span>
-          ))}
+        {/* Tags + DM CTA */}
+        <div className="flex items-center justify-between gap-3 mt-auto">
+          <div className="flex flex-wrap gap-1.5">
+            {community.tags.map((tag) => (
+              <span
+                key={tag}
+                className="px-2 py-0.5 rounded-md bg-[var(--foreground)]/5 border border-[var(--border)] text-xs text-[var(--muted)] font-medium transition-colors"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+          <a
+            href={community.inviteUrl || "https://x.com/oswaluxd"}
+            target="_blank"
+            rel="noreferrer"
+            className="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-lime-500/10 border border-lime-500/30 text-lime-600 text-xs font-semibold hover:bg-lime-500 hover:text-white hover:border-lime-500 transition-all duration-200"
+          >
+            {community.inviteUrl ? (
+              <>
+                <Sparkles className="w-3.5 h-3.5" />
+                Join link
+              </>
+            ) : (
+              <>
+                <MessageCircle className="w-3.5 h-3.5" />
+                DM for invite
+              </>
+            )}
+          </a>
         </div>
-        <a
-          href={community.inviteUrl || "https://x.com/oswaluxd"}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 text-xs font-semibold hover:bg-indigo-500 hover:text-white hover:border-indigo-500 transition-all duration-200"
-        >
-          {community.inviteUrl ? (
-            <>
-              <Sparkles className="w-3.5 h-3.5" />
-              Join with invite
-            </>
-          ) : (
-            <>
-              <MessageCircle className="w-3.5 h-3.5" />
-              DM for invite
-            </>
-          )}
-        </a>
       </div>
     </div>
   );

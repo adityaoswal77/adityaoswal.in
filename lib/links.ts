@@ -34,7 +34,8 @@ export type Community = {
   url: string;
   tags: string[];
   memberBadge: string;
-  inviteUrl?: string; // if set, CTA links here directly instead of DM
+  inviteUrl?: string;
+  specialEffect?: "animated-gradient";
 };
 
 export const COMMUNITIES: Community[] = [
@@ -358,5 +359,45 @@ export const BOOKMARKS: Bookmark[] = [
     url: "https://lumalabs.ai/dream-machine",
     category: "AI",
     tags: ["Video", "Generative"],
+  },
+  {
+    id: "34",
+    title: "Claude AI",
+    description: "The most capable and safe AI assistant, developed by Anthropic.",
+    url: "https://claude.ai",
+    category: "AI",
+    tags: ["LLM", "Research"],
+  },
+  {
+    id: "35",
+    title: "Wisprflow",
+    description: "The next generation of voice-to-text AI, making communication seamless.",
+    url: "https://wisprflow.ai",
+    category: "AI",
+    tags: ["Voice", "Productivity"],
+  },
+  {
+    id: "36",
+    title: "Flow",
+    description: "Google's AI-first creative studio for cinematic video and narrative storytelling.",
+    url: "https://flow.google.com",
+    category: "AI",
+    tags: ["Video", "Creative"],
+  },
+  {
+    id: "37",
+    title: "Stitch",
+    description: "Google's AI UI designer — generate high-fidelity interfaces and code from prompts.",
+    url: "https://stitch.withgoogle.com",
+    category: "AI",
+    tags: ["UI Gen", "Dev"],
+  },
+  {
+    id: "38",
+    title: "Lovable",
+    description: "The ultimate AI full-stack engineer — build and deploy apps in seconds.",
+    url: "https://lovable.dev/invite/S2ZM3VT",
+    category: "AI",
+    tags: ["App Gen", "Fullstack"],
   },
 ];
