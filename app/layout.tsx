@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { PageLoadProvider } from "@/components/PageLoader";
 
 const siteUrl = "https://adityaoswal.in";
 
@@ -126,11 +127,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           >
             Skip to main content
           </a>
-          <Navbar />
-          <main id="main-content">
-            {children}
-          </main>
-          <Footer />
+          <PageLoadProvider>
+            <Navbar />
+            <main id="main-content">
+              {children}
+            </main>
+            <Footer />
+          </PageLoadProvider>
           <Analytics />
           <SpeedInsights />
         </ThemeProvider>
