@@ -17,6 +17,22 @@ interface Entry {
 
 const CHANGELOG: Entry[] = [
   {
+    date: "2026-04-25",
+    hash: "8266276",
+    title: "Wandering character, hover letter images, footer redesign & site polish",
+    changes: [
+      { type: "feat", description: "Add pixel art WanderingCharacter — roams all pages, pauses on hover with a speech bubble and random exclamations" },
+      { type: "feat", description: "Add AdityaHoverText — each letter in 'Aditya' on the hero crossfades to its corresponding image on hover, alternating between two versions" },
+      { type: "feat", description: "Redesign Footer — 108 Supply-inspired layout with warm amber radial gradient, nav columns (Work/About/Playground/Links + Resume/LinkedIn/GitHub/Twitter), and a 4-column bottom info strip" },
+      { type: "feat", description: "Light mode now uses a warm beige palette (#FAF8F5 bg, #1A1208 fg, #8A7B6F muted) instead of plain white" },
+      { type: "refactor", description: "Toolstack section on About page: remove nested GlassIcons and GSAP animation, direct icon + label grid" },
+      { type: "refactor", description: "Core Skills: physics view restored with monochrome pills; toggle added back between physics and clean pill-tag list view" },
+      { type: "content", description: "WorkExperience descriptions synced with resume — added $100K savings metric, 21% CTR, DNG Technologies client, veritaslogistics.com, TypeScript in Frontend Intern entry" },
+      { type: "content", description: "Updated skills list with current HR/ATS keywords: Design Tokens, Component Architecture, 0-to-1 Product Design, AI-Assisted Design, Healthcare UX, etc." },
+      { type: "fix", description: "Resume link updated from Google Drive folder to correct Google Doc" },
+    ],
+  },
+  {
     date: "2026-03-17",
     hash: "911e503",
     title: "Code quality pass, SEO & sitemap",

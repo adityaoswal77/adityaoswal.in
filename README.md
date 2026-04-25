@@ -1,35 +1,72 @@
-Personal website for Aditya Oswal (https://twitter.com/oswaluxd)
+# adityaoswal.in
 
+Personal portfolio for [Aditya Oswal](https://adityaoswal.in) — Product Designer & Design Engineer based in Bangalore. Currently at AliveCor.
 
-<!-- This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Stack
 
-## Getting Started
+- **Framework**: Next.js 15 (App Router), React 19, TypeScript
+- **Styling**: Tailwind CSS v3, dark mode default (`darkMode: 'class'`)
+- **Fonts**: Inter (sans), JetBrains Mono (mono)
+- **Animation**: GSAP, Framer Motion
+- **3D / Physics**: Three.js, @react-three/fiber, @react-three/drei, Matter.js
+- **Deployment**: Vercel
 
-First, run the development server:
+## Project Structure
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+app/
+  page.tsx            # Home (hero, collaborations, bento grid)
+  aboutme/            # About page (bio, experience, skills, toolstack)
+  work/               # Work index
+  work/[slug]/        # Case study pages
+  playground/         # Side projects gallery
+  blogs/              # Blog posts
+  career-odyssey/     # Career timeline
+  changelog/          # Site changelog
+  links/              # Links page
+  layout.tsx          # Root layout (Navbar, Footer, WanderingCharacter, ThemeProvider)
+components/
+  AdityaHoverText.tsx # Per-letter hover → image effect in hero
+  WanderingCharacter.tsx # Pixel art character that wanders all pages
+  Footer.tsx          # Footer with warm gradient + nav columns
+  Navbar.tsx          # Sticky nav with theme toggle
+  Collaborations.tsx
+  GradientBlinds.tsx
+lib/
+  data.ts             # Project/work data
+public/
+  Aditya/             # Per-letter images for hover effect (A1-A2, D1-D2, etc.)
+  assets/             # Project images, OG image
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Commands
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run dev       # Start dev server → localhost:3000
+npm run build     # Production build
+npm run lint      # ESLint
+npx tsc --noEmit  # Type check
+vercel --prod     # Deploy to production
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Features
 
-## Learn More
+- **Wandering character** — small pixel art figure roams every page; hover to trigger speech bubble
+- **Hover letter images** — each letter in "Aditya" on the hero swaps to a photo on hover
+- **Physics skills** — Core Skills section has a Matter.js gravity sandbox (toggle between physics and list view)
+- **Dither background** — WebGL dither effect on hero that reacts to mouse
+- **Dark/light mode** — dark default; light mode uses warm beige palette (#FAF8F5)
 
-To learn more about Next.js, take a look at the following resources:
+## Conventions
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Named exports for all components
+- `dark:` Tailwind variants on every colored element
+- Framer Motion for interactive animations; GSAP for scroll-driven timelines
+- Respect `prefers-reduced-motion`
+- Images always include `alt` text
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Links
 
-## Deploy on Vercel -->
+- Site: [adityaoswal.in](https://adityaoswal.in)
+- Twitter: [@oswaluxd](https://twitter.com/oswaluxd)
+- LinkedIn: [oswaladitya](https://linkedin.com/in/oswaladitya)
