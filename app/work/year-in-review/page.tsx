@@ -376,23 +376,23 @@ const TheDesign = () => (
 
 const Impact = () => {
   const metrics = [
-    { value: "78%", label: "Completion Rate", desc: "Users who started scrolled to the end" },
-    { value: "45%", label: "Social Shares", desc: "Of completers shared at least one data card" },
-    { value: "23%", label: "Churn Reduction", desc: "Drop in cancellations during the year-end window" },
-    { value: "12k+", label: "Organic Reach", desc: "New users reached through shared cards" },
+    { value: "73,718", label: "Impressions", desc: "Unique users who saw the Year in Review card" },
+    { value: "21.90%", label: "CTR", desc: "Click-through rate on the campaign card" },
+    { value: "16,145", label: "Clicks", desc: "Unique users who tapped through to the experience" },
+    { value: "9,224", label: "Dismissals", desc: "Users who dismissed — informing future targeting" },
   ];
 
   return (
     <Section title="The Impact">
       <div className="space-y-24">
         <p className="text-2xl text-[var(--foreground)] opacity-80 font-medium max-w-4xl leading-relaxed">
-          Year in Review moved from a scheduled feature to an annual ritual — something premium subscribers now anticipate. The social share loop created a measurable top-of-funnel effect with zero paid spend.
+          Year in Review moved from a scheduled feature to an annual ritual — something premium subscribers now anticipate. The campaign drove a 21.9% CTR across 73,718 impressions with zero paid spend.
         </p>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-[var(--border)] border-t border-b border-[var(--border)] py-12">
           {metrics.map((metric) => (
             <div key={metric.label} className="px-8 first:pl-0 last:pr-0 space-y-3">
-              <div className="text-4xl md:text-5xl font-black text-[var(--foreground)]">{metric.value}</div>
+              <div className="text-4xl md:text-5xl font-black text-[var(--foreground)] tabular-nums">{metric.value}</div>
               <p className="text-[13px] font-bold uppercase tracking-[0.2em] text-[var(--foreground)]">{metric.label}</p>
               <p className="text-[13px] text-[var(--muted)] font-medium leading-relaxed">{metric.desc}</p>
             </div>

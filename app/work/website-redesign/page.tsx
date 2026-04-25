@@ -377,19 +377,35 @@ const NextProject = () => {
   );
 };
 
+const ComingSoon = () => (
+  <section className="px-6 py-40 bg-[var(--background)] border-t border-[var(--border)]">
+    <div className="max-w-6xl mx-auto flex flex-col gap-8">
+      <p className="text-[13px] uppercase tracking-[0.3em] font-bold text-[var(--muted)]">Case Study</p>
+      <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight text-[var(--foreground)] leading-[0.9]">
+        Writing in<br /><span className="italic font-light text-[var(--muted)]">Progress</span>
+      </h2>
+      <p className="text-lg text-[var(--muted)] font-medium max-w-xl leading-relaxed">
+        This case study is being documented. Check back soon — or reach out directly if you&apos;d like to hear about the project.
+      </p>
+      <Link
+        href="/work"
+        className="inline-flex items-center gap-2 text-[var(--muted)] hover:text-[var(--foreground)] transition-colors font-mono text-[13px] uppercase tracking-widest mt-4 w-fit"
+      >
+        <ArrowLeft className="h-4 w-4" />
+        Back to Work
+      </Link>
+    </div>
+  </section>
+);
+
 // --- Main Component ---
 
 export default function WebsiteRedesign() {
-
   return (
     <div className="font-sans antialiased bg-[var(--background)] text-[var(--foreground)] selection:bg-[var(--foreground)] selection:text-[var(--background)] min-h-screen transition-colors duration-300">
       <div className="w-full relative">
         <Hero />
-        <ProblemStatement />
-        <Approach />
-        <Features />
-        <Impact />
-        <NextProject />
+        <ComingSoon />
       </div>
     </div>
   );
