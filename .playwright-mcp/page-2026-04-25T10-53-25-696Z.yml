@@ -1,0 +1,258 @@
+- complementary [ref=e2]:
+  - generic [ref=e3]:
+    - link "Home" [ref=e5] [cursor=pointer]:
+      - /url: /
+      - img [ref=e7]
+    - navigation [ref=e11]:
+      - list [ref=e13]:
+        - listitem [ref=e14]:
+          - link "Typographic" [ref=e15] [cursor=pointer]:
+            - /url: /styles/typographic
+        - listitem [ref=e16]:
+          - link "Small Type" [ref=e17] [cursor=pointer]:
+            - /url: /styles/small-type
+        - listitem [ref=e18]:
+          - link "Illustrative" [ref=e19] [cursor=pointer]:
+            - /url: /styles/illustrative
+        - listitem [ref=e20]:
+          - link "Grid" [ref=e21] [cursor=pointer]:
+            - /url: /styles/grid
+        - listitem [ref=e22]:
+          - link "Flat" [ref=e23] [cursor=pointer]:
+            - /url: /styles/flat
+        - listitem [ref=e24]:
+          - link "Animated" [ref=e25] [cursor=pointer]:
+            - /url: /styles/animated
+      - link "See all" [ref=e26] [cursor=pointer]:
+        - /url: /browse
+    - generic [ref=e27]:
+      - link "Start a project" [ref=e28] [cursor=pointer]:
+        - /url: https://www.nooon.studio
+        - generic [ref=e29]: Start a project
+      - link "Submit" [ref=e30] [cursor=pointer]:
+        - /url: /submit
+        - generic [ref=e31]: Submit
+  - main [ref=e32]:
+    - generic [ref=e37]:
+      - img "108 Supply" [ref=e40]
+      - generic [ref=e41]:
+        - generic [ref=e42]:
+          - heading "Footr Design" [level=1]
+          - heading "A curated gallery of the best web footers on planet earth" [level=2]
+          - heading "108 Supply" [level=1] [ref=e43]
+          - heading "A curated collection of premium Jitter motion templates for web designers. Clean transitions, bold effects, ready to drop into your workflow." [level=2] [ref=e44]
+        - link "View Website" [ref=e45] [cursor=pointer]:
+          - /url: https://108.supply
+          - generic [ref=e46]: View Website
+          - img [ref=e48]
+      - generic [ref=e50]:
+        - generic [ref=e51]:
+          - generic [ref=e52]: Styles
+          - list [ref=e54]:
+            - listitem [ref=e55]:
+              - link "Gradient" [ref=e56] [cursor=pointer]:
+                - /url: /styles/gradient
+            - listitem [ref=e57]:
+              - link "Flat" [ref=e58] [cursor=pointer]:
+                - /url: /styles/flat
+            - listitem [ref=e59]:
+              - link "Animated" [ref=e60] [cursor=pointer]:
+                - /url: /styles/animated
+            - listitem [ref=e61]:
+              - link "Dark" [ref=e62] [cursor=pointer]:
+                - /url: /styles/dark
+        - generic [ref=e63]:
+          - generic [ref=e64]: Type
+          - list [ref=e66]:
+            - listitem [ref=e67]:
+              - link "Design" [ref=e68] [cursor=pointer]:
+                - /url: /types/design
+            - listitem [ref=e69]:
+              - link "Motion" [ref=e70] [cursor=pointer]:
+                - /url: /types/motion
+            - listitem [ref=e71]:
+              - link "Development" [ref=e72] [cursor=pointer]:
+                - /url: /types/development
+        - generic [ref=e73]:
+          - generic [ref=e74]: Date Added
+          - generic [ref=e75]: April 8, 2026
+        - generic [ref=e76]:
+          - generic [ref=e77]: Designed By
+          - link "Ariel Jędrzejczak" [ref=e78] [cursor=pointer]:
+            - /url: https://arieljedrzejczak.com
+        - generic [ref=e79]:
+          - generic [ref=e80]: Submitted By
+          - link "Ariel Jędrzejczak" [ref=e81] [cursor=pointer]:
+            - /url: https://arieljedrzejczak.com
+      - generic [ref=e82]:
+        - img "108 Supply" [ref=e84]
+        - generic [ref=e85]: Mobile View
+    - generic [ref=e89]:
+      - heading "Similar designs" [level=2] [ref=e91]
+      - list [ref=e93]:
+        - listitem [ref=e94]:
+          - link "fromanother" [ref=e95] [cursor=pointer]:
+            - /url: /sites/fromanother
+            - img "fromanother" [ref=e96]
+          - generic [ref=e97]:
+            - link "fromanother Favicon fromanother" [ref=e98] [cursor=pointer]:
+              - /url: /sites/fromanother
+              - img "fromanother Favicon" [ref=e101]
+              - heading "fromanother" [level=3] [ref=e102]
+            - link "Visit Website" [ref=e103] [cursor=pointer]:
+              - /url: https://www.fromanother.love/
+              - generic [ref=e104]: Visit Website
+              - img [ref=e106]
+        - listitem [ref=e108]:
+          - link "Evolve" [ref=e109] [cursor=pointer]:
+            - /url: /sites/evolve
+            - img "Evolve" [ref=e110]
+          - generic [ref=e111]:
+            - link "Evolve Favicon Evolve" [ref=e112] [cursor=pointer]:
+              - /url: /sites/evolve
+              - img "Evolve Favicon" [ref=e115]
+              - heading "Evolve" [level=3] [ref=e116]
+            - link "Visit Website" [ref=e117] [cursor=pointer]:
+              - /url: https://madeinevolve.com/
+              - generic [ref=e118]: Visit Website
+              - img [ref=e120]
+        - listitem [ref=e122]:
+          - link "Yu-Hsin Lin" [ref=e123] [cursor=pointer]:
+            - /url: /sites/yu-hsin-lin
+            - img "Yu-Hsin Lin" [ref=e124]
+          - generic [ref=e125]:
+            - link "Yu-Hsin Lin Favicon Yu-Hsin Lin" [ref=e126] [cursor=pointer]:
+              - /url: /sites/yu-hsin-lin
+              - img "Yu-Hsin Lin Favicon" [ref=e129]
+              - heading "Yu-Hsin Lin" [level=3] [ref=e130]
+            - link "Visit Website" [ref=e131] [cursor=pointer]:
+              - /url: https://www.yuhsinlin.com/
+              - generic [ref=e132]: Visit Website
+              - img [ref=e134]
+        - listitem [ref=e136]:
+          - link "108 Supply" [ref=e137] [cursor=pointer]:
+            - /url: /sites/108-supply
+            - img "108 Supply" [ref=e138]
+          - generic [ref=e139]:
+            - link "108 Supply Favicon 108 Supply" [ref=e140] [cursor=pointer]:
+              - /url: /sites/108-supply
+              - img "108 Supply Favicon" [ref=e143]
+              - heading "108 Supply" [level=3] [ref=e144]
+            - link "Visit Website" [ref=e145] [cursor=pointer]:
+              - /url: https://108.supply
+              - generic [ref=e146]: Visit Website
+              - img [ref=e148]
+        - listitem [ref=e150]:
+          - link "Provence Creations" [ref=e151] [cursor=pointer]:
+            - /url: /sites/provence-creations
+            - img "Provence Creations" [ref=e152]
+          - generic [ref=e153]:
+            - link "Provence Creations Favicon Provence Creations" [ref=e154] [cursor=pointer]:
+              - /url: /sites/provence-creations
+              - img "Provence Creations Favicon" [ref=e157]
+              - heading "Provence Creations" [level=3] [ref=e158]
+            - link "Visit Website" [ref=e159] [cursor=pointer]:
+              - /url: https://provencecreations.nl/
+              - generic [ref=e160]: Visit Website
+              - img [ref=e162]
+        - listitem [ref=e164]:
+          - link "Decimal" [ref=e165] [cursor=pointer]:
+            - /url: /sites/decimal
+            - img "Decimal" [ref=e166]
+          - generic [ref=e167]:
+            - link "Decimal Favicon Decimal" [ref=e168] [cursor=pointer]:
+              - /url: /sites/decimal
+              - img "Decimal Favicon" [ref=e171]
+              - heading "Decimal" [level=3] [ref=e172]
+            - link "Visit Website" [ref=e173] [cursor=pointer]:
+              - /url: https://decimal.app/
+              - generic [ref=e174]: Visit Website
+              - img [ref=e176]
+        - listitem [ref=e178]:
+          - link "Kuba" [ref=e179] [cursor=pointer]:
+            - /url: /sites/kuba
+            - img "Kuba" [ref=e180]
+          - generic [ref=e181]:
+            - link "Kuba Favicon Kuba" [ref=e182] [cursor=pointer]:
+              - /url: /sites/kuba
+              - img "Kuba Favicon" [ref=e185]
+              - heading "Kuba" [level=3] [ref=e186]
+            - link "Visit Website" [ref=e187] [cursor=pointer]:
+              - /url: https://www.heykuba.com/
+              - generic [ref=e188]: Visit Website
+              - img [ref=e190]
+        - listitem [ref=e192]:
+          - link "Harsh Shah" [ref=e193] [cursor=pointer]:
+            - /url: /sites/harsh-shah
+            - img "Harsh Shah" [ref=e194]
+          - generic [ref=e195]:
+            - link "Harsh Shah Favicon Harsh Shah" [ref=e196] [cursor=pointer]:
+              - /url: /sites/harsh-shah
+              - img "Harsh Shah Favicon" [ref=e199]
+              - heading "Harsh Shah" [level=3] [ref=e200]
+            - link "Visit Website" [ref=e201] [cursor=pointer]:
+              - /url: https://harshshah.design/
+              - generic [ref=e202]: Visit Website
+              - img [ref=e204]
+        - listitem [ref=e206]:
+          - link "Chris Fairchild" [ref=e207] [cursor=pointer]:
+            - /url: /sites/chris-fairchild
+            - img "Chris Fairchild" [ref=e208]
+          - generic [ref=e209]:
+            - link "Chris Fairchild Favicon Chris Fairchild" [ref=e210] [cursor=pointer]:
+              - /url: /sites/chris-fairchild
+              - img "Chris Fairchild Favicon" [ref=e213]
+              - heading "Chris Fairchild" [level=3] [ref=e214]
+            - link "Visit Website" [ref=e215] [cursor=pointer]:
+              - /url: https://chrisfairchild.co/
+              - generic [ref=e216]: Visit Website
+              - img [ref=e218]
+        - listitem [ref=e220]:
+          - link "Relace" [ref=e221] [cursor=pointer]:
+            - /url: /sites/relace
+            - img "Relace" [ref=e222]
+          - generic [ref=e223]:
+            - link "Relace Favicon Relace" [ref=e224] [cursor=pointer]:
+              - /url: /sites/relace
+              - img "Relace Favicon" [ref=e227]
+              - heading "Relace" [level=3] [ref=e228]
+            - link "Visit Website" [ref=e229] [cursor=pointer]:
+              - /url: https://relace.ai/
+              - generic [ref=e230]: Visit Website
+              - img [ref=e232]
+        - listitem [ref=e234]:
+          - link "Pilcrow" [ref=e235] [cursor=pointer]:
+            - /url: /sites/pilcrow
+            - img "Pilcrow" [ref=e236]
+          - generic [ref=e237]:
+            - link "Pilcrow Favicon Pilcrow" [ref=e238] [cursor=pointer]:
+              - /url: /sites/pilcrow
+              - img "Pilcrow Favicon" [ref=e241]
+              - heading "Pilcrow" [level=3] [ref=e242]
+            - link "Visit Website" [ref=e243] [cursor=pointer]:
+              - /url: https://pilcrow.no/
+              - generic [ref=e244]: Visit Website
+              - img [ref=e246]
+        - listitem [ref=e248]:
+          - link "Glyphs" [ref=e249] [cursor=pointer]:
+            - /url: /sites/glyphs
+            - img "Glyphs" [ref=e250]
+          - generic [ref=e251]:
+            - link "Glyphs Favicon Glyphs" [ref=e252] [cursor=pointer]:
+              - /url: /sites/glyphs
+              - img "Glyphs Favicon" [ref=e255]
+              - heading "Glyphs" [level=3] [ref=e256]
+            - link "Visit Website" [ref=e257] [cursor=pointer]:
+              - /url: https://glyphsapp.com
+              - generic [ref=e258]: Visit Website
+              - img [ref=e260]
+  - generic [ref=e262]:
+    - link "Info" [ref=e264] [cursor=pointer]:
+      - /url: /info
+    - generic [ref=e265]:
+      - text: Get more inspiration
+      - link "@footrdesign" [ref=e266] [cursor=pointer]:
+        - /url: https://twitter.com/footrdesign
+    - link "Site by NOOON" [ref=e268] [cursor=pointer]:
+      - /url: https://www.nooon.studio
+  - complementary [ref=e269]

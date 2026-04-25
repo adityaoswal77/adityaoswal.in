@@ -1,0 +1,555 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]: You came at the right time. 15% off everything.
+      - link "Get your code" [ref=e6] [cursor=pointer]:
+        - /url: "#"
+    - banner [ref=e7]:
+      - generic [ref=e9]:
+        - link "home" [ref=e10] [cursor=pointer]:
+          - /url: /
+          - img "Logo" [ref=e12]
+        - navigation [ref=e16]:
+          - generic [ref=e18]:
+            - link "Motion Templates" [ref=e19] [cursor=pointer]:
+              - /url: https://108.supply/#product-grid
+              - generic [ref=e20]: Motion Templates
+            - link "Website Templates Soon":
+              - /url: /showcase
+              - generic: Website Templates
+              - generic: Soon
+            - link "Complete Collection" [ref=e21] [cursor=pointer]:
+              - /url: https://108.supply/templates/complete-collection
+              - generic [ref=e22]: Complete Collection
+            - link "Freebies" [ref=e23] [cursor=pointer]:
+              - /url: /?1_category_equal=Freebies
+              - generic [ref=e24]: Freebies
+            - link "Showcase NEW" [ref=e25] [cursor=pointer]:
+              - /url: /showcase
+              - generic [ref=e26]: Showcase
+              - generic [ref=e27]: NEW
+            - link "About" [ref=e28] [cursor=pointer]:
+              - /url: /about
+              - generic [ref=e29]: About
+    - text: Checkout
+  - main [ref=e30]:
+    - generic [ref=e34]:
+      - heading "A growing set of 310123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789 Jitter motion templates, no After Effects needed.Fresh template every week." [level=1] [ref=e35]:
+        - generic [ref=e37]:
+          - text: A growing set of
+          - generic [ref=e38]:
+            - generic [ref=e39]: "31"
+            - generic:
+              - generic:
+                - generic:
+                  - generic: "0"
+                  - generic: "1"
+                  - generic: "2"
+                  - generic: "3"
+                  - generic: "4"
+                  - generic: "5"
+                  - generic: "6"
+                  - generic: "7"
+                  - generic: "8"
+                  - generic: "9"
+                  - generic: "0"
+                  - generic: "1"
+                  - generic: "2"
+                  - generic: "3"
+                  - generic: "4"
+                  - generic: "5"
+                  - generic: "6"
+                  - generic: "7"
+                  - generic: "8"
+                  - generic: "9"
+                  - generic: "0"
+                  - generic: "1"
+                  - generic: "2"
+                  - generic: "3"
+                  - generic: "4"
+                  - generic: "5"
+                  - generic: "6"
+                  - generic: "7"
+                  - generic: "8"
+                  - generic: "9"
+                  - generic: "0"
+                  - generic: "1"
+                  - generic: "2"
+                  - generic: "3"
+                  - generic: "4"
+                  - generic: "5"
+                  - generic: "6"
+                  - generic: "7"
+                  - generic: "8"
+                  - generic: "9"
+                  - generic: "0"
+                  - generic: "1"
+                  - generic: "2"
+                  - generic: "3"
+                  - generic: "4"
+                  - generic: "5"
+                  - generic: "6"
+                  - generic: "7"
+                  - generic: "8"
+                  - generic: "9"
+                  - generic: "0"
+                  - generic: "1"
+                  - generic: "2"
+                  - generic: "3"
+                  - generic: "4"
+                  - generic: "5"
+                  - generic: "6"
+                  - generic: "7"
+                  - generic: "8"
+                  - generic: "9"
+                  - generic: "0"
+                  - generic: "1"
+                  - generic: "2"
+                  - generic: "3"
+                  - generic: "4"
+                  - generic: "5"
+                  - generic: "6"
+                  - generic: "7"
+                  - generic: "8"
+                  - generic: "9"
+                  - generic: "0"
+                  - generic: "1"
+                  - generic: "2"
+                  - generic: "3"
+                  - generic: "4"
+                  - generic: "5"
+                  - generic: "6"
+                  - generic: "7"
+                  - generic: "8"
+                  - generic: "9"
+              - generic:
+                - generic:
+                  - generic: "0"
+                  - generic: "1"
+                  - generic: "2"
+                  - generic: "3"
+                  - generic: "4"
+                  - generic: "5"
+                  - generic: "6"
+                  - generic: "7"
+                  - generic: "8"
+                  - generic: "9"
+                  - generic: "0"
+                  - generic: "1"
+                  - generic: "2"
+                  - generic: "3"
+                  - generic: "4"
+                  - generic: "5"
+                  - generic: "6"
+                  - generic: "7"
+                  - generic: "8"
+                  - generic: "9"
+                  - generic: "0"
+                  - generic: "1"
+                  - generic: "2"
+                  - generic: "3"
+                  - generic: "4"
+                  - generic: "5"
+                  - generic: "6"
+                  - generic: "7"
+                  - generic: "8"
+                  - generic: "9"
+                  - generic: "0"
+                  - generic: "1"
+                  - generic: "2"
+                  - generic: "3"
+                  - generic: "4"
+                  - generic: "5"
+                  - generic: "6"
+                  - generic: "7"
+                  - generic: "8"
+                  - generic: "9"
+                  - generic: "0"
+                  - generic: "1"
+                  - generic: "2"
+                  - generic: "3"
+                  - generic: "4"
+                  - generic: "5"
+                  - generic: "6"
+                  - generic: "7"
+                  - generic: "8"
+                  - generic: "9"
+                  - generic: "0"
+                  - generic: "1"
+                  - generic: "2"
+                  - generic: "3"
+                  - generic: "4"
+                  - generic: "5"
+                  - generic: "6"
+                  - generic: "7"
+                  - generic: "8"
+                  - generic: "9"
+                  - generic: "0"
+                  - generic: "1"
+                  - generic: "2"
+                  - generic: "3"
+                  - generic: "4"
+                  - generic: "5"
+                  - generic: "6"
+                  - generic: "7"
+                  - generic: "8"
+                  - generic: "9"
+                  - generic: "0"
+                  - generic: "1"
+                  - generic: "2"
+                  - generic: "3"
+                  - generic: "4"
+                  - generic: "5"
+                  - generic: "6"
+                  - generic: "7"
+                  - generic: "8"
+                  - generic: "9"
+          - link [ref=e40] [cursor=pointer]:
+            - /url: https://jitter.video
+            - text: Jitter
+          - text: motion
+        - generic [ref=e42]: templates, no After Effects needed.
+        - emphasis [ref=e45]: Fresh template every week.
+      - generic [ref=e46]:
+        - link "Browse templates" [ref=e48] [cursor=pointer]:
+          - /url: "#product-grid"
+          - generic [ref=e49]: Browse templates
+        - link "See it in action" [ref=e51] [cursor=pointer]:
+          - /url: /showcase
+          - strong [ref=e53]: See it in action
+    - generic [ref=e56]:
+      - generic [ref=e57]:
+        - form "Email Form" [ref=e60]:
+          - generic [ref=e62] [cursor=pointer]: All
+          - generic [ref=e64] [cursor=pointer]: Carousel
+          - generic [ref=e66] [cursor=pointer]: Stack
+          - generic [ref=e68] [cursor=pointer]: Sequence
+          - generic [ref=e70] [cursor=pointer]: Grid
+          - generic [ref=e72] [cursor=pointer]: Switch
+          - generic [ref=e74] [cursor=pointer]: Experiment
+          - generic [ref=e76] [cursor=pointer]: Freebies
+        - form "Email Form" [ref=e79]:
+          - combobox [ref=e80]:
+            - option "Media Format" [selected]
+            - option "Desktop"
+            - option "Mobile"
+            - option "Desktop + Mobile"
+      - generic [ref=e81]:
+        - list [ref=e82]:
+          - listitem [ref=e83]:
+            - link [ref=e84] [cursor=pointer]:
+              - /url: /templates/complete-collection
+            - generic [ref=e90]:
+              - generic [ref=e91]:
+                - generic [ref=e92]:
+                  - generic [ref=e93]: $
+                  - generic [ref=e94]: "299"
+                - generic [ref=e95]: ·
+                - generic [ref=e96]: Lifetime
+                - generic [ref=e97]: ·
+                - generic [ref=e98]: 108-000
+              - generic [ref=e99]:
+                - generic [ref=e100]: Complete Collection
+                - generic [ref=e101]: All templates. Forever.
+              - link "View template" [ref=e102] [cursor=pointer]:
+                - /url: "#"
+                - paragraph [ref=e103]: View template
+          - listitem [ref=e104]:
+            - link [ref=e105] [cursor=pointer]:
+              - /url: /templates/focus-reel-mobile
+            - generic [ref=e107]:
+              - generic [ref=e108]: Apr 23
+              - generic [ref=e110]: 5 sizes
+            - generic [ref=e115]:
+              - generic [ref=e116]:
+                - generic [ref=e117]:
+                  - generic [ref=e118]: $
+                  - generic [ref=e119]: "29"
+                - generic [ref=e120]: ·
+                - generic [ref=e121]: Carousel
+                - generic [ref=e122]: ·
+                - generic [ref=e123]: 108-025
+              - generic [ref=e124]:
+                - generic [ref=e125]: Focus Reel
+                - generic [ref=e126]: Mobile
+              - link "View template" [ref=e127] [cursor=pointer]:
+                - /url: "#"
+                - paragraph [ref=e128]: View template
+          - listitem [ref=e129]:
+            - link [ref=e130] [cursor=pointer]:
+              - /url: /templates/scroll-grid
+            - generic [ref=e132]:
+              - generic [ref=e133]: Apr 16
+              - generic [ref=e135]: 5 sizes
+            - generic [ref=e140]:
+              - generic [ref=e141]:
+                - generic [ref=e142]:
+                  - generic [ref=e143]: $
+                  - generic [ref=e144]: "29"
+                - generic [ref=e145]: ·
+                - generic [ref=e146]: Grid
+                - generic [ref=e147]: ·
+                - generic [ref=e148]: 108-030
+              - generic [ref=e149]:
+                - generic [ref=e150]: Scroll Grid
+                - generic [ref=e151]: Desktop
+              - link "View template" [ref=e152] [cursor=pointer]:
+                - /url: "#"
+                - paragraph [ref=e153]: View template
+          - listitem [ref=e154]:
+            - link [ref=e155] [cursor=pointer]:
+              - /url: /templates/pyramid-stack
+            - generic [ref=e157]:
+              - generic [ref=e158]: Apr 9
+              - generic [ref=e160]: 5 sizes
+            - generic [ref=e165]:
+              - generic [ref=e166]:
+                - generic [ref=e167]:
+                  - generic [ref=e168]: $
+                  - generic [ref=e169]: "29"
+                - generic [ref=e170]: ·
+                - generic [ref=e171]: Stack
+                - generic [ref=e172]: ·
+                - generic [ref=e173]: 108-029
+              - generic [ref=e174]:
+                - generic [ref=e175]: Pyramid Stack
+                - generic [ref=e176]: Desktop
+              - link "View template" [ref=e177] [cursor=pointer]:
+                - /url: "#"
+                - paragraph [ref=e178]: View template
+          - listitem [ref=e179]:
+            - link [ref=e180] [cursor=pointer]:
+              - /url: /templates/orbit-sheet
+            - generic [ref=e182]:
+              - generic [ref=e183]: Apr 2
+              - generic [ref=e185]: 5 sizes
+            - generic [ref=e190]:
+              - generic [ref=e191]:
+                - generic [ref=e192]:
+                  - generic [ref=e193]: $
+                  - generic [ref=e194]: "29"
+                - generic [ref=e195]: ·
+                - generic [ref=e196]: Experiment
+                - generic [ref=e197]: ·
+                - generic [ref=e198]: 108-028
+              - generic [ref=e199]:
+                - generic [ref=e200]: Orbit Sheet
+                - generic [ref=e201]: Desktop
+              - link "View template" [ref=e202] [cursor=pointer]:
+                - /url: "#"
+                - paragraph [ref=e203]: View template
+          - listitem [ref=e204]:
+            - link [ref=e205] [cursor=pointer]:
+              - /url: /templates/bento-one
+            - generic [ref=e207]:
+              - generic [ref=e208]: Mar 26
+              - generic [ref=e210]: 5 sizes
+            - generic [ref=e215]:
+              - generic [ref=e216]:
+                - generic [ref=e217]:
+                  - generic [ref=e218]: $
+                  - generic [ref=e219]: "39"
+                - generic [ref=e220]: ·
+                - generic [ref=e221]: Grid
+                - generic [ref=e222]: ·
+                - generic [ref=e223]: 108-027
+              - generic [ref=e224]:
+                - generic [ref=e225]: Bento One
+                - generic [ref=e226]: Multi
+              - link "View template" [ref=e227] [cursor=pointer]:
+                - /url: "#"
+                - paragraph [ref=e228]: View template
+          - listitem [ref=e229]:
+            - link [ref=e230] [cursor=pointer]:
+              - /url: /templates/sequence-four
+            - generic [ref=e232]:
+              - generic [ref=e233]: Mar 19
+              - generic [ref=e235]: 5 sizes
+            - generic [ref=e240]:
+              - generic [ref=e241]:
+                - generic [ref=e242]:
+                  - generic [ref=e243]: $
+                  - generic [ref=e244]: "49"
+                - generic [ref=e245]: ·
+                - generic [ref=e246]: Sequence
+                - generic [ref=e247]: ·
+                - generic [ref=e248]: 108-026
+              - generic [ref=e249]:
+                - generic [ref=e250]: Sequence Four
+                - generic [ref=e251]: Desktop
+              - link "View template" [ref=e252] [cursor=pointer]:
+                - /url: "#"
+                - paragraph [ref=e253]: View template
+          - listitem [ref=e254]:
+            - link [ref=e255] [cursor=pointer]:
+              - /url: /templates/focus-reel
+            - generic [ref=e257]:
+              - generic [ref=e258]: Mar 12
+              - generic [ref=e260]: 5 sizes
+            - generic [ref=e265]:
+              - generic [ref=e266]:
+                - generic [ref=e267]:
+                  - generic [ref=e268]: $
+                  - generic [ref=e269]: "29"
+                - generic [ref=e270]: ·
+                - generic [ref=e271]: Carousel
+                - generic [ref=e272]: ·
+                - generic [ref=e273]: 108-025
+              - generic [ref=e274]:
+                - generic [ref=e275]: Focus Reel
+                - generic [ref=e276]: Desktop
+              - link "View template" [ref=e277] [cursor=pointer]:
+                - /url: "#"
+                - paragraph [ref=e278]: View template
+          - listitem [ref=e279]:
+            - link [ref=e280] [cursor=pointer]:
+              - /url: /templates/sequence-three
+            - generic [ref=e282]:
+              - generic [ref=e283]: Mar 5
+              - generic [ref=e285]: 5 sizes
+            - generic [ref=e290]:
+              - generic [ref=e291]:
+                - generic [ref=e292]:
+                  - generic [ref=e293]: $
+                  - generic [ref=e294]: "49"
+                - generic [ref=e295]: ·
+                - generic [ref=e296]: Sequence
+                - generic [ref=e297]: ·
+                - generic [ref=e298]: 108-024
+              - generic [ref=e299]:
+                - generic [ref=e300]: Sequence Three
+                - generic [ref=e301]: Desktop + Mobile
+              - link "View template" [ref=e302] [cursor=pointer]:
+                - /url: "#"
+                - paragraph [ref=e303]: View template
+          - listitem [ref=e304]:
+            - link [ref=e305] [cursor=pointer]:
+              - /url: /templates/drop-back
+            - generic [ref=e307]:
+              - generic [ref=e308]: Launch drop
+              - generic [ref=e310]: 5 sizes
+            - generic [ref=e315]:
+              - generic [ref=e316]:
+                - generic [ref=e317]:
+                  - generic [ref=e318]: $
+                  - generic [ref=e319]: "29"
+                - generic [ref=e320]: ·
+                - generic [ref=e321]: Stack
+                - generic [ref=e322]: ·
+                - generic [ref=e323]: 108-023
+              - generic [ref=e324]:
+                - generic [ref=e325]: Drop Back
+                - generic [ref=e326]: Desktop
+              - link "View template" [ref=e327] [cursor=pointer]:
+                - /url: "#"
+                - paragraph [ref=e328]: View template
+          - listitem [ref=e329]:
+            - link [ref=e330] [cursor=pointer]:
+              - /url: /templates/solid-grid
+            - generic [ref=e332]:
+              - generic [ref=e333]: Launch drop
+              - generic [ref=e335]: 5 sizes
+            - generic [ref=e340]:
+              - generic [ref=e341]:
+                - generic [ref=e342]:
+                  - generic [ref=e343]: $
+                  - generic [ref=e344]: "29"
+                - generic [ref=e345]: ·
+                - generic [ref=e346]: Grid
+                - generic [ref=e347]: ·
+                - generic [ref=e348]: 108-022
+              - generic [ref=e349]:
+                - generic [ref=e350]: Solid Grid
+                - generic [ref=e351]: Desktop
+              - link "View template" [ref=e352] [cursor=pointer]:
+                - /url: "#"
+                - paragraph [ref=e353]: View template
+          - listitem [ref=e354]:
+            - link [ref=e355] [cursor=pointer]:
+              - /url: /templates/split-quadrant
+            - generic [ref=e357]:
+              - generic [ref=e358]: Launch drop
+              - generic [ref=e360]: 5 sizes
+            - generic [ref=e365]:
+              - generic [ref=e366]:
+                - generic [ref=e367]:
+                  - generic [ref=e368]: $
+                  - generic [ref=e369]: "29"
+                - generic [ref=e370]: ·
+                - generic [ref=e371]: Switch
+                - generic [ref=e372]: ·
+                - generic [ref=e373]: 108-021
+              - generic [ref=e374]:
+                - generic [ref=e375]: Split Quadrant
+                - generic [ref=e376]: Desktop
+              - link "View template" [ref=e377] [cursor=pointer]:
+                - /url: "#"
+                - paragraph [ref=e378]: View template
+        - navigation "List" [ref=e379]:
+          - link "Next Page" [ref=e381] [cursor=pointer]:
+            - /url: "?e854c91b_page=2"
+            - generic:
+              - generic: Load more
+            - text: Just do it
+  - generic [ref=e386]:
+    - generic:
+      - img "Unicorn Studio Scene"
+    - generic [ref=e387]:
+      - generic [ref=e388]:
+        - generic [ref=e389]:
+          - generic [ref=e390]:
+            - heading "Follow what we're building" [level=3] [ref=e391]:
+              - text: Follow what
+              - text: we're
+              - emphasis [ref=e392]: building
+            - generic [ref=e393]: Get 15% off your first template
+          - link "Join the list" [ref=e395] [cursor=pointer]:
+            - /url: "#"
+            - generic [ref=e396]: Join the list
+        - generic [ref=e397]:
+          - link "Jitter Templates" [ref=e398] [cursor=pointer]:
+            - /url: /
+          - generic [ref=e399]:
+            - link "Showcase" [ref=e400] [cursor=pointer]:
+              - /url: /showcase
+            - generic [ref=e401]: NEW
+          - link "Complete Collection" [ref=e403] [cursor=pointer]:
+            - /url: https://108.supply/templates/complete-collection
+          - link "About" [ref=e404] [cursor=pointer]:
+            - /url: /about
+        - generic [ref=e405]:
+          - link "License" [ref=e406] [cursor=pointer]:
+            - /url: /license
+          - link "Privacy" [ref=e407] [cursor=pointer]:
+            - /url: /privacy-policy
+          - link "Terms" [ref=e408] [cursor=pointer]:
+            - /url: /terms-conditions
+      - generic [ref=e409]:
+        - generic [ref=e410]:
+          - generic [ref=e411]: © 108 Supply
+          - generic [ref=e413]:
+            - text: Made by
+            - link "Ariel" [ref=e414] [cursor=pointer]:
+              - /url: https://arieljedrzejczak.com
+        - generic [ref=e415]:
+          - generic [ref=e416]: Instagram
+          - link "@108.supply" [ref=e417] [cursor=pointer]:
+            - /url: https://instagram.com/108.supply
+        - generic [ref=e418]:
+          - generic [ref=e420]: Your device
+          - generic [ref=e421]:
+            - generic [ref=e422]: MacOS
+            - paragraph [ref=e423]: ·
+            - generic [ref=e424]: 1200×1102
+        - generic [ref=e425]:
+          - generic [ref=e426]:
+            - generic [ref=e428]: Fonts used
+            - generic [ref=e429]:
+              - link "GT Alp," [ref=e430] [cursor=pointer]:
+                - /url: https://www.grillitype.com/typeface/gt-alpina
+              - link "Geist Mono" [ref=e431] [cursor=pointer]:
+                - /url: https://github.com/vercel/geist-font
+              - text: ","
+              - link "Season" [ref=e432] [cursor=pointer]:
+                - /url: https://displaay.net/typeface/season
+          - generic [ref=e434]: 4 8 15 16 23 42
