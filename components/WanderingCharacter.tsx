@@ -95,20 +95,17 @@ export function WanderingCharacter() {
     setMounted(true);
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    // Random start
+    // Start at viewport center (where the globe loader was), delay until loader exits
     const vw = window.innerWidth;
     const vh = window.innerHeight;
-    posRef.current = {
-      x: 80 + Math.random() * (vw - 160),
-      y: NAV_HEIGHT + 60 + Math.random() * (vh - NAV_HEIGHT - 200),
-    };
+    posRef.current = { x: vw / 2, y: vh / 2 };
     if (charRef.current) {
       charRef.current.style.left = `${posRef.current.x}px`;
       charRef.current.style.top = `${posRef.current.y}px`;
     }
 
-    // Kick off after 1s
-    const kickoff = setTimeout(() => pickNewTarget(), 1000);
+    // Wait for globe loader to finish (2.5s min + 550ms fade) then start wandering
+    const kickoff = setTimeout(() => pickNewTarget(), 3200);
 
     const loop = () => {
       if (stateRef.current === "walking" && charRef.current) {

@@ -46,7 +46,7 @@ export function PageLoadProvider({ children }: { children: React.ReactNode }) {
             pointerEvents: phase === "fading" ? "none" : "all",
           }}
         >
-          <GlobeLoader />
+          <GlobeLoader phase={phase} />
         </div>
       )}
 

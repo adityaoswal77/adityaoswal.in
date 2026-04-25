@@ -117,10 +117,12 @@ export default function GlobeLoader({
   size = 200,
   className,
   ariaLabel = "Loading",
+  phase = "loading",
 }: {
   size?: number;
   className?: string;
   ariaLabel?: string;
+  phase?: "loading" | "fading" | "done";
 }) {
   const landRef = useRef<SVGPathElement>(null);
   const gratRef = useRef<SVGPathElement>(null);
@@ -211,6 +213,32 @@ export default function GlobeLoader({
         </g>
 
         <circle cx="100" cy="100" r="78" fill="url(#gl-shade)" pointerEvents="none" />
+
+        {/* Pixel character standing on the globe */}
+        <g
+          style={{
+            transformBox: "fill-box",
+            transformOrigin: "center bottom",
+            animation: phase === "fading"
+              ? "char-jump 0.55s cubic-bezier(0.33,0,0.66,1) forwards"
+              : "char-idle 1.4s ease-in-out infinite",
+          }}
+        >
+          {/* Head */}
+          <rect x="94" y="152" width="12" height="11" fill="currentColor" rx="1" />
+          {/* Eyes */}
+          <rect x="96.5" y="155" width="2.5" height="2.5" style={{ fill: "var(--background)" }} />
+          <rect x="101" y="155" width="2.5" height="2.5" style={{ fill: "var(--background)" }} />
+          {/* Body */}
+          <rect x="91" y="163" width="18" height="10" fill="currentColor" rx="1" />
+          {/* Pencil arm */}
+          <rect x="109" y="165" width="3" height="6" fill="currentColor" opacity="0.6" />
+          <rect x="109" y="171" width="3" height="2" fill="#f59e0b" />
+          {/* Left leg */}
+          <rect x="92" y="173" width="6" height="5" fill="currentColor" />
+          {/* Right leg */}
+          <rect x="102" y="173" width="6" height="5" fill="currentColor" />
+        </g>
       </svg>
 
       {/* Fast comet whirl */}
@@ -243,6 +271,15 @@ export default function GlobeLoader({
       <style jsx global>{`
         @keyframes gl-spin {
           to { transform: rotate(360deg); }
+        }
+        @keyframes char-idle {
+          0%, 100% { transform: translateY(0px); }
+          50%       { transform: translateY(-4px); }
+        }
+        @keyframes char-jump {
+          0%   { transform: translateY(0px)    rotate(0deg);  }
+          18%  { transform: translateY(5px)    rotate(0deg);  }
+          100% { transform: translateY(-260px) rotate(12deg); }
         }
       `}</style>
     </div>
