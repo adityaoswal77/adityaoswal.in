@@ -135,12 +135,12 @@ export default function LinksPage() {
           </span>
         </div>
 
-        <h1 className="bm-header-title text-5xl md:text-7xl font-light leading-[0.95] tracking-wide text-[var(--foreground)] mb-6">
+        <h1 className="bm-header-title text-5xl md:text-7xl lg:text-8xl font-black uppercase leading-[0.9] tracking-tight text-[var(--foreground)] mb-6">
           Resources &{" "}
-          <span className="italic text-[var(--muted)]">References</span>
+          <span className="italic font-light text-[var(--muted)] normal-case">References</span>
         </h1>
 
-        <p className="bm-header-desc max-w-xl text-[var(--muted)] text-lg leading-relaxed mb-12">
+        <p className="bm-header-desc max-w-xl text-[var(--muted)] font-medium text-lg leading-relaxed mb-12">
           A curated collection of tools, articles, and links I keep coming back
           to — organized by topic.
         </p>
