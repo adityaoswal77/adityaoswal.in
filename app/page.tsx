@@ -13,6 +13,7 @@ import dynamic from "next/dynamic";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { PROJECTS } from "@/lib/data";
+import { AdityaHoverText } from "@/components/AdityaHoverText";
 
 gsap.registerPlugin(ScrollTrigger);
 import Collaborations from "@/components/Collaborations";
@@ -40,7 +41,7 @@ const Hero = () => {
   const isLight = mounted && currentTheme === "light";
 
   // Dither colors
-  const baseColor: [number, number, number] = isLight ? [0.976, 0.973, 0.965] : [0, 0, 0]; // #f9f8f6 vs #000000
+  const baseColor: [number, number, number] = isLight ? [0.98, 0.973, 0.961] : [0, 0, 0]; // #FAF8F5 vs #000000
   const waveColor: [number, number, number] = isLight ? [0.45, 0.45, 0.45] : [0.3, 0.4, 0.5]; // darker gray for visibility
   const hoverColor: [number, number, number] = isLight ? [1, 1, 1] : [0, 0, 0]; // White in light, black in dark
 
@@ -94,7 +95,7 @@ const Hero = () => {
         {/* Headline */}
         <div ref={headingRef} className="mb-8">
           <h1 className="text-6xl md:text-8xl lg:text-[8rem] font-semibold leading-[0.9] tracking-wide text-[var(--foreground)]">
-            I&apos;m Aditya,
+            I&apos;m <AdityaHoverText />,
             <br />
             <span className="italic font-light text-[var(--muted)] tracking-normal capitalize"> Product designer + Engineer</span>
           </h1>
@@ -130,6 +131,13 @@ const Hero = () => {
       >
         <ArrowDown className="w-6 h-6" />
       </button>
+
+      {/* Frosted glass transition */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 z-10 pointer-events-none overflow-hidden">
+        <div className="absolute inset-0 backdrop-blur-2xl [mask-image:linear-gradient(to_bottom,transparent_0%,black_60%,black_100%)]" />
+        <div className="absolute inset-0 backdrop-blur-md [mask-image:linear-gradient(to_bottom,transparent_30%,black_100%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--background)]/30 to-[var(--background)]" />
+      </div>
     </section>
   );
 };
@@ -164,7 +172,7 @@ const BentoGrid = () => {
     <section
       ref={containerRef}
       id="work"
-      className="bento-grid-section px-6 py-32 bg-[var(--background)] border-t border-[var(--border)]"
+      className="bento-grid-section px-6 py-32 bg-[var(--background)]"
     >
       <div className="max-w-7xl mx-auto">
         <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">

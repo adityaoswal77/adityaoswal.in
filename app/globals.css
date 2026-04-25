@@ -70,12 +70,12 @@
 }
 
 .light {
-  --background: #ffffff;
-  --foreground: #000000;
+  --background: #FAF8F5;
+  --foreground: #1A1208;
   --primary: #4f46e5;
-  --muted: #71717a;
-  --border: #e4e4e7;
-  --card: rgba(244, 244, 245, 0.8);
+  --muted: #8A7B6F;
+  --border: #E6DDD4;
+  --card: rgba(242, 238, 232, 0.8);
 }
 
 body {

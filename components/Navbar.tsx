@@ -18,7 +18,7 @@ const navigation = [
 ];
 
 const socialLinks = [
-  { name: "Resume", href: "https://drive.google.com/drive/folders/1d7JqAFL_SbR3dN9wo7B32x3Uzu-dpfzp", current: false },
+  { name: "Resume", href: "https://docs.google.com/document/d/1zTrAxlCX6HjjZGu-QBHbUE5juLPsb6di2kZlzeWj_Is/edit?usp=sharing", current: false },
 ];
 
 export default function Navbar() {

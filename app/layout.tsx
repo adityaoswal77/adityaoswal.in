@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { PageLoadProvider } from "@/components/PageLoader";
+import { WanderingCharacter } from "@/components/WanderingCharacter";
 
 const siteUrl = "https://adityaoswal.in";
 
@@ -133,6 +134,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {children}
             </main>
             <Footer />
+            <WanderingCharacter />
           </PageLoadProvider>
           <Analytics />
           <SpeedInsights />
