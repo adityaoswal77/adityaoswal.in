@@ -33,14 +33,35 @@ interface AdiOsProps {
   onClose: () => void;
 }
 
+const MIN_WIDTH = 260;
+const MAX_WIDTH = 620;
+const DEFAULT_WIDTH = 320;
+
 export function AdiOs({ open, onClose }: AdiOsProps) {
   const { messages, sendMessage, status, error } = useChat({
     transport: new TextStreamChatTransport({ api: "/api/chat" }),
   });
   const [input, setInput] = useState("");
+  const [width, setWidth] = useState(DEFAULT_WIDTH);
   const isLoading = status === "streaming" || status === "submitted";
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleResizePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const el = e.currentTarget;
+    el.setPointerCapture(e.pointerId);
+    const onMove = (ev: PointerEvent) => {
+      const newWidth = window.innerWidth - ev.clientX;
+      setWidth(Math.min(MAX_WIDTH, Math.max(MIN_WIDTH, newWidth)));
+    };
+    const onUp = () => {
+      el.removeEventListener("pointermove", onMove);
+      el.removeEventListener("pointerup", onUp);
+    };
+    el.addEventListener("pointermove", onMove);
+    el.addEventListener("pointerup", onUp);
+  };
 
   useEffect(() => {
     if (open) setTimeout(() => inputRef.current?.focus(), 300);
@@ -87,8 +108,14 @@ export function AdiOs({ open, onClose }: AdiOsProps) {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", stiffness: 320, damping: 32 }}
-            className="fixed right-0 top-0 bottom-0 z-[999] w-full md:w-80 flex flex-col bg-[var(--background)] border-l border-[var(--border)] shadow-2xl"
+            className="fixed right-0 top-0 bottom-0 z-[999] w-full flex flex-col bg-[var(--background)] border-l border-[var(--border)] shadow-2xl"
+            style={{ width: typeof window !== "undefined" && window.innerWidth >= 768 ? width : undefined }}
           >
+            {/* Resize handle — desktop only */}
+            <div
+              onPointerDown={handleResizePointerDown}
+              className="hidden md:block absolute left-0 top-0 bottom-0 w-1 cursor-col-resize hover:bg-[var(--foreground)]/10 transition-colors"
+            />
             {/* Header */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-[var(--border)] flex-shrink-0">
               <div className="flex items-center gap-3">
