@@ -70,9 +70,9 @@ export function WanderingCharacter() {
   const posRef = useRef({ x: 160, y: 300 });
   const targetRef = useRef({ x: 160, y: 300 });
   const stateRef = useRef<"walking" | "idle" | "hovering">("idle");
-  const rafRef = useRef<number>();
-  const idleTimerRef = useRef<ReturnType<typeof setTimeout>>();
-  const resumeTimerRef = useRef<ReturnType<typeof setTimeout>>();
+  const rafRef = useRef<number>(0);
+  const idleTimerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   const [facingRight, setFacingRight] = useState(true);
   const [isWalking, setIsWalking] = useState(false);
