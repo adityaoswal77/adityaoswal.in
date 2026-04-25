@@ -24,7 +24,7 @@ export const PROJECTS = [
     {
         id: 3,
         title: "Kardia Design System",
-        category: "Design System",
+        category: ["Design System", "Mobile Design"],
         span: "md:col-span-1",
         description: "Consumer mobile app design system.",
         color: "from-blue-600",

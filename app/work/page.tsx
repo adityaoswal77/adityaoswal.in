@@ -10,13 +10,13 @@ export default function WorkPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const categories = useMemo(() => {
-    return ["All", ...Array.from(new Set(PROJECTS.map(p => p.category)))];
+    return ["All", ...Array.from(new Set(PROJECTS.flatMap(p => Array.isArray(p.category) ? p.category : [p.category])))];
   }, []);
 
   const filteredProjects = useMemo(() => {
     return selectedCategory === "All"
       ? PROJECTS
-      : PROJECTS.filter(p => p.category === selectedCategory);
+      : PROJECTS.filter(p => (Array.isArray(p.category) ? p.category : [p.category]).includes(selectedCategory));
   }, [selectedCategory]);
 
   return (
@@ -88,10 +88,14 @@ export default function WorkPage() {
 
                     <div className="relative z-20">
                       {/* Refined Pill Container - Now consistent with filter style */}
-                      <div className="mb-4 w-fit px-3 py-1 rounded-full border border-white/20 bg-white/[0.08] backdrop-blur-md flex items-center gap-2">
-                        <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-white">
-                          {project.category}
-                        </span>
+                      <div className="mb-4 flex flex-wrap gap-2">
+                        {(Array.isArray(project.category) ? project.category : [project.category]).map((cat) => (
+                          <div key={cat} className="w-fit px-3 py-1 rounded-full border border-white/20 bg-white/[0.08] backdrop-blur-md flex items-center">
+                            <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-white">
+                              {cat}
+                            </span>
+                          </div>
+                        ))}
                       </div>
                       <h3 className="text-4xl font-black uppercase leading-none tracking-tighter text-white group-hover:translate-x-1 transition-transform duration-300">
                         {project.title}
