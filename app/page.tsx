@@ -13,7 +13,6 @@ import dynamic from "next/dynamic";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { PROJECTS } from "@/lib/data";
-import { AdityaHoverText } from "@/components/AdityaHoverText";
 
 gsap.registerPlugin(ScrollTrigger);
 import Collaborations from "@/components/Collaborations";
@@ -95,7 +94,7 @@ const Hero = () => {
         {/* Headline */}
         <div ref={headingRef} className="mb-8">
           <h1 className="text-6xl md:text-8xl lg:text-[8rem] font-semibold leading-[0.9] tracking-wide text-[var(--foreground)]">
-            I&apos;m <AdityaHoverText />,
+            I&apos;m Aditya,
             <br />
             <span className="italic font-light text-[var(--muted)] tracking-normal capitalize"> Product designer + Engineer</span>
           </h1>
