@@ -18,6 +18,20 @@ interface Entry {
 const CHANGELOG: Entry[] = [
   {
     date: "2026-04-25",
+    hash: "8434654",
+    title: "Adi.Os — Claude-powered chat drawer",
+    changes: [
+      { type: "feat", description: "Add Adi.Os chat drawer — click the wandering pixel character to open a Claude Haiku-powered side panel and ask questions about Aditya" },
+      { type: "feat", description: "Streaming responses via Vercel AI SDK v6 (TextStreamChatTransport + streamText)" },
+      { type: "feat", description: "Resizable drawer on desktop — drag the left edge between 260–620px" },
+      { type: "feat", description: "Mobile FAB at bottom-right opens the chat drawer on small screens" },
+      { type: "feat", description: "Suggested prompts shown before first message; suggestions submit directly" },
+      { type: "feat", description: "Playful error state: 'Aditya stepped out for coffee ☕'" },
+      { type: "feat", description: "iOS safe-area-inset-bottom on drawer footer" },
+    ],
+  },
+  {
+    date: "2026-04-25",
     hash: "8266276",
     title: "Wandering character, hover letter images, footer redesign & site polish",
     changes: [
