@@ -69,6 +69,9 @@ export function AdiOs({ open, onClose }: AdiOsProps) {
   const [input, setInput] = useState("");
   const [width, setWidth] = useState(DEFAULT_WIDTH);
   const isLoading = status === "streaming" || status === "submitted";
+  const MESSAGE_LIMIT = 10;
+  const userMessageCount = messages.filter((m) => m.role === "user").length;
+  const atLimit = userMessageCount >= MESSAGE_LIMIT;
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -97,12 +100,13 @@ export function AdiOs({ open, onClose }: AdiOsProps) {
   }, [messages]);
 
   const handleSuggestion = (text: string) => {
+    if (atLimit) return;
     sendMessage({ text });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim() || isLoading) return;
+    if (!input.trim() || isLoading || atLimit) return;
     const text = input;
     setInput("");
     sendMessage({ text });
@@ -246,26 +250,36 @@ export function AdiOs({ open, onClose }: AdiOsProps) {
             </div>
 
             {/* Input */}
-            <form
-              onSubmit={handleSubmit}
-              className="flex-shrink-0 flex items-center gap-2 px-4 py-4 border-t border-[var(--border)]"
-            >
-              <input
-                ref={inputRef}
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask about Aditya..."
-                maxLength={500}
-                className="flex-1 bg-[var(--card)] border border-[var(--border)] rounded-xl px-3.5 py-2.5 text-[13px] text-[var(--foreground)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-1 focus:ring-[var(--foreground)]/20 transition-all"
-              />
-              <button
-                type="submit"
-                disabled={!input.trim() || isLoading}
-                className="w-9 h-9 flex items-center justify-center rounded-xl bg-[var(--foreground)] text-[var(--background)] disabled:opacity-30 hover:opacity-80 transition-all flex-shrink-0"
+            {atLimit ? (
+              <div className="flex-shrink-0 px-4 py-4 border-t border-[var(--border)] text-center space-y-1">
+                <p className="text-[12px] font-mono text-[var(--foreground)] font-semibold">Session limit reached</p>
+                <p className="text-[11px] text-[var(--muted)]">Reopen the chat to start a fresh conversation.</p>
+              </div>
+            ) : (
+              <form
+                onSubmit={handleSubmit}
+                className="flex-shrink-0 flex items-center gap-2 px-4 py-4 border-t border-[var(--border)]"
               >
-                <Send className="w-3.5 h-3.5" />
-              </button>
-            </form>
+                <input
+                  ref={inputRef}
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Ask about Aditya..."
+                  maxLength={500}
+                  className="flex-1 bg-[var(--card)] border border-[var(--border)] rounded-xl px-3.5 py-2.5 text-[13px] text-[var(--foreground)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-1 focus:ring-[var(--foreground)]/20 transition-all"
+                />
+                <span className="text-[10px] font-mono text-[var(--muted)] opacity-50 flex-shrink-0">
+                  {userMessageCount}/{MESSAGE_LIMIT}
+                </span>
+                <button
+                  type="submit"
+                  disabled={!input.trim() || isLoading}
+                  className="w-9 h-9 flex items-center justify-center rounded-xl bg-[var(--foreground)] text-[var(--background)] disabled:opacity-30 hover:opacity-80 transition-all flex-shrink-0"
+                >
+                  <Send className="w-3.5 h-3.5" />
+                </button>
+              </form>
+            )}
 
             {/* Footer */}
             <div
