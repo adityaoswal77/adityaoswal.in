@@ -1,5 +1,6 @@
 import { anthropic } from "@ai-sdk/anthropic";
 import { streamText, convertToModelMessages, type UIMessage } from "ai";
+import { put } from "@vercel/blob";
 
 const SYSTEM_PROMPT = `You are Adi.Os — a tiny pixel art character who lives on Aditya Oswal's portfolio site. You answer questions about Aditya in a warm, concise, and slightly playful way. You speak in first person on behalf of Aditya ("Aditya does X", not "I do X") unless it's natural to say "he".
 
@@ -102,22 +103,32 @@ export async function POST(req: Request) {
         : m.parts,
     }));
 
-  // Log every incoming question for visibility
+  // Build log entry
   const lastUserMessage = rawMessages.filter((m) => m.role === "user").at(-1);
   const question = lastUserMessage?.parts
     ?.filter((p): p is { type: "text"; text: string } => p.type === "text")
     .map((p) => p.text)
     .join("") ?? "";
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
-  console.log(
-    JSON.stringify({
-      event: "adios_chat",
-      ts: new Date().toISOString(),
-      ip,
-      msgNum: userCount,          // which message in the session (1–10)
-      q: question.slice(0, 300),  // cap logged text at 300 chars
-    })
-  );
+  const now = new Date();
+  const logEntry = {
+    event: "adios_chat",
+    ts: now.toISOString(),
+    ip,
+    msgNum: userCount,
+    q: question.slice(0, 300),
+  };
+
+  // Log to Vercel function logs (visible in dashboard)
+  console.log(JSON.stringify(logEntry));
+
+  // Persist to Vercel Blob — fire and forget, don't block the stream
+  const dateStr = now.toISOString().slice(0, 10); // YYYY-MM-DD
+  const key = `logs/${dateStr}/${now.getTime()}-${Math.random().toString(36).slice(2, 8)}.json`;
+  put(key, JSON.stringify(logEntry), { access: "public", addRandomSuffix: false }).catch(() => {
+    // Non-critical — log to console if blob write fails
+    console.error("blob write failed for", key);
+  });
 
   const result = streamText({
     model: anthropic("claude-haiku-4-5-20251001"),
