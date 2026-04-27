@@ -136,7 +136,7 @@ export default function Navbar() {
             )}
           </button>
           <Link
-            href="https://drive.google.com/drive/folders/1d7JqAFL_SbR3dN9wo7B32x3Uzu-dpfzp"
+            href="https://docs.google.com/document/d/1zTrAxlCX6HjjZGu-QBHbUE5juLPsb6di2kZlzeWj_Is/edit?usp=sharing"
             className="hidden md:inline-flex bg-[var(--foreground)] text-[var(--background)] px-4 py-1.5 rounded-2xl text-[14px] font-bold uppercase tracking-wider hover:opacity-90 transition-all"
             target="_blank"
             rel="noopener noreferrer"
@@ -185,7 +185,7 @@ export default function Navbar() {
                           <div className="pt-2 border-t border-[var(--border)]">
                             <Disclosure.Button
                               as={Link}
-                              href="https://drive.google.com/drive/folders/1d7JqAFL_SbR3dN9wo7B32x3Uzu-dpfzp"
+                              href="https://docs.google.com/document/d/1zTrAxlCX6HjjZGu-QBHbUE5juLPsb6di2kZlzeWj_Is/edit?usp=sharing"
                               target="_blank"
                               rel="noopener noreferrer"
                               className="block w-full px-4 py-3 text-sm font-bold uppercase tracking-widest rounded-xl text-center bg-[var(--foreground)] text-[var(--background)] hover:opacity-90 transition-all"

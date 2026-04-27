@@ -6,6 +6,29 @@ import { X, Send } from "lucide-react";
 import { useChat } from "@ai-sdk/react";
 import { TextStreamChatTransport, type UIMessage } from "ai";
 
+const LINK_RE = /\[([^\]]+)\]\((https?:\/\/[^\)]+)\)|https?:\/\/\S+/g;
+
+function renderWithLinks(text: string): React.ReactNode {
+  const parts: React.ReactNode[] = [];
+  let last = 0;
+  let match: RegExpExecArray | null;
+  LINK_RE.lastIndex = 0;
+  while ((match = LINK_RE.exec(text)) !== null) {
+    if (match.index > last) parts.push(text.slice(last, match.index));
+    const label = match[1];
+    const url = match[1] ? match[2] : match[0];
+    parts.push(
+      <a key={match.index} href={url} target="_blank" rel="noopener noreferrer"
+        className="underline underline-offset-2 hover:opacity-70 transition-opacity">
+        {label ?? url}
+      </a>
+    );
+    last = match.index + match[0].length;
+  }
+  if (last < text.length) parts.push(text.slice(last));
+  return parts.length === 1 && typeof parts[0] === "string" ? parts[0] : <>{parts}</>;
+}
+
 const SUGGESTED = [
   "What does Aditya do?",
   "What's his stack?",
@@ -181,7 +204,7 @@ export function AdiOs({ open, onClose }: AdiOsProps) {
                           : "bg-[var(--card)] border border-[var(--border)] text-[var(--foreground)] rounded-tl-sm"
                       }`}
                     >
-                      {text}
+                      {renderWithLinks(text)}
                     </div>
                   </div>
                 );
