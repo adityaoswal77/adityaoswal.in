@@ -17,8 +17,8 @@ const EXCLAMATIONS = [
   "Check my work →",
   "Hello there!",
   "Pushing Pixels",
-  "Click me to chat! 💬",
-  "Open to new things?",
+  "Click me to chat!💬",
+  "Open to new things",
   "Built with Next.js!",
   "Figma is open...",
   "Designer or Engineer",
@@ -100,6 +100,29 @@ export function WanderingCharacter() {
   const [exclamation, setExclamation] = useState("");
   const [chatOpen, setChatOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [pinned, setPinned] = useState(false);
+  const pinnedRef = useRef(false);
+  const [showIntroMessage, setShowIntroMessage] = useState(false);
+  const [hasClickedPin, setHasClickedPin] = useState(false);
+  const [showRandomExclamation, setShowRandomExclamation] = useState(false);
+  const randomScheduleRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const randomHideRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+  const scheduleRandomExclamation = () => {
+    if (randomScheduleRef.current) clearTimeout(randomScheduleRef.current);
+    randomScheduleRef.current = setTimeout(() => {
+      if (!pinnedRef.current && stateRef.current !== "chatting" && stateRef.current !== "hovering") {
+        setExclamation(EXCLAMATIONS[Math.floor(Math.random() * EXCLAMATIONS.length)]);
+        setShowRandomExclamation(true);
+        randomHideRef.current = setTimeout(() => {
+          setShowRandomExclamation(false);
+          scheduleRandomExclamation();
+        }, 2500);
+      } else {
+        scheduleRandomExclamation();
+      }
+    }, 8000 + Math.random() * 7000);
+  };
 
   const pickNewTarget = () => {
     const margin = 60;
@@ -118,7 +141,35 @@ export function WanderingCharacter() {
     stateRef.current = "chatting";
     setIsWalking(false);
     setIsHovered(false);
+    setShowRandomExclamation(false);
     setChatOpen(true);
+  };
+
+  const togglePinned = () => {
+    const next = !pinnedRef.current;
+    pinnedRef.current = next;
+    setPinned(next);
+    setHasClickedPin(true);
+    if (next) {
+      if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
+      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+      stateRef.current = "idle";
+      setIsWalking(false);
+      setIsHovered(false);
+      setShowRandomExclamation(false);
+      if (randomScheduleRef.current) clearTimeout(randomScheduleRef.current);
+      if (randomHideRef.current) clearTimeout(randomHideRef.current);
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      posRef.current = { x: vw / 2 - CHAR_W / 2, y: vh - CHAR_H - 16 };
+      if (charRef.current) {
+        charRef.current.style.left = `${posRef.current.x}px`;
+        charRef.current.style.top = `${posRef.current.y}px`;
+      }
+    } else {
+      pickNewTarget();
+      scheduleRandomExclamation();
+    }
   };
 
   const closeChat = () => {
@@ -130,7 +181,13 @@ export function WanderingCharacter() {
 
   useEffect(() => {
     setMounted(true);
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const introShow = setTimeout(() => setShowIntroMessage(true), 1500);
+    const introHide = setTimeout(() => setShowIntroMessage(false), 7000);
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return () => { clearTimeout(introShow); clearTimeout(introHide); };
+    }
 
     const vw = window.innerWidth;
     const vh = window.innerHeight;
@@ -141,9 +198,21 @@ export function WanderingCharacter() {
     }
 
     const kickoff = setTimeout(() => pickNewTarget(), 3200);
+    scheduleRandomExclamation();
+
+    const handleResize = () => {
+      if (pinnedRef.current && charRef.current) {
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        posRef.current = { x: vw / 2 - CHAR_W / 2, y: vh - CHAR_H - 16 };
+        charRef.current.style.left = `${posRef.current.x}px`;
+        charRef.current.style.top = `${posRef.current.y}px`;
+      }
+    };
+    window.addEventListener("resize", handleResize);
 
     const loop = () => {
-      if (stateRef.current === "walking" && charRef.current) {
+      if (stateRef.current === "walking" && !pinnedRef.current && charRef.current) {
         const dx = targetRef.current.x - posRef.current.x;
         const dy = targetRef.current.y - posRef.current.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
@@ -174,10 +243,15 @@ export function WanderingCharacter() {
     rafRef.current = requestAnimationFrame(loop);
 
     return () => {
+      clearTimeout(introShow);
+      clearTimeout(introHide);
       clearTimeout(kickoff);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
       if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+      if (randomScheduleRef.current) clearTimeout(randomScheduleRef.current);
+      if (randomHideRef.current) clearTimeout(randomHideRef.current);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -188,6 +262,8 @@ export function WanderingCharacter() {
     stateRef.current = "hovering";
     setIsWalking(false);
     setIsHovered(true);
+    setShowIntroMessage(false);
+    setShowRandomExclamation(false);
     setExclamation(EXCLAMATIONS[Math.floor(Math.random() * EXCLAMATIONS.length)]);
   };
 
@@ -203,6 +279,43 @@ export function WanderingCharacter() {
 
   return (
     <>
+      {/* Desktop dock toggle */}
+      <button
+        type="button"
+        onClick={togglePinned}
+        aria-label={pinned ? "Let character wander" : "Dock character to bottom"}
+        title={pinned ? "Let wander" : "Dock to bottom"}
+        className={`hidden md:flex fixed top-5 right-5 z-50 h-8 items-center justify-center gap-1.5 rounded-md border border-[var(--border)] px-2.5 transition-colors duration-150 ${
+          pinned
+            ? "bg-[var(--foreground)] text-[var(--background)]"
+            : "bg-[var(--card)] text-[var(--foreground)] hover:bg-[var(--foreground)] hover:text-[var(--background)]"
+        }`}
+      >
+        {!hasClickedPin && (
+          <span className="absolute inset-0 rounded-md animate-ping bg-[var(--foreground)] opacity-20 pointer-events-none" />
+        )}
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+          <line x1="8" y1="1" x2="8" y2="10" />
+          <path d="M4 6 Q8 11 12 6" />
+          <line x1="6" y1="10" x2="10" y2="10" />
+          <line x1="8" y1="13" x2="8" y2="15" />
+        </svg>
+        <span className="text-[11px] font-mono">{pinned ? "resume" : "pause"}</span>
+        <AnimatePresence>
+          {showIntroMessage && !pinned && (
+            <motion.span
+              initial={{ opacity: 0, width: 0 }}
+              animate={{ opacity: 1, width: "auto" }}
+              exit={{ opacity: 0, width: 0 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="text-[11px] font-mono overflow-hidden whitespace-nowrap opacity-60"
+            >
+              — click to stop Adi.Os
+            </motion.span>
+          )}
+        </AnimatePresence>
+      </button>
+
       {/* Desktop wandering character */}
       <div aria-hidden="true" className="hidden md:block fixed inset-0 pointer-events-none z-40">
         <div
@@ -215,7 +328,7 @@ export function WanderingCharacter() {
         >
           {/* Speech bubble */}
           <AnimatePresence>
-            {isHovered && !chatOpen && (
+            {(showIntroMessage || isHovered || showRandomExclamation) && !chatOpen && (
               <motion.div
                 initial={{ opacity: 0, scale: 0.75, y: 6 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -224,7 +337,9 @@ export function WanderingCharacter() {
                 className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 whitespace-nowrap"
               >
                 <div className="relative px-3 py-1.5 rounded-full bg-[var(--card)] border border-[var(--border)] backdrop-blur-sm shadow-lg">
-                  <span className="text-[11px] font-mono text-[var(--foreground)]">{exclamation}</span>
+                  <span className="text-[11px] font-mono text-[var(--foreground)]">
+                    {(isHovered || showRandomExclamation) ? exclamation : "you can pause me by clicking on the top right"}
+                  </span>
                   <div
                     className="absolute top-full left-1/2 -translate-x-1/2"
                     style={{

@@ -17,6 +17,19 @@ interface Entry {
 
 const CHANGELOG: Entry[] = [
   {
+    date: "2026-04-27",
+    hash: "582e893",
+    title: "WanderingCharacter — pause toggle & ambient speech bubbles",
+    changes: [
+      { type: "feat", description: "Add pause/resume button (top-right, desktop only) — docks the pixel character to the bottom-center of the screen and stops wandering" },
+      { type: "feat", description: "Pulsing ping ring on the pause button until first click; expands to show '— click to stop Adi.Os' for the first few seconds" },
+      { type: "feat", description: "Character shows an intro speech bubble on mount: 'you can pause me by clicking on the top right'" },
+      { type: "feat", description: "Character randomly pops a speech bubble every 8–15 s while wandering (suppressed when paused, hovering, or chatting)" },
+      { type: "fix", description: "Clear random-exclamation state when opening chat so bubble can't flash back after drawer closes" },
+      { type: "fix", description: "Reposition docked character on window resize so it stays centred at the bottom" },
+    ],
+  },
+  {
     date: "2026-04-25",
     hash: "8434654",
     title: "Adi.Os — Claude-powered chat drawer",
