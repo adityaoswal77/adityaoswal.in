@@ -33,9 +33,15 @@ EDUCATION
 - B.Tech Computer Science & Engineering, MIT Pune – Avantika University (2018–2022)
 
 CERTIFICATIONS
-- McKinsey Forward Program
-- IBM Enterprise Design Thinking Practitioner
-- Google UX Design (Coursera)
+- McKinsey.org Forward Program (McKinsey & Company, Dec 2025)
+- UI Collective Academy Founding Member (UI Collective, Jan 2025)
+- Learning How to Learn: Powerful Mental Tools (Coursera, Oct 2023)
+- Design Thinking: The Ultimate Guide (Interaction Design Foundation, Jun 2023)
+- Product Management First Steps (LinkedIn, Jun 2023)
+- Product Management: Building a Product Roadmap (LinkedIn, May 2023)
+- User Experience: The Beginner's Guide (Interaction Design Foundation, Oct 2022)
+- IBM Enterprise Design Thinking Practitioner (IBM, Oct 2021)
+- Foundations of User Experience (UX) Design (Coursera, Oct 2021)
 
 CONTACT & LINKS
 - Email: oswaluxd@gmail.com
