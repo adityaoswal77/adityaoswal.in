@@ -75,20 +75,22 @@ function buildLand(features: Feature[], lambda: number): string {
     const polys: Ring[][] = geom.type === "Polygon" ? [geom.coordinates] : geom.coordinates;
     for (const poly of polys) {
       for (const ring of poly) {
-        let started = false;
-        let moved = false;
+        let inSubpath = false;
         for (let i = 0; i < ring.length; i++) {
           const [lon, lat] = ring[i];
           const p = project(lon, lat, lambda);
-          if (p[2] < 0) { started = false; continue; }
-          if (!started) {
+          if (p[2] < 0) {
+            if (inSubpath) { d += "Z"; inSubpath = false; }
+            continue;
+          }
+          if (!inSubpath) {
             d += "M" + p[0].toFixed(2) + " " + p[1].toFixed(2);
-            started = true; moved = true;
+            inSubpath = true;
           } else {
             d += "L" + p[0].toFixed(2) + " " + p[1].toFixed(2);
           }
         }
-        if (moved) d += "Z";
+        if (inSubpath) d += "Z";
       }
     }
   }
@@ -138,16 +140,19 @@ export default function GlobeLoader({
       setReady(true);
     });
 
+    let lastRender = 0;
     const tick = (ts: number) => {
+      raf = requestAnimationFrame(tick);
+      if (ts - lastRender < 33) return; // ~30fps cap
+      lastRender = ts;
       if (t0 === null) t0 = ts;
       const lambda = (((ts - t0) / PERIOD_MS) % 1) * Math.PI * 2;
       if (gratRef.current) gratRef.current.setAttribute("d", buildGraticule(lambda));
       if (landRef.current && features.length)
         landRef.current.setAttribute("d", buildLand(features, lambda));
-      raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+    return () => { cancelAnimationFrame(raf); };
   }, []);
 
   return (
@@ -268,7 +273,7 @@ export default function GlobeLoader({
         <circle cx="190" cy="100" r="1.8" fill="currentColor" />
       </svg>
 
-      <style jsx global>{`
+      <style>{`
         @keyframes gl-spin {
           to { transform: rotate(360deg); }
         }
