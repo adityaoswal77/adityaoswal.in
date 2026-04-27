@@ -102,6 +102,23 @@ export async function POST(req: Request) {
         : m.parts,
     }));
 
+  // Log every incoming question for visibility
+  const lastUserMessage = rawMessages.filter((m) => m.role === "user").at(-1);
+  const question = lastUserMessage?.parts
+    ?.filter((p): p is { type: "text"; text: string } => p.type === "text")
+    .map((p) => p.text)
+    .join("") ?? "";
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  console.log(
+    JSON.stringify({
+      event: "adios_chat",
+      ts: new Date().toISOString(),
+      ip,
+      msgNum: userCount,          // which message in the session (1–10)
+      q: question.slice(0, 300),  // cap logged text at 300 chars
+    })
+  );
+
   const result = streamText({
     model: anthropic("claude-haiku-4-5-20251001"),
     system: SYSTEM_PROMPT,
