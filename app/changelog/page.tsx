@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 
-type ChangeType = "fix" | "feat" | "refactor" | "perf" | "content" | "seo";
+type ChangeType = "fix" | "feat" | "refactor" | "perf" | "content" | "seo" | "security";
 
 interface Change {
   description: string;
@@ -18,7 +18,22 @@ interface Entry {
 const CHANGELOG: Entry[] = [
   {
     date: "2026-04-27",
-    hash: "582e893",
+    hash: "86ac50a",
+    title: "Adi.Os — security, rate limiting, logging & content updates",
+    changes: [
+      { type: "feat", description: "Persist chat logs to Vercel Blob (logs/YYYY-MM-DD/*.json) — permanent storage, zero cost, fire-and-forget so it never slows the stream" },
+      { type: "feat", description: "Protected /api/admin/logs endpoint — filter by date, paginate, and purge old entries via DELETE" },
+      { type: "feat", description: "10-message session rate limit with X/10 counter in the UI; input swaps to a friendly note when the limit is hit" },
+      { type: "security", description: "XSS fix: renderWithLinks now only allows https:// URLs, blocking javascript: and data: URI injection from model output" },
+      { type: "security", description: "Server-side request validation: reject malformed bodies, cap message history to 10, truncate each message to 500 chars" },
+      { type: "security", description: "System prompt hardened against prompt injection, persona switching, jailbreaks, and system prompt disclosure" },
+      { type: "fix", description: "Resume link in chatbot now renders as a clickable hyperlink; Navbar resume button fixed from stale Google Drive folder to correct Google Doc URL" },
+      { type: "content", description: "Certifications in Adi.Os system prompt updated from LinkedIn — 9 certs with issuers and dates (was 3-item stub)" },
+    ],
+  },
+  {
+    date: "2026-04-27",
+    hash: "09b1440",
     title: "WanderingCharacter — pause toggle & ambient speech bubbles",
     changes: [
       { type: "feat", description: "Add pause/resume button (top-right, desktop only) — docks the pixel character to the bottom-center of the screen and stops wandering" },
@@ -127,6 +142,7 @@ const TYPE_STYLES: Record<ChangeType, { label: string; className: string }> = {
   perf:     { label: "perf",     className: "text-yellow-400 border-yellow-400/30 bg-yellow-400/5" },
   content:  { label: "content",  className: "text-teal-400   border-teal-400/30   bg-teal-400/5"   },
   seo:      { label: "seo",      className: "text-green-400  border-green-400/30  bg-green-400/5"  },
+  security: { label: "security", className: "text-red-400    border-red-400/30    bg-red-400/5"    },
 };
 
 export default function ChangelogPage() {
