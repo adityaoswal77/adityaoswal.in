@@ -17,6 +17,8 @@ function renderWithLinks(text: string): React.ReactNode {
     if (match.index > last) parts.push(text.slice(last, match.index));
     const label = match[1];
     const url = match[1] ? match[2] : match[0];
+    // Only allow https:// links — blocks javascript: and data: URIs
+    if (!url.startsWith("https://")) { last = match.index + match[0].length; continue; }
     parts.push(
       <a key={match.index} href={url} target="_blank" rel="noopener noreferrer"
         className="underline underline-offset-2 hover:opacity-70 transition-opacity">
@@ -253,6 +255,7 @@ export function AdiOs({ open, onClose }: AdiOsProps) {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask about Aditya..."
+                maxLength={500}
                 className="flex-1 bg-[var(--card)] border border-[var(--border)] rounded-xl px-3.5 py-2.5 text-[13px] text-[var(--foreground)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-1 focus:ring-[var(--foreground)]/20 transition-all"
               />
               <button
