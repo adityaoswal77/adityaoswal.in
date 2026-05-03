@@ -17,6 +17,15 @@ interface Entry {
 
 const CHANGELOG: Entry[] = [
   {
+    date: "2026-05-03",
+    hash: "utm-redirects",
+    title: "UTM tracking short links",
+    changes: [
+      { type: "feat", description: "Add /linkedin, /twitter, /instagram, /github, /luma, /resume short links — each redirects to /?utm_source=<platform>&utm_medium=<type> for Vercel Analytics tracking" },
+      { type: "seo", description: "utm_medium set per platform type (social, profile, event, document) for richer traffic segmentation in analytics" },
+    ],
+  },
+  {
     date: "2026-04-27",
     hash: "86ac50a",
     title: "Adi.Os — security, rate limiting, logging & content updates",
