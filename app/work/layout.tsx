@@ -1,12 +1,5 @@
 import type { Metadata } from "next";
-// import { Raleway } from "next/font/google";
-
-// const raleway = Raleway({
-//   subsets: ["latin"],
-//   weight: ["400", "500", "700"],
-//   display: 'swap',
-//   variable: '--font-raleway',
-// });
+import { ScrollProgress } from "@/components/ScrollProgress";
 
 export const metadata: Metadata = {
   title: "Work & Case Studies | UX Designer & Product Designer",
@@ -22,6 +15,7 @@ export default function WorkLayout({
 }) {
   return (
     <>
+      <ScrollProgress />
       {children}
     </>
   );

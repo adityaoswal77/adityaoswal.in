@@ -1,13 +1,35 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useLayoutEffect, useRef } from 'react';
 import Link from 'next/link';
 import { PROJECTS } from '@/lib/data';
 import { ArrowUpRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function WorkPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const headingRef = useRef<HTMLHeadingElement>(null);
+
+  useLayoutEffect(() => {
+    if (!headingRef.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const words = headingRef.current.querySelectorAll<HTMLElement>(".word-reveal");
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: headingRef.current,
+        start: "top 90%",
+        end: "top 40%",
+        scrub: 1,
+      },
+    });
+    words.forEach((word, i) => {
+      tl.fromTo(word, { y: "110%" }, { y: "0%", ease: "power3.out", duration: 0.5 }, i * 0.25);
+    });
+    return () => { tl.kill(); };
+  }, []);
 
   const categories = useMemo(() => {
     return ["All", ...Array.from(new Set(PROJECTS.flatMap(p => Array.isArray(p.category) ? p.category : [p.category])))];
@@ -31,10 +53,17 @@ export default function WorkPage() {
               Portfolio
             </span>
           </div>
-          <h1 className="text-6xl md:text-[8rem] font-black uppercase tracking-normal leading-[0.85] text-[var(--foreground)]">
-            Selected
+          <h1
+            ref={headingRef}
+            className="text-6xl md:text-[8rem] font-black uppercase tracking-normal leading-[0.85] text-[var(--foreground)]"
+          >
+            <span className="overflow-hidden inline-block align-bottom mr-[0.2em]">
+              <span className="word-reveal inline-block">Selected</span>
+            </span>
             <br />
-            <span className="italic font-light text-[var(--muted)]">projects</span>
+            <span className="overflow-hidden inline-block align-bottom italic font-light text-[var(--muted)]">
+              <span className="word-reveal inline-block">projects</span>
+            </span>
           </h1>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mt-12">
             <p className="text-xl text-[var(--muted)] font-medium max-w-lg">

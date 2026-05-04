@@ -1,9 +1,13 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useLayoutEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, Copy } from 'lucide-react';
 import Link from 'next/link';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const NAV_COLS = [
   [
@@ -30,6 +34,24 @@ const BOTTOM_STRIP = [
 export default function Footer() {
   const [copied, setCopied] = useState(false);
   const email = "oswaluxd@gmail.com";
+  const headingRef = useRef<HTMLHeadingElement>(null);
+
+  useLayoutEffect(() => {
+    if (!headingRef.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const words = headingRef.current.querySelectorAll<HTMLElement>(".word-reveal");
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: headingRef.current,
+        start: "top 85%",
+        end: "top 20%",
+        scrub: 1,
+      },
+    });
+    words.forEach((word, i) => {
+      tl.fromTo(word, { y: "110%" }, { y: "0%", ease: "power3.out", duration: 0.5 }, i * 0.15);
+    });
+    return () => { tl.kill(); };
+  }, []);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(email);
@@ -51,10 +73,23 @@ export default function Footer() {
 
           {/* Left: headline + email CTA */}
           <div className="space-y-10">
-            <h2 className="text-5xl md:text-7xl xl:text-[6rem] font-black uppercase leading-[0.9] tracking-tight text-[var(--foreground)]">
-              Let&apos;s build
+            <h2
+              ref={headingRef}
+              className="text-5xl md:text-7xl xl:text-[6rem] font-black uppercase leading-[0.9] tracking-tight text-[var(--foreground)]"
+            >
+              {["Let's", "build"].map((word) => (
+                <span key={word} className="overflow-hidden inline-block align-bottom mr-[0.22em]">
+                  <span className="word-reveal inline-block">{word}</span>
+                </span>
+              ))}
               <br />
-              <span className="italic font-light text-[var(--muted)]">something crazy.</span>
+              <span className="italic font-light text-[var(--muted)]">
+                {["something", "crazy."].map((word) => (
+                  <span key={word} className="overflow-hidden inline-block align-bottom mr-[0.22em] last:mr-0">
+                    <span className="word-reveal inline-block">{word}</span>
+                  </span>
+                ))}
+              </span>
             </h2>
 
             <button

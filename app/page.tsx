@@ -16,6 +16,7 @@ import { PROJECTS } from "@/lib/data";
 
 gsap.registerPlugin(ScrollTrigger);
 import Collaborations from "@/components/Collaborations";
+import { MarqueeStrip } from "@/components/MarqueeStrip";
 
 const Dither = dynamic(() => import("@/components/background/Dither"), {
   ssr: false,
@@ -143,6 +144,7 @@ const Hero = () => {
 
 const BentoGrid = () => {
   const containerRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -163,6 +165,21 @@ const BentoGrid = () => {
           },
         }
       );
+
+      if (headingRef.current && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const words = headingRef.current.querySelectorAll<HTMLElement>(".word-reveal");
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: headingRef.current,
+            start: "top 85%",
+            end: "top 25%",
+            scrub: 1,
+          },
+        });
+        words.forEach((word, i) => {
+          tl.fromTo(word, { y: "110%" }, { y: "0%", ease: "power3.out", duration: 0.5 }, i * 0.2);
+        });
+      }
     }, containerRef);
     return () => ctx.revert();
   }, []);
@@ -179,8 +196,15 @@ const BentoGrid = () => {
             <span className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-4 block">
               Selected Work
             </span>
-            <h2 className="text-5xl md:text-7xl font-black uppercase leading-[0.9] text-[var(--foreground)]">
-              Past & Current Projects
+            <h2
+              ref={headingRef}
+              className="text-5xl md:text-7xl font-black uppercase leading-[0.9] text-[var(--foreground)]"
+            >
+              {["Past", "&", "Current", "Projects"].map((word) => (
+                <span key={word} className="overflow-hidden inline-block align-bottom mr-[0.22em] last:mr-0">
+                  <span className="word-reveal inline-block">{word}</span>
+                </span>
+              ))}
             </h2>
           </div>
           <p className="max-w-xs text-[var(--muted)] font-medium md:text-right">
@@ -249,6 +273,7 @@ export default function Home() {
   return (
     <div className="font-sans antialiased text-[var(--foreground)] selection:bg-indigo-500 selection:text-white">
       <Hero />
+      <MarqueeStrip />
       <Collaborations />
       <BentoGrid />
     </div>

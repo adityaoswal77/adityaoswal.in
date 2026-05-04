@@ -160,6 +160,15 @@ p {
   animation: pulse-camera 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation-play-state: paused !important; }
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
