@@ -16,7 +16,6 @@ import { PROJECTS } from "@/lib/data";
 
 gsap.registerPlugin(ScrollTrigger);
 import Collaborations from "@/components/Collaborations";
-import { MarqueeStrip } from "@/components/MarqueeStrip";
 
 const Dither = dynamic(() => import("@/components/background/Dither"), {
   ssr: false,
@@ -273,7 +272,6 @@ export default function Home() {
   return (
     <div className="font-sans antialiased text-[var(--foreground)] selection:bg-indigo-500 selection:text-white">
       <Hero />
-      <MarqueeStrip />
       <Collaborations />
       <BentoGrid />
     </div>
