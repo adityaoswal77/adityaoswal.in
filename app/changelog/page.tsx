@@ -17,6 +17,15 @@ interface Entry {
 
 const CHANGELOG: Entry[] = [
   {
+    date: "2026-05-04",
+    hash: "bf48a49",
+    title: "Scroll-scrubbed reveals & work progress bar",
+    changes: [
+      { type: "feat", description: "Scroll-scrubbed word reveal on homepage BentoGrid, /work page, and footer — words slide up proportional to scroll position via GSAP scrub:1 (respects prefers-reduced-motion)" },
+      { type: "feat", description: "ScrollProgress bar wired into /work layout — was previously only available in /playground" },
+    ],
+  },
+  {
     date: "2026-05-03",
     hash: "utm-redirects",
     title: "UTM tracking short links",
