@@ -75,6 +75,7 @@ export default function WorkPage() {
               {categories.map((category) => (
                 <button
                   key={category}
+                  type="button"
                   onClick={() => setSelectedCategory(category)}
                   className={`px-4 py-2 rounded-full border text-[10px] uppercase tracking-widest font-bold transition-all duration-300 ${selectedCategory === category
                     ? "border-violet-500/50 bg-violet-500/10 text-violet-500 shadow-[0_0_20px_rgba(139,92,246,0.15)]"

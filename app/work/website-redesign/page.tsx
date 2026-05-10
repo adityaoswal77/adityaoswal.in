@@ -66,7 +66,7 @@ const Hero = () => {
           >
             REVAMPING
             <br />
-            <span className="italic font-light text-[var(--muted)]"> STARTUP WEBSITE </span>
+            <span className="italic font-light text-[var(--muted)]">STARTUP WEBSITE</span>
           </h1>
 
           <p

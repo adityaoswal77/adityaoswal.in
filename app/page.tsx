@@ -87,8 +87,8 @@ const Hero = () => {
           className="mb-8 px-4 py-1.5 rounded-full border border-white/10 bg-white/8 backdrop-blur-lg flex items-center gap-2"
         >
           <div className="w-1.5 h-1.5 rounded-full bg-violet-900 animate-pulse" />
-          <span className="text-[14px]  uppercase tracking-[0.1em] font-bold text-[var(--muted)]">
-            Based in Bangalore | Working Globally
+          <span className="text-[14px] uppercase tracking-tight sm:tracking-[0.1em] font-bold text-[var(--muted)]">
+            Based in Bangalore · Working Globally
           </span>
         </div>
 
@@ -105,7 +105,7 @@ const Hero = () => {
         <div ref={actionsRef} className="flex flex-col sm:flex-row items-center gap-4 pointer-events-auto">
           <Link
             href="/#work"
-            className="group relative flex items-center gap-2 bg-[var(--foreground)] text-[var(--background)] px-8 py-4 rounded-2xl font-bold uppercase text-[14px] tracking-wider hover:opacity-90 transition-all"
+            className="group relative flex items-center gap-2 bg-[var(--foreground)] text-[var(--background)] px-6 py-3 sm:px-8 sm:py-4 rounded-2xl font-bold uppercase text-[14px] tracking-wider hover:opacity-90 transition-all"
           >
             View My Projects
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
@@ -114,7 +114,7 @@ const Hero = () => {
             rel="noopener noreferrer"
             target="_blank"
             href="https://www.linkedin.com/in/oswaladitya/"
-            className="flex items-center gap-2 bg-[var(--foreground)]/5 backdrop-blur-md border border-[var(--border)] text-[var(--foreground)] px-8 py-4 rounded-2xl font-bold uppercase text-[14px] tracking-wider hover:bg-[var(--foreground)]/10 transition-all"
+            className="flex items-center gap-2 bg-[var(--foreground)]/5 backdrop-blur-md border border-[var(--border)] text-[var(--foreground)] px-6 py-3 sm:px-8 sm:py-4 rounded-2xl font-bold uppercase text-[14px] tracking-wider hover:bg-[var(--foreground)]/10 transition-all"
           >
             Contact Me
           </Link>
@@ -123,7 +123,8 @@ const Hero = () => {
       </div>
 
       <button
-        title="projects button"
+        type="button"
+        title="Scroll to projects"
         onClick={() => {
           document.getElementById("work")?.scrollIntoView({ behavior: "smooth" });
         }}

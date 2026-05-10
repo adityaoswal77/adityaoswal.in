@@ -11,7 +11,7 @@ const COMPANIES = [
     { name: "Kardia", src: "/logos/Kardia logo.svg" },
     { name: "Aibiliti", src: "/logos/Aibiliti.svg" },
     { name: "Dngtechno", src: "/logos/dngtechno logo.svg" },
-    { name: "Wollkraft", src: "/logos/wollkraft logo.svg" },
+    { name: "Wolffkraft", src: "/logos/wollkraft logo.svg" },
 ];
 
 const Collaborations = () => {

@@ -73,7 +73,7 @@ const Hero = () => {
             <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 pt-12 border-t border-[var(--border)]">
               <div ref={descriptionRef}>
                 <dt className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-3">Current Role</dt>
-                <dd className="text-xl font-bold text-[var(--foreground)]">Designer @ Alivecor</dd>
+                <dd className="text-xl font-bold text-[var(--foreground)]">Designer @ AliveCor</dd>
               </div>
               <div>
                 <dt className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-3">Location</dt>
@@ -399,7 +399,7 @@ const InteractiveSkills = () => {
                 }}
                 className="cursor-grab active:cursor-grabbing"
               >
-                <div className="px-5 py-2.5 rounded-full border border-[var(--border)] bg-[var(--background)] text-[11px] font-bold uppercase tracking-widest text-[var(--foreground)] whitespace-nowrap select-none">
+                <div className="px-4 py-2 rounded-full border border-[var(--border)] bg-[var(--background)] text-[11px] font-bold uppercase tracking-widest text-[var(--foreground)] select-none text-center max-w-[180px]">
                   {skill}
                 </div>
               </MatterBody>
