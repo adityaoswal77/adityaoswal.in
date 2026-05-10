@@ -63,7 +63,7 @@ const Hero = () => {
 
         <h1
           ref={titleRef}
-          className="text-5xl md:text-8xl lg:text-[10rem] font-bold leading-[0.9] tracking-tighter text-[var(--foreground)] mb-6 md:mb-8"
+          className="text-[2.5rem] sm:text-5xl md:text-8xl lg:text-[10rem] font-bold leading-[0.9] tracking-tighter text-[var(--foreground)] mb-6 md:mb-8"
         >
           NEON <br /> FINTECH
         </h1>

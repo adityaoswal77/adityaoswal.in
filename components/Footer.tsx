@@ -66,16 +66,16 @@ export default function Footer() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_100%,rgba(160,80,20,0.45),transparent)] dark:opacity-100 opacity-30" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-24 pb-10">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-12 md:pt-24 pb-10">
 
         {/* Top section */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr,auto] gap-16 items-start pb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr,auto] gap-12 md:gap-16 items-start pb-12 md:pb-24">
 
           {/* Left: headline + email CTA */}
           <div className="space-y-10">
             <h2
               ref={headingRef}
-              className="text-5xl md:text-7xl xl:text-[6rem] font-black uppercase leading-[0.9] tracking-tight text-[var(--foreground)]"
+              className="text-4xl sm:text-5xl md:text-7xl xl:text-[6rem] font-black uppercase leading-[0.9] tracking-tight text-[var(--foreground)]"
             >
               {["Let's", "build"].map((word) => (
                 <span key={word} className="overflow-hidden inline-block align-bottom mr-[0.22em]">

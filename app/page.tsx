@@ -45,6 +45,7 @@ const Hero = () => {
   const hoverColor: [number, number, number] = isLight ? [1, 1, 1] : [0, 0, 0]; // White in light, black in dark
 
   useLayoutEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         defaults: { ease: "power4.out", duration: 1 },
@@ -93,7 +94,7 @@ const Hero = () => {
 
         {/* Headline */}
         <div ref={headingRef} className="mb-8">
-          <h1 className="text-6xl md:text-8xl lg:text-[8rem] font-semibold leading-[0.9] tracking-wide text-[var(--foreground)]">
+          <h1 className="text-[2.5rem] sm:text-6xl md:text-8xl lg:text-[8rem] font-semibold leading-[0.9] tracking-wide text-[var(--foreground)]">
             I&apos;m Aditya,
             <br />
             <span className="italic font-light text-[var(--muted)] tracking-normal capitalize"> Product designer + Engineer</span>
@@ -147,6 +148,7 @@ const BentoGrid = () => {
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const ctx = gsap.context(() => {
       const cards = gsap.utils.toArray(".project-card");
       gsap.fromTo(
@@ -187,7 +189,7 @@ const BentoGrid = () => {
     <section
       ref={containerRef}
       id="work"
-      className="bento-grid-section px-6 py-32 bg-[var(--background)]"
+      className="bento-grid-section px-6 py-16 md:py-32 bg-[var(--background)]"
     >
       <div className="max-w-7xl mx-auto">
         <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
@@ -197,7 +199,7 @@ const BentoGrid = () => {
             </span>
             <h2
               ref={headingRef}
-              className="text-5xl md:text-7xl font-black uppercase leading-[0.9] text-[var(--foreground)]"
+              className="text-4xl sm:text-5xl md:text-7xl font-black uppercase leading-[0.9] text-[var(--foreground)]"
             >
               {["Past", "&", "Current", "Projects"].map((word) => (
                 <span key={word} className="overflow-hidden inline-block align-bottom mr-[0.22em] last:mr-0">
@@ -251,7 +253,7 @@ const BentoGrid = () => {
               <Link
                 key={project.id}
                 href={project.href || "#"}
-                className={`project-card block relative h-[500px] overflow-hidden rounded-[1rem] border border-[var(--border)] bg-[var(--card)] transition-all duration-500 hover:border-[var(--foreground)]/30 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] ${project.span}`}
+                className={`project-card block relative h-[380px] md:h-[500px] overflow-hidden rounded-[1rem] border border-[var(--border)] bg-[var(--card)] transition-all duration-500 hover:border-[var(--foreground)]/30 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] ${project.span}`}
               >
                 <div className="h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.02]">
                   {CardContent}

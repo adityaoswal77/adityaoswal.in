@@ -62,7 +62,7 @@ const Hero = () => {
 
           <h1
             ref={titleRef}
-            className="text-6xl md:text-8xl lg:text-[9rem] font-bold leading-[0.85] tracking-normal uppercase text-[var(--foreground)]"
+            className="text-[2.5rem] sm:text-6xl md:text-8xl lg:text-[9rem] font-bold leading-[0.85] tracking-normal uppercase text-[var(--foreground)]"
           >
             REVAMPING
             <br />
@@ -108,7 +108,7 @@ const Section = ({ title, children, className = "" }: { title?: string; children
   const contentRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const ctx = gsap.context(() => {
       const elementsToAnimate = [contentRef.current].filter(Boolean);
       if (titleRef.current) {
@@ -141,7 +141,7 @@ const Section = ({ title, children, className = "" }: { title?: string; children
     <section
       ref={sectionRef}
       aria-labelledby={title ? `section-${title.toLowerCase().replace(/\s+/g, '-')}` : undefined}
-      className={`px-6 py-32 bg-[var(--background)] border-t border-[var(--border)] transition-colors duration-300 ${className}`}
+      className={`px-6 py-16 md:py-32 bg-[var(--background)] border-t border-[var(--border)] transition-colors duration-300 ${className}`}
     >
       <div className="max-w-6xl mx-auto">
         {title && (
