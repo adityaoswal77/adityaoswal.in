@@ -84,11 +84,12 @@ const Hero = () => {
         {/* Badge */}
         <div
           ref={badgeRef}
-          className="mb-8 px-4 py-1.5 rounded-full border border-white/10 bg-white/8 backdrop-blur-lg flex items-center gap-2"
+          className="mb-8 px-3 sm:px-4 py-1.5 rounded-full border border-white/10 bg-white/8 backdrop-blur-lg flex items-center gap-2"
         >
           <div className="w-1.5 h-1.5 rounded-full bg-violet-900 animate-pulse" />
           <span className="text-[14px] uppercase tracking-tight sm:tracking-[0.1em] font-bold text-[var(--muted)]">
-            Based in Bangalore · Working Globally
+            <span className="sm:hidden">Bangalore · Worldwide</span>
+            <span className="hidden sm:inline">Based in Bangalore · Working Globally</span>
           </span>
         </div>
 
