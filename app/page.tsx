@@ -45,6 +45,7 @@ const Hero = () => {
   const hoverColor: [number, number, number] = isLight ? [1, 1, 1] : [0, 0, 0]; // White in light, black in dark
 
   useLayoutEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         defaults: { ease: "power4.out", duration: 1 },
@@ -83,17 +84,18 @@ const Hero = () => {
         {/* Badge */}
         <div
           ref={badgeRef}
-          className="mb-8 px-4 py-1.5 rounded-full border border-white/10 bg-white/8 backdrop-blur-lg flex items-center gap-2"
+          className="mb-8 px-3 sm:px-4 py-1.5 rounded-full border border-white/10 bg-white/8 backdrop-blur-lg flex items-center gap-2"
         >
           <div className="w-1.5 h-1.5 rounded-full bg-violet-900 animate-pulse" />
-          <span className="text-[14px]  uppercase tracking-[0.1em] font-bold text-[var(--muted)]">
-            Based in Bangalore | Working Globally
+          <span className="text-[14px] uppercase tracking-tight sm:tracking-[0.1em] font-bold text-[var(--muted)]">
+            <span className="sm:hidden">Bangalore · Worldwide</span>
+            <span className="hidden sm:inline">Based in Bangalore · Working Globally</span>
           </span>
         </div>
 
         {/* Headline */}
         <div ref={headingRef} className="mb-8">
-          <h1 className="text-6xl md:text-8xl lg:text-[8rem] font-semibold leading-[0.9] tracking-wide text-[var(--foreground)]">
+          <h1 className="text-[2.5rem] sm:text-6xl md:text-8xl lg:text-[8rem] font-semibold leading-[0.9] tracking-wide text-[var(--foreground)]">
             I&apos;m Aditya,
             <br />
             <span className="italic font-light text-[var(--muted)] tracking-normal capitalize"> Product designer + Engineer</span>
@@ -104,7 +106,7 @@ const Hero = () => {
         <div ref={actionsRef} className="flex flex-col sm:flex-row items-center gap-4 pointer-events-auto">
           <Link
             href="/#work"
-            className="group relative flex items-center gap-2 bg-[var(--foreground)] text-[var(--background)] px-8 py-4 rounded-2xl font-bold uppercase text-[14px] tracking-wider hover:opacity-90 transition-all"
+            className="group relative flex items-center gap-2 bg-[var(--foreground)] text-[var(--background)] px-6 py-3 sm:px-8 sm:py-4 rounded-2xl font-bold uppercase text-[14px] tracking-wider hover:opacity-90 transition-all"
           >
             View My Projects
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
@@ -113,7 +115,7 @@ const Hero = () => {
             rel="noopener noreferrer"
             target="_blank"
             href="https://www.linkedin.com/in/oswaladitya/"
-            className="flex items-center gap-2 bg-[var(--foreground)]/5 backdrop-blur-md border border-[var(--border)] text-[var(--foreground)] px-8 py-4 rounded-2xl font-bold uppercase text-[14px] tracking-wider hover:bg-[var(--foreground)]/10 transition-all"
+            className="flex items-center gap-2 bg-[var(--foreground)]/5 backdrop-blur-md border border-[var(--border)] text-[var(--foreground)] px-6 py-3 sm:px-8 sm:py-4 rounded-2xl font-bold uppercase text-[14px] tracking-wider hover:bg-[var(--foreground)]/10 transition-all"
           >
             Contact Me
           </Link>
@@ -122,7 +124,8 @@ const Hero = () => {
       </div>
 
       <button
-        title="projects button"
+        type="button"
+        title="Scroll to projects"
         onClick={() => {
           document.getElementById("work")?.scrollIntoView({ behavior: "smooth" });
         }}
@@ -147,6 +150,7 @@ const BentoGrid = () => {
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const ctx = gsap.context(() => {
       const cards = gsap.utils.toArray(".project-card");
       gsap.fromTo(
@@ -187,7 +191,7 @@ const BentoGrid = () => {
     <section
       ref={containerRef}
       id="work"
-      className="bento-grid-section px-6 py-32 bg-[var(--background)]"
+      className="bento-grid-section px-6 py-16 md:py-32 bg-[var(--background)]"
     >
       <div className="max-w-7xl mx-auto">
         <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
@@ -197,7 +201,7 @@ const BentoGrid = () => {
             </span>
             <h2
               ref={headingRef}
-              className="text-5xl md:text-7xl font-black uppercase leading-[0.9] text-[var(--foreground)]"
+              className="text-4xl sm:text-5xl md:text-7xl font-black uppercase leading-[0.9] text-[var(--foreground)]"
             >
               {["Past", "&", "Current", "Projects"].map((word) => (
                 <span key={word} className="overflow-hidden inline-block align-bottom mr-[0.22em] last:mr-0">
@@ -251,7 +255,7 @@ const BentoGrid = () => {
               <Link
                 key={project.id}
                 href={project.href || "#"}
-                className={`project-card block relative h-[500px] overflow-hidden rounded-[1rem] border border-[var(--border)] bg-[var(--card)] transition-all duration-500 hover:border-[var(--foreground)]/30 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] ${project.span}`}
+                className={`project-card block relative h-[380px] md:h-[500px] overflow-hidden rounded-[1rem] border border-[var(--border)] bg-[var(--card)] transition-all duration-500 hover:border-[var(--foreground)]/30 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] ${project.span}`}
               >
                 <div className="h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.02]">
                   {CardContent}

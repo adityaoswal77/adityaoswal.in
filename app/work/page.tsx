@@ -55,7 +55,7 @@ export default function WorkPage() {
           </div>
           <h1
             ref={headingRef}
-            className="text-6xl md:text-[8rem] font-black uppercase tracking-normal leading-[0.85] text-[var(--foreground)]"
+            className="text-[2.5rem] sm:text-6xl md:text-[8rem] font-black uppercase tracking-normal leading-[0.85] text-[var(--foreground)]"
           >
             <span className="overflow-hidden inline-block align-bottom mr-[0.2em]">
               <span className="word-reveal inline-block">Selected</span>
@@ -75,6 +75,7 @@ export default function WorkPage() {
               {categories.map((category) => (
                 <button
                   key={category}
+                  type="button"
                   onClick={() => setSelectedCategory(category)}
                   className={`px-4 py-2 rounded-full border text-[10px] uppercase tracking-widest font-bold transition-all duration-300 ${selectedCategory === category
                     ? "border-violet-500/50 bg-violet-500/10 text-violet-500 shadow-[0_0_20px_rgba(139,92,246,0.15)]"
@@ -106,7 +107,7 @@ export default function WorkPage() {
                 <Link
                   href={project.href || "#"}
                   {...('external' in project && project.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className="block relative h-[550px] overflow-hidden rounded-[.5rem] border border-[var(--border)] bg-[var(--card)] transition-all duration-500 hover:border-[var(--foreground)]/20 hover:shadow-2xl group"
+                  className="block relative h-[400px] md:h-[550px] overflow-hidden rounded-[.5rem] border border-[var(--border)] bg-[var(--card)] transition-all duration-500 hover:border-[var(--foreground)]/20 hover:shadow-2xl group"
                 >
                   <div className="relative h-full w-full p-10 flex flex-col justify-end overflow-hidden">
                     {/* Background Gradient - Now with a subtle base opacity */}

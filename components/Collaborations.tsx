@@ -11,7 +11,7 @@ const COMPANIES = [
     { name: "Kardia", src: "/logos/Kardia logo.svg" },
     { name: "Aibiliti", src: "/logos/Aibiliti.svg" },
     { name: "Dngtechno", src: "/logos/dngtechno logo.svg" },
-    { name: "Wollkraft", src: "/logos/wollkraft logo.svg" },
+    { name: "Wolffkraft", src: "/logos/wollkraft logo.svg" },
 ];
 
 const Collaborations = () => {
@@ -19,7 +19,7 @@ const Collaborations = () => {
     const duplicatedCompanies = [...COMPANIES, ...COMPANIES, ...COMPANIES, ...COMPANIES];
 
     return (
-        <div className="w-full py-32 bg-[var(--background)] overflow-hidden">
+        <div className="w-full py-16 md:py-32 bg-[var(--background)] overflow-hidden">
             <div className="max-w-7xl mx-auto px-6 mb-12 text-center md:text-left">
                 <h2 className="text-xl flex justify-center  tracking-[0.1em] font-bold text-[var(--muted)]">
                     Some companies I&apos;ve had the pleasure to work with
@@ -58,8 +58,8 @@ const Collaborations = () => {
                 </motion.div>
 
                 {/* Gradient overlays for smooth fade edges */}
-                <div className="absolute inset-y-0 left-0 w-64 bg-gradient-to-r from-[var(--background)] to-transparent z-10 pointer-events-none" />
-                <div className="absolute inset-y-0 right-0 w-64 bg-gradient-to-l from-[var(--background)] to-transparent z-10 pointer-events-none" />
+                <div className="absolute inset-y-0 left-0 w-16 sm:w-32 md:w-64 bg-gradient-to-r from-[var(--background)] to-transparent z-10 pointer-events-none" />
+                <div className="absolute inset-y-0 right-0 w-16 sm:w-32 md:w-64 bg-gradient-to-l from-[var(--background)] to-transparent z-10 pointer-events-none" />
             </div>
         </div>
     );

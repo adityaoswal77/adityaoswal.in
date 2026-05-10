@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cd /Users/aoswal752/Code/adityaoswal.in/adityaoswal.in && npx tsc --noEmit 2>&1 | head -20"
+            "command": "cd /home/user/adityaoswal.in && npx tsc --noEmit 2>&1 | head -20"
           }
         ]
       }

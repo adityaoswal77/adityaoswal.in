@@ -23,7 +23,7 @@ const Hero = () => {
   const imageRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power4.out", duration: 1.2 } });
 
@@ -64,7 +64,7 @@ const Hero = () => {
 
             <h1
               ref={titleRef}
-              className="text-6xl md:text-8xl lg:text-9xl font-bold leading-[0.85] tracking-wide  text-[var(--foreground)]"
+              className="text-[2.5rem] sm:text-6xl md:text-8xl lg:text-9xl font-bold leading-[0.85] tracking-wide text-[var(--foreground)]"
             >
               Aditya Oswal
             </h1>
@@ -73,7 +73,7 @@ const Hero = () => {
             <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 pt-12 border-t border-[var(--border)]">
               <div ref={descriptionRef}>
                 <dt className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-3">Current Role</dt>
-                <dd className="text-xl font-bold text-[var(--foreground)]">Designer @ Alivecor</dd>
+                <dd className="text-xl font-bold text-[var(--foreground)]">Designer @ AliveCor</dd>
               </div>
               <div>
                 <dt className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-3">Location</dt>
@@ -89,7 +89,7 @@ const Hero = () => {
 
           <div
             ref={imageRef}
-            className="relative w-full lg:w-[400px] xl:w-[500px] aspect-square flex justify-center items-center"
+            className="relative w-full max-w-xs sm:max-w-sm mx-auto lg:max-w-none lg:w-[400px] xl:w-[500px] aspect-square flex justify-center items-center"
           >
             {/* Profile Image */}
             <div className="relative w-full h-full rounded-[.5rem] overflow-hidden border border-white/10 group grayscale hover:grayscale-0 transition-all duration-700">
@@ -116,7 +116,7 @@ const Section = ({ title, children, className = "", rightHeader }: { title?: str
   const contentRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const ctx = gsap.context(() => {
       const elementsToAnimate = [contentRef.current].filter(Boolean);
       if (titleRef.current) {
@@ -149,7 +149,7 @@ const Section = ({ title, children, className = "", rightHeader }: { title?: str
     <section
       ref={sectionRef}
       aria-labelledby={title ? `section-${title.toLowerCase().replace(/\s+/g, '-')}` : undefined}
-      className={`px-6 py-32 bg-[var(--background)] border-t border-[var(--border)] transition-colors duration-300 ${className}`}
+      className={`px-6 py-16 md:py-32 bg-[var(--background)] border-t border-[var(--border)] transition-colors duration-300 ${className}`}
     >
       <div className="max-w-6xl mx-auto">
         {title && (
@@ -157,7 +157,7 @@ const Section = ({ title, children, className = "", rightHeader }: { title?: str
             <h2
               id={`section-${title.toLowerCase().replace(/\s+/g, '-')}`}
               ref={titleRef}
-              className="text-5xl md:text-7xl font-black uppercase tracking-[0.01em] text-[var(--foreground)] leading-[0.9]"
+              className="text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-[0.01em] text-[var(--foreground)] leading-[0.9]"
             >
               {title}
             </h2>
@@ -399,7 +399,7 @@ const InteractiveSkills = () => {
                 }}
                 className="cursor-grab active:cursor-grabbing"
               >
-                <div className="px-5 py-2.5 rounded-full border border-[var(--border)] bg-[var(--background)] text-[11px] font-bold uppercase tracking-widest text-[var(--foreground)] whitespace-nowrap select-none">
+                <div className="px-4 py-2 rounded-full border border-[var(--border)] bg-[var(--background)] text-[11px] font-bold uppercase tracking-widest text-[var(--foreground)] select-none text-center max-w-[180px]">
                   {skill}
                 </div>
               </MatterBody>
@@ -442,7 +442,7 @@ const Toolstack = () => {
           return (
             <div
               key={i}
-              className="group p-10 flex flex-col items-center justify-center gap-4 border-r border-b border-[var(--border)] hover:bg-[var(--card)] transition-colors duration-300"
+              className="group p-6 md:p-10 flex flex-col items-center justify-center gap-4 border-r border-b border-[var(--border)] hover:bg-[var(--card)] transition-colors duration-300"
             >
               <Icon className="w-6 h-6 text-[var(--muted)] group-hover:text-[var(--foreground)] transition-colors duration-300" />
               <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--muted)] group-hover:text-[var(--foreground)] transition-colors duration-300">
