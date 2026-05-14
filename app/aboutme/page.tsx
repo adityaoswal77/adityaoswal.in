@@ -290,13 +290,13 @@ const WorkExperience = () => {
       description: "Led redesign and Webflow implementation for Shiftlinkapp, Aibiliti.co, Dualite.dev, and DNG Technologies — boosting performance and driving higher lead conversions."
     },
     {
-      role: "UX Intern",
+      role: "UX Designer",
       company: "Wolffkraft Design Studio",
       period: "Aug '22 – Dec '22",
       description: "Delivered veritaslogistics.com using Webflow, combining no-code development with high-fidelity design and animations. Supported UX research and execution across varied client projects."
     },
     {
-      role: "Frontend Intern",
+      role: "Frontend Developer",
       company: "Embed Design Studio",
       period: "Jun '21 – Jul '21",
       description: "Developed and maintained the company website using Next.js, React, TypeScript, and Tailwind CSS, deployed on Vercel for optimised performance."
