@@ -17,6 +17,14 @@ interface Entry {
 
 const CHANGELOG: Entry[] = [
   {
+    date: "2026-05-14",
+    hash: "footer-reveal-fix",
+    title: "Footer heading reveal — scroll-scrub replaced with entrance animation",
+    changes: [
+      { type: "fix", description: "Footer 'Let's build something crazy.' word reveal was stuck mid-animation because scrub:1 tied progress to scroll distance — replaced with a one-shot entrance animation (toggleActions play) so all words fully reveal as soon as the footer enters the viewport" },
+    ],
+  },
+  {
     date: "2026-05-04",
     hash: "bf48a49",
     title: "Scroll-scrubbed reveals & work progress bar",

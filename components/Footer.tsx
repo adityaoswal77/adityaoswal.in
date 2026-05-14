@@ -42,13 +42,12 @@ export default function Footer() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: headingRef.current,
-        start: "top 85%",
-        end: "top 20%",
-        scrub: 1,
+        start: "top 90%",
+        toggleActions: "play none none none",
       },
     });
     words.forEach((word, i) => {
-      tl.fromTo(word, { y: "110%" }, { y: "0%", ease: "power3.out", duration: 0.5 }, i * 0.15);
+      tl.fromTo(word, { y: "110%" }, { y: "0%", ease: "power3.out", duration: 0.6 }, i * 0.12);
     });
     return () => { tl.kill(); };
   }, []);
@@ -85,7 +84,7 @@ export default function Footer() {
               <br />
               <span className="italic font-light text-[var(--muted)]">
                 {["something", "crazy."].map((word) => (
-                  <span key={word} className="overflow-hidden inline-block align-bottom mr-[0.22em] last:mr-0">
+                  <span key={word} className="overflow-hidden inline-block align-bottom mr-[0.22em] last:mr-0 pb-[0.15em]">
                     <span className="word-reveal inline-block">{word}</span>
                   </span>
                 ))}
