@@ -10,7 +10,17 @@ const nextConfig = {
       { path: "/resume",    source: "resume",    medium: "document" },
     ];
 
-    return sources.flatMap(({ path, source, medium }) => [
+    const directRedirects = [
+      {
+        source: "/r",
+        destination: "https://docs.google.com/document/d/1zTrAxlCX6HjjZGu-QBHbUE5juLPsb6di2kZlzeWj_Is/edit?usp=sharing",
+        permanent: false,
+      },
+    ];
+
+    return [
+      ...directRedirects,
+      ...sources.flatMap(({ path, source, medium }) => [
       {
         source: path,
         destination: `/?utm_source=${source}&utm_medium=${medium}`,
@@ -21,7 +31,8 @@ const nextConfig = {
         destination: `/?utm_source=${source}&utm_medium=${medium}`,
         permanent: false,
       },
-    ]);
+    ]),
+    ];
   },
 };
 
