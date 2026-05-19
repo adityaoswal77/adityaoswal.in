@@ -8,6 +8,94 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+const SPOTLIGHT_COLORS: Record<string, string> = {
+  "from-amber-600":   "#d97706",
+  "from-indigo-600":  "#4f46e5",
+  "from-blue-600":    "#2563eb",
+  "from-lime-600":    "#65a30d",
+  "from-emerald-600": "#059669",
+  "from-rose-600":    "#e11d48",
+};
+
+function WorkCard({ project }: { project: typeof PROJECTS[number] }) {
+  const cardRef = useRef<HTMLAnchorElement>(null);
+  const spotlightRef = useRef<HTMLDivElement>(null);
+  const accentColor = SPOTLIGHT_COLORS[project.color] ?? "#ffffff";
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const rect = cardRef.current?.getBoundingClientRect();
+    if (!rect || !spotlightRef.current) return;
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    spotlightRef.current.style.background =
+      `radial-gradient(500px circle at ${x}px ${y}px, ${accentColor}55, transparent 70%)`;
+  };
+
+  const handleMouseEnter = () => {
+    if (spotlightRef.current) spotlightRef.current.style.opacity = "1";
+  };
+
+  const handleMouseLeave = () => {
+    if (spotlightRef.current) spotlightRef.current.style.opacity = "0";
+  };
+
+  const categories = Array.isArray(project.category) ? project.category : [project.category];
+
+  return (
+    <Link
+      ref={cardRef}
+      href={project.href || "#"}
+      {...('external' in project && project.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      className="block relative h-[400px] md:h-[550px] overflow-hidden rounded-[.5rem] border border-[var(--border)] bg-[var(--card)] transition-all duration-500 hover:border-[var(--foreground)]/20 hover:shadow-2xl group"
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div className="relative h-full w-full p-10 flex flex-col justify-end overflow-hidden">
+        {/* Mouse-tracking spotlight */}
+        <div
+          ref={spotlightRef}
+          className="absolute inset-0 z-[1] pointer-events-none"
+          style={{ opacity: 0, transition: "opacity 0.4s ease" }}
+        />
+
+        {/* Subtle always-on base tint */}
+        <div className={`absolute inset-0 z-0 bg-gradient-to-br ${project.color} to-transparent opacity-10`} />
+
+        {/* Bottom overlay */}
+        <div className="absolute inset-0 z-[2] bg-gradient-to-t from-black/90 via-black/30 to-transparent group-hover:from-black/80 transition-all duration-700" />
+
+        <div className="relative z-[3]">
+          <div className="mb-3 flex flex-wrap gap-2">
+            {categories.map((cat) => (
+              <div key={cat} className="w-fit px-3 py-1 rounded-full border border-white/20 bg-white/[0.08] backdrop-blur-md flex items-center">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-white">
+                  {cat}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Description — hidden by default, slides up on hover */}
+          <p className="text-sm text-white/60 font-medium mb-3 leading-relaxed max-w-xs opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out">
+            {project.description}
+          </p>
+
+          <h3 className="text-4xl font-black uppercase leading-none tracking-tighter text-white group-hover:translate-x-1 transition-transform duration-300">
+            {project.title}
+          </h3>
+        </div>
+
+        <div className="absolute top-10 right-10 z-[3] opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+          <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center text-black shadow-xl">
+            <ArrowUpRight className="w-7 h-7" />
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 gsap.registerPlugin(ScrollTrigger);
 
 export default function WorkPage() {
@@ -104,41 +192,7 @@ export default function WorkPage() {
                 transition={{ duration: 0.4, ease: "easeOut" }}
                 className={`${project.span}`}
               >
-                <Link
-                  href={project.href || "#"}
-                  {...('external' in project && project.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className="block relative h-[400px] md:h-[550px] overflow-hidden rounded-[.5rem] border border-[var(--border)] bg-[var(--card)] transition-all duration-500 hover:border-[var(--foreground)]/20 hover:shadow-2xl group"
-                >
-                  <div className="relative h-full w-full p-10 flex flex-col justify-end overflow-hidden">
-                    {/* Background Gradient - Now with a subtle base opacity */}
-                    <div className={`absolute inset-0 z-0 bg-gradient-to-br ${project.color} to-transparent opacity-[0.2] group-hover:opacity-100 transition-all duration-700 ease-out`} />
-
-                    {/* Overlay Gradient (static) */}
-                    <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/90 via-black/20 to-transparent group-hover:opacity-40 transition-opacity duration-700" />
-
-                    <div className="relative z-20">
-                      {/* Refined Pill Container - Now consistent with filter style */}
-                      <div className="mb-4 flex flex-wrap gap-2">
-                        {(Array.isArray(project.category) ? project.category : [project.category]).map((cat) => (
-                          <div key={cat} className="w-fit px-3 py-1 rounded-full border border-white/20 bg-white/[0.08] backdrop-blur-md flex items-center">
-                            <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-white">
-                              {cat}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                      <h3 className="text-4xl font-black uppercase leading-none tracking-tighter text-white group-hover:translate-x-1 transition-transform duration-300">
-                        {project.title}
-                      </h3>
-                    </div>
-
-                    <div className="absolute top-10 right-10 z-20 opacity-0 group-hover:opacity-100 duration-300 translate-y-2 group-hover:translate-y-0 transition-all">
-                      <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center text-black shadow-xl">
-                        <ArrowUpRight className="w-7 h-7" />
-                      </div>
-                    </div>
-                  </div>
-                </Link>
+                <WorkCard project={project} />
               </motion.div>
             ))}
           </AnimatePresence>

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowUpRight } from "lucide-react";
+import { X, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 // --- Gallery Data ---
 // To add/remove items: edit this array.
@@ -119,10 +119,29 @@ const GALLERY_ITEMS = [
 function Lightbox({
   item,
   onClose,
+  onPrev,
+  onNext,
+  hasPrev,
+  hasNext,
 }: {
   item: (typeof GALLERY_ITEMS)[0] | null;
   onClose: () => void;
+  onPrev: () => void;
+  onNext: () => void;
+  hasPrev: boolean;
+  hasNext: boolean;
 }) {
+  React.useEffect(() => {
+    if (!item) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft" && hasPrev) onPrev();
+      if (e.key === "ArrowRight" && hasNext) onNext();
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [item, onClose, onPrev, onNext, hasPrev, hasNext]);
+
   if (!item) return null;
   return (
     <AnimatePresence>
@@ -159,6 +178,30 @@ function Lightbox({
               priority
               sizes="(max-width: 768px) 100vw, 1200px"
             />
+
+            {/* Prev arrow */}
+            {hasPrev && (
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); onPrev(); }}
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-black/80 border border-white/10 flex items-center justify-center text-white transition-all duration-200 hover:scale-105"
+                aria-label="Previous image"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+            )}
+
+            {/* Next arrow */}
+            {hasNext && (
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); onNext(); }}
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-black/80 border border-white/10 flex items-center justify-center text-white transition-all duration-200 hover:scale-105"
+                aria-label="Next image"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            )}
           </div>
 
           <div className="mt-5 flex items-center justify-between">
@@ -166,6 +209,9 @@ function Lightbox({
               <p className="text-white font-bold text-lg">{item.label}</p>
               <p className="text-white/40 text-sm font-mono uppercase tracking-widest">{item.tag}</p>
             </div>
+            <p className="text-white/30 text-sm font-mono">
+              {GALLERY_ITEMS.indexOf(item) + 1} / {GALLERY_ITEMS.length}
+            </p>
           </div>
         </motion.div>
       </motion.div>
@@ -231,7 +277,8 @@ function GalleryCard({
 // --- Main Page ---
 
 export default function PlaygroundPage() {
-  const [lightboxItem, setLightboxItem] = useState<(typeof GALLERY_ITEMS)[0] | null>(null);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const lightboxItem = lightboxIndex !== null ? GALLERY_ITEMS[lightboxIndex] : null;
 
   const filtered = GALLERY_ITEMS;
 
@@ -322,14 +369,14 @@ export default function PlaygroundPage() {
         </div>
         <motion.div
           layout
-          className="grid grid-cols-1 md:grid-cols-3 auto-rows-[280px] gap-3"
+          className="grid grid-cols-1 md:grid-cols-3 auto-rows-[280px] gap-3 md:[grid-auto-flow:dense]"
         >
           <AnimatePresence mode="popLayout">
-            {filtered.map((item) => (
+            {filtered.map((item, i) => (
               <GalleryCard
                 key={item.id}
                 item={item}
-                onClick={() => setLightboxItem(item)}
+                onClick={() => setLightboxIndex(i)}
               />
             ))}
           </AnimatePresence>
@@ -345,7 +392,14 @@ export default function PlaygroundPage() {
 
       {/* Lightbox */}
       {lightboxItem && (
-        <Lightbox item={lightboxItem} onClose={() => setLightboxItem(null)} />
+        <Lightbox
+          item={lightboxItem}
+          onClose={() => setLightboxIndex(null)}
+          onPrev={() => setLightboxIndex((i) => (i !== null && i > 0 ? i - 1 : i))}
+          onNext={() => setLightboxIndex((i) => (i !== null && i < GALLERY_ITEMS.length - 1 ? i + 1 : i))}
+          hasPrev={lightboxIndex !== null && lightboxIndex > 0}
+          hasNext={lightboxIndex !== null && lightboxIndex < GALLERY_ITEMS.length - 1}
+        />
       )}
     </div>
   );

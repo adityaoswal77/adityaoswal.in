@@ -17,6 +17,27 @@ interface Entry {
 
 const CHANGELOG: Entry[] = [
   {
+    date: "2026-05-19",
+    hash: "playground-gallery",
+    title: "Playground gallery — dense grid, lightbox navigation & work card spotlight",
+    changes: [
+      { type: "feat", description: "Playground gallery grid now uses CSS grid-auto-flow: dense — backfills gaps left by wide/tall items automatically" },
+      { type: "feat", description: "Lightbox prev/next chevron arrows overlaid inside the image — navigate without closing" },
+      { type: "feat", description: "Keyboard navigation in lightbox: ← → to browse, Escape to close" },
+      { type: "feat", description: "Image counter (e.g. 3 / 11) shown in lightbox caption" },
+      { type: "feat", description: "Work page cards: mouse-tracking radial spotlight follows cursor within each card using that project's accent color — replaces the static gradient opacity transition" },
+      { type: "feat", description: "Work cards now reveal project description on hover (was never shown despite being in the data)" },
+    ],
+  },
+  {
+    date: "2026-05-18",
+    hash: "e489bd1",
+    title: "/r short link for resume",
+    changes: [
+      { type: "feat", description: "adityaoswal.in/r redirects directly to the Google Doc resume — faster to share than the full URL" },
+    ],
+  },
+  {
     date: "2026-05-14",
     hash: "footer-reveal-fix",
     title: "Footer heading reveal — scroll-scrub replaced with entrance animation",
