@@ -54,6 +54,16 @@ public/        # Static assets
 - `/resume` → `/?utm_source=resume&utm_medium=document`
 - `/linkedin`, `/twitter`, `/instagram`, `/github`, `/luma` → homepage with UTM params
 
+## Adi.Os Chatbot
+
+- **Component**: `components/AdiOs.tsx` — slide-in drawer, powered by `useChat` from `@ai-sdk/react`
+- **API route**: `app/api/chat/route.ts` — uses `streamText` + `toTextStreamResponse()` + `TextStreamChatTransport`
+- **Model**: `claude-haiku-4-5-20251001` via `@ai-sdk/anthropic`
+- **Env var**: `ANTHROPIC_API_KEY` — set in Vercel for **Production only** (not Development); local `.env.local` will be empty
+- **Session limit**: 10 user messages per session
+- **Fallback**: if the API errors (no credits, invalid key), the stream catches the error and injects a humorous message with a LinkedIn link instead of silence
+- **Blob logging**: chat questions logged to Vercel Blob (`BLOB_READ_WRITE_TOKEN` required); non-critical, failures are swallowed
+
 ## SEO / Metadata
 
 - Site URL: `https://adityaoswal.in`
