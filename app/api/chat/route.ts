@@ -139,6 +139,9 @@ export async function POST(req: Request) {
     model: anthropic("claude-haiku-4-5-20251001"),
     system: SYSTEM_PROMPT,
     messages: await convertToModelMessages(messages),
+    onError: ({ error }) => {
+      console.error(JSON.stringify({ event: "adios_stream_error", error: String(error) }));
+    },
   });
 
   return result.toTextStreamResponse();
