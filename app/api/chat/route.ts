@@ -135,7 +135,7 @@ export async function POST(req: Request) {
     console.error("blob write failed for", key);
   });
 
-  const FALLBACK = "Oof — Adi.Os has used up all his brain tokens for now. 🪫 Check back soon!";
+  const FALLBACK = "Oof — Adi.Os has used up all his brain tokens for now. 🪫 Reach out to Aditya directly on [LinkedIn](https://linkedin.com/in/oswaladitya) in the meantime!";
 
   const result = streamText({
     model: anthropic("claude-haiku-4-5-20251001"),
