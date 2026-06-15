@@ -135,6 +135,8 @@ export async function POST(req: Request) {
     console.error("blob write failed for", key);
   });
 
+  const FALLBACK = "Oof — Adi.Os has used up all his brain tokens for now. 🪫 Check back soon!";
+
   const result = streamText({
     model: anthropic("claude-haiku-4-5-20251001"),
     system: SYSTEM_PROMPT,
@@ -144,5 +146,21 @@ export async function POST(req: Request) {
     },
   });
 
-  return result.toTextStreamResponse();
+  const stream = new ReadableStream({
+    async start(controller) {
+      const enc = new TextEncoder();
+      try {
+        for await (const chunk of result.textStream) {
+          controller.enqueue(enc.encode(chunk));
+        }
+      } catch {
+        controller.enqueue(enc.encode(FALLBACK));
+      }
+      controller.close();
+    },
+  });
+
+  return new Response(stream, {
+    headers: { "content-type": "text/plain; charset=utf-8" },
+  });
 }
