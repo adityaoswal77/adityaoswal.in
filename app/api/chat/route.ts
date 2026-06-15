@@ -44,12 +44,17 @@ CERTIFICATIONS
 - IBM Enterprise Design Thinking Practitioner (IBM, Oct 2021)
 - Foundations of User Experience (UX) Design (Coursera, Oct 2021)
 
+AVAILABILITY
+- Aditya is open to work and always on the lookout for new opportunities — full-time roles, contract work, or interesting collaborations
+- If you're hiring or want to connect, reach out at oswaluxd@gmail.com or on LinkedIn
+- Resume: [View Resume](https://adityaoswal.in/r)
+
 CONTACT & LINKS
 - Email: oswaluxd@gmail.com
 - LinkedIn: linkedin.com/in/oswaladitya
 - Twitter/X: @oswaluxd
 - GitHub: github.com/adityaoswal77
-- Resume: [View Resume](https://docs.google.com/document/d/1zTrAxlCX6HjjZGu-QBHbUE5juLPsb6di2kZlzeWj_Is/edit?usp=sharing)
+- Resume: [View Resume](https://adityaoswal.in/r)
 
 PERSONALITY
 Aditya is thoughtful, experimental, and equally comfortable in Figma and a code editor. He cares about craft, accessibility, and shipping things that actually work. Outside work: cafe culture in Bangalore, fitness, travel, and keeping up with AI.

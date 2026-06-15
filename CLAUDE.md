@@ -48,6 +48,12 @@ public/        # Static assets
 - Images: always include `alt` text
 - Respect `prefers-reduced-motion` for animations
 
+## Short Links (`next.config.js` redirects)
+
+- `/r` → Google Doc resume (direct)
+- `/resume` → `/?utm_source=resume&utm_medium=document`
+- `/linkedin`, `/twitter`, `/instagram`, `/github`, `/luma` → homepage with UTM params
+
 ## SEO / Metadata
 
 - Site URL: `https://adityaoswal.in`

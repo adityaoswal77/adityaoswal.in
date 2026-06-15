@@ -10,7 +10,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// --- Components ---
 const Hero = () => {
   const containerRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -18,10 +17,8 @@ const Hero = () => {
   const descriptionRef = useRef<HTMLParagraphElement>(null);
 
   useLayoutEffect(() => {
-
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power4.out", duration: 1.2 } });
-
       tl.from(metaRef.current, { y: 30, opacity: 0, duration: 0.8 })
         .from(titleRef.current, { y: 100, skewY: 5, opacity: 0 }, "-=0.6")
         .from(descriptionRef.current, { y: 30, opacity: 0 }, "-=0.8");
@@ -40,7 +37,7 @@ const Hero = () => {
       <div className="max-w-7xl mx-auto w-full relative z-10">
         <Link
           href="/work"
-          className="inline-flex items-center gap-2 mb-16 text-[var(--muted)] hover:text-[var(--foreground)] transition-colors font-mono text-[14px] uppercase tracking-widest"
+          className="inline-flex items-center gap-2 mb-16 text-[var(--muted)] hover:text-[var(--foreground)] transition-colors text-[14px] uppercase tracking-widest"
         >
           <ArrowLeft className="h-4 w-4" />
           <span>Back to Work</span>
@@ -115,9 +112,7 @@ const Section = ({ title, id, children, className = "" }: { title?: string; id?:
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const ctx = gsap.context(() => {
       const elementsToAnimate = [contentRef.current].filter(Boolean);
-      if (titleRef.current) {
-        elementsToAnimate.unshift(titleRef.current);
-      }
+      if (titleRef.current) elementsToAnimate.unshift(titleRef.current);
 
       if (elementsToAnimate.length > 0) {
         gsap.fromTo(
@@ -146,7 +141,7 @@ const Section = ({ title, id, children, className = "" }: { title?: string; id?:
       id={id}
       ref={sectionRef}
       aria-labelledby={title ? `section-${title.toLowerCase().replace(/\s+/g, '-')}` : undefined}
-      className={`px-6 py-16 md:py-32 bg-[var(--background)] border-t border-[var(--border)] transition-colors duration-300 ${className}`}
+      className={`px-6 py-16 md:py-32 bg-[var(--background)] transition-colors duration-300 ${className}`}
     >
       <div className="max-w-6xl mx-auto">
         {title && (
@@ -168,35 +163,32 @@ const Section = ({ title, id, children, className = "" }: { title?: string; id?:
 
 const ImageSection = ({ src, alt, className = "" }: { src: string; alt: string; className?: string }) => {
   return (
-    <figure className={`relative w-full overflow-hidden rounded-[2.5rem] border border-[var(--border)] ${className}`}>
-      <div className="relative aspect-video w-full bg-zinc-900">
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          className="object-cover"
-          priority={false}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-        />
-      </div>
+    <figure className={`relative w-full overflow-hidden rounded-2xl ${className}`}>
+      <Image
+        src={src}
+        alt={alt}
+        width={1200}
+        height={900}
+        className="w-full h-auto"
+        priority={false}
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+      />
       {alt && <figcaption className="sr-only">{alt}</figcaption>}
     </figure>
   );
 };
 
-// --- Stages Sidebar ---
 const STAGES = [
-  { id: 'context',        label: 'Context' },
-  { id: 'current-state',  label: 'Current State' },
-  { id: 'problem',        label: 'Problem' },
-  { id: 'solution-space', label: 'Solution Space' },
-  { id: 'solution',       label: 'Solution' },
-  { id: 'process',        label: 'Process' },
-  { id: 'narrowing',      label: 'Narrowing' },
-  { id: 'ideations',      label: 'Ideations' },
-  { id: 'outcome',        label: 'Outcome' },
-  { id: 'results',        label: 'Results' },
-  { id: 'learnings',      label: 'Learnings' },
+  { id: 'context',       label: 'Context' },
+  { id: 'current-state', label: 'Current State' },
+  { id: 'problem',       label: 'Problem' },
+  { id: 'solution',      label: 'Solution' },
+  { id: 'process',       label: 'Process' },
+  { id: 'narrowing',     label: 'Narrowing' },
+  { id: 'ideations',     label: 'Ideations' },
+  { id: 'outcome',       label: 'Outcome' },
+  { id: 'results',       label: 'Results' },
+  { id: 'learnings',     label: 'Learnings' },
 ];
 
 const StagesSidebar = () => {
@@ -247,7 +239,7 @@ const StagesSidebar = () => {
               className="text-left group"
             >
               <span
-                className={`font-mono text-[14px] uppercase tracking-[0.15em] leading-none motion-safe:transition-all motion-safe:duration-300 ${
+                className={`text-[14px] uppercase tracking-[0.15em] leading-none motion-safe:transition-all motion-safe:duration-300 ${
                   isActive
                     ? 'text-[var(--foreground)] opacity-100'
                     : 'text-[var(--muted)] opacity-40 group-hover:opacity-70'
@@ -263,9 +255,7 @@ const StagesSidebar = () => {
   );
 };
 
-// --- Main Component ---
 export default function GuestEKGRecording() {
-
   return (
     <div className="font-sans antialiased bg-[var(--background)] text-[var(--foreground)] selection:bg-[var(--foreground)] selection:text-[var(--background)] min-h-screen transition-colors duration-300">
       <div className="w-full relative">
@@ -274,279 +264,223 @@ export default function GuestEKGRecording() {
         <div className="relative lg:grid lg:grid-cols-[200px_1fr]">
           <StagesSidebar />
           <div className="min-w-0">
+
             <Section title="Context" id="context">
-          <div className="space-y-12">
-            <p className="text-xl md:text-2xl font-medium leading-relaxed text-[var(--foreground)] opacity-80 max-w-4xl">
-              Kardia is a leading personal electrocardiogram (EKG) device and app that empowers users to monitor their heart health. This project focused on improving the user experience for a specific feature: guest EKG recording.
-            </p>
-            <p className="text-xl md:text-2xl font-medium leading-relaxed text-[var(--foreground)] opacity-80 max-w-4xl">
-              What was the need for Guest Mode? The absence of Guest Mode limited the experience for shared users, making it harder to design for real-world use cases and show inclusive, growth-oriented thinking.
-            </p>
-            <div className="space-y-0">
-              {[
-                { title: 'Missed Opportunity', desc: 'Missed Opportunity to acquire potential users.' },
-                { title: 'Negative Experience', desc: 'Users not able to save recordings for others thereby creating negative shared experiences.' },
-                { title: 'Data Integrity', desc: 'Need for better shared experiences and more polished data for the primary user.' }
-              ].map((item, i) => (
-                <div key={i} className="border-t border-[var(--border)] py-8 flex flex-col md:flex-row md:items-start gap-4 md:gap-12">
-                  <span className="text-[14px] font-bold uppercase tracking-[0.2em] text-[var(--muted)] md:w-48 shrink-0">0{i + 1} — {item.title}</span>
-                  <p className="text-[var(--muted)] font-medium leading-relaxed">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Section>
-
-        <Section title="Current State" id="current-state" className="bg-[var(--foreground)]/5">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-            <div className="space-y-8">
-              <p className="text-xl md:text-2xl font-medium leading-relaxed text-[var(--foreground)] opacity-80">
-                Currently, the user can only save the recording from the Instant analysis screen.
-              </p>
-
-              <h3 className="text-[16px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-4">The Bottleneck</h3>
-              <p className="text-xl text-[var(--muted)] font-medium leading-relaxed">
-                By forcing a &ldquo;Save &amp; Close&rdquo; action at the end of a personal medical analysis, the app failed to account for shared users (guests), forcing them to pollute the primary user&apos;s data or abandon the flow entirely.
-              </p>
-
-            </div>
-            <ImageSection
-              src="/guest-mode-deck/guest-mode-0_page-0005.jpg"
-              alt="Current State - Instant Analysis Screen"
-              className="shadow-2xl"
-            />
-          </div>
-        </Section>
-
-        <Section title="The Problem" id="problem">
-          <div className="space-y-16">
-            <div className="flex flex-col md:flex-row gap-12 items-center">
-              <div className="flex-1 space-y-6">
-                <p className="text-xl md:text-2xl text-[var(--muted)] font-medium leading-relaxed">
-                  Negative Shared Experience. The friction between the guest user and the Kardia system creates a disconnect, highlighting the need for a better shared experience.
+              <div className="space-y-12">
+                <p className="text-xl md:text-2xl font-medium leading-relaxed text-[var(--foreground)] opacity-80 max-w-4xl">
+                  Kardia is a leading personal EKG device and app. This project focused on closing a specific gap: guest EKG recording.
                 </p>
+                <div className="space-y-0">
+                  {[
+                    { title: 'Missed Opportunity', desc: 'Missed opportunity to acquire potential users.' },
+                    { title: 'Negative Experience', desc: 'Users unable to save recordings for others, creating friction in shared use.' },
+                    { title: 'Data Integrity', desc: 'Guest recordings polluted primary user data, reducing insight accuracy.' },
+                  ].map((item, i) => (
+                    <div key={i} className="border-t border-[var(--border)] py-8 flex flex-col md:flex-row md:items-start gap-4 md:gap-12">
+                      <span className="text-[14px] font-bold uppercase tracking-[0.2em] text-[var(--muted)] md:w-48 shrink-0">0{i + 1} — {item.title}</span>
+                      <p className="text-[var(--muted)] font-medium leading-relaxed">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className="flex-1 w-full flex items-center justify-center gap-6 py-12">
-                <span className="font-bold tracking-widest uppercase text-[var(--foreground)] text-lg">Guest</span>
-                <span className="text-[var(--muted)] text-2xl">&#8212;</span>
-                <span className="font-bold tracking-widest uppercase text-[var(--foreground)] text-lg">Kardia</span>
-              </div>
-            </div>
+            </Section>
 
-            <div className="border-t border-[var(--border)] pt-16">
-              <h3 className="text-[14px] font-bold uppercase tracking-[0.2em] mb-12 text-[var(--muted)]">Solving For</h3>
+            <Section title="Current State" id="current-state">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+                <div className="space-y-8">
+                  <p className="text-xl md:text-2xl font-medium leading-relaxed text-[var(--foreground)] opacity-80">
+                    The user could only save a recording from the Instant Analysis screen — with no way to attribute it to a guest.
+                  </p>
+                  <p className="text-xl text-[var(--muted)] font-medium leading-relaxed">
+                    By forcing a &ldquo;Save &amp; Close&rdquo; action at the end of a personal medical analysis, the app failed to account for shared users, forcing them to pollute the primary user&apos;s data or abandon the flow entirely.
+                  </p>
+                </div>
+                <ImageSection
+                  src="/assets/projects/guest-ekg/before-IA.png"
+                  alt="Current State - Instant Analysis Screen"
+                  className="max-w-xs mx-auto" 
+                />
+              </div>
+            </Section>
+
+            <Section title="The Problem" id="problem">
               <div className="space-y-0">
                 {[
                   { title: 'Low Visibility', desc: 'Users were often unaware that guest recording was even an option.' },
-                  { title: 'Inaccurate Data', desc: 'EKGs recorded by guests without proper identification compromised the accuracy and personalization of the app\'s insights for the primary user.' },
-                  { title: 'Missed Opportunities', desc: 'The existing flow did not effectively capture information about guest users, hindering potential future marketing and user acquisition efforts which would add to business revenue.' },
+                  { title: 'Inaccurate Data', desc: 'EKGs recorded by guests without proper identification compromised the accuracy of the app\u2019s insights for the primary user.' },
+                  { title: 'Missed Opportunities', desc: 'The existing flow did not capture guest user information, hindering future user acquisition.' },
                 ].map((item, i) => (
                   <div key={i} className="border-t border-[var(--border)] py-8 flex flex-col md:flex-row md:items-start gap-4 md:gap-12">
-                    <h4 className="text-lg font-bold text-[var(--foreground)] uppercase tracking-[0.05em] md:w-48 shrink-0">{item.title}</h4>
+                    <h3 className="text-[14px] font-bold uppercase tracking-[0.2em] text-[var(--foreground)] md:w-48 shrink-0">{item.title}</h3>
                     <p className="text-[var(--muted)] font-medium leading-relaxed">{item.desc}</p>
                   </div>
                 ))}
               </div>
-            </div>
-          </div>
-        </Section>
+            </Section>
 
-        <Section title="Solution Space" id="solution-space" className="bg-[var(--foreground)]/5">
-          <div className="space-y-16">
-            <div>
-              <h3 className="text-[14px] font-bold uppercase tracking-[0.2em] mb-12 text-[var(--muted)]">Design Principles</h3>
+            <Section title="The Solution" id="solution">
+              <div className="space-y-12">
+                <p className="text-xl md:text-2xl font-medium leading-relaxed text-[var(--foreground)] opacity-80 max-w-4xl">
+                  One seamless guest recording experience, embedded in the existing flow — no separate mode, no disruption.
+                </p>
+                <ImageSection
+                  src="/assets/projects/guest-ekg/before-after.png"
+                  alt="The Solution - Before and after comparison"
+                />
+              </div>
+            </Section>
+
+            <Section title="Process" id="process">
               <div className="space-y-0">
-                {['Clarity and Simplicity', 'Building Trust', 'Minimal Friction', 'Value The User'].map((text, i) => (
-                  <div key={i} className="border-t border-[var(--border)] py-8">
-                    <h4 className="text-lg font-bold text-[var(--foreground)] uppercase tracking-[0.05em]">{text}</h4>
+                {[
+                  { num: '1', title: 'Quantitative Research', desc: 'Understanding the Kardia user base. Guest users are typically spouses, family, and friends.' },
+                  { num: '2', title: 'Explorations', desc: 'Iterating through mobile UI screens, integrating medical-grade accuracy with consumer-friendly aesthetics.' },
+                  { num: '3', title: 'Usability Testing', desc: 'Reiterating on feedback through user flows and brainstorming sessions.' },
+                ].map((item) => (
+                  <div key={item.num} className="border-t border-[var(--border)] py-8 flex flex-col md:flex-row md:items-start gap-4 md:gap-12">
+                    <span className="text-[14px] font-bold uppercase tracking-[0.2em] text-[var(--muted)] md:w-8 shrink-0">{item.num}</span>
+                    <div>
+                      <h3 className="text-[14px] font-bold uppercase tracking-[0.2em] text-[var(--foreground)] mb-2">{item.title}</h3>
+                      <p className="text-[var(--muted)] font-medium leading-relaxed">{item.desc}</p>
+                    </div>
                   </div>
                 ))}
               </div>
-            </div>
-          </div>
-        </Section>
+            </Section>
 
-        <Section title="The Solution" id="solution">
-          <div className="space-y-12">
-
-            <ImageSection src="/guest-mode-deck/guest-mode-0_page-0011.jpg" alt="The Solution - Create one seamless experience" className="shadow-2xl max-w-5xl mx-auto" />
-          </div>
-        </Section>
-
-        <Section title="Process" id="process" className="bg-[var(--foreground)]/5">
-          <div className="space-y-0">
-            {[
-              { num: '1', title: 'Quantitative Research', desc: 'Understanding the Kardia user base and identifying that Guest Users are typically spouses, significant others, family, and friends.' },
-              { num: '2', title: 'Explorations', desc: 'Iterating through various mobile UI screens, integrating medical-grade accuracy with consumer-friendly aesthetics.' },
-              { num: '3', title: 'Usability Testing', desc: 'Reiterating on feedback through user flows, brainstorming sessions, and ideations for the guest recording experience.' },
-            ].map((item) => (
-              <div key={item.num} className="border-t border-[var(--border)] py-8 flex flex-col md:flex-row md:items-start gap-4 md:gap-12">
-                <span className="text-[14px] font-bold uppercase tracking-[0.2em] text-[var(--muted)] md:w-8 shrink-0">{item.num}</span>
-                <div>
-                  <h4 className="text-lg md:text-xl font-bold text-[var(--foreground)] uppercase tracking-[0.05em] mb-2">{item.title}</h4>
-                  <p className="text-[var(--muted)] font-medium leading-relaxed">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        <Section title="Narrowing the playfield" id="narrowing">
-          <div className="space-y-16">
-            <div className="space-y-6 max-w-4xl">
-              <p className="text-xl md:text-2xl font-medium leading-relaxed text-[var(--foreground)] opacity-80">
-                The user can potentially be identified at three different stages. All of these involve user to confirm via User Input based identification or Biometric identification.
-              </p>
-            </div>
-
-            <div className="space-y-0">
-              <div className="border-t border-[var(--border)] py-8 flex flex-col md:flex-row md:items-start gap-4 md:gap-12">
-                <span className="text-[14px] font-bold uppercase tracking-[0.2em] text-rose-400/70 md:w-48 shrink-0">1 — Before Recording</span>
-                <p className="text-[var(--muted)] font-medium leading-relaxed">
-                  From the research, it was clear that asking users who is recording the EKG before the recording even begins has faced resistance historically &amp; does not serve the best user experience.
-                </p>
-              </div>
-
-              <div className="border-t border-[var(--border)] py-8 flex flex-col md:flex-row md:items-start gap-4 md:gap-12">
-                <span className="text-[14px] font-bold uppercase tracking-[0.2em] text-yellow-500/60 md:w-48 shrink-0">2 — During Recording</span>
-                <p className="text-[var(--muted)] font-medium leading-relaxed">
-                  Not the most ideal place to get an interaction in because at this point, users are connecting the Kardia device with the mobile, and hands are engaged with recording EKG.
-                </p>
-              </div>
-
-              <div className="border-t border-[var(--border)] py-8 flex flex-col md:flex-row md:items-start gap-4 md:gap-12">
-                <span className="text-[14px] font-bold uppercase tracking-[0.2em] text-emerald-400/80 md:w-48 shrink-0">3 — Post Recording <span className="font-normal normal-case tracking-normal opacity-60">(selected)</span></span>
-                <p className="text-[var(--foreground)] font-medium leading-relaxed">
-                  Ideal to confirm who has recorded the EKG.
-                </p>
-              </div>
-            </div>
-
-            <ImageSection
-              src="/guest-mode-deck/guest-mode-0_page-0014.jpg"
-              alt="Narrowing the playfield - UI Flows"
-              className="mt-16 shadow-2xl"
-            />
-          </div>
-        </Section>
-
-        <Section title="Ideations & Testing" id="ideations" className="bg-[var(--foreground)]/5">
-          <div className="space-y-24">
-            <div>
-              <h3 className="text-[14px] font-bold uppercase tracking-[0.2em] mb-12 text-[var(--muted)]">UI Ideations</h3>
-              <div className="space-y-0">
-                <div className="border-t border-[var(--border)] py-8 flex flex-col md:flex-row md:items-start gap-4 md:gap-12">
-                  <span className="text-[14px] font-bold uppercase tracking-[0.2em] text-[var(--muted)] md:w-48 shrink-0">Ideation 1</span>
-                  <p className="text-[var(--muted)] font-medium leading-relaxed">Checkbox at the bottom of the result page before saving.</p>
-                </div>
-                <div className="border-t border-[var(--border)] py-8 flex flex-col md:flex-row md:items-start gap-4 md:gap-12">
-                  <span className="text-[14px] font-bold uppercase tracking-[0.2em] text-[var(--muted)] md:w-48 shrink-0">Ideation 2</span>
-                  <p className="text-[var(--muted)] font-medium leading-relaxed">Mid-page context box integrated with the clinical data.</p>
-                </div>
-                <div className="border-t border-[var(--border)] py-8 flex flex-col md:flex-row md:items-start gap-4 md:gap-12">
-                  <span className="text-[14px] font-bold uppercase tracking-[0.2em] text-[var(--foreground)] md:w-48 shrink-0">Ideation 3 <span className="text-[var(--muted)] font-normal normal-case tracking-normal">(winner)</span></span>
-                  <p className="text-[var(--foreground)] font-medium leading-relaxed">Explicit assignment via a clear dropdown selector before the primary action.</p>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-[14px] font-bold uppercase tracking-[0.2em] mb-12 text-[var(--muted)]">Usability Test Outcomes</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <Section title="Narrowing" id="narrowing">
+              <div className="space-y-16">
                 <div className="space-y-0">
-                  <div className="border-t border-[var(--border)] py-6">
-                    <p className="text-[14px] font-bold uppercase tracking-widest text-emerald-400/80 mb-6">Ideation 3 — Winning Flow</p>
-                    <div className="grid grid-cols-2 gap-8">
-                      <div>
-                        <div className="text-4xl md:text-5xl font-black text-emerald-400">96.8%</div>
-                        <div className="text-[12px] text-[var(--muted)] uppercase tracking-widest font-bold mt-2">Success Rate</div>
+                  <div className="border-t border-[var(--border)] py-8 flex flex-col md:flex-row md:items-start gap-4 md:gap-12">
+                    <span className="text-[14px] font-bold uppercase tracking-[0.2em] text-rose-400/70 md:w-48 shrink-0">1 — Before Recording</span>
+                    <p className="text-[var(--muted)] font-medium leading-relaxed">
+                      Asking users who is recording before it begins has faced resistance historically and doesn&apos;t serve the best experience.
+                    </p>
+                  </div>
+                  <div className="border-t border-[var(--border)] py-8 flex flex-col md:flex-row md:items-start gap-4 md:gap-12">
+                    <span className="text-[14px] font-bold uppercase tracking-[0.2em] text-yellow-500/60 md:w-48 shrink-0">2 — During Recording</span>
+                    <p className="text-[var(--muted)] font-medium leading-relaxed">
+                      Not ideal — hands are engaged with the Kardia device during recording.
+                    </p>
+                  </div>
+                  <div className="border-t border-[var(--border)] py-8 flex flex-col md:flex-row md:items-start gap-4 md:gap-12">
+                    <span className="text-[14px] font-bold uppercase tracking-[0.2em] text-emerald-400/80 md:w-48 shrink-0">3 — Post Recording <span className="font-normal normal-case tracking-normal opacity-60">(selected)</span></span>
+                    <p className="text-[var(--foreground)] font-medium leading-relaxed">
+                      Ideal. Confirm who recorded the EKG after the fact.
+                    </p>
+                  </div>
+                </div>
+                <ImageSection
+                  src="/assets/projects/guest-ekg/three-solutions.png"
+                  alt="Narrowing the playfield"
+                  
+                />
+              </div>
+            </Section>
+
+            <Section title="Ideations & Testing" id="ideations">
+              <div className="space-y-24">
+                <div className="space-y-0">
+                  <div className="border-t border-[var(--border)] py-8 flex flex-col md:flex-row md:items-start gap-4 md:gap-12">
+                    <span className="text-[14px] font-bold uppercase tracking-[0.2em] text-[var(--muted)] md:w-48 shrink-0">Ideation 1</span>
+                    <p className="text-[var(--muted)] font-medium leading-relaxed">Checkbox at the bottom of the result page before saving.</p>
+                  </div>
+                  <div className="border-t border-[var(--border)] py-8 flex flex-col md:flex-row md:items-start gap-4 md:gap-12">
+                    <span className="text-[14px] font-bold uppercase tracking-[0.2em] text-[var(--muted)] md:w-48 shrink-0">Ideation 2</span>
+                    <p className="text-[var(--muted)] font-medium leading-relaxed">Mid-page context box integrated with the clinical data.</p>
+                  </div>
+                  <div className="border-t border-[var(--border)] py-8 flex flex-col md:flex-row md:items-start gap-4 md:gap-12">
+                    <span className="text-[14px] font-bold uppercase tracking-[0.2em] text-[var(--foreground)] md:w-48 shrink-0">Ideation 3 <span className="text-[var(--muted)] font-normal normal-case tracking-normal">(winner)</span></span>
+                    <p className="text-[var(--foreground)] font-medium leading-relaxed">Explicit assignment via a dropdown selector before the primary action.</p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                  <div className="space-y-0">
+                    <div className="border-t border-[var(--border)] py-6">
+                      <p className="text-[14px] font-bold uppercase tracking-widest text-emerald-400/80 mb-6">Ideation 3 — Winning Flow</p>
+                      <div className="grid grid-cols-2 gap-8">
+                        <div>
+                          <div className="text-4xl md:text-5xl font-black text-emerald-400">96.8%</div>
+                          <div className="text-[12px] text-[var(--muted)] uppercase tracking-widest font-bold mt-2">Success Rate</div>
+                        </div>
+                        <div>
+                          <div className="text-4xl md:text-5xl font-black text-[var(--foreground)]">3.2%</div>
+                          <div className="text-[12px] text-[var(--muted)] uppercase tracking-widest font-bold mt-2">Drop-off</div>
+                        </div>
                       </div>
-                      <div>
-                        <div className="text-4xl md:text-5xl font-black text-[var(--foreground)]">3.2%</div>
-                        <div className="text-[12px] text-[var(--muted)] uppercase tracking-widest font-bold mt-2">Drop-off</div>
+                    </div>
+                    <div className="border-t border-[var(--border)] py-6">
+                      <p className="text-[14px] font-bold uppercase tracking-widest text-rose-400/70 mb-6">Existing Flow</p>
+                      <div className="grid grid-cols-2 gap-8">
+                        <div>
+                          <div className="text-4xl md:text-5xl font-black text-rose-400/80">36.7%</div>
+                          <div className="text-[12px] text-[var(--muted)] uppercase tracking-widest font-bold mt-2">Success Rate</div>
+                        </div>
+                        <div>
+                          <div className="text-4xl md:text-5xl font-black text-rose-400/80">63.3%</div>
+                          <div className="text-[12px] text-[var(--muted)] uppercase tracking-widest font-bold mt-2">Drop-off</div>
+                        </div>
                       </div>
                     </div>
                   </div>
+                  <ImageSection src="/assets/projects/guest-ekg/guest-1.png" alt="Ideation 3 UI" />
+                </div>
+              </div>
+            </Section>
 
-                  <div className="border-t border-[var(--border)] py-6">
-                    <p className="text-[14px] font-bold uppercase tracking-widest text-rose-400/70 mb-6">Existing Flow</p>
-                    <div className="grid grid-cols-2 gap-8">
-                      <div>
-                        <div className="text-4xl md:text-5xl font-black text-rose-400/80">36.7%</div>
-                        <div className="text-[12px] text-[var(--muted)] uppercase tracking-widest font-bold mt-2">Success Rate</div>
-                      </div>
-                      <div>
-                        <div className="text-4xl md:text-5xl font-black text-rose-400/80">63.3%</div>
-                        <div className="text-[12px] text-[var(--muted)] uppercase tracking-widest font-bold mt-2">Drop-off</div>
-                      </div>
-                    </div>
+            <Section title="Outcome" id="outcome">
+              <div className="space-y-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                  <div className="space-y-6">
+                    <h3 className="text-xl md:text-5xl font-black uppercase tracking-[0.01em] text-[var(--foreground)]">
+                      The Sticky Bottom Selection
+                    </h3>
+                    <p className="text-xl md:text-2xl text-[var(--muted)] font-medium leading-relaxed">
+                      We selected Ideation 3. It reduced friction for existing users while keeping options open for Guest users — an explicit, inline selection before the primary action.
+                    </p>
+                  </div>
+                  <ImageSection src="/assets/projects/guest-ekg/after.png" alt="Selected Outcome - Ideation 3" />
+                </div>
+
+                <div className="pt-16 border-t border-[var(--border)]">
+                  <h3 className="text-[14px] font-bold uppercase tracking-[0.2em] mb-12 text-[var(--muted)] text-center">Before &amp; After</h3>
+                  <ImageSection src="/assets/projects/guest-ekg/before-after.png" alt="Before and After Comparison" className="max-w-5xl mx-auto" />
+                </div>
+              </div>
+            </Section>
+
+            <Section title="Results" id="results">
+              <div className="space-y-12">
+                <p className="text-[14px] font-bold uppercase tracking-[0.2em] text-[var(--muted)]">Guest recording over time (avg. figures, since Q3 2024)</p>
+                <div className="space-y-0">
+                  <div className="border-t border-[var(--border)] py-12 flex flex-col md:flex-row md:items-center gap-4 md:gap-12">
+                    <div className="text-5xl md:text-7xl font-black text-emerald-400">+2.5%</div>
+                    <div className="text-[14px] font-bold uppercase tracking-widest text-[var(--muted)]">iOS Users</div>
+                  </div>
+                  <div className="border-t border-[var(--border)] py-12 flex flex-col md:flex-row md:items-center gap-4 md:gap-12">
+                    <div className="text-5xl md:text-7xl font-black text-emerald-400">+3.8%</div>
+                    <div className="text-[14px] font-bold uppercase tracking-widest text-[var(--muted)]">Android Users</div>
                   </div>
                 </div>
-                <ImageSection src="/guest-mode-deck/guest-mode-0_page-0020.jpg" alt="Ideation 3 UI" className="shadow-2xl" />
               </div>
-            </div>
-          </div>
-        </Section>
+            </Section>
 
-        <Section title="Outcome" id="outcome">
-          <div className="space-y-16">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div className="space-y-6">
-                <h3 className="text-xl md:text-5xl font-sans uppercase tracking-tighter text-[var(--foreground)]">
-                  The Sticky Bottom Selection
-                </h3>
-                <p className="text-xl md:text-2xl text-[var(--muted)] font-medium leading-relaxed">
-                  Based on internal discussions and the future roadmap, we selected Ideation 3. It reduced friction for existing users while keeping options open for Guest users by providing an explicit, inline selection before the primary action.
-                </p>
-              </div>
-              <ImageSection src="/guest-mode-deck/guest-mode-0_page-0021.jpg" alt="Selected Outcome - Ideation 3" className="shadow-2xl" />
-            </div>
-
-            <div className="pt-16 border-t border-[var(--border)]">
-              <h3 className="text-[14px] font-bold uppercase tracking-[0.2em] mb-12 text-[var(--muted)] text-center">Before &amp; After</h3>
-              <div className="grid grid-cols-1">
-                <ImageSection src="/guest-mode-deck/guest-mode-0_page-0022.jpg" alt="Before and After Comparison" className="shadow-xl max-w-5xl mx-auto" />
-              </div>
-            </div>
-          </div>
-        </Section>
-
-        <Section title="Results" id="results" className="bg-[var(--foreground)]/5">
-          <div className="space-y-12">
-            <p className="text-[14px] font-bold uppercase tracking-[0.2em] text-[var(--muted)]">Guest recording over time (avg. figures, since Q3 2024)</p>
-            <div className="space-y-0">
-              <div className="border-t border-[var(--border)] py-12 flex flex-col md:flex-row md:items-center gap-4 md:gap-12">
-                <div className="text-5xl md:text-7xl font-black text-emerald-400">+2.5%</div>
-                <div className="text-[14px] font-bold uppercase tracking-widest text-[var(--muted)]">iOS Users</div>
-              </div>
-              <div className="border-t border-[var(--border)] py-12 flex flex-col md:flex-row md:items-center gap-4 md:gap-12">
-                <div className="text-5xl md:text-7xl font-black text-emerald-400">+3.8%</div>
-                <div className="text-[14px] font-bold uppercase tracking-widest text-[var(--muted)]">Android Users</div>
-              </div>
-            </div>
-          </div>
-        </Section>
-
-        <Section title="Learnings & Challenges" id="learnings">
-          <div className="space-y-12">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              <div className="space-y-0">
-                <div className="border-t border-[var(--border)] py-8">
-                  <h4 className="text-[14px] font-bold uppercase tracking-widest mb-4 text-[var(--foreground)]">Mental Models</h4>
-                  <p className="text-[var(--muted)] font-medium leading-relaxed">User mental models are important to understand as they dictate how users will navigate through a flow.</p>
+            <Section title="Learnings" id="learnings">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div className="space-y-0">
+                  {[
+                    { title: 'Mental Models', desc: 'User mental models dictate how users navigate through a flow.' },
+                    { title: 'Business Alignment', desc: 'Understanding constraints and goals early on shapes the optimal design.' },
+                    { title: 'Reduce Friction', desc: 'Better UI should not come at the cost of worse UX.' },
+                  ].map((item, i) => (
+                    <div key={i} className="border-t border-[var(--border)] py-8">
+                      <h3 className="text-[14px] font-bold uppercase tracking-[0.2em] mb-4 text-[var(--foreground)]">{item.title}</h3>
+                      <p className="text-[var(--muted)] font-medium leading-relaxed">{item.desc}</p>
+                    </div>
+                  ))}
                 </div>
-                <div className="border-t border-[var(--border)] py-8">
-                  <h4 className="text-[14px] font-bold uppercase tracking-widest mb-4 text-[var(--foreground)]">Business Alignment</h4>
-                  <p className="text-[var(--muted)] font-medium leading-relaxed">Understanding the constraints and business goals early on goes a long way in shaping the optimal design.</p>
-                </div>
-                <div className="border-t border-[var(--border)] py-8">
-                  <h4 className="text-[14px] font-bold uppercase tracking-widest mb-4 text-[var(--foreground)]">Reduce Friction</h4>
-                  <p className="text-[var(--muted)] font-medium leading-relaxed">Better UI should not come at the cost of worse UX. Reducing friction is paramount.</p>
-                </div>
-              </div>
-              <div className="space-y-8 h-full">
-                <div className="h-full flex flex-col justify-center">
-                  <h4 className="text-[14px] font-bold uppercase tracking-widest mb-8 text-[var(--muted)]">The Pre-Recording Dilemma</h4>
+                <div className="flex flex-col justify-center">
                   <blockquote className="border-l-2 border-[var(--border)] pl-6">
                     <p className="text-xl md:text-2xl text-[var(--foreground)] font-medium leading-relaxed italic">
                       I believe identifying a guest even before the recording begins needs to be tested more. The intent for a user before recording is vastly different than a user who just wants to view the result post-recording.
@@ -554,25 +488,24 @@ export default function GuestEKGRecording() {
                   </blockquote>
                 </div>
               </div>
-            </div>
-          </div>
-        </Section>
+            </Section>
 
-        <section className="px-6 py-40 bg-[var(--background)] border-t border-[var(--border)]">
-          <div className="max-w-6xl mx-auto">
-            <Link href="/work" className="group block text-center">
-              <p className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-8 block">End of Study</p>
-              <div className="flex flex-col items-center gap-12">
-                <h2 className="text-5xl md:text-9xl font-black uppercase tracking-tighter text-[var(--foreground)] group-hover:italic transition-all duration-500 group-hover:opacity-70">
-                  Return to All
-                </h2>
-                <div className="w-20 h-20 rounded-full bg-[var(--foreground)] flex items-center justify-center text-[var(--background)] group-hover:scale-110 transition-transform duration-500">
-                  <ArrowUpRight className="w-10 h-10" />
-                </div>
+            <section className="px-6 py-40 bg-[var(--background)]">
+              <div className="max-w-6xl mx-auto">
+                <Link href="/work" className="group block text-center">
+                  <p className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-8 block">End of Study</p>
+                  <div className="flex flex-col items-center gap-12">
+                    <h2 className="text-5xl md:text-9xl font-black uppercase tracking-tighter text-[var(--foreground)] group-hover:italic transition-all duration-500 group-hover:opacity-70">
+                      Return to All
+                    </h2>
+                    <div className="w-20 h-20 rounded-full bg-[var(--foreground)] flex items-center justify-center text-[var(--background)] group-hover:scale-110 transition-transform duration-500">
+                      <ArrowUpRight className="w-10 h-10" />
+                    </div>
+                  </div>
+                </Link>
               </div>
-            </Link>
-          </div>
-        </section>
+            </section>
+
           </div>
         </div>
       </div>

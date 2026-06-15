@@ -122,12 +122,12 @@ export function AdiOs({ open, onClose }: AdiOsProps) {
     <AnimatePresence>
       {open && (
         <>
-          {/* Backdrop (mobile only) */}
+          {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[998] bg-black/30 backdrop-blur-sm md:hidden"
+            className="fixed inset-0 z-[998] bg-black/30 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none"
             onClick={onClose}
           />
 

@@ -55,7 +55,7 @@ const Hero = () => {
             </div>
             <div className="h-px w-8 bg-[var(--border)]" />
             <span className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)]">
-              Alivecor / 2023 - 2025
+              Alivecor / 2025 - 2026
             </span>
           </div>
 
@@ -78,15 +78,15 @@ const Hero = () => {
           <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 pt-16 border-t border-[var(--border)]">
             <div>
               <dt className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-3">Role</dt>
-              <dd className="text-xl font-bold text-[var(--foreground)]">Lead Design Engineer</dd>
+              <dd className="text-xl font-bold text-[var(--foreground)]">Lead Designer</dd>
             </div>
             <div>
               <dt className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-3">Timeline</dt>
-              <dd className="text-xl font-bold text-[var(--foreground)]">24 Months</dd>
+              <dd className="text-xl font-bold text-[var(--foreground)]">4 Months</dd>
             </div>
             <div>
               <dt className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-3">Impact</dt>
-              <dd className="text-xl font-bold text-[var(--foreground)]">Global Scalability</dd>
+              <dd className="text-xl font-bold text-[var(--foreground)]">Scalability & Consistency</dd>
             </div>
           </dl>
         </div>
