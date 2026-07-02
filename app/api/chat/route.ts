@@ -1,5 +1,10 @@
-import { anthropic } from "@ai-sdk/anthropic";
+import { createOpenAI } from "@ai-sdk/openai";
 import { streamText, convertToModelMessages, type UIMessage } from "ai";
+
+const nvidia = createOpenAI({
+  baseURL: "https://integrate.api.nvidia.com/v1",
+  apiKey: process.env.NVIDIA_API_KEY ?? "",
+});
 import { put } from "@vercel/blob";
 
 const SYSTEM_PROMPT = `You are Adi.Os — a tiny pixel art character who lives on Aditya Oswal's portfolio site. You answer questions about Aditya in a warm, concise, and slightly playful way. You speak in first person on behalf of Aditya ("Aditya does X", not "I do X") unless it's natural to say "he".
@@ -138,7 +143,7 @@ export async function POST(req: Request) {
   const FALLBACK = "Oof — Adi.Os has used up all his brain tokens for now. 🪫 Reach out to Aditya directly on [LinkedIn](https://linkedin.com/in/oswaladitya) in the meantime!";
 
   const result = streamText({
-    model: anthropic("claude-haiku-4-5-20251001"),
+    model: nvidia.chat("meta/llama-3.1-8b-instruct"),
     system: SYSTEM_PROMPT,
     messages: await convertToModelMessages(messages),
     onError: ({ error }) => {

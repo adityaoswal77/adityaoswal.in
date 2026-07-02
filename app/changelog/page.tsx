@@ -17,6 +17,15 @@ interface Entry {
 
 const CHANGELOG: Entry[] = [
   {
+    date: "2026-07-02",
+    hash: "nvidia-llama",
+    title: "Adi.Os chatbot switched to Llama 3.1 8B via NVIDIA API",
+    changes: [
+      { type: "refactor", description: "Replaced Anthropic claude-haiku with meta/llama-3.1-8b-instruct via NVIDIA's free API — same chatbot experience, no API cost" },
+      { type: "refactor", description: "Swapped @ai-sdk/anthropic for @ai-sdk/openai (v3) pointed at integrate.api.nvidia.com — uses .chat() to target the Chat Completions endpoint" },
+    ],
+  },
+  {
     date: "2026-05-19",
     hash: "playground-gallery",
     title: "Playground gallery — dense grid, lightbox navigation & work card spotlight",
