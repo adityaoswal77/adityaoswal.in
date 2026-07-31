@@ -106,4 +106,4 @@ Per-project pastels are in `lib/data.ts` (`pastel` / `pastelHover` — flat base
 - **Skill** `/deploy`: runs `vercel --prod`
 - **Subagent** `ui-reviewer`: audits components for a11y, dark mode, responsive design
 - **MCP** context7: live docs for Next.js, React, Framer Motion, Three.js, etc.
-- **MCP** Playwright: browser automation and visual testing
+- **MCP** Playwright: browser automation and visual testing — dumps console logs/snapshots/screenshots into `.playwright-mcp/`, which is gitignored; safe to delete anytime
