@@ -4,7 +4,6 @@ import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 
 import { ArrowUpRight, ArrowDown } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 import VariableFontHoverByRandomLetter from "@/fancy/components/text/variable-font-hover-by-random-letter";
 import BreathingText from "@/components/fancy/text/breathing-text";
 import { useTheme } from "next-themes";
@@ -12,6 +11,8 @@ import dynamic from "next/dynamic";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { PROJECTS } from "@/lib/data";
+import { WorkCard } from "@/components/WorkCard";
+import { WarpBackground } from "@/components/ui/warp-background";
 
 gsap.registerPlugin(ScrollTrigger);
 import Collaborations from "@/components/Collaborations";
@@ -57,7 +58,15 @@ const Hero = () => {
       className="relative flex min-h-screen w-full flex-col items-center justify-center px-6 pt-20 overflow-hidden"
     >
       <div className="absolute inset-0 z-0">
-        {!mounted || isLight ? null : (
+        {!mounted ? null : isLight ? (
+          <WarpBackground
+            className="h-full w-full rounded-none border-0 p-0 bg-[var(--background)]"
+            gridColor="var(--border)"
+            perspective={120}
+            beamsPerSide={4}
+            beamDuration={4}
+          />
+        ) : (
           <Dither
             baseColor={[0, 0, 0]}
             waveColor={[0.3, 0.4, 0.5]}
@@ -214,57 +223,14 @@ const BentoGrid = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {PROJECTS.map((project) => {
-            const CardContent = (
-
-              <div className="relative h-full w-full p-8 flex flex-col justify-end overflow-hidden group">
-                {/* Light: flat pastel base + deeper pastel on hover */}
-                <div className="absolute inset-0 z-0 dark:hidden" style={{ backgroundColor: project.pastel }} />
-                <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out dark:hidden" style={{ backgroundColor: project.pastelHover }} />
-
-                {/* Dark: card base */}
-                <div className="absolute inset-0 z-0 hidden dark:block bg-[var(--card)] transition-colors duration-700" />
-
-                {/* Dark: hover gradient */}
-                <div className={`absolute inset-0 z-0 hidden dark:block bg-gradient-to-br ${project.color} to-transparent opacity-[0.2] group-hover:opacity-100 transition-all duration-700 ease-out`} />
-                {/* Dark: secondary glow on hover */}
-                <div className="absolute -inset-[100%] z-20 hidden dark:block bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08),transparent_50%)] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
-
-                {/* Dark: static overlay gradient */}
-                <div className="absolute inset-0 z-10 hidden dark:block bg-gradient-to-t from-black/90 via-black/20 to-transparent transition-opacity duration-700" />
-
-                <div className="relative z-30">
-                  {/* Category chip — sticker tilt in light, glass pill in dark */}
-                  <div className="mb-4 w-fit px-4 py-1.5 rounded-full border border-[#2A2438]/20 bg-white/70 -rotate-2 dark:rotate-0 dark:border-white/20 dark:bg-white/[0.08] backdrop-blur-md flex items-center gap-2 opacity-0 -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out">
-                    <span className="text-[12px] font-mono font-bold uppercase tracking-widest text-[#2A2438] dark:text-white">
-                      {project.category}
-                    </span>
-                  </div>
-                  <h3 className="text-3xl font-black uppercase leading-none tracking-tighter text-[#2A2438] dark:text-white group-hover:translate-x-1 transition-transform duration-300">
-                    {project.title}
-                  </h3>
-                </div>
-
-                <div className="absolute top-8 right-8 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="w-12 h-12 rounded-full bg-[#2A2438] text-[#FDFBF7] shadow-[0_8px_24px_rgba(42,36,56,0.25)] dark:bg-white dark:text-black dark:shadow-[0_0_20px_rgba(255,255,255,0.3)] flex items-center justify-center">
-                    <ArrowUpRight className="w-6 h-6" />
-                  </div>
-                </div>
-              </div>
-            );
-
-            return (
-              <Link
-                key={project.id}
-                href={project.href || "#"}
-                className={`project-card block relative h-[380px] md:h-[500px] overflow-hidden rounded-[1.5rem] dark:rounded-[1rem] border border-[var(--border)] bg-[var(--card)] transition-all duration-500 hover:border-[#2A2438]/30 dark:hover:border-white/30 hover:shadow-[0_24px_60px_rgba(42,36,56,0.18)] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A2438] focus-visible:ring-offset-2 dark:focus-visible:ring-white ${project.span}`}
-              >
-                <div className="h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.02]">
-                  {CardContent}
-                </div>
-              </Link>
-            );
-          })}
+          {PROJECTS.map((project) => (
+            <WorkCard
+              key={project.id}
+              project={project}
+              className={`project-card ${project.span}`}
+              heightClassName="h-[380px] md:h-[500px]"
+            />
+          ))}
         </div>
       </div>
     </section>

@@ -29,24 +29,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/work/year-in-review`,
-      lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/work/kardia-design-system`,
-      lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/work/website-redesign`,
-      lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 0.7,
-    },
-    {
       url: `${baseUrl}/work/neon-fintech`,
       lastModified: new Date(),
       changeFrequency: "yearly",
