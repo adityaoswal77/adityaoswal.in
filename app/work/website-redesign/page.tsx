@@ -182,37 +182,22 @@ const ImageSection = ({ src, alt, className = "" }: { src: string; alt: string; 
 const ProblemStatement = () => {
   return (
     <Section title="The Problem">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
-        <div className="space-y-10">
-          <p className="text-xl md:text-2xl text-[var(--foreground)] opacity-80 leading-relaxed font-medium">
-            A static heritage in a dynamic software market.
-          </p>
-          <ul className="divide-y divide-[var(--border)] text-[var(--muted)] font-medium">
-            {[
-              { label: 'Outdated Identity', desc: 'Design language failed to communicate technical sophistication.' },
-              { label: 'Conversion Gaps', desc: 'Fragmented flows leading to high bounce rates on key product pages.' },
-              { label: 'Stiff Architecture', desc: 'Marketing team unable to pivot content without engineering debt.' }
-            ].map((item, i) => (
-              <li key={i} className="py-6">
-                <span className="text-[var(--foreground)] font-bold uppercase tracking-widest text-[14px] block mb-1">{item.label}</span>
-                <span>{item.desc}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <blockquote className="border-l-2 border-[var(--border)] pl-8">
-            <p className="text-[var(--foreground)] text-xl md:text-2xl font-bold leading-relaxed mb-10 italic">
-              &quot;We needed a digital storefront that reflected our evolution from a utility to a category leader.&quot;
-            </p>
-            <footer className="flex items-center gap-4">
-              <div className="w-10 h-px bg-[var(--border)]" />
-              <span className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)]">
-                Marketing Director
-              </span>
-            </footer>
-          </blockquote>
-        </div>
+      <div className="space-y-10 max-w-4xl">
+        <p className="text-xl md:text-2xl text-[var(--foreground)] opacity-80 leading-relaxed font-medium">
+          A static heritage in a dynamic software market.
+        </p>
+        <ul className="divide-y divide-[var(--border)] text-[var(--muted)] font-medium">
+          {[
+            { label: 'Outdated Identity', desc: 'Design language failed to communicate technical sophistication.' },
+            { label: 'Conversion Gaps', desc: 'Fragmented flows leading to high bounce rates on key product pages.' },
+            { label: 'Stiff Architecture', desc: 'Marketing team unable to pivot content without engineering debt.' }
+          ].map((item, i) => (
+            <li key={i} className="py-6">
+              <span className="text-[var(--foreground)] font-bold uppercase tracking-widest text-[14px] block mb-1">{item.label}</span>
+              <span>{item.desc}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </Section>
   );
@@ -220,7 +205,7 @@ const ProblemStatement = () => {
 
 const Approach = () => {
   return (
-    <Section title="The Strategy" className="bg-[var(--foreground)]/5">
+    <Section title="The Strategy" className="bg-[#2A2438]/5 dark:bg-white/5">
       <div className="space-y-24">
         <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[var(--border)]">
           {[
@@ -315,7 +300,7 @@ const Impact = () => {
   ];
 
   return (
-    <Section title="The Result" className="bg-[var(--foreground)]/5">
+    <Section title="The Result" className="bg-[#2A2438]/5 dark:bg-white/5">
       <div className="space-y-24">
         <p className="text-2xl text-[var(--foreground)] opacity-80 font-medium max-w-4xl leading-relaxed">
           The transformation delivered immediate business value, turning the website into a primary driver for lead generation.

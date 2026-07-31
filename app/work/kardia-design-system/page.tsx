@@ -164,30 +164,20 @@ const Section = ({ title, children, className = "" }: { title?: string; children
 const ProblemStatement = () => {
   return (
     <Section title="The Problem">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
-        <div className="space-y-12">
-          <p className="text-xl md:text-2xl text-[var(--foreground)] opacity-80 leading-relaxed font-medium">
-            Fragmented design systems across mobile platforms were creating friction for developers and a disjointed experience for users.
-          </p>
-          <div className="space-y-0">
-            {[
-              "Inconsistent UI patterns across iOS and Android left teams rebuilding the same components in isolation.",
-              "Slow development velocity due to lack of reusable, documented components shared between squads.",
-              "Accessibility gaps affecting medical compliance and excluding users with visual or motor impairments.",
-            ].map((text, i) => (
-              <p key={i} className="border-t border-[var(--border)] py-5 text-[var(--muted)] font-medium leading-relaxed">
-                {text}
-              </p>
-            ))}
-          </div>
-        </div>
-        <div className="self-start space-y-6">
-          <p className="text-[var(--foreground)] text-xl md:text-2xl font-bold leading-relaxed italic border-l-2 border-[var(--border)] pl-6">
-            &quot;We needed a single source of truth that could scale with our product while maintaining the precision required for medical grade hardware.&quot;
-          </p>
-          <p className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] pl-6">
-            Product Design Lead
-          </p>
+      <div className="space-y-12 max-w-4xl">
+        <p className="text-xl md:text-2xl text-[var(--foreground)] opacity-80 leading-relaxed font-medium">
+          Fragmented design systems across mobile platforms were creating friction for developers and a disjointed experience for users.
+        </p>
+        <div className="space-y-0">
+          {[
+            "Inconsistent UI patterns across iOS and Android left teams rebuilding the same components in isolation.",
+            "Slow development velocity due to lack of reusable, documented components shared between squads.",
+            "Accessibility gaps affecting medical compliance and excluding users with visual or motor impairments.",
+          ].map((text, i) => (
+            <p key={i} className="border-t border-[var(--border)] py-5 text-[var(--muted)] font-medium leading-relaxed">
+              {text}
+            </p>
+          ))}
         </div>
       </div>
     </Section>

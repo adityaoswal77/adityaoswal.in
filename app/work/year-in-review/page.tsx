@@ -175,73 +175,60 @@ const PhoneMockup = ({ src, alt, caption }: { src: string; alt: string; caption?
 
 const Challenge = () => (
   <Section title="The Challenge">
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-24">
-      <div className="space-y-12">
-        <p className="text-xl md:text-2xl text-[var(--foreground)] opacity-80 leading-relaxed font-medium">
-          KardiaCare Premium delivers real clinical value — clinician reviews, telehealth consultations, advanced ECG analysis. But most users never see that value reflected back to them.
-        </p>
-        <ul className="space-y-10">
-          {[
-            { label: 'Invisible Value', desc: "Subscribers couldn't easily see what their membership had delivered across the year — reviews used, money saved, milestones hit." },
-            { label: 'Clinical ≠ Emotional', desc: 'Raw ECG data is medically meaningful but emotionally flat. We needed to make heart health data feel personal and worth sharing.' },
-            { label: 'Retention at Risk', desc: 'Year-end is the highest churn window. A compelling recap would reinforce subscription worth right before renewal.' },
-          ].map((item, i) => (
-            <li key={i} className="space-y-2">
-              <span className="text-[var(--foreground)] font-bold uppercase tracking-widest text-[13px] block">{item.label}</span>
-              <span className="text-[var(--muted)] font-medium leading-relaxed">{item.desc}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="border-l border-[var(--border)] pl-12 flex flex-col justify-center gap-8">
-        <p className="text-[var(--foreground)] text-xl md:text-2xl font-bold leading-relaxed italic">
-          &quot;Year-end reviews are the ultimate opportunity to transition from a product to a partner in our users&apos; health journey.&quot;
-        </p>
-        <span className="text-[13px] uppercase tracking-[0.2em] font-bold text-[var(--muted)]">
-          Growth Design Lead
-        </span>
-      </div>
+    <div className="space-y-8 max-w-4xl">
+      <p className="text-xl md:text-2xl text-[var(--foreground)] opacity-80 leading-relaxed font-medium">
+        KardiaCare Premium delivers real clinical value — clinician reviews, telehealth consultations, advanced ECG analysis. But most users never see that value reflected back to them.
+      </p>
+      <ul className="divide-y divide-[var(--border)]">
+        {[
+          { label: 'Invisible Value', desc: "Subscribers couldn't easily see what their membership had delivered across the year — reviews used, money saved, milestones hit." },
+          { label: 'Clinical ≠ Emotional', desc: 'Raw ECG data is medically meaningful but emotionally flat. We needed to make heart health data feel personal and worth sharing.' },
+          { label: 'Retention at Risk', desc: 'Year-end is the highest churn window. A compelling recap would reinforce subscription worth right before renewal.' },
+        ].map((item, i) => (
+          <li key={i} className="py-5 first:pt-0 last:pb-0 text-lg text-[var(--muted)] font-medium leading-relaxed">
+            <strong className="text-[var(--foreground)] font-bold">{item.label}.</strong> {item.desc}
+          </li>
+        ))}
+      </ul>
     </div>
   </Section>
 );
 
 const Strategy = () => (
   <Section title="The Strategy">
-    <div className="space-y-24">
-      <p className="text-xl md:text-2xl text-[var(--foreground)] opacity-80 font-medium max-w-4xl leading-relaxed">
+    <div className="space-y-12 max-w-4xl">
+      <p className="text-xl md:text-2xl text-[var(--foreground)] opacity-80 font-medium leading-relaxed">
         A cinematic, scroll-driven experience inside the app. Dark navy with a star-field backdrop — celestial, premium, personal. Each section builds towards a shareable moment.
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[var(--border)]">
+      <ul className="divide-y divide-[var(--border)]">
         {[
-          { step: '01', title: 'Excavate', desc: 'Surface meaningful moments buried in clinical telemetry — total ECGs, recording habits, device usage, clinician reviews ordered.' },
-          { step: '02', title: 'Narrate', desc: 'Arrange the data into a rhythm that builds emotional momentum. From stats to value to gratitude to future action.' },
-          { step: '03', title: 'Amplify', desc: 'Design shareable data cards that turn personal milestones into organic social content — a built-in growth loop.' },
+          { title: 'Excavate', desc: 'Surface meaningful moments buried in clinical telemetry — total ECGs, recording habits, device usage, clinician reviews ordered.' },
+          { title: 'Narrate', desc: 'Arrange the data into a rhythm that builds emotional momentum. From stats to value to gratitude to future action.' },
+          { title: 'Amplify', desc: 'Design shareable data cards that turn personal milestones into organic social content — a built-in growth loop.' },
         ].map((item, i) => (
-          <div key={i} className="py-10 md:py-0 md:px-12 first:md:pl-0 last:md:pr-0 space-y-6">
-            <span className="text-[13px] font-bold text-[var(--muted)] uppercase tracking-widest">{item.step}</span>
-            <h3 className="text-2xl font-bold uppercase tracking-tight text-[var(--foreground)]">{item.title}</h3>
-            <p className="text-[var(--muted)] font-medium leading-relaxed">{item.desc}</p>
-          </div>
+          <li key={i} className="py-5 first:pt-0 last:pb-0 text-lg text-[var(--muted)] font-medium leading-relaxed">
+            <strong className="text-[var(--foreground)] font-bold">{item.title}.</strong> {item.desc}
+          </li>
         ))}
-      </div>
+      </ul>
 
-      <div className="pt-20 border-t border-[var(--border)]">
-        <h3 className="text-[13px] uppercase tracking-[0.3em] font-bold text-[var(--muted)] mb-14">Design Principles</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-10">
-          {[
-            { title: 'Celebratory', desc: 'Every data point feels like a victory, not a clinical record.' },
-            { title: 'Personal', desc: 'Hyper-specific stats that feel one-to-one, not templated.' },
-            { title: 'Premium', desc: 'Visual polish that makes the $10/month feel obviously worth it.' },
-            { title: 'Shareable', desc: 'Built-in social share flow — every card is export-ready.' },
-          ].map((p, i) => (
-            <div key={i} className="space-y-3">
-              <h4 className="text-[14px] font-black uppercase tracking-widest text-[var(--foreground)]">{p.title}</h4>
-              <p className="text-[var(--muted)] text-[14px] font-medium leading-relaxed">{p.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+      <p className="text-lg text-[var(--foreground)] opacity-80 font-medium leading-relaxed">
+        The experience was held to four design principles:
+      </p>
+
+      <ul className="divide-y divide-[var(--border)]">
+        {[
+          { title: 'Celebratory', desc: 'Every data point feels like a victory, not a clinical record.' },
+          { title: 'Personal', desc: 'Hyper-specific stats that feel one-to-one, not templated.' },
+          { title: 'Premium', desc: 'Visual polish that makes the $10/month feel obviously worth it.' },
+          { title: 'Shareable', desc: 'Built-in social share flow — every card is export-ready.' },
+        ].map((item, i) => (
+          <li key={i} className="py-5 first:pt-0 last:pb-0 text-lg text-[var(--muted)] font-medium leading-relaxed">
+            <strong className="text-[var(--foreground)] font-bold">{item.title}.</strong> {item.desc}
+          </li>
+        ))}
+      </ul>
     </div>
   </Section>
 );

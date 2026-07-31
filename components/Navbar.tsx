@@ -175,8 +175,8 @@ export default function Navbar() {
                               as={Link}
                               href={item.href}
                               className={`block w-full px-4 py-3 text-sm font-bold uppercase tracking-widest rounded-xl transition-all duration-300 ${pathname === item.href
-                                ? "text-[var(--foreground)] bg-[var(--foreground)]/5"
-                                : "text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--foreground)]/5"
+                                ? "text-[var(--foreground)] bg-[#2A2438]/5 dark:bg-white/5"
+                                : "text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[#2A2438]/5 dark:hover:bg-white/5"
                                 }`}
                             >
                               {item.name}

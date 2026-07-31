@@ -143,7 +143,7 @@ export function AdiOs({ open, onClose }: AdiOsProps) {
             {/* Resize handle — desktop only */}
             <div
               onPointerDown={handleResizePointerDown}
-              className="hidden md:block absolute left-0 top-0 bottom-0 w-1 cursor-col-resize hover:bg-[var(--foreground)]/10 transition-colors"
+              className="hidden md:block absolute left-0 top-0 bottom-0 w-1 cursor-col-resize hover:bg-[#2A2438]/10 dark:hover:bg-white/10 transition-colors"
             />
             {/* Header */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-[var(--border)] flex-shrink-0">
@@ -157,7 +157,7 @@ export function AdiOs({ open, onClose }: AdiOsProps) {
               <button
                 type="button"
                 onClick={onClose}
-                className="w-8 h-8 flex items-center justify-center rounded-full border border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--foreground)]/30 transition-colors"
+                className="w-8 h-8 flex items-center justify-center rounded-full border border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[#2A2438]/30 dark:hover:border-white/30 transition-colors"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -183,7 +183,7 @@ export function AdiOs({ open, onClose }: AdiOsProps) {
                       key={s}
                       type="button"
                       onClick={() => handleSuggestion(s)}
-                      className="text-left text-[12px] font-medium text-[var(--muted)] hover:text-[var(--foreground)] border border-[var(--border)] hover:border-[var(--foreground)]/20 rounded-xl px-3 py-2 transition-colors duration-150"
+                      className="text-left text-[12px] font-medium text-[var(--muted)] hover:text-[var(--foreground)] border border-[var(--border)] hover:border-[#2A2438]/20 dark:hover:border-white/20 rounded-xl px-3 py-2 transition-colors duration-150"
                     >
                       {s}
                     </button>
@@ -266,7 +266,7 @@ export function AdiOs({ open, onClose }: AdiOsProps) {
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Ask about Aditya..."
                   maxLength={500}
-                  className="flex-1 bg-[var(--card)] border border-[var(--border)] rounded-xl px-3.5 py-2.5 text-[13px] text-[var(--foreground)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-1 focus:ring-[var(--foreground)]/20 transition-all"
+                  className="flex-1 bg-[var(--card)] border border-[var(--border)] rounded-xl px-3.5 py-2.5 text-[13px] text-[var(--foreground)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-1 focus:ring-[#2A2438]/20 dark:focus:ring-white/20 transition-all"
                 />
                 <span className="text-[10px] font-mono text-[var(--muted)] opacity-50 flex-shrink-0">
                   {userMessageCount}/{MESSAGE_LIMIT}

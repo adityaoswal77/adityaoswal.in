@@ -17,6 +17,19 @@ interface Entry {
 
 const CHANGELOG: Entry[] = [
   {
+    date: "2026-08-01",
+    hash: "hero-simplify-quote-cleanup",
+    title: "Simplified homepage hero, redesigned Collaborations, removed fabricated case-study quotes",
+    changes: [
+      { type: "refactor", description: "Homepage hero (light mode) simplified — removed the animated PastelField gradient backdrop, atmospheric glow, and marker-highlight underline; CTA/heading accent/badge dot switched from tangerine to a one-off blue (#2554EB) per feedback that the original had too much going on" },
+      { type: "fix", description: "Hero intro GSAP timeline referenced a descriptionRef pointing at an element removed from the JSX in an earlier pass — the dangling null target stalled the whole entrance animation; ref removed" },
+      { type: "feat", description: "Collaborations (\"companies I've worked with\") section redesigned as a slow-scrolling marquee of equally-spaced rectangle logo cards on the section's off-white/black background, instead of bare logos" },
+      { type: "content", description: "Removed fabricated attributed pull-quotes (\"— Product Lead\", \"— Marketing Director\", etc.) from Year in Review, Kardia Design System, Website Redesign, and Neon Fintech case studies — nobody said these; quotes should never be invented" },
+      { type: "refactor", description: "Year in Review's Strategy and Challenge sections rewritten from 3/4-card grids into a single paragraph followed by a plain bullet list; bullets switched from dot+margin spacing (uneven when items wrapped) to a divide-y border rhythm for consistent spacing regardless of line count" },
+      { type: "feat", description: "Work page card mockups now support video files (.mov/.mp4/.webm) via an autoplaying muted <video>, same blur/sharpen hover reveal as image mockups — Interesting Places card now shows its demo video instead of the skeleton placeholder" },
+    ],
+  },
+  {
     date: "2026-07-02",
     hash: "nvidia-llama",
     title: "Adi.Os chatbot switched to Llama 3.1 8B via NVIDIA API",

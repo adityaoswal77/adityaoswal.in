@@ -206,7 +206,7 @@ export default function CareerOdysseyPage() {
   return (
     <div
       ref={containerRef}
-      className="relative h-[1500vh] bg-[var(--background)] text-[var(--foreground)] selection:bg-indigo-500 selection:text-white font-sans overflow-x-clip transition-colors duration-300"
+      className="relative h-[1500vh] bg-[var(--background)] text-[var(--foreground)] selection:bg-[#FF5C39] selection:text-[#2A2438] dark:selection:bg-indigo-500 dark:selection:text-white font-sans overflow-x-clip transition-colors duration-300"
     >
       <style jsx global>{`
         .w-max {
@@ -241,7 +241,7 @@ export default function CareerOdysseyPage() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mb-4 px-4 py-1.5 w-fit rounded-full border border-[var(--border)] bg-[var(--foreground)]/5 backdrop-blur-sm flex items-center gap-2"
+                className="mb-4 px-4 py-1.5 w-fit rounded-full border border-[var(--border)] bg-[#2A2438]/5 dark:bg-white/5 backdrop-blur-sm flex items-center gap-2"
               >
                 <div className="w-1.5 h-1.5 rounded-full bg-violet-500" />
                 <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-[var(--muted)]">

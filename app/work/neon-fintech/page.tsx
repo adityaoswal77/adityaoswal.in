@@ -173,38 +173,28 @@ const ImageSection = ({ src, alt, className = "" }: { src: string; alt: string; 
 const ProblemStatement = () => {
   return (
     <Section title="The Problem" className="bg-[#FFFFFF]">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div className="space-y-6">
-          <p className="text-lg leading-relaxed text-[#1A1A1A]/80">
-            Traditional banking apps feel outdated and disconnected from the digital-native generation. Users wanted a financial platform that matched their aesthetic sensibilities while providing powerful tools for managing money.
-          </p>
-          <ul className="space-y-4 text-lg text-[#1A1A1A]/80" role="list">
-            <li className="flex items-baseline gap-3" role="listitem">
-              <span className="font-bold text-lg md:text-xl leading-none flex-shrink-0" style={{ color: 'var(--primary)' }} aria-hidden="true">•</span>
-              <span>Outdated UI patterns that don&apos;t resonate with younger users</span>
-            </li>
-            <li className="flex items-baseline gap-3" role="listitem">
-              <span className="font-bold text-lg md:text-xl leading-none flex-shrink-0" style={{ color: 'var(--primary)' }} aria-hidden="true">•</span>
-              <span>Complex navigation making basic tasks feel cumbersome</span>
-            </li>
-            <li className="flex items-baseline gap-3" role="listitem">
-              <span className="font-bold text-lg md:text-xl leading-none flex-shrink-0" style={{ color: 'var(--primary)' }} aria-hidden="true">•</span>
-              <span>Lack of visual feedback and engaging interactions</span>
-            </li>
-            <li className="flex items-baseline gap-3" role="listitem">
-              <span className="font-bold text-lg md:text-xl leading-none flex-shrink-0" style={{ color: 'var(--primary)' }} aria-hidden="true">•</span>
-              <span>No sense of identity or brand personality in the experience</span>
-            </li>
-          </ul>
-        </div>
-        <div className="bg-[#F9F8F6] p-8 rounded-none border border-black/10">
-          <p className="text-[#1A1A1A] text-lg leading-relaxed mb-4">
-            &quot;We needed to create a banking experience that felt as modern and exciting as the apps users love, while maintaining the trust and security required for financial services.&quot;
-          </p>
-          <p className="text-[#1A1A1A]/60 font-mono text-[14px] uppercase tracking-widest">
-            — Product Lead
-          </p>
-        </div>
+      <div className="space-y-6 max-w-4xl">
+        <p className="text-lg leading-relaxed text-[#1A1A1A]/80">
+          Traditional banking apps feel outdated and disconnected from the digital-native generation. Users wanted a financial platform that matched their aesthetic sensibilities while providing powerful tools for managing money.
+        </p>
+        <ul className="space-y-4 text-lg text-[#1A1A1A]/80" role="list">
+          <li className="flex items-baseline gap-3" role="listitem">
+            <span className="font-bold text-lg md:text-xl leading-none flex-shrink-0" style={{ color: 'var(--primary)' }} aria-hidden="true">•</span>
+            <span>Outdated UI patterns that don&apos;t resonate with younger users</span>
+          </li>
+          <li className="flex items-baseline gap-3" role="listitem">
+            <span className="font-bold text-lg md:text-xl leading-none flex-shrink-0" style={{ color: 'var(--primary)' }} aria-hidden="true">•</span>
+            <span>Complex navigation making basic tasks feel cumbersome</span>
+          </li>
+          <li className="flex items-baseline gap-3" role="listitem">
+            <span className="font-bold text-lg md:text-xl leading-none flex-shrink-0" style={{ color: 'var(--primary)' }} aria-hidden="true">•</span>
+            <span>Lack of visual feedback and engaging interactions</span>
+          </li>
+          <li className="flex items-baseline gap-3" role="listitem">
+            <span className="font-bold text-lg md:text-xl leading-none flex-shrink-0" style={{ color: 'var(--primary)' }} aria-hidden="true">•</span>
+            <span>No sense of identity or brand personality in the experience</span>
+          </li>
+        </ul>
       </div>
     </Section>
   );

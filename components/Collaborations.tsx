@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 
 const COMPANIES = [
@@ -15,6 +15,7 @@ const COMPANIES = [
 ];
 
 const Collaborations = () => {
+    const reducedMotion = useReducedMotion();
     // Duplicate the list multiple times to ensure a seamless loop even on larger screens
     const duplicatedCompanies = [...COMPANIES, ...COMPANIES, ...COMPANIES, ...COMPANIES];
 
@@ -28,15 +29,13 @@ const Collaborations = () => {
 
             <div className="relative flex overflow-hidden group">
                 <motion.div
-                    className="flex whitespace-nowrap gap-12 md:gap-24 items-center"
-                    animate={{
-                        x: ["0%", "-50%"],
-                    }}
+                    className="flex items-stretch gap-16 md:gap-12"
+                    animate={reducedMotion ? undefined : { x: ["0%", "-50%"] }}
                     transition={{
                         x: {
                             repeat: Infinity,
                             repeatType: "loop",
-                            duration: 60,
+                            duration: 100,
                             ease: "linear",
                         },
                     }}
@@ -44,14 +43,14 @@ const Collaborations = () => {
                     {duplicatedCompanies.map((company, index) => (
                         <div
                             key={index}
-                            className="flex-shrink-0 flex items-center mt-8 justify-center mx-16 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
+                            className="flex-shrink-0 w-40 h-24 md:w-52 md:h-28 flex items-center justify-center rounded-xl border border-[var(--border)] dark:border-white/10 bg-[#E9E2F2]/40 dark:bg-white/[0.04] grayscale opacity-60 hover:grayscale-0 hover:opacity-100 hover:border-[#2A2438]/30 dark:hover:border-white/30 transition-all duration-500"
                         >
                             <Image
                                 src={company.src}
                                 alt={`${company.name} logo`}
-                                width={240}
+                                width={280}
                                 height={60}
-                                className="h-8 md:h-12 w-auto object-contain invert dark:invert-0"
+                                className="h-7 md:h-9 w-auto max-w-[70%] object-contain invert dark:invert-0"
                             />
                         </div>
                     ))}

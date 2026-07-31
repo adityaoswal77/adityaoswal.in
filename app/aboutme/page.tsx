@@ -70,7 +70,7 @@ const Hero = () => {
             </h1>
 
 
-            <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 pt-12 border-t border-[var(--border)]">
+            <dl className="grid grid-cols-1 sm:grid-cols-2 gap-12 pt-12 border-t border-[var(--border)]">
               <div ref={descriptionRef}>
                 <dt className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-3">Current Role</dt>
                 <dd className="text-xl font-bold text-[var(--foreground)]">Designer @ AliveCor</dd>
@@ -78,10 +78,6 @@ const Hero = () => {
               <div>
                 <dt className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-3">Location</dt>
                 <dd className="text-xl font-bold text-[var(--foreground)]">Bangalore, IN</dd>
-              </div>
-              <div>
-                <dt className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-3">Philosophy</dt>
-                <dd className="text-xl font-bold text-[var(--foreground)]">Experimentation</dd>
               </div>
             </dl>
           </div>
@@ -179,32 +175,13 @@ const Section = ({ title, children, className = "", rightHeader }: { title?: str
 const AboutOverview = () => {
   return (
     <Section title="">
-      <div className="grid lg:grid-cols-[1.5fr,1fr] gap-20">
-        <div className="space-y-8">
-          <p className="text-2xl md:text-3xl font-medium leading-[1.3] text-[var(--foreground)] opacity-80">
-            My background in engineering and design has shaped my approach to problem-solving. I believe in creating solutions that are both functional and beautiful.
-          </p>
-          <p className="text-lg text-[var(--muted)] leading-relaxed font-medium">
-            If not working, you will find me exploring the cafe culture in Bangalore, planning my next workout split, the next trip or geeking out over the latest AI developments.
-          </p>
-        </div>
-
-        <div className="space-y-12 pt-2">
-          <div>
-            <p className="text-[13px] uppercase tracking-[0.15em] font-bold text-[var(--muted)] mb-3">What I Do</p>
-            <p className="text-lg text-[var(--foreground)]/70 font-medium leading-relaxed">
-              Specialize in Product Design & Design Systems. I enjoy solving problems that require both analytical and visual thinking.
-            </p>
-          </div>
-
-          <div>
-            <p className="text-[13px] uppercase tracking-[0.15em] font-bold text-[var(--muted)] mb-3">Quote to live by</p>
-            <p className="text-lg text-[var(--foreground)]/70 font-medium leading-relaxed italic">
-              &ldquo;Thinking about design is hard, but not thinking about it can be disastrous.&rdquo;
-            </p>
-          </div>
-        </div>
-
+      <div className="max-w-3xl space-y-8">
+        <p className="text-2xl md:text-3xl font-medium leading-[1.3] text-[var(--foreground)] opacity-80">
+          My background in engineering and design shapes how I solve problems. I specialize in product design and design systems — work that needs both analytical and visual thinking — and I believe solutions should be functional and beautiful.
+        </p>
+        <p className="text-lg text-[var(--muted)] leading-relaxed font-medium">
+          If not working, you will find me exploring the cafe culture in Bangalore, planning my next workout split, the next trip or geeking out over the latest AI developments.
+        </p>
       </div>
     </Section>
   );
@@ -237,7 +214,7 @@ const SideProjects = () => {
           <Link
             key={project.href}
             href={project.href}
-            className="group flex items-start justify-between gap-6 p-8 rounded-lg border border-[var(--border)] bg-[var(--card)] hover:border-[var(--foreground)]/20 transition-all duration-300"
+            className="group flex items-start justify-between gap-6 p-8 rounded-lg border border-[var(--border)] bg-[var(--card)] hover:border-[#2A2438]/20 dark:hover:border-white/20 transition-all duration-300"
           >
             <div className="space-y-3">
               <div className="flex items-center gap-2">
@@ -356,7 +333,7 @@ const InteractiveSkills = () => {
     <button
       type="button"
       onClick={() => setIsPhysics((p) => !p)}
-      className="flex items-center gap-3 px-4 py-2 rounded-full border border-[var(--border)] bg-[var(--card)] hover:border-[var(--foreground)]/20 transition-colors duration-200"
+      className="flex items-center gap-3 px-4 py-2 rounded-full border border-[var(--border)] bg-[var(--card)] hover:border-[#2A2438]/20 dark:hover:border-white/20 transition-colors duration-200"
     >
       <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-[var(--muted)]">
         {isPhysics ? "Simple" : "Physics"}
@@ -411,7 +388,7 @@ const InteractiveSkills = () => {
           {skills.map((skill, i) => (
             <span
               key={i}
-              className="px-4 py-2 rounded-full border border-[var(--border)] bg-[var(--card)] text-[12px] font-bold uppercase tracking-widest text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--foreground)]/20 transition-colors duration-200"
+              className="px-4 py-2 rounded-full border border-[var(--border)] bg-[var(--card)] text-[12px] font-bold uppercase tracking-widest text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[#2A2438]/20 dark:hover:border-white/20 transition-colors duration-200"
             >
               {skill}
             </span>
@@ -461,7 +438,7 @@ const Toolstack = () => {
 export default function AboutPage() {
 
   return (
-    <div className="font-sans antialiased bg-[var(--background)] text-[var(--foreground)] selection:bg-indigo-500 selection:text-white min-h-screen transition-colors duration-300">
+    <div className="font-sans antialiased bg-[var(--background)] text-[var(--foreground)] selection:bg-[#FF5C39] selection:text-[#2A2438] dark:selection:bg-indigo-500 dark:selection:text-white min-h-screen transition-colors duration-300">
       <div className="w-full relative">
         <Hero />
         <AboutOverview />

@@ -337,7 +337,7 @@ export default function PlaygroundPage() {
             <Link
               key={project.href}
               href={project.href}
-              className="group flex items-start justify-between gap-6 p-8 rounded-lg border border-[var(--border)] bg-[var(--card)] hover:border-[var(--foreground)]/20 transition-all duration-300"
+              className="group flex items-start justify-between gap-6 p-8 rounded-lg border border-[var(--border)] bg-[var(--card)] hover:border-[#2A2438]/20 dark:hover:border-white/20 transition-all duration-300"
             >
               <div className="space-y-3">
                 <div className="flex items-center gap-2">

@@ -167,7 +167,7 @@ export default function LinksPage() {
               onClick={() => setActiveCategory("All")}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-sm font-semibold transition-all duration-200 ${activeCategory === "All"
                 ? "bg-[var(--foreground)] text-[var(--background)] border-[var(--foreground)]"
-                : "bg-[var(--card)] text-[var(--muted)] border-[var(--border)] hover:text-[var(--foreground)] hover:border-[var(--foreground)]/30"
+                : "bg-[var(--card)] text-[var(--muted)] border-[var(--border)] hover:text-[var(--foreground)] hover:border-[#2A2438]/30 dark:hover:border-white/30"
                 }`}
             >
               All
@@ -277,30 +277,30 @@ function BookmarkCard({
       href={bookmark.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="bookmark-card group relative flex flex-col justify-between gap-4 p-5 rounded-2xl border border-[var(--border)] bg-[var(--card)] hover:border-[var(--foreground)]/20 hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-300 overflow-hidden"
+      className="bookmark-card group relative flex flex-col justify-between gap-4 p-5 rounded-2xl border border-[var(--border)] bg-[var(--card)] hover:border-[#2A2438]/20 dark:hover:border-white/20 hover:shadow-[0_12px_32px_rgba(42,36,56,0.12)] dark:hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-300 overflow-hidden"
     >
-      {/* Background Layers */}
-      <div className="absolute inset-0 bg-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      {/* Background Layers — dark-mode hover takeover only */}
+      <div className="absolute inset-0 hidden dark:block bg-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-[var(--primary)]/5 to-transparent pointer-events-none" />
 
       <div className="relative z-10 flex flex-col justify-between gap-4 h-full">
         {/* Top: title + arrow */}
         <div className="flex items-start justify-between gap-3">
           <div>
-            <p className="font-semibold text-[var(--foreground)] text-[15px] leading-snug group-hover:text-white transition-colors">
+            <p className="font-semibold text-[var(--foreground)] text-[15px] leading-snug dark:group-hover:text-white transition-colors">
               {bookmark.title}
             </p>
-            <p className="text-xs text-[var(--muted)] mt-0.5 font-mono opacity-60 group-hover:text-zinc-500 transition-colors">
+            <p className="text-xs text-[var(--muted)] mt-0.5 font-mono opacity-60 dark:group-hover:text-zinc-500 transition-colors">
               {domain}
             </p>
           </div>
-          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--foreground)]/5 border border-[var(--border)] flex items-center justify-center group-hover:bg-white group-hover:border-white transition-all duration-300">
-            <ArrowUpRight className="w-3.5 h-3.5 text-[var(--muted)] group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
+          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#2A2438]/5 dark:bg-white/5 border border-[var(--border)] flex items-center justify-center group-hover:bg-[#2A2438] group-hover:border-[#2A2438] dark:group-hover:bg-white dark:group-hover:border-white transition-all duration-300">
+            <ArrowUpRight className="w-3.5 h-3.5 text-[var(--muted)] group-hover:text-[#FDFBF7] dark:group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
           </div>
         </div>
 
         {/* Description */}
-        <p className="text-sm text-[var(--muted)] leading-relaxed line-clamp-2 group-hover:text-zinc-400 transition-colors">
+        <p className="text-sm text-[var(--muted)] leading-relaxed line-clamp-2 dark:group-hover:text-zinc-400 transition-colors">
           {bookmark.description}
         </p>
 
@@ -310,7 +310,7 @@ function BookmarkCard({
             {bookmark.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-2 py-0.5 rounded-md bg-[var(--foreground)]/5 border border-[var(--border)] text-xs text-[var(--muted)] font-medium group-hover:border-white/10 group-hover:bg-white/5 group-hover:text-zinc-300 transition-colors"
+                className="px-2 py-0.5 rounded-md bg-[#2A2438]/5 dark:bg-white/5 border border-[var(--border)] text-xs text-[var(--muted)] font-medium dark:group-hover:border-white/10 dark:group-hover:bg-white/5 dark:group-hover:text-zinc-300 transition-colors"
               >
                 {tag}
               </span>
@@ -363,7 +363,7 @@ function CommunityCard({ community }: { community: Community }) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Visit ${community.title}`}
-            className="flex-shrink-0 w-9 h-9 rounded-full bg-[var(--foreground)]/5 border border-[var(--border)] flex items-center justify-center hover:bg-lime-500 hover:border-lime-500 transition-all duration-300 group/btn"
+            className="flex-shrink-0 w-9 h-9 rounded-full bg-[#2A2438]/5 dark:bg-white/5 border border-[var(--border)] flex items-center justify-center hover:bg-lime-500 hover:border-lime-500 transition-all duration-300 group/btn"
           >
             <ExternalLink className="w-3.5 h-3.5 text-[var(--muted)] group-hover/btn:text-white transition-colors" />
           </a>
@@ -380,7 +380,7 @@ function CommunityCard({ community }: { community: Community }) {
             {community.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-2 py-0.5 rounded-md bg-[var(--foreground)]/5 border border-[var(--border)] text-xs text-[var(--muted)] font-medium transition-colors"
+                className="px-2 py-0.5 rounded-md bg-[#2A2438]/5 dark:bg-white/5 border border-[var(--border)] text-xs text-[var(--muted)] font-medium transition-colors"
               >
                 {tag}
               </span>
