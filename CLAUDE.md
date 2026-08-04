@@ -21,7 +21,9 @@ vercel --prod    # deploy to production
 - Images: always include `alt` text
 - Respect `prefers-reduced-motion` for animations
 - **Never fabricate quotes/testimonials** — no invented pull-quotes attributed to a role or person ("— Product Lead") on case-study pages. Use only quotes the user explicitly supplies.
-- Case-study body copy defaults to a paragraph followed by a plain bullet list (bold inline label + sentence, `divide-y` border rhythm — see `app/work/year-in-review/page.tsx`), not card/grid layouts, unless asked for something richer.
+- **Never write unconfirmed numeric stats** into case-study copy (percentages, dollar figures, counts) — even if a source deck/reference contains them. Structural spec facts (hex codes, px values, a timeline the user stated in chat) are fine; business-impact/narrative numbers need explicit user confirmation first. Default to qualitative language otherwise.
+- **Case-study section titles are literal**, naming what the section covers ("Context", "The Problem", "Typography", "Impact") — not punchy marketing/deck-style sentence headlines, even when ported from a source deck.
+- Case-study body copy defaults to a paragraph followed by a plain bullet list (bold inline label + sentence, `divide-y` border rhythm — see `app/work/year-in-review/page.tsx` and the `List`/`Quote` helpers in `app/work/kardia-design-system/page.tsx`), not card/grid layouts, unless asked for something richer.
 
 ## Theme System — Two Personas
 
@@ -77,8 +79,9 @@ Per-project pastels are in `lib/data.ts` (`pastel` / `pastelHover` — flat base
 - ✅ Site-wide token sweep: all broken `var()/opacity` classes fixed, selection colors theme-paired, links-page dark hover takeover scoped to `dark:` (Navbar, AdiOs, `/aboutme`, `/playground`, `/links`, `/career-odyssey`, `/work/website-redesign`)
 - ✅ Homepage Hero simplified (see Homepage Hero exception above) and `Collaborations` company logos redesigned as an equally-spaced rectangle-card marquee (`components/Collaborations.tsx`)
 - ✅ Fabricated pull-quotes removed from all case studies (`year-in-review`, `kardia-design-system`, `website-redesign`, `neon-fintech`); `year-in-review`'s Strategy/Challenge sections simplified from card grids to paragraph + `divide-y` bullet lists
+- ✅ `kardia-design-system` fully built out (was a `Hero` + "coming soon" placeholder) — 10 sections ported from the user's Figma deck (`Deck`, fileKey `IQ7NX7hXzlVKWSHyzceL72`, node `729:3610`), rewritten in the site's plain paragraph+bullet convention with literal section titles and no unconfirmed stats; `Image` mockups at `/assets/img1.jpg` / `/assets/img2.jpg` are temporary placeholders pending real exports
 - ⏳ Optional deeper playful treatments (beyond tokens) for inner pages if desired
-- ⏳ Same card-grid → paragraph+bullets simplification not yet applied beyond the quote sections on `guest-user`, `kardia-design-system`, `neon-fintech`, `website-redesign` (their Approach/Impact/Features sections still use grids)
+- ⏳ Same card-grid → paragraph+bullets simplification not yet applied beyond the quote sections on `guest-user`, `neon-fintech`, `website-redesign` (their Approach/Impact/Features sections still use grids)
 
 ## Short Links (`next.config.js` redirects)
 
