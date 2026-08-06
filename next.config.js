@@ -13,7 +13,7 @@ const nextConfig = {
     const directRedirects = [
       {
         source: "/r",
-        destination: "https://docs.google.com/document/d/1zTrAxlCX6HjjZGu-QBHbUE5juLPsb6di2kZlzeWj_Is/edit?usp=sharing",
+        destination: "https://docs.google.com/document/d/1f5oV6IebgAPDjHWuhbLtVdXS0Z0eDX5Wmr3N8WIbHQU/edit?usp=sharing",
         permanent: false,
       },
     ];

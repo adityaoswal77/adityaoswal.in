@@ -17,7 +17,7 @@ const NAV_COLS = [
     { label: "Links", href: "/links", external: false },
   ],
   [
-    { label: "Resume", href: "https://docs.google.com/document/d/1zTrAxlCX6HjjZGu-QBHbUE5juLPsb6di2kZlzeWj_Is/edit?usp=sharing", external: true },
+    { label: "Resume", href: "https://docs.google.com/document/d/1f5oV6IebgAPDjHWuhbLtVdXS0Z0eDX5Wmr3N8WIbHQU/edit?usp=sharing", external: true },
     { label: "LinkedIn", href: "https://linkedin.com/in/oswaladitya", external: true },
     { label: "GitHub", href: "https://github.com/adityaoswal77", external: true },
     { label: "Twitter", href: "https://x.com/oswaluxd", external: true },

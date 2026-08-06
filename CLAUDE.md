@@ -82,6 +82,7 @@ Per-project pastels are in `lib/data.ts` (`pastel` / `pastelHover` — flat base
 - ✅ `kardia-design-system` fully built out (was a `Hero` + "coming soon" placeholder) — 10 sections ported from the user's Figma deck (`Deck`, fileKey `IQ7NX7hXzlVKWSHyzceL72`, node `729:3610`), rewritten in the site's plain paragraph+bullet convention with literal section titles and no unconfirmed stats; `Image` mockups at `/assets/img1.jpg` / `/assets/img2.jpg` are temporary placeholders pending real exports
 - ⏳ Optional deeper playful treatments (beyond tokens) for inner pages if desired
 - ⏳ Same card-grid → paragraph+bullets simplification not yet applied beyond the quote sections on `guest-user`, `neon-fintech`, `website-redesign` (their Approach/Impact/Features sections still use grids)
+- ✅ Resume link refreshed to the current Google Doc (updated in `next.config.js`'s `/r` redirect, `components/Navbar.tsx`, `components/Footer.tsx`) and the Adi.Os chatbot's knowledge base (`app/api/chat/route.ts`) synced to the updated resume content, with its tone loosened to be more casual/chill
 
 ## Short Links (`next.config.js` redirects)
 
