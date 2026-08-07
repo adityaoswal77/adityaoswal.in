@@ -102,7 +102,7 @@ export function WorkCard({
             {project.mockup && isVideoMockup ? (
               <video
                 src={project.mockup}
-                className={`h-full w-full ${isPhoneMockup ? "object-cover object-top" : "object-contain object-top"}`}
+                className={`h-full w-full ${isPhoneMockup ? "object-cover object-top" : "object-contain object-right-top"}`}
                 autoPlay
                 loop
                 muted
@@ -114,7 +114,7 @@ export function WorkCard({
                 alt={`${project.title} interface preview`}
                 fill
                 sizes="(max-width: 768px) 80vw, 440px"
-                className={hasMockupBg || isPhoneMockup ? "object-cover object-top" : "object-contain object-top"}
+                className={hasMockupBg || isPhoneMockup ? "object-cover object-top" : "object-contain object-right-top"}
               />
             ) : (
               <SkeletonScreen accent={project.accent} tint={project.pastel} />
