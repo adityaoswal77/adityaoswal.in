@@ -3,7 +3,7 @@
 import React, { useRef, useLayoutEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Gravity, { MatterBody } from "@/components/fancy/physics/gravity";
-import { ArrowLeft, ArrowUpRight, Palette, TestTube2, Cpu, PenTool, Wind, Code2, Zap, Triangle } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, Palette, TestTube2, Cpu, PenTool, Wind, Code2, Zap, Triangle, Users } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Collaborations from '@/components/Collaborations';
@@ -73,7 +73,7 @@ const Hero = () => {
             <dl className="grid grid-cols-1 sm:grid-cols-2 gap-12 pt-12 border-t border-[var(--border)]">
               <div ref={descriptionRef}>
                 <dt className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-3">Current Role</dt>
-                <dd className="text-xl font-bold text-[var(--foreground)]">Designer @ AliveCor</dd>
+                <dd className="text-xl font-bold text-[var(--foreground)]">Product Designer @ AliveCor</dd>
               </div>
               <div>
                 <dt className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-3">Location</dt>
@@ -246,13 +246,13 @@ const WorkExperience = () => {
       role: "Product Designer",
       company: "AliveCor Inc.",
       period: "Mar '25 – Present",
-      description: "Leading end-to-end design for KardiaStation Mobile and owning the design system across mobile apps. Redesigned EKG report templates resulting in $100K+ in annual savings. Conceived and shipped Kardia Year in Review, driving a 21% click-through rate."
+      description: "Own end-to-end design for KardiaStation Mobile (12-lead EKG recording, used by providers across the US, Canada, Europe, and India) and mobile product design for KardiaRx, a clinical research platform with CVS, Walgreens, and Pfizer. Built and scaled the cross-platform Kardia Mobile Design System across iOS and Android, driving adoption across four product teams. Designed AI-powered internal tools adopted across Product, Design, Marketing, QA, Clinical, and Business teams. Redesigned EKG report templates, cutting printing and mailing costs by $200K+ annually. Conceived and shipped Kardia Year in Review, driving a 21% click-through rate."
     },
     {
       role: "Associate Product Designer",
       company: "AliveCor Inc.",
       period: "Nov '23 – Mar '25",
-      description: "Led design of KardiaRX (clinical study platform) and KardiaComplete (B2B2C wellness platform) used by Pfizer, CVS, and Walgreens. Shaped onboarding, adherence tracking, and care coordination experiences."
+      description: "Designed end-to-end member experiences for KardiaComplete (B2B2C cardiovascular platform with CVS and Walgreens), covering onboarding, adherence tracking, and care coordination. Collaborated with product and engineering to define requirements and interaction patterns for KardiaRx's mobile experience. Ran user research and usability testing with a focus on accessibility and regulatory compliance."
     },
     {
       role: "UX Faculty",
@@ -318,14 +318,14 @@ const WorkExperience = () => {
 const InteractiveSkills = () => {
   const [isPhysics, setIsPhysics] = useState(false);
   const skills = [
-    "Product Design", "UX Design", "Design Systems", "Interaction Design",
-    "User Research", "Usability Testing", "Heuristic Evaluation",
+    "Product Design", "Product Strategy", "UX Design", "Design Systems", "Interaction Design",
+    "User Research", "Usability Testing", "Heuristic Evaluation", "Data Analysis",
     "Rapid Prototyping", "Accessibility (WCAG)", "Information Architecture",
     "Design Tokens", "Component Architecture", "Motion Design",
     "0-to-1 Product Design", "AI-Assisted Design", "Prompt Engineering",
     "Data-Informed Design", "Cross-functional Collaboration",
     "Stakeholder Management", "Agile / Scrum",
-    "React", "Next.js", "TypeScript", "Tailwind CSS", "Webflow",
+    "React", "Next.js", "TypeScript", "Tailwind CSS", "Webflow", "Git", "Supabase", "Vercel",
     "Figma", "Framer", "Origami Studio",
   ];
 
@@ -409,6 +409,7 @@ const Toolstack = () => {
     { name: "VS Code", icon: Code2 },
     { name: "Framer", icon: Zap },
     { name: "Origami Studio", icon: Triangle },
+    { name: "UserInterviews", icon: Users },
   ];
 
   return (

@@ -35,6 +35,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${baseUrl}/work/kardia-design-system`,
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.7,
+    },
+    {
       url: `${baseUrl}/links`,
       lastModified: new Date(),
       changeFrequency: "weekly",

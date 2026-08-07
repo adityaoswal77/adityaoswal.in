@@ -57,6 +57,7 @@ export function WorkCard({
   const isVideoMockup = /\.(mov|mp4|webm)$/i.test(project.mockup);
   const hasMockupBg = !('mockupBg' in project) || project.mockupBg !== false;
   const mockupRadius = 'mockupRadius' in project && project.mockupRadius ? project.mockupRadius : "rounded-t-[1.75rem]";
+  const isPhoneMockup = 'mockupFit' in project && project.mockupFit === 'phone';
 
   return (
     <Link
@@ -81,13 +82,18 @@ export function WorkCard({
       <div className="absolute inset-0 hidden dark:block bg-[var(--card)]" />
       <div className={`absolute inset-0 hidden dark:block bg-gradient-to-br ${project.color} to-transparent opacity-10 group-hover:opacity-20 transition-opacity duration-700`} />
 
-      {/* Mockup screen — slides up with a spring pop and sharpens on hover */}
+      {/* Mockup screen — slides up with a spring pop and sharpens on hover.
+          Phone mockups get their own top offset per breakpoint (not one %, since the
+          card itself is a different height on mobile vs desktop — h-[400px] md:h-[550px] —
+          and the reserved text-block height above the fold doesn't scale with it). */}
       <div className={`absolute z-10 origin-bottom-right transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] motion-reduce:transition-none ${hasMockupBg
         ? "inset-x-10 md:inset-x-14 top-[60%] bottom-0 group-hover:-translate-y-12 group-hover:scale-[1.04]"
-        : "inset-x-6 md:inset-x-10 top-[62%] -bottom-[25rem] group-hover:-translate-y-16 group-hover:scale-[1.03]"
+        : isPhoneMockup
+          ? "inset-x-10 top-[58%] md:top-[46%] -bottom-24 md:-bottom-32 group-hover:-translate-y-8 group-hover:scale-[1.03]"
+          : "inset-x-6 md:inset-x-10 top-[62%] -bottom-[25rem] group-hover:-translate-y-16 group-hover:scale-[1.03]"
         }`}>
         <div
-          className={`relative ml-auto h-full w-full ${hasMockupBg ? "max-w-[440px]" : "max-w-[520px]"} overflow-hidden ${mockupRadius} ${hasMockupBg
+          className={`relative ml-auto h-full w-full ${hasMockupBg ? "max-w-[440px]" : isPhoneMockup ? "max-w-none" : "max-w-[520px]"} overflow-hidden ${mockupRadius} ${hasMockupBg
             ? "border border-[#2A2438]/10 dark:border-white/10 bg-white dark:bg-zinc-900 shadow-[0_-16px_48px_rgba(42,36,56,0.16)] dark:shadow-[0_-16px_48px_rgba(0,0,0,0.6)]"
             : ""
             }`}
@@ -96,7 +102,7 @@ export function WorkCard({
             {project.mockup && isVideoMockup ? (
               <video
                 src={project.mockup}
-                className={`h-full w-full ${hasMockupBg ? "object-cover object-top" : "object-contain object-top"}`}
+                className={`h-full w-full ${isPhoneMockup ? "object-cover object-top" : "object-contain object-top"}`}
                 autoPlay
                 loop
                 muted
@@ -108,7 +114,7 @@ export function WorkCard({
                 alt={`${project.title} interface preview`}
                 fill
                 sizes="(max-width: 768px) 80vw, 440px"
-                className={hasMockupBg ? "object-cover object-top" : "object-contain object-top"}
+                className={hasMockupBg || isPhoneMockup ? "object-cover object-top" : "object-contain object-top"}
               />
             ) : (
               <SkeletonScreen accent={project.accent} tint={project.pastel} />

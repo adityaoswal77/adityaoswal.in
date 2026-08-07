@@ -17,6 +17,50 @@ interface Entry {
 
 const CHANGELOG: Entry[] = [
   {
+    date: "2026-08-07",
+    hash: "design-system-case-study-live",
+    title: "Design System case study made discoverable — was built but never linked anywhere",
+    changes: [
+      { type: "fix", description: "Found the case study missing from `lib/data.ts` PROJECTS and `app/sitemap.ts` — it had a real page and metadata but no card on /work and no sitemap entry, so it was unreachable by browsing and invisible to search crawlers. Added both." },
+      { type: "content", description: "Dropped \"Kardia\" from the case study title — hero now reads \"Design / System\" (was \"Kardia / Design System\"), browser tab title is \"Design System — Alivecor\" (was \"Kardia Design System — Alivecor\"), background watermark word updated to match" },
+      { type: "feat", description: "Added a /work card for it — Design System category, teal accent, frameless landscape mockup of the button spec sheet bleeding off the card fold" },
+    ],
+  },
+  {
+    date: "2026-08-07",
+    hash: "aboutme-resume-sync",
+    title: "About page work history and skills synced against the current resume",
+    changes: [
+      { type: "content", description: "Re-mapped Experience role ownership to match the resume: KardiaStation Mobile and KardiaRx mobile ownership moved to the current Product Designer role; Associate role scoped to KardiaComplete plus KardiaRx collaboration, not ownership" },
+      { type: "content", description: "Corrected the EKG report redesign savings figure from an unconfirmed \"$100K+\" to the resume-confirmed \"$200K+\" annually, and added the Kardia Mobile Design System and AI-tooling bullets with resume-confirmed adoption scope" },
+      { type: "content", description: "Added resume-listed skills/tools missing from the page: Product Strategy, Data Analysis, Git, Supabase, Vercel, UserInterviews" },
+      { type: "fix", description: "Hero role label corrected from \"Designer\" to \"Product Designer\" to match the resume title" },
+    ],
+  },
+  {
+    date: "2026-08-07",
+    hash: "kardia-ds-real-exports",
+    title: "Kardia Design System case study: last placeholder swapped for a real export",
+    changes: [
+      { type: "content", description: "Replaced the Problem section's placeholder account-deletion exhibit (`/assets/img1.jpg`) with a real export — a KardiaCard Tutorial popup screenshot showing 8 variants of the same component side by side in the file" },
+      { type: "content", description: "Rewrote the exhibit copy to match what the new image actually shows: two competing step-navigation patterns, a literal unfilled `TEXT` button label on 4 of 8 variants, and inconsistent close/illustration treatment — dropped the prior account-deletion-specific facts (`Action_Button/OLDandCrusty` layer, hardcoded hex) that no longer applied to this exhibit" },
+      { type: "content", description: "Synced `CLAUDE.md` and `kardia-design-system-deck.md` — the case study now has zero placeholder images, all exhibits pull from `/assets/kardia-ds/`" },
+    ],
+  },
+  {
+    date: "2026-08-04",
+    hash: "kardia-ds-case-study",
+    title: "Kardia Design System case study built out from a Hero + \"coming soon\" placeholder",
+    changes: [
+      { type: "feat", description: "Ported the full Kardia Design System case study from the user's Figma deck — Context, Problem, System, Color Foundations, Typography, Buttons, Tokens in Code, Process, Impact, and Learnings, 10 sections total" },
+      { type: "refactor", description: "Rewrote the page's layout from bordered/tinted card grids to the site's existing paragraph + plain bullet convention (single-column, `divide-y` rhythm) — matches `guest-user`, not a slide-deck look" },
+      { type: "content", description: "Rewrote section titles as literal labels (\"Context\", \"The Problem\", \"Typography\"...) instead of the source deck's marketing-style sentence headlines" },
+      { type: "content", description: "Stripped unconfirmed numeric stats ported from the deck (workflow/typeface counts, ROI percentages, dollar figures) — kept only structural spec facts (token hex values, px sizes) and the timeline confirmed in chat" },
+      { type: "fix", description: "Hero credit corrected to Lead Designer / 4 Weeks with a design-contractor mention, replacing the deck's placeholder \"Aditi\" attribution and the page's stale \"4 Months\" framing" },
+      { type: "content", description: "Delete-account-modal and pre-DS button mockups are temporary `next/image` placeholders (`/assets/img1.jpg`, `/assets/img2.jpg`) pending the real exports" },
+    ],
+  },
+  {
     date: "2026-08-01",
     hash: "hero-simplify-quote-cleanup",
     title: "Simplified homepage hero, redesigned Collaborations, removed fabricated case-study quotes",
