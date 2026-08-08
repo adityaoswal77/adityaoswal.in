@@ -80,6 +80,19 @@ const Hero = () => {
             mouseRadius={0.4}
           />
         )}
+        {/* Light: soften the grid's hard frame edge — blur ring, then fade to page background */}
+        {isLight && (
+          <>
+            <div className="absolute inset-0 pointer-events-none backdrop-blur-md [mask-image:radial-gradient(ellipse_65%_65%_at_center,transparent_35%,black_100%)] [-webkit-mask-image:radial-gradient(ellipse_65%_65%_at_center,transparent_35%,black_100%)]" />
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  "radial-gradient(ellipse 65% 65% at center, transparent 40%, var(--background) 100%)",
+              }}
+            />
+          </>
+        )}
       </div>
       <div className="atmospheric-glow z-[1] hidden dark:block" />
 

@@ -30,6 +30,19 @@ const SPEED = 1.2;
 const NAV_HEIGHT = 80;
 const CHAR_W = 32;
 const CHAR_H = 48;
+const FAB_SIZE = 56;
+const FAB_MARGIN = 24;
+
+function getDockPosition() {
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const fabX = vw - FAB_MARGIN - FAB_SIZE;
+  const fabY = vh - FAB_MARGIN - FAB_SIZE;
+  return {
+    x: fabX + (FAB_SIZE - CHAR_W) / 2,
+    y: fabY - CHAR_H + 12,
+  };
+}
 
 function PixelChar({ facingRight, isWalking }: { facingRight: boolean; isWalking: boolean }) {
   return (
@@ -64,14 +77,14 @@ function PixelChar({ facingRight, isWalking }: { facingRight: boolean; isWalking
   );
 }
 
-// Mobile FAB — fixed bottom-right, tap to open chat
-function MobileFAB({ onClick }: { onClick: () => void }) {
+// Chat FAB — fixed bottom-right on every breakpoint; the desktop character docks on top of it
+function ChatFab({ onClick }: { onClick: () => void }) {
   return (
     <button
       type="button"
       onClick={onClick}
       aria-label="Chat with Adi.Os"
-      className="md:hidden fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-[var(--foreground)] text-[var(--background)] shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-150"
+      className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-[var(--foreground)] text-[var(--background)] shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-150"
     >
       <svg width="28" height="28" viewBox="0 0 8 12" style={{ imageRendering: "pixelated" }}>
         <rect x="2" y="0" width="4" height="4" fill="currentColor" />
@@ -128,8 +141,13 @@ export function WanderingCharacter() {
     const margin = 60;
     const vw = window.innerWidth;
     const vh = window.innerHeight;
-    const x = margin + Math.random() * (vw - margin * 2 - CHAR_W);
-    const y = NAV_HEIGHT + margin + Math.random() * (vh - NAV_HEIGHT - margin * 2 - CHAR_H);
+    // Keep the character in the bottom-right zone, near where the chat FAB lives.
+    const xMin = vw * 0.5;
+    const xMax = vw - margin - CHAR_W;
+    const yMin = Math.max(NAV_HEIGHT + margin, vh * 0.6);
+    const yMax = vh - margin - CHAR_H;
+    const x = xMin + Math.random() * Math.max(0, xMax - xMin);
+    const y = yMin + Math.random() * Math.max(0, yMax - yMin);
     targetRef.current = { x, y };
     stateRef.current = "walking";
     setIsWalking(true);
@@ -159,9 +177,7 @@ export function WanderingCharacter() {
       setShowRandomExclamation(false);
       if (randomScheduleRef.current) clearTimeout(randomScheduleRef.current);
       if (randomHideRef.current) clearTimeout(randomHideRef.current);
-      const vw = window.innerWidth;
-      const vh = window.innerHeight;
-      posRef.current = { x: vw / 2 - CHAR_W / 2, y: vh - CHAR_H - 16 };
+      posRef.current = getDockPosition();
       if (charRef.current) {
         charRef.current.style.left = `${posRef.current.x}px`;
         charRef.current.style.top = `${posRef.current.y}px`;
@@ -191,7 +207,7 @@ export function WanderingCharacter() {
 
     const vw = window.innerWidth;
     const vh = window.innerHeight;
-    posRef.current = { x: vw / 2, y: vh / 2 };
+    posRef.current = { x: vw * 0.7, y: vh * 0.75 };
     if (charRef.current) {
       charRef.current.style.left = `${posRef.current.x}px`;
       charRef.current.style.top = `${posRef.current.y}px`;
@@ -202,9 +218,7 @@ export function WanderingCharacter() {
 
     const handleResize = () => {
       if (pinnedRef.current && charRef.current) {
-        const vw = window.innerWidth;
-        const vh = window.innerHeight;
-        posRef.current = { x: vw / 2 - CHAR_W / 2, y: vh - CHAR_H - 16 };
+        posRef.current = getDockPosition();
         charRef.current.style.left = `${posRef.current.x}px`;
         charRef.current.style.top = `${posRef.current.y}px`;
       }
@@ -271,7 +285,12 @@ export function WanderingCharacter() {
     if (stateRef.current === "chatting") return;
     setIsHovered(false);
     resumeTimerRef.current = setTimeout(() => {
-      if (stateRef.current === "hovering") pickNewTarget();
+      if (stateRef.current !== "hovering") return;
+      if (pinnedRef.current) {
+        stateRef.current = "idle";
+      } else {
+        pickNewTarget();
+      }
     }, 800);
   };
 
@@ -283,8 +302,8 @@ export function WanderingCharacter() {
       <button
         type="button"
         onClick={togglePinned}
-        aria-label={pinned ? "Let character wander" : "Dock character to bottom"}
-        title={pinned ? "Let wander" : "Dock to bottom"}
+        aria-label={pinned ? "Let character wander" : "Dock character in the chat FAB"}
+        title={pinned ? "Let wander" : "Dock in chat FAB"}
         className={`hidden md:flex fixed top-5 right-5 z-50 h-8 items-center justify-center gap-1.5 rounded-md border border-[var(--border)] px-2.5 transition-colors duration-150 ${
           pinned
             ? "bg-[var(--foreground)] text-[var(--background)]"
@@ -316,7 +335,10 @@ export function WanderingCharacter() {
         </AnimatePresence>
       </button>
 
-      {/* Desktop wandering character */}
+      {/* Chat FAB — always mounted; desktop character docks on top of it when pinned */}
+      {!chatOpen && <ChatFab onClick={openChat} />}
+
+      {/* Desktop wandering character — painted after the FAB so it visibly sits in/on it when docked */}
       <div aria-hidden="true" className="hidden md:block fixed inset-0 pointer-events-none z-40">
         <div
           ref={charRef}
@@ -334,14 +356,14 @@ export function WanderingCharacter() {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.75, y: 6 }}
                 transition={{ duration: 0.15, ease: "easeOut" }}
-                className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 whitespace-nowrap"
+                className="absolute bottom-full right-0 mb-2 whitespace-nowrap"
               >
                 <div className="relative px-3 py-1.5 rounded-full bg-[var(--card)] border border-[var(--border)] backdrop-blur-sm shadow-lg">
                   <span className="text-[11px] font-mono text-[var(--foreground)]">
                     {(isHovered || showRandomExclamation) ? exclamation : "you can pause me by clicking on the top right"}
                   </span>
                   <div
-                    className="absolute top-full left-1/2 -translate-x-1/2"
+                    className="absolute top-full right-3"
                     style={{
                       width: 0, height: 0,
                       borderLeft: "5px solid transparent",
@@ -359,9 +381,6 @@ export function WanderingCharacter() {
           </div>
         </div>
       </div>
-
-      {/* Mobile FAB */}
-      {!chatOpen && <MobileFAB onClick={openChat} />}
 
       {/* Adi.Os chat drawer */}
       <AdiOs open={chatOpen} onClose={closeChat} />

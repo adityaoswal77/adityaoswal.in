@@ -43,9 +43,9 @@ export const PROJECTS = [
         pastelHover: "#8FC4FF",
         href: "/work/kardia-design-system",
         image: "/assets/kardia-ds/kardia-ds-card.png",
-        mockup: "/assets/kardia-ds/kardia-ds-card.png",
-        mockupRadius: "rounded-t-[0.5rem]",
+        mockup: "/assets/kardia-ds/Mockup-DS-crop.png",
         mockupBg: false,
+        mockupFit: "phone",
     },
     {
         id: 6,

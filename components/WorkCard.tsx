@@ -65,22 +65,36 @@ export function WorkCard({
       {...('external' in project && project.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       className={`group block relative ${heightClassName} overflow-hidden rounded-[1.5rem] dark:rounded-[1rem] border border-[var(--border)] bg-[var(--card)] transition-all duration-500 hover:border-[#2A2438]/30 dark:hover:border-white/30 hover:shadow-[0_24px_60px_rgba(42,36,56,0.18)] dark:hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A2438] focus-visible:ring-offset-2 dark:focus-visible:ring-white ${className}`}
     >
-      {/* Light: subtle per-project gradient that drifts on hover + accent-tinted inset border */}
+      {/* Light: vibrant per-project gradient, always adrift + surges faster on hover, accent-tinted inset border.
+          Rounded on itself (matching the card radius) so the hover scale-transform self-clips instead of
+          bleeding past the parent's overflow-hidden corner — a Chromium transform+clip rendering quirk. */}
       <div
-        className="absolute inset-0 dark:hidden [background-size:200%_200%] [background-position:0%_50%] group-hover:[background-position:100%_50%] transition-[background-position] duration-[1400ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
+        className="absolute inset-0 dark:hidden rounded-[1.5rem] dark:rounded-[1rem] [background-size:220%_220%] animate-[background-gradient_9s_ease-in-out_infinite] group-hover:[animation-duration:2.2s] group-hover:scale-[1.015] transition-transform duration-700 ease-out motion-reduce:animate-none motion-reduce:transition-none"
         style={{
-          backgroundImage: `linear-gradient(120deg, color-mix(in srgb, ${project.pastel} 42%, #FDFBF7) 0%, ${project.pastelHover} 50%, color-mix(in srgb, ${project.pastel} 42%, #FDFBF7) 100%)`,
-          boxShadow: `inset 0 0 0 1px ${project.accent}1f`,
+          backgroundImage: `linear-gradient(120deg, ${project.pastelHover} 0%, color-mix(in srgb, ${project.pastel} 65%, #FDFBF7) 50%, ${project.pastelHover} 100%)`,
+          boxShadow: `inset 0 0 0 1px ${project.accent}33`,
         }}
       />
       <div
-        className="absolute inset-0 dark:hidden opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out pointer-events-none"
-        style={{ boxShadow: `inset 0 0 0 1.5px ${project.accent}4d` }}
+        className="absolute inset-0 dark:hidden rounded-[1.5rem] dark:rounded-[1rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out pointer-events-none"
+        style={{ boxShadow: `inset 0 0 0 1.5px ${project.accent}66` }}
       />
 
-      {/* Dark: surface + subtle accent tint */}
+      {/* Dark: black glass surface + vibrant accent glow, always adrift + surges faster on hover — same motion
+          language as the light gradient above, recolored for the black-base persona. Rounded on itself for the
+          same self-clip reason as the light layer. */}
       <div className="absolute inset-0 hidden dark:block bg-[var(--card)]" />
-      <div className={`absolute inset-0 hidden dark:block bg-gradient-to-br ${project.color} to-transparent opacity-10 group-hover:opacity-20 transition-opacity duration-700`} />
+      <div
+        className="absolute inset-0 hidden dark:block rounded-[1rem] [background-size:220%_220%] animate-[background-gradient_9s_ease-in-out_infinite] group-hover:[animation-duration:2.2s] group-hover:scale-[1.015] transition-transform duration-700 ease-out motion-reduce:animate-none motion-reduce:transition-none"
+        style={{
+          backgroundImage: `linear-gradient(120deg, ${project.accent}4d 0%, ${project.accent}14 50%, ${project.accent}4d 100%)`,
+          boxShadow: `inset 0 0 0 1px ${project.accent}4d`,
+        }}
+      />
+      <div
+        className="absolute inset-0 hidden dark:block rounded-[1rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out pointer-events-none"
+        style={{ boxShadow: `inset 0 0 0 1.5px ${project.accent}99` }}
+      />
 
       {/* Mockup screen — slides up with a spring pop and sharpens on hover.
           Phone mockups get their own top offset per breakpoint (not one %, since the
