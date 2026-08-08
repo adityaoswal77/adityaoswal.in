@@ -26,7 +26,7 @@ const EXCLAMATIONS = [
   "To the moon?",
 ];
 
-const SPEED = 1.2;
+const SPEED = 0.85;
 const NAV_HEIGHT = 80;
 const CHAR_W = 32;
 const CHAR_H = 48;

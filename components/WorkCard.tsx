@@ -63,20 +63,20 @@ export function WorkCard({
     <Link
       href={project.href || "#"}
       {...('external' in project && project.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-      className={`group block relative ${heightClassName} overflow-hidden rounded-[1.5rem] dark:rounded-[1rem] border border-[var(--border)] bg-[var(--card)] transition-all duration-500 hover:border-[#2A2438]/30 dark:hover:border-white/30 hover:shadow-[0_24px_60px_rgba(42,36,56,0.18)] dark:hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A2438] focus-visible:ring-offset-2 dark:focus-visible:ring-white ${className}`}
+      className={`group block relative ${heightClassName} overflow-hidden rounded-[1.5rem] dark:rounded-[1rem] border border-[var(--border)] bg-[var(--card)] transition-all duration-700 hover:border-[#2A2438]/30 dark:hover:border-white/30 hover:shadow-[0_24px_60px_rgba(42,36,56,0.18)] dark:hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A2438] focus-visible:ring-offset-2 dark:focus-visible:ring-white ${className}`}
     >
       {/* Light: vibrant per-project gradient, always adrift + surges faster on hover, accent-tinted inset border.
           Rounded on itself (matching the card radius) so the hover scale-transform self-clips instead of
           bleeding past the parent's overflow-hidden corner — a Chromium transform+clip rendering quirk. */}
       <div
-        className="absolute inset-0 dark:hidden rounded-[1.5rem] dark:rounded-[1rem] [background-size:220%_220%] animate-[background-gradient_9s_ease-in-out_infinite] group-hover:[animation-duration:2.2s] group-hover:scale-[1.015] transition-transform duration-700 ease-out motion-reduce:animate-none motion-reduce:transition-none"
+        className="absolute inset-0 dark:hidden rounded-[1.5rem] dark:rounded-[1rem] [background-size:220%_220%] animate-[background-gradient_9s_ease-in-out_infinite] group-hover:[animation-duration:4s] group-hover:scale-[1.015] transition-transform duration-1000 ease-out motion-reduce:animate-none motion-reduce:transition-none"
         style={{
           backgroundImage: `linear-gradient(120deg, ${project.pastelHover} 0%, color-mix(in srgb, ${project.pastel} 65%, #FDFBF7) 50%, ${project.pastelHover} 100%)`,
           boxShadow: `inset 0 0 0 1px ${project.accent}33`,
         }}
       />
       <div
-        className="absolute inset-0 dark:hidden rounded-[1.5rem] dark:rounded-[1rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out pointer-events-none"
+        className="absolute inset-0 dark:hidden rounded-[1.5rem] dark:rounded-[1rem] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ease-out pointer-events-none"
         style={{ boxShadow: `inset 0 0 0 1.5px ${project.accent}66` }}
       />
 
@@ -85,14 +85,14 @@ export function WorkCard({
           same self-clip reason as the light layer. */}
       <div className="absolute inset-0 hidden dark:block bg-[var(--card)]" />
       <div
-        className="absolute inset-0 hidden dark:block rounded-[1rem] [background-size:220%_220%] animate-[background-gradient_9s_ease-in-out_infinite] group-hover:[animation-duration:2.2s] group-hover:scale-[1.015] transition-transform duration-700 ease-out motion-reduce:animate-none motion-reduce:transition-none"
+        className="absolute inset-0 hidden dark:block rounded-[1rem] [background-size:220%_220%] animate-[background-gradient_9s_ease-in-out_infinite] group-hover:[animation-duration:4s] group-hover:scale-[1.015] transition-transform duration-1000 ease-out motion-reduce:animate-none motion-reduce:transition-none"
         style={{
           backgroundImage: `linear-gradient(120deg, ${project.accent}4d 0%, ${project.accent}14 50%, ${project.accent}4d 100%)`,
           boxShadow: `inset 0 0 0 1px ${project.accent}4d`,
         }}
       />
       <div
-        className="absolute inset-0 hidden dark:block rounded-[1rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out pointer-events-none"
+        className="absolute inset-0 hidden dark:block rounded-[1rem] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ease-out pointer-events-none"
         style={{ boxShadow: `inset 0 0 0 1.5px ${project.accent}99` }}
       />
 
@@ -100,7 +100,7 @@ export function WorkCard({
           Phone mockups get their own top offset per breakpoint (not one %, since the
           card itself is a different height on mobile vs desktop — h-[400px] md:h-[550px] —
           and the reserved text-block height above the fold doesn't scale with it). */}
-      <div className={`absolute z-10 origin-bottom-right transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] motion-reduce:transition-none ${hasMockupBg
+      <div className={`absolute z-10 origin-bottom-right transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] motion-reduce:transition-none ${hasMockupBg
         ? "inset-x-10 md:inset-x-14 top-[60%] bottom-0 group-hover:-translate-y-12 group-hover:scale-[1.04]"
         : isPhoneMockup
           ? "inset-x-10 top-[58%] md:top-[46%] -bottom-24 md:-bottom-32 group-hover:-translate-y-8 group-hover:scale-[1.03]"
@@ -112,7 +112,7 @@ export function WorkCard({
             : ""
             }`}
         >
-          <div className="absolute inset-0 blur-[2px] group-hover:blur-0 transition-[filter] duration-500 ease-out motion-reduce:transition-none">
+          <div className="absolute inset-0 blur-[2px] group-hover:blur-0 transition-[filter] duration-700 ease-out motion-reduce:transition-none">
             {project.mockup && isVideoMockup ? (
               <video
                 src={project.mockup}
@@ -150,12 +150,12 @@ export function WorkCard({
         <h3 className="mt-3 text-2xl md:text-3xl font-bold tracking-tight text-[#2A2438] dark:text-white">
           {project.title}
         </h3>
-        <p className="mt-2 mb-0 text-sm font-medium leading-relaxed max-w-sm text-[#2A2438]/70 dark:text-white/60 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out motion-reduce:transition-none">
+        <p className="mt-2 mb-0 text-sm font-medium leading-relaxed max-w-sm text-[#2A2438]/70 dark:text-white/60 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-700 ease-out motion-reduce:transition-none">
           {project.description}
         </p>
       </div>
 
-      <div className="absolute top-8 right-8 z-20 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 motion-reduce:transition-none">
+      <div className="absolute top-8 right-8 z-20 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 motion-reduce:transition-none">
         <div className="w-12 h-12 rounded-full bg-[#2A2438] text-[#FDFBF7] dark:bg-white dark:text-black flex items-center justify-center shadow-lg">
           <ArrowUpRight className="w-6 h-6" />
         </div>

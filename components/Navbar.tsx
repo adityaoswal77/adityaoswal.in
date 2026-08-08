@@ -39,7 +39,7 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-4xl px-4 pointer-events-none">
-      <div className="flex items-center justify-between w-full h-14 px-6 bg-[var(--card)]/90 md:bg-[var(--card)] backdrop-blur-xl border border-[var(--border)] rounded-full pointer-events-auto shadow-2xl transition-colors duration-300">
+      <div className="flex items-center justify-between w-full h-14 px-3 bg-[var(--card)]/90 md:bg-[var(--card)] backdrop-blur-xl border border-[var(--border)] rounded-2xl pointer-events-auto shadow-2xl transition-colors duration-300">
         {/* Logo Container */}
         <div className="flex items-center text-[var(--foreground)]">
           <Link href="/" className="flex items-center font-bold text-lg tracking-tighter uppercase">
@@ -137,7 +137,7 @@ export default function Navbar() {
           </button>
           <Link
             href="https://docs.google.com/document/d/1f5oV6IebgAPDjHWuhbLtVdXS0Z0eDX5Wmr3N8WIbHQU/edit?usp=sharing"
-            className="hidden md:inline-flex bg-[var(--foreground)] text-[var(--background)] px-4 py-1.5 rounded-2xl text-[14px] font-bold uppercase tracking-wider hover:opacity-90 transition-all"
+            className="hidden md:inline-flex bg-[var(--foreground)] text-[var(--background)] px-4 py-1.5 rounded-md text-[14px] font-bold uppercase tracking-wider hover:opacity-90 transition-all"
             target="_blank"
             rel="noopener noreferrer"
           >
