@@ -356,7 +356,10 @@ export default function Dither({
                 className="w-full h-full"
                 camera={{ position: [0, 0, 6] }}
                 dpr={1}
-                gl={{ antialias: true, preserveDrawingBuffer: true, alpha: true }}
+                // No MSAA (the output is quantized by the dither pass, so there are no edges to
+                // smooth) and no preserved drawing buffer (nothing reads the canvas back) — both
+                // cost a full-framebuffer allocation and resolve on every frame.
+                gl={{ antialias: false, preserveDrawingBuffer: false, alpha: true }}
                 frameloop={isInView ? "always" : "never"}
             >
                 <DitheredWaves

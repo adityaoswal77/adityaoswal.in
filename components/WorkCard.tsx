@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
@@ -44,6 +45,32 @@ export function SkeletonScreen({ accent, tint }: { accent: string; tint: string 
   );
 }
 
+// `autoPlay` fetches and decodes the whole file during the landing-page load even though the card
+// sits below the fold, and keeps decoding once scrolled past. Fetch and run it only while on screen.
+function MockupVideo({ src, className }: { src: string; className: string }) {
+  const ref = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      el.preload = "metadata";
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) el.play().catch(() => {});
+        else el.pause();
+      },
+      { rootMargin: "200px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return <video ref={ref} src={src} className={className} preload="none" loop muted playsInline />;
+}
+
 export function WorkCard({
   project,
   className = "",
@@ -66,30 +93,41 @@ export function WorkCard({
       className={`group block relative ${heightClassName} overflow-hidden rounded-[1.5rem] dark:rounded-[1rem] border border-[var(--border)] bg-[var(--card)] transition-all duration-700 hover:border-[#2A2438]/30 dark:hover:border-white/30 hover:shadow-[0_24px_60px_rgba(42,36,56,0.18)] dark:hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A2438] focus-visible:ring-offset-2 dark:focus-visible:ring-white ${className}`}
     >
       {/* Light: vibrant per-project gradient, always adrift + surges faster on hover, accent-tinted inset border.
-          Rounded on itself (matching the card radius) so the hover scale-transform self-clips instead of
-          bleeding past the parent's overflow-hidden corner — a Chromium transform+clip rendering quirk. */}
+          The drift is a transform on an oversized child rather than an animated background-position, so it
+          composites instead of repainting the full card every frame on every card at once. The clip is on the
+          layer itself so the hover scale self-clips rather than bleeding past the parent's rounded corner —
+          a Chromium transform+clip rendering quirk. */}
+      <div className="absolute inset-0 dark:hidden overflow-hidden rounded-[1.5rem] group-hover:scale-[1.015] transition-transform duration-1000 ease-out motion-reduce:transition-none">
+        <div
+          className="absolute left-0 top-[-60%] h-[220%] w-[220%] animate-[gradient-drift_9s_ease-in-out_infinite] group-hover:[animation-duration:4s] motion-reduce:animate-none"
+          style={{
+            backgroundImage: `linear-gradient(120deg, ${project.pastelHover} 0%, color-mix(in srgb, ${project.pastel} 65%, #FDFBF7) 50%, ${project.pastelHover} 100%)`,
+          }}
+        />
+      </div>
       <div
-        className="absolute inset-0 dark:hidden rounded-[1.5rem] dark:rounded-[1rem] [background-size:220%_220%] animate-[background-gradient_9s_ease-in-out_infinite] group-hover:[animation-duration:4s] group-hover:scale-[1.015] transition-transform duration-1000 ease-out motion-reduce:animate-none motion-reduce:transition-none"
-        style={{
-          backgroundImage: `linear-gradient(120deg, ${project.pastelHover} 0%, color-mix(in srgb, ${project.pastel} 65%, #FDFBF7) 50%, ${project.pastelHover} 100%)`,
-          boxShadow: `inset 0 0 0 1px ${project.accent}33`,
-        }}
+        className="absolute inset-0 dark:hidden rounded-[1.5rem] pointer-events-none"
+        style={{ boxShadow: `inset 0 0 0 1px ${project.accent}33` }}
       />
       <div
-        className="absolute inset-0 dark:hidden rounded-[1.5rem] dark:rounded-[1rem] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ease-out pointer-events-none"
+        className="absolute inset-0 dark:hidden rounded-[1.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ease-out pointer-events-none"
         style={{ boxShadow: `inset 0 0 0 1.5px ${project.accent}66` }}
       />
 
-      {/* Dark: black glass surface + vibrant accent glow, always adrift + surges faster on hover — same motion
-          language as the light gradient above, recolored for the black-base persona. Rounded on itself for the
-          same self-clip reason as the light layer. */}
+      {/* Dark: black glass surface + vibrant accent glow — same motion language as the light gradient above,
+          recolored for the black-base persona, same composited-drift structure. */}
       <div className="absolute inset-0 hidden dark:block bg-[var(--card)]" />
+      <div className="absolute inset-0 hidden dark:block overflow-hidden rounded-[1rem] group-hover:scale-[1.015] transition-transform duration-1000 ease-out motion-reduce:transition-none">
+        <div
+          className="absolute left-0 top-[-60%] h-[220%] w-[220%] animate-[gradient-drift_9s_ease-in-out_infinite] group-hover:[animation-duration:4s] motion-reduce:animate-none"
+          style={{
+            backgroundImage: `linear-gradient(120deg, ${project.accent}4d 0%, ${project.accent}14 50%, ${project.accent}4d 100%)`,
+          }}
+        />
+      </div>
       <div
-        className="absolute inset-0 hidden dark:block rounded-[1rem] [background-size:220%_220%] animate-[background-gradient_9s_ease-in-out_infinite] group-hover:[animation-duration:4s] group-hover:scale-[1.015] transition-transform duration-1000 ease-out motion-reduce:animate-none motion-reduce:transition-none"
-        style={{
-          backgroundImage: `linear-gradient(120deg, ${project.accent}4d 0%, ${project.accent}14 50%, ${project.accent}4d 100%)`,
-          boxShadow: `inset 0 0 0 1px ${project.accent}4d`,
-        }}
+        className="absolute inset-0 hidden dark:block rounded-[1rem] pointer-events-none"
+        style={{ boxShadow: `inset 0 0 0 1px ${project.accent}4d` }}
       />
       <div
         className="absolute inset-0 hidden dark:block rounded-[1rem] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ease-out pointer-events-none"
@@ -114,13 +152,9 @@ export function WorkCard({
         >
           <div className="absolute inset-0 blur-[2px] group-hover:blur-0 transition-[filter] duration-700 ease-out motion-reduce:transition-none">
             {project.mockup && isVideoMockup ? (
-              <video
+              <MockupVideo
                 src={project.mockup}
                 className={`h-full w-full ${isPhoneMockup ? "object-cover object-top" : "object-contain object-right-top"}`}
-                autoPlay
-                loop
-                muted
-                playsInline
               />
             ) : project.mockup ? (
               <Image

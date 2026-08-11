@@ -14,6 +14,21 @@
   }
 }
 
+/* Same drift as background-gradient, expressed as a transform on an oversized layer so it
+   composites on the GPU instead of repainting the whole card every frame. -54.5% of a 220%-wide
+   layer == the 100% background-position end stop. */
+@keyframes gradient-drift {
+
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(-54.5%, 0, 0);
+  }
+}
+
 @keyframes svg-background-gradient {
 
   0%,

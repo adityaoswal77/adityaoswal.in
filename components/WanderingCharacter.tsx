@@ -44,6 +44,20 @@ function getDockPosition() {
   };
 }
 
+// Native mouseenter/mouseleave only fire on real pointer movement, not when an
+// element slides under a stationary cursor — so a walking character never
+// triggers them. Poll the last known pointer position against the character's
+// live rect every animation frame instead.
+const HOVER_HIT_PAD = 6;
+function isPointerOverChar(px: number, py: number, cx: number, cy: number) {
+  return (
+    px >= cx - HOVER_HIT_PAD &&
+    px <= cx + CHAR_W + HOVER_HIT_PAD &&
+    py >= cy - HOVER_HIT_PAD &&
+    py <= cy + CHAR_H + HOVER_HIT_PAD
+  );
+}
+
 function PixelChar({ facingRight, isWalking }: { facingRight: boolean; isWalking: boolean }) {
   return (
     <>
@@ -104,8 +118,11 @@ export function WanderingCharacter() {
   const targetRef = useRef({ x: 160, y: 300 });
   const stateRef = useRef<"walking" | "idle" | "hovering" | "chatting">("idle");
   const rafRef = useRef<number>(0);
+  const pointerRef = useRef({ x: -9999, y: -9999 });
+  const pointerOverRef = useRef(false);
   const idleTimerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const reducedMotionRef = useRef(false);
 
   const [facingRight, setFacingRight] = useState(true);
   const [isWalking, setIsWalking] = useState(false);
@@ -137,7 +154,23 @@ export function WanderingCharacter() {
     }, 8000 + Math.random() * 7000);
   };
 
+  // Positioned by transform rather than left/top: the walk loop writes this on every animation
+  // frame, and a layout-driven offset would force a reflow plus a repaint of the drop-shadowed
+  // sprite each time, on every page the character is mounted on.
+  const applyPosition = () => {
+    if (!charRef.current) return;
+    charRef.current.style.transform = `translate3d(${posRef.current.x}px, ${posRef.current.y}px, 0)`;
+  };
+
   const pickNewTarget = () => {
+    // Under reduced motion the rAF walk loop never starts, so committing to "walking" here would
+    // leave the leg-cycle CSS animation spinning forever on a sprite that visually never moves.
+    // Settle into "idle" instead so callers exiting another state (e.g. closeChat leaving
+    // "chatting") still land somewhere handleMouseEnter/other checks expect.
+    if (reducedMotionRef.current) {
+      stateRef.current = "idle";
+      return;
+    }
     const margin = 60;
     const vw = window.innerWidth;
     const vh = window.innerHeight;
@@ -168,20 +201,23 @@ export function WanderingCharacter() {
     pinnedRef.current = next;
     setPinned(next);
     setHasClickedPin(true);
+
+    if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
+    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+    // Can be invoked from the hover bubble, so the pointer is still over the cluster while the
+    // character teleports (or walks) away. Release the edge-trigger latch too, otherwise the
+    // poll never fires a fresh enter if the character lands back under that same cursor.
+    pointerOverRef.current = false;
+    setIsHovered(false);
+    setShowRandomExclamation(false);
+
     if (next) {
-      if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
-      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
       stateRef.current = "idle";
       setIsWalking(false);
-      setIsHovered(false);
-      setShowRandomExclamation(false);
       if (randomScheduleRef.current) clearTimeout(randomScheduleRef.current);
       if (randomHideRef.current) clearTimeout(randomHideRef.current);
       posRef.current = getDockPosition();
-      if (charRef.current) {
-        charRef.current.style.left = `${posRef.current.x}px`;
-        charRef.current.style.top = `${posRef.current.y}px`;
-      }
+      applyPosition();
     } else {
       pickNewTarget();
       scheduleRandomExclamation();
@@ -194,80 +230,6 @@ export function WanderingCharacter() {
       if (stateRef.current === "chatting") pickNewTarget();
     }, 600);
   };
-
-  useEffect(() => {
-    setMounted(true);
-
-    const introShow = setTimeout(() => setShowIntroMessage(true), 1500);
-    const introHide = setTimeout(() => setShowIntroMessage(false), 7000);
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return () => { clearTimeout(introShow); clearTimeout(introHide); };
-    }
-
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-    posRef.current = { x: vw * 0.7, y: vh * 0.75 };
-    if (charRef.current) {
-      charRef.current.style.left = `${posRef.current.x}px`;
-      charRef.current.style.top = `${posRef.current.y}px`;
-    }
-
-    const kickoff = setTimeout(() => pickNewTarget(), 3200);
-    scheduleRandomExclamation();
-
-    const handleResize = () => {
-      if (pinnedRef.current && charRef.current) {
-        posRef.current = getDockPosition();
-        charRef.current.style.left = `${posRef.current.x}px`;
-        charRef.current.style.top = `${posRef.current.y}px`;
-      }
-    };
-    window.addEventListener("resize", handleResize);
-
-    const loop = () => {
-      if (stateRef.current === "walking" && !pinnedRef.current && charRef.current) {
-        const dx = targetRef.current.x - posRef.current.x;
-        const dy = targetRef.current.y - posRef.current.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist < SPEED + 1) {
-          posRef.current = { ...targetRef.current };
-          stateRef.current = "idle";
-          setIsWalking(false);
-          charRef.current.style.left = `${posRef.current.x}px`;
-          charRef.current.style.top = `${posRef.current.y}px`;
-
-          idleTimerRef.current = setTimeout(
-            () => { if (stateRef.current === "idle") pickNewTarget(); },
-            2000 + Math.random() * 3000
-          );
-        } else {
-          posRef.current.x += (dx / dist) * SPEED;
-          posRef.current.y += (dy / dist) * SPEED;
-          charRef.current.style.left = `${posRef.current.x}px`;
-          charRef.current.style.top = `${posRef.current.y}px`;
-          const newFacingRight = dx > 0;
-          setFacingRight((prev) => (prev !== newFacingRight ? newFacingRight : prev));
-        }
-      }
-      rafRef.current = requestAnimationFrame(loop);
-    };
-
-    rafRef.current = requestAnimationFrame(loop);
-
-    return () => {
-      clearTimeout(introShow);
-      clearTimeout(introHide);
-      clearTimeout(kickoff);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
-      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
-      if (randomScheduleRef.current) clearTimeout(randomScheduleRef.current);
-      if (randomHideRef.current) clearTimeout(randomHideRef.current);
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   const handleMouseEnter = () => {
     if (stateRef.current === "chatting") return;
@@ -293,6 +255,105 @@ export function WanderingCharacter() {
       }
     }, 800);
   };
+
+  // Single edge-triggered entry point for both the real DOM hover events and
+  // the per-frame poll below, so a moving character crossing a stationary
+  // cursor and a stationary character crossing a moving cursor both pause it
+  // exactly once instead of re-firing every frame.
+  const updateHoverState = (overChar: boolean) => {
+    if (overChar && !pointerOverRef.current) {
+      pointerOverRef.current = true;
+      handleMouseEnter();
+    } else if (!overChar && pointerOverRef.current) {
+      pointerOverRef.current = false;
+      handleMouseLeave();
+    }
+  };
+
+  useEffect(() => {
+    setMounted(true);
+
+    const introShow = setTimeout(() => setShowIntroMessage(true), 1500);
+    const introHide = setTimeout(() => setShowIntroMessage(false), 7000);
+
+    reducedMotionRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotionRef.current) {
+      return () => { clearTimeout(introShow); clearTimeout(introHide); };
+    }
+
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    posRef.current = { x: vw * 0.7, y: vh * 0.75 };
+    applyPosition();
+
+    const kickoff = setTimeout(() => pickNewTarget(), 3200);
+    scheduleRandomExclamation();
+
+    const handleResize = () => {
+      if (pinnedRef.current) {
+        posRef.current = getDockPosition();
+        applyPosition();
+      }
+    };
+    window.addEventListener("resize", handleResize);
+
+    const handlePointerMove = (e: MouseEvent) => {
+      pointerRef.current = { x: e.clientX, y: e.clientY };
+    };
+    window.addEventListener("mousemove", handlePointerMove, { passive: true });
+
+    const loop = () => {
+      // Skip once actually hovering: the character is stationary at that point, so real
+      // DOM mouseenter/leave (which correctly cover descendants like the pause bubble)
+      // take over. Recomputing here too would fire a false "leave" the instant the
+      // cursor crosses outside the sprite's tiny box onto the bubble above it.
+      if (charRef.current && stateRef.current !== "chatting" && stateRef.current !== "hovering") {
+        updateHoverState(
+          isPointerOverChar(pointerRef.current.x, pointerRef.current.y, posRef.current.x, posRef.current.y)
+        );
+      }
+
+      if (stateRef.current === "walking" && !pinnedRef.current && charRef.current) {
+        const dx = targetRef.current.x - posRef.current.x;
+        const dy = targetRef.current.y - posRef.current.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < SPEED + 1) {
+          posRef.current = { ...targetRef.current };
+          stateRef.current = "idle";
+          setIsWalking(false);
+          applyPosition();
+
+          idleTimerRef.current = setTimeout(
+            () => { if (stateRef.current === "idle") pickNewTarget(); },
+            2000 + Math.random() * 3000
+          );
+        } else {
+          posRef.current.x += (dx / dist) * SPEED;
+          posRef.current.y += (dy / dist) * SPEED;
+          applyPosition();
+          const newFacingRight = dx > 0;
+          setFacingRight((prev) => (prev !== newFacingRight ? newFacingRight : prev));
+        }
+      }
+      rafRef.current = requestAnimationFrame(loop);
+    };
+
+    rafRef.current = requestAnimationFrame(loop);
+
+    return () => {
+      clearTimeout(introShow);
+      clearTimeout(introHide);
+      clearTimeout(kickoff);
+      window.removeEventListener("mousemove", handlePointerMove);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
+      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+      if (randomScheduleRef.current) clearTimeout(randomScheduleRef.current);
+      if (randomHideRef.current) clearTimeout(randomHideRef.current);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   if (!mounted) return null;
 
@@ -342,21 +403,24 @@ export function WanderingCharacter() {
       <div aria-hidden="true" className="hidden md:block fixed inset-0 pointer-events-none z-40">
         <div
           ref={charRef}
-          className="absolute pointer-events-auto"
-          style={{ left: posRef.current.x, top: posRef.current.y }}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          className="absolute left-0 top-0 pointer-events-auto"
+          style={{ transform: `translate3d(${posRef.current.x}px, ${posRef.current.y}px, 0)` }}
+          onMouseEnter={() => updateHoverState(true)}
+          onMouseLeave={() => updateHoverState(false)}
           onClick={openChat}
         >
           {/* Speech bubble */}
           <AnimatePresence>
             {(showIntroMessage || isHovered || showRandomExclamation) && !chatOpen && (
+              // pb-2 rather than mb-2: a margin gap here is dead space outside every element of
+              // the cluster, so moving the cursor from the sprite up to the pause button fires a
+              // real DOM mouseleave mid-travel and unmounts the button before the click lands.
               <motion.div
                 initial={{ opacity: 0, scale: 0.75, y: 6 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.75, y: 6 }}
                 transition={{ duration: 0.15, ease: "easeOut" }}
-                className="absolute bottom-full right-0 mb-2 whitespace-nowrap"
+                className="absolute bottom-full right-0 pb-2 flex flex-col items-end gap-1.5 whitespace-nowrap"
               >
                 <div className="relative px-3 py-1.5 rounded-full bg-[var(--card)] border border-[var(--border)] backdrop-blur-sm shadow-lg">
                   <span className="text-[11px] font-mono text-[var(--foreground)]">
@@ -372,13 +436,52 @@ export function WanderingCharacter() {
                     }}
                   />
                 </div>
+
+                {/* Pause bubble — only while hovering; docks the character into the chat FAB */}
+                {isHovered && (
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      togglePinned();
+                    }}
+                    // Lives inside the aria-hidden character layer and is hover-only; the
+                    // top-right dock toggle is the keyboard-reachable equivalent.
+                    tabIndex={-1}
+                    aria-label={pinned ? "Let character wander" : "Pause character in the chat FAB"}
+                    className="px-2.5 py-1 rounded-full bg-[var(--foreground)] text-[var(--background)] text-[10px] font-mono shadow-md hover:scale-105 transition-transform duration-150"
+                  >
+                    {pinned ? "resume wandering" : "pause here ⏸"}
+                  </button>
+                )}
               </motion.div>
             )}
           </AnimatePresence>
 
-          <div className="text-[var(--foreground)] cursor-pointer hover:scale-110 transition-transform duration-150">
+          <div
+            className="text-[var(--foreground)] cursor-pointer transition-transform duration-150"
+            style={{ transform: isHovered ? "scale(1.1)" : "scale(1)" }}
+          >
             <PixelChar facingRight={facingRight} isWalking={isWalking} />
           </div>
+
+          {/* Pause badge — confirms hover actually froze the character, not just an incidental stop */}
+          <AnimatePresence>
+            {isHovered && !chatOpen && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.5 }}
+                transition={{ duration: 0.12, ease: "easeOut" }}
+                className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-[var(--foreground)] flex items-center justify-center shadow-md"
+              >
+                <svg width="7" height="7" viewBox="0 0 8 8" fill="none">
+                  <rect x="1" y="0.5" width="2" height="7" fill="var(--background)" />
+                  <rect x="5" y="0.5" width="2" height="7" fill="var(--background)" />
+                </svg>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
 

@@ -17,6 +17,21 @@ interface Entry {
 
 const CHANGELOG: Entry[] = [
   {
+    date: "2026-08-11",
+    hash: "landing-page-perf-pass",
+    title: "Landing page lag traced and fixed — repaints, layout thrash, and wasted WebGL work",
+    changes: [
+      { type: "perf", description: "Work card idle-drift gradient (light and dark) was animating `background-position` on every visible card simultaneously, forcing a full repaint each frame — switched to a `translate3d` transform on an oversized child layer instead, same visual drift, now GPU-composited" },
+      { type: "perf", description: "Work card video mockups had bare `autoPlay loop`, so an off-screen video (6.5MB) downloaded and decoded in full during landing-page load and kept decoding once scrolled past — now `preload=\"none\"` with an `IntersectionObserver` gating play/pause, and a still frame under `prefers-reduced-motion`" },
+      { type: "perf", description: "The wandering mascot (mounted globally, so this ran on every page) wrote `style.left`/`style.top` every animation frame, forcing a layout plus a repaint of its drop-shadowed sprite — switched to `translate3d`" },
+      { type: "perf", description: "Dither WebGL hero background had `antialias` and `preserveDrawingBuffer` on, both allocating/resolving a full extra framebuffer per frame for a canvas nothing reads back and whose output is quantized by the dither pass anyway (no edges to smooth) — both off, zero visual change" },
+      { type: "perf", description: "Hero's light-mode edge-fade blur ring was `backdrop-blur`-ing the full viewport before a mask hid the already-fully-transparent center — filter runs before mask, so the center was blurred for nothing; added a `clip-path` cutout over that dead area. Bottom frosted-glass band dropped a redundant second stacked blur layer (was compounding two full-resolution blur passes into a ~4.5% larger radius near the bottom edge, where the gradient underneath already does the work)" },
+      { type: "fix", description: "Character's per-frame hover poll (checks only the small sprite hitbox) was fighting real DOM hover once actually hovering, causing a new \"pause here\" bubble below the speech bubble to vanish before a click registered — poll now defers to native hover once truly hovering, and a dead `mb-2` gap between bubble and button (outside any hoverable element) that caused the same symptom is now `pb-2`, inside the hover box" },
+      { type: "fix", description: "Reduced-motion users could get the character's leg-cycle animation stuck running forever after a single hover, despite the character never actually moving (the walk loop that drives position never starts under reduced motion, but `isWalking` was still being set true) — `pickNewTarget()` now gates on reduced motion at every call site" },
+      { type: "content", description: "Not fixed: `interestingplaces-video.mov` (6.5MB) still needs re-encoding to `.webm` — blocked on `ffmpeg` not being available on this machine" },
+    ],
+  },
+  {
     date: "2026-08-07",
     hash: "design-system-case-study-live",
     title: "Design System case study made discoverable — was built but never linked anywhere",

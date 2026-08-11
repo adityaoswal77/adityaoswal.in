@@ -83,7 +83,22 @@ const Hero = () => {
         {/* Light: soften the grid's hard frame edge — blur ring, then fade to page background */}
         {isLight && (
           <>
-            <div className="absolute inset-0 pointer-events-none backdrop-blur-md [mask-image:radial-gradient(ellipse_65%_65%_at_center,transparent_35%,black_100%)] [-webkit-mask-image:radial-gradient(ellipse_65%_65%_at_center,transparent_35%,black_100%)]" />
+            {/* The mask already keeps the center 35%-of-ellipse fully transparent — backdrop-filter
+                still computes over that dead area first, since mask-image is applied after the filter
+                pass. clip-path cuts that guaranteed-invisible center out of the element's paint bounds
+                before the blur runs, so the browser has less backdrop to sample/blur — a genuine (if
+                bounded, since the falloff itself spans most of the box) reduction in work, not just a
+                different way of hiding it. The clip rectangle (34%-66%) is inset from the mask's true
+                transparent ellipse (~22.75% half-extent) so it never eats into the visible gradient. */}
+            <div
+              className="absolute inset-0 pointer-events-none backdrop-blur-md [mask-image:radial-gradient(ellipse_65%_65%_at_center,transparent_35%,black_100%)] [-webkit-mask-image:radial-gradient(ellipse_65%_65%_at_center,transparent_35%,black_100%)]"
+              style={{
+                clipPath:
+                  "polygon(evenodd, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 34% 34%, 34% 66%, 66% 66%, 66% 34%, 34% 34%, 0% 0%)",
+                WebkitClipPath:
+                  "polygon(evenodd, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 34% 34%, 34% 66%, 66% 66%, 66% 34%, 34% 34%, 0% 0%)",
+              }}
+            />
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
@@ -155,9 +170,14 @@ const Hero = () => {
       </button>
 
       {/* Frosted glass transition */}
+      {/* Was two stacked backdrop-blur layers (2xl + md) over the same band — each a full
+          backdrop-filter pass on the same 192px-tall area. Blurring an already-blurred backdrop
+          compounds roughly in quadrature (sqrt(40^2+12^2) ≈ 41.8px vs 40px alone), so the second
+          layer bought a ~4.5% larger effective radius concentrated near the bottom edge, where the
+          solid-color gradient below already carries most of the visual transition. One blur pass
+          instead of two halves the backdrop-filter cost for this band with no visible seam. */}
       <div className="absolute bottom-0 left-0 right-0 h-48 z-10 pointer-events-none overflow-hidden">
         <div className="absolute inset-0 backdrop-blur-2xl [mask-image:linear-gradient(to_bottom,transparent_0%,black_60%,black_100%)]" />
-        <div className="absolute inset-0 backdrop-blur-md [mask-image:linear-gradient(to_bottom,transparent_30%,black_100%)]" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#FDFBF7]/30 dark:via-black/30 to-[var(--background)]" />
       </div>
     </section>
