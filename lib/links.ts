@@ -45,7 +45,7 @@ export const COMMUNITIES: Community[] = [
     tagline: "Community to become marketing engineers",
     description:
       "Curated, invite-only community for high agency founders and marketers to talk about marketing, AI, and content creation.",
-    url: "https://themodernmarketers.co/community",
+    url: "https://themodernmarketers.co/community/?atp=cogx",
     tags: ["Marketing", "AI", "Content"],
     memberBadge: "Member",
   },
