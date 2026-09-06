@@ -41,12 +41,12 @@ export type Community = {
 export const COMMUNITIES: Community[] = [
   {
     id: "c1",
-    title: "Cognition",
-    tagline: "Content marketing frameworks for builders",
+    title: "The Modern Marketers PRO",
+    tagline: "Community to become marketing engineers",
     description:
-      "Actionable content, growth, and monetization frameworks delivered 2× a week. Built for designers and creators who want their work to get seen. I'm a member — DM me for an invite link and a discount.",
-    url: "https://readcognition.com/",
-    tags: ["Newsletter", "Growth", "Content"],
+      "Curated, invite-only community for high agency founders and marketers to talk about marketing, AI, and content creation.",
+    url: "https://themodernmarketers.co/community",
+    tags: ["Marketing", "AI", "Content"],
     memberBadge: "Member",
   },
   {
