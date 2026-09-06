@@ -17,9 +17,10 @@ import { WarpBackground } from "@/components/ui/warp-background";
 gsap.registerPlugin(ScrollTrigger);
 import Collaborations from "@/components/Collaborations";
 
-const Dither = dynamic(() => import("@/components/background/Dither"), {
-  ssr: false,
-});
+const FishSchool = dynamic(
+  () => import("@/components/background/FishSchool").then((m) => m.FishSchool),
+  { ssr: false }
+);
 
 // --- Sub-Components ---
 
@@ -55,7 +56,10 @@ const Hero = () => {
   return (
     <section
       ref={containerRef}
-      className="relative flex min-h-screen w-full flex-col items-center justify-center px-6 pt-20 overflow-hidden"
+      // minHeight is inline so 100svh wins where it is supported and silently falls back to the
+      // class's 100vh where it is not — on mobile Safari the two differ by the whole URL bar.
+      style={{ minHeight: "100svh" }}
+      className="relative flex min-h-screen w-full flex-col items-center justify-center px-6 pt-20 pb-24 overflow-hidden"
     >
       <div className="absolute inset-0 z-0">
         {!mounted ? null : isLight ? (
@@ -67,17 +71,15 @@ const Hero = () => {
             beamDuration={4}
           />
         ) : (
-          <Dither
+          <FishSchool
             baseColor={[0, 0, 0]}
-            waveColor={[0.3, 0.4, 0.5]}
-            hoverColor={[0, 0, 0]}
-            waveSpeed={0.01}
-            waveFrequency={3}
-            waveAmplitude={0.6}
+            waterColor={[0.26, 0.36, 0.46]}
+            fishColor={[0.66, 0.79, 0.88]}
+            swimSpeed={0.045}
             colorNum={8}
             pixelSize={2}
             enableMouseInteraction={true}
-            mouseRadius={0.4}
+            mouseRadius={0.22}
           />
         )}
         {/* Light: soften the grid's hard frame edge — blur ring, then fade to page background */}
@@ -108,6 +110,16 @@ const Hero = () => {
             />
           </>
         )}
+        {/* Dark: readability scrim. The school swims directly behind the headline, and on a phone
+            the type sits over the busiest, brightest part of the frame — this keeps the copy the
+            first thing read without flattening the scene out on wider screens. */}
+        <div
+          className="absolute inset-0 pointer-events-none hidden dark:block sm:opacity-70"
+          style={{
+            background:
+              "radial-gradient(105% 42% at 50% 44%, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.34) 50%, rgba(0,0,0,0) 82%)",
+          }}
+        />
       </div>
       <div className="atmospheric-glow z-[1] hidden dark:block" />
 
@@ -115,7 +127,7 @@ const Hero = () => {
         {/* Badge */}
         <div
           ref={badgeRef}
-          className="mb-8 px-3 sm:px-4 py-1.5 rounded-full border border-[#2A2438]/15 bg-[#FFE8A3]/70 dark:border-white/10 dark:bg-white/[0.08] backdrop-blur-lg flex items-center gap-2"
+          className="mb-6 sm:mb-8 px-3 sm:px-4 py-1.5 rounded-full border border-[#2A2438]/15 bg-[#FFE8A3]/70 dark:border-white/10 dark:bg-white/[0.08] backdrop-blur-lg flex items-center gap-2"
         >
           <div className="w-1.5 h-1.5 rounded-full bg-[#2554EB] dark:bg-violet-900 motion-safe:animate-pulse" />
           <span className="text-[14px] uppercase tracking-tight sm:tracking-[0.1em] font-bold text-[var(--foreground)] dark:text-[var(--muted)]">
@@ -125,8 +137,8 @@ const Hero = () => {
         </div>
 
         {/* Headline */}
-        <div ref={headingRef} className="mb-8">
-          <h1 className="text-[2.5rem] sm:text-6xl md:text-8xl lg:text-[8rem] font-semibold leading-[0.9] tracking-wide text-[var(--foreground)]">
+        <div ref={headingRef} className="mb-7 sm:mb-8">
+          <h1 className="text-[2.5rem] sm:text-6xl md:text-8xl lg:text-[8rem] font-semibold leading-[0.95] sm:leading-[0.9] tracking-tight sm:tracking-wide text-[var(--foreground)] dark:[text-shadow:0_2px_28px_rgba(0,0,0,0.6)]">
             I&apos;m Aditya,
             <br />
             <span className="italic font-light text-[var(--muted)] tracking-normal capitalize">
@@ -137,10 +149,10 @@ const Hero = () => {
         </div>
 
         {/* Actions */}
-        <div ref={actionsRef} className="flex flex-col sm:flex-row items-center gap-4 pointer-events-auto">
+        <div ref={actionsRef} className="w-full max-w-[320px] sm:max-w-none flex flex-col sm:flex-row items-center gap-3 sm:gap-4 pointer-events-auto">
           <Link
             href="/#work"
-            className="group relative flex items-center gap-2 bg-[#2554EB] text-white dark:bg-[var(--foreground)] dark:text-[var(--background)] px-6 py-3 sm:px-8 sm:py-4 rounded-2xl font-bold uppercase text-[14px] tracking-wider hover:opacity-90 hover:-rotate-1 dark:hover:rotate-0 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2554EB] focus-visible:ring-offset-2 dark:focus-visible:ring-white"
+            className="group relative w-full sm:w-auto justify-center flex items-center gap-2 bg-[#2554EB] text-white dark:bg-[var(--foreground)] dark:text-[var(--background)] px-6 py-3.5 sm:px-8 sm:py-4 rounded-2xl font-bold uppercase text-[14px] tracking-wider hover:opacity-90 hover:-rotate-1 dark:hover:rotate-0 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2554EB] focus-visible:ring-offset-2 dark:focus-visible:ring-white"
           >
             View My Projects
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
@@ -149,7 +161,7 @@ const Hero = () => {
             rel="noopener noreferrer"
             target="_blank"
             href="https://www.linkedin.com/in/oswaladitya/"
-            className="flex items-center gap-2 bg-[#2A2438]/5 dark:bg-white/5 backdrop-blur-md border border-[var(--border)] text-[var(--foreground)] px-6 py-3 sm:px-8 sm:py-4 rounded-2xl font-bold uppercase text-[14px] tracking-wider hover:bg-[#2A2438]/10 dark:hover:bg-white/10 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A2438] focus-visible:ring-offset-2 dark:focus-visible:ring-white"
+            className="w-full sm:w-auto justify-center flex items-center gap-2 bg-[#2A2438]/5 dark:bg-white/5 backdrop-blur-md border border-[var(--border)] text-[var(--foreground)] px-6 py-3.5 sm:px-8 sm:py-4 rounded-2xl font-bold uppercase text-[14px] tracking-wider hover:bg-[#2A2438]/10 dark:hover:bg-white/10 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A2438] focus-visible:ring-offset-2 dark:focus-visible:ring-white"
           >
             Contact Me
           </Link>
@@ -164,7 +176,7 @@ const Hero = () => {
         onClick={() => {
           document.getElementById("work")?.scrollIntoView({ behavior: "smooth" });
         }}
-        className="absolute bottom-10 motion-safe:animate-bounce text-[var(--muted)] hover:text-[var(--foreground)] transition-colors z-20 pointer-events-auto"
+        className="absolute bottom-6 sm:bottom-10 p-2 motion-safe:animate-bounce text-[var(--muted)] hover:text-[var(--foreground)] transition-colors z-20 pointer-events-auto"
       >
         <ArrowDown className="w-6 h-6" aria-hidden="true" />
       </button>
