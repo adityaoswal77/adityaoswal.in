@@ -12,13 +12,17 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { PROJECTS } from "@/lib/data";
 import { WorkCard } from "@/components/WorkCard";
-import { WarpBackground } from "@/components/ui/warp-background";
 
 gsap.registerPlugin(ScrollTrigger);
 import Collaborations from "@/components/Collaborations";
 
 const FishSchool = dynamic(
   () => import("@/components/background/FishSchool").then((m) => m.FishSchool),
+  { ssr: false }
+);
+
+const Pasture = dynamic(
+  () => import("@/components/background/Pasture").then((m) => m.Pasture),
   { ssr: false }
 );
 
@@ -63,13 +67,7 @@ const Hero = () => {
     >
       <div className="absolute inset-0 z-0">
         {!mounted ? null : isLight ? (
-          <WarpBackground
-            className="h-full w-full rounded-none border-0 p-0 bg-[var(--background)]"
-            gridColor="var(--border)"
-            perspective={120}
-            beamsPerSide={4}
-            beamDuration={4}
-          />
+          <Pasture />
         ) : (
           <FishSchool
             baseColor={[0, 0, 0]}
@@ -82,34 +80,17 @@ const Hero = () => {
             mouseRadius={0.22}
           />
         )}
-        {/* Light: soften the grid's hard frame edge — blur ring, then fade to page background */}
-        {isLight && (
-          <>
-            {/* The mask already keeps the center 35%-of-ellipse fully transparent — backdrop-filter
-                still computes over that dead area first, since mask-image is applied after the filter
-                pass. clip-path cuts that guaranteed-invisible center out of the element's paint bounds
-                before the blur runs, so the browser has less backdrop to sample/blur — a genuine (if
-                bounded, since the falloff itself spans most of the box) reduction in work, not just a
-                different way of hiding it. The clip rectangle (34%-66%) is inset from the mask's true
-                transparent ellipse (~22.75% half-extent) so it never eats into the visible gradient. */}
-            <div
-              className="absolute inset-0 pointer-events-none backdrop-blur-md [mask-image:radial-gradient(ellipse_65%_65%_at_center,transparent_35%,black_100%)] [-webkit-mask-image:radial-gradient(ellipse_65%_65%_at_center,transparent_35%,black_100%)]"
-              style={{
-                clipPath:
-                  "polygon(evenodd, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 34% 34%, 34% 66%, 66% 66%, 66% 34%, 34% 34%, 0% 0%)",
-                WebkitClipPath:
-                  "polygon(evenodd, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 34% 34%, 34% 66%, 66% 66%, 66% 34%, 34% 34%, 0% 0%)",
-              }}
-            />
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background:
-                  "radial-gradient(ellipse 65% 65% at center, transparent 40%, var(--background) 100%)",
-              }}
-            />
-          </>
-        )}
+        {/* Light: the herd grazes across the lower half, where the CTAs sit — a soft scrim keeps
+            the buttons off the busiest grass without flattening the field. The warp grid's
+            blur ring and vignette went with it; they existed only to hide that grid's hard
+            near-plane edge, and there is no such edge here. */}
+        <div
+          className="absolute inset-0 pointer-events-none dark:hidden"
+          style={{
+            background:
+              "radial-gradient(110% 48% at 50% 40%, rgba(253,251,247,0.55) 0%, rgba(253,251,247,0.22) 55%, rgba(253,251,247,0) 85%)",
+          }}
+        />
         {/* Dark: readability scrim. The school swims directly behind the headline, and on a phone
             the type sits over the busiest, brightest part of the frame — this keeps the copy the
             first thing read without flattening the scene out on wider screens. */}
