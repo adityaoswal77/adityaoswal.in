@@ -166,10 +166,20 @@ void main() {
     float vel = swimSpeed * depth * mix(0.75, 1.3, r3);
     float span = aspect + size * 2.4;
 
-    float x = mod(r4 * span + time * vel * dir, span) - span * 0.5;
+    // Both axes are stratified rather than left to the hashes. At a handful of fish raw hashes
+    // clump — three of them can land in the same half of the frame, or two can start on top of
+    // each other — which is invisible in a crowd and glaring when the school is this small.
+    // Each fish gets its own horizontal band and its own slice of the wrap cycle, jittered inside.
+    // The band index is the loop index folded into a permutation (0,2,4,..,5,3,1) so that the
+    // depth ordering above does not also stack the near fish along the bottom of the frame.
+    float band = fi * 2.0 < fishCount ? fi * 2.0 : (fishCount - 1.0 - fi) * 2.0 + 1.0;
+    float lane = (band + 0.15 + r5 * 0.7) / fishCount;
+    float phase = fract(r4 + fi / fishCount);
+
+    float x = mod(phase * span + time * vel * dir, span) - span * 0.5;
     float bobRate = mix(0.3, 0.7, r3);
     float bobPhase = r1 * 6.283;
-    float y = (r5 - 0.5) * 0.88 + sin(time * bobRate + bobPhase) * 0.045;
+    float y = (lane - 0.5) * 0.88 + sin(time * bobRate + bobPhase) * 0.045;
     vec2 fp = vec2(x, y);
 
     // The school parts around the pointer.
@@ -322,10 +332,12 @@ function FishScene({
   const mouseTarget = useRef(new THREE.Vector2());
   const hasPointer = useRef(false);
 
-  // A narrow phone viewport fits far fewer fish before it reads as soup, and each one needs to be
-  // proportionally larger to stay recognisable once the dither pass chunks it into dots.
+  // Four fish in the wrap cycle, not four on screen: the cycle is a viewport wide plus a fish
+  // length of run-off at each edge, so a phone (where that run-off is a big share of a narrow
+  // frame) usually shows two or three, and a desktop three or four. Each one is proportionally
+  // larger on a phone to stay recognisable once the dither pass chunks it into dots.
   const isCompact = size.width < 640;
-  const fishCount = isCompact ? 10 : 14;
+  const fishCount = 4;
   const fishScale = isCompact ? 0.16 : 0.15;
 
   const uniforms = useRef<SceneUniforms>({
