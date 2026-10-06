@@ -6,7 +6,7 @@ import { IS_PRODUCTION, isPlaceholder } from "@/lib/utils";
 import { getPostsForProject } from "@/content/writing";
 import { Placeholder } from "@/components/writing/Placeholder";
 
-const description = "Things I'm building on my own time, what state they're in, and where to find them.";
+const description = "Stuff I’m building on the side, and how each one is doing.";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -35,7 +35,7 @@ export default function ProjectsPage() {
       <header className="mb-10">
         <h1 className="text-4xl text-[var(--foreground)] md:text-5xl">Projects</h1>
         <p className="mb-0 mt-3 text-[var(--muted)]">
-          {description} Notes on how they&apos;re going live in{" "}
+          {description} I write about them in{" "}
           <Link href="/writing" className="text-[var(--foreground)] underline decoration-[var(--muted)] underline-offset-4 hover:decoration-[var(--foreground)]">
             Writing
           </Link>
