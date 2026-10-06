@@ -36,14 +36,14 @@ export default function ProjectsPage() {
         <h1 className="text-4xl text-[var(--foreground)] md:text-5xl">Projects</h1>
         <p className="mb-0 mt-3 text-[var(--muted)]">
           {description} Notes on how they&apos;re going live in{" "}
-          <Link href="/writing" className="text-[var(--foreground)] underline decoration-[#2A2438]/30 underline-offset-4 hover:decoration-[#2A2438] dark:decoration-white/30 dark:hover:decoration-white">
+          <Link href="/writing" className="text-[var(--foreground)] underline decoration-[var(--muted)] underline-offset-4 hover:decoration-[var(--foreground)]">
             Writing
           </Link>
           .
         </p>
       </header>
 
-      <ul className="divide-y divide-[var(--border)] border-y border-[var(--border)]">
+      <ul role="list" className="divide-y divide-[var(--border)] border-y border-[var(--border)]">
         {SIDE_PROJECTS.map((project) => {
           const posts = getPostsForProject(project.slug);
           const statPending = isPlaceholder(project.stat.value);
@@ -84,17 +84,18 @@ export default function ProjectsPage() {
                   href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 font-medium text-[var(--foreground)] underline decoration-[#2A2438]/30 underline-offset-4 hover:decoration-[#2A2438] dark:decoration-white/30 dark:hover:decoration-white"
+                  className="inline-flex items-center gap-1 font-medium text-[var(--foreground)] underline decoration-[var(--muted)] underline-offset-4 hover:decoration-[var(--foreground)]"
                 >
                   {project.url.replace(/^https?:\/\//, "")}
                   <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+                  <span className="sr-only"> (opens in new tab)</span>
                 </a>
                 {project.caseStudy && (
                   <Link
                     href={project.caseStudy}
-                    className="text-[var(--muted)] transition-colors hover:text-[var(--foreground)]"
+                    className="text-[var(--muted)] underline decoration-[var(--muted)] underline-offset-4 transition-colors hover:text-[var(--foreground)] hover:decoration-[var(--foreground)]"
                   >
-                    Case study
+                    Case study<span className="sr-only"> for {project.title}</span>
                   </Link>
                 )}
               </div>
@@ -107,7 +108,7 @@ export default function ProjectsPage() {
                       {i > 0 && <span className="text-[var(--muted)]"> · </span>}
                       <Link
                         href={`/writing/${post.slug}`}
-                        className="text-[var(--foreground)] underline decoration-[#2A2438]/30 underline-offset-4 hover:decoration-[#2A2438] dark:decoration-white/30 dark:hover:decoration-white"
+                        className="text-[var(--foreground)] underline decoration-[var(--muted)] underline-offset-4 hover:decoration-[var(--foreground)]"
                       >
                         {post.title}
                       </Link>

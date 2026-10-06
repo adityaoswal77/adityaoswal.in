@@ -101,9 +101,9 @@ export const post: Post = {
         posts. One. The others come out weekly, and each one is another launch day.
       </p>
 
-      <h2>
+      <p>
         <Placeholder>[PLAYBOOK_CHITTI_SECTION_OR_REMOVE]</Placeholder>
-      </h2>
+      </p>
 
       <hr />
       <p>

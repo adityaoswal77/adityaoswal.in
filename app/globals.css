@@ -95,6 +95,10 @@
   --card: rgba(255, 255, 255, 0.75);
 }
 
+html {
+  scroll-padding-top: 6rem;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -244,6 +248,7 @@ p {
     font-size: 1.0625rem;
     line-height: 1.75;
     color: var(--foreground);
+    overflow-wrap: break-word;
   }
 
   .post-body > * + * {

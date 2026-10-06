@@ -56,7 +56,7 @@ export default async function PostPage({ params }: Props) {
         href="/writing"
         className="text-sm text-[var(--muted)] transition-colors hover:text-[var(--foreground)]"
       >
-        ← Writing
+        <span aria-hidden>←</span> Writing
       </Link>
 
       <header className="mb-10 mt-8">
