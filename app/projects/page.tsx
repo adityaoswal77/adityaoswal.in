@@ -33,7 +33,7 @@ export default function ProjectsPage() {
   return (
     <div className="mx-auto w-full max-w-[38rem] px-5 pb-24 pt-32 md:pt-40">
       <header className="mb-10">
-        <h1 className="text-4xl text-[var(--foreground)] md:text-5xl">Projects</h1>
+        <h1 className="font-sans text-3xl font-semibold tracking-tight text-[var(--foreground)]">Projects</h1>
         <p className="mb-0 mt-3 text-[var(--muted)]">
           {description} I write about them in{" "}
           <Link href="/writing" className="text-[var(--foreground)] underline decoration-[var(--muted)] underline-offset-4 hover:decoration-[var(--foreground)]">
