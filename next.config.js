@@ -16,6 +16,11 @@ const nextConfig = {
         destination: "https://docs.google.com/document/d/1f5oV6IebgAPDjHWuhbLtVdXS0Z0eDX5Wmr3N8WIbHQU/edit?usp=sharing",
         permanent: false,
       },
+      {
+        source: "/blogs",
+        destination: "/writing",
+        permanent: false,
+      },
     ];
 
     return [

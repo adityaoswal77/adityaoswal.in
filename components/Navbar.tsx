@@ -12,6 +12,8 @@ import { Sun, Moon } from "lucide-react";
 const navigation = [
   { name: "Home", href: "/", current: false },
   { name: "Work", href: "/work", current: false },
+  { name: "Writing", href: "/writing", current: false },
+  { name: "Projects", href: "/projects", current: false },
   { name: "Playground", href: "/playground", current: false },
   { name: "Links", href: "/links", current: false },
   { name: "About", href: "/aboutme", current: false },
@@ -20,6 +22,10 @@ const navigation = [
 const socialLinks = [
   { name: "Resume", href: "https://docs.google.com/document/d/1f5oV6IebgAPDjHWuhbLtVdXS0Z0eDX5Wmr3N8WIbHQU/edit?usp=sharing", current: false },
 ];
+
+function isActivePath(pathname: string, href: string) {
+  return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
+}
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -39,7 +45,7 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-4xl px-4 pointer-events-none">
-      <div className="flex items-center justify-between w-full h-14 px-3 bg-[var(--card)]/90 md:bg-[var(--card)] backdrop-blur-xl border border-[var(--border)] rounded-2xl pointer-events-auto shadow-2xl transition-colors duration-300">
+      <div className="flex items-center justify-between w-full h-14 px-3 bg-[var(--card)] backdrop-blur-xl border border-[var(--border)] rounded-2xl pointer-events-auto shadow-2xl transition-colors duration-300">
         {/* Logo Container */}
         <div className="flex items-center text-[var(--foreground)]">
           <Link href="/" className="flex items-center font-bold text-lg tracking-tighter uppercase">
@@ -65,13 +71,14 @@ export default function Navbar() {
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-6 lg:gap-8">
+        <div className="hidden lg:flex items-center gap-6">
           {navigation.map((item) => {
-            const isActive = pathname === item.href;
+            const isActive = isActivePath(pathname, item.href);
             return (
               <Link
                 key={item.name}
                 href={item.href}
+                aria-current={isActive ? "page" : undefined}
                 className={`text-sm font-medium transition-all duration-300 ${isActive ? "text-[var(--foreground)]" : "text-[var(--muted)] hover:text-[var(--foreground)]"
                   }`}
               >
@@ -137,7 +144,7 @@ export default function Navbar() {
           </button>
           <Link
             href="https://docs.google.com/document/d/1f5oV6IebgAPDjHWuhbLtVdXS0Z0eDX5Wmr3N8WIbHQU/edit?usp=sharing"
-            className="hidden md:inline-flex bg-[var(--foreground)] text-[var(--background)] px-4 py-1.5 rounded-md text-[14px] font-bold uppercase tracking-wider hover:opacity-90 transition-all"
+            className="hidden lg:inline-flex bg-[var(--foreground)] text-[var(--background)] px-4 py-1.5 rounded-md text-[14px] font-bold uppercase tracking-wider hover:opacity-90 transition-all"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -145,12 +152,12 @@ export default function Navbar() {
           </Link>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <Disclosure>
               {({ open }) => (
                 <>
-                  <Disclosure.Button className="p-1 text-[var(--muted)] hover:text-[var(--foreground)] focus:outline-none">
-                    <span className="sr-only">Open main menu</span>
+                  <Disclosure.Button className="p-1 text-[var(--muted)] hover:text-[var(--foreground)] rounded focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--foreground)]">
+                    <span className="sr-only">{open ? "Close" : "Open"} main menu</span>
                     {open ? (
                       <XMarkIcon className="block h-5 w-5" aria-hidden="true" />
                     ) : (
@@ -174,7 +181,8 @@ export default function Navbar() {
                               key={item.name}
                               as={Link}
                               href={item.href}
-                              className={`block w-full px-4 py-3 text-sm font-bold uppercase tracking-widest rounded-xl transition-all duration-300 ${pathname === item.href
+                              aria-current={isActivePath(pathname, item.href) ? "page" : undefined}
+                              className={`block w-full px-4 py-3 text-sm font-bold uppercase tracking-widest rounded-xl transition-all duration-300 ${isActivePath(pathname, item.href)
                                 ? "text-[var(--foreground)] bg-[#2A2438]/5 dark:bg-white/5"
                                 : "text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[#2A2438]/5 dark:hover:bg-white/5"
                                 }`}

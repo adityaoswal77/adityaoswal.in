@@ -12,6 +12,8 @@ gsap.registerPlugin(ScrollTrigger);
 const NAV_COLS = [
   [
     { label: "Work", href: "/work", external: false },
+    { label: "Writing", href: "/writing", external: false },
+    { label: "Projects", href: "/projects", external: false },
     { label: "About", href: "/aboutme", external: false },
     { label: "Playground", href: "/playground", external: false },
     { label: "Links", href: "/links", external: false },

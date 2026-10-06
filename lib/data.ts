@@ -64,3 +64,35 @@ export const PROJECTS = [
         mockupBg: false,
     },
 ];
+
+export type SideProject = {
+    slug: string;
+    title: string;
+    summary: string;
+    status: string;
+    stat?: { value: string; label: string };
+    url: string;
+    caseStudy?: string;
+};
+
+export const SIDE_PROJECTS: SideProject[] = [
+    {
+        slug: "interesting-places",
+        title: "Interesting Places",
+        summary: "428 places across India and Singapore",
+        status: "Growing it",
+        stat: { value: "90", label: "visitors in the last 30 days" },
+        url: "https://interestingplaces.in",
+        caseStudy: "/playground/interestingplaces",
+    },
+    {
+        slug: "freshfolios",
+        title: "Freshfolios",
+        summary: "Design studio for listed Indian companies",
+        status: "Relaunching",
+        url: "https://freshfolios.com",
+        caseStudy: "/playground/freshfolios",
+    },
+];
+
+export const IP_SIGNUP_URL = "[IP_SIGNUP_URL]";
