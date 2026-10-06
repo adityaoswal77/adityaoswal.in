@@ -60,7 +60,7 @@ export default async function PostPage({ params }: Props) {
       </Link>
 
       <header className="mb-10 mt-8">
-        <h1 className="text-4xl leading-[1.1] text-[var(--foreground)] md:text-5xl">
+        <h1 className="font-sans text-3xl font-semibold leading-tight tracking-tight text-[var(--foreground)] md:text-4xl">
           {post.title}
         </h1>
         <p className="mb-0 mt-4 text-sm text-[var(--muted)]">
@@ -77,7 +77,7 @@ export default async function PostPage({ params }: Props) {
         <nav aria-labelledby="read-next" className="mt-16 border-t border-[var(--border)] pt-8">
           <h2
             id="read-next"
-            className="mb-4 font-sans text-xs font-bold uppercase tracking-[0.2em] text-[var(--muted)]"
+            className="mb-2 font-sans text-sm font-semibold tracking-normal text-[var(--muted)]"
           >
             Read next
           </h2>

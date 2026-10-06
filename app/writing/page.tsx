@@ -32,7 +32,7 @@ export default function WritingPage() {
   return (
     <div className="mx-auto w-full max-w-[38rem] px-5 pb-24 pt-32 md:pt-40">
       <header className="mb-10">
-        <h1 className="text-4xl text-[var(--foreground)] md:text-5xl">Writing</h1>
+        <h1 className="font-sans text-3xl font-semibold tracking-tight text-[var(--foreground)]">Writing</h1>
         <p className="mb-0 mt-3 text-[var(--muted)]">{description}</p>
       </header>
 

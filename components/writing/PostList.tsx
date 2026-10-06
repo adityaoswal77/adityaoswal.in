@@ -13,7 +13,7 @@ export function PostList({ posts }: { posts: Post[] }) {
             <span className="font-medium text-[var(--foreground)] underline-offset-4 decoration-[var(--muted)] group-hover:underline group-focus-visible:underline">
               {post.title}
               {post.draft && (
-                <span className="ml-2 align-middle rounded border border-[var(--border)] px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-widest text-[var(--muted)]">
+                <span className="ml-2 align-middle rounded border border-[var(--border)] px-1.5 py-0.5 text-xs font-normal text-[var(--muted)]">
                   Draft
                 </span>
               )}
