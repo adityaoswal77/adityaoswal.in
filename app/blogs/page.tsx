@@ -1,14 +1,5 @@
-"use client";
-
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 
 export default function BlogsPage() {
-  const router = useRouter();
-
-  useEffect(() => {
-    router.replace("/aboutme");
-  }, [router]);
-
-  return null;
+  redirect("/writing");
 }

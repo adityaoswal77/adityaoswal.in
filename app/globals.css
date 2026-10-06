@@ -239,3 +239,73 @@ p {
 .font-mono.text-\[9px\] {
   font-size: 14px !important;
 }
+@layer components {
+  .post-body {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--foreground);
+  }
+
+  .post-body > * + * {
+    margin-top: 1.25em;
+  }
+
+  .post-body p {
+    margin-bottom: 0;
+    font-size: inherit;
+    color: inherit;
+  }
+
+  .post-body h2 {
+    margin-top: 2.25em;
+    font-size: 1.875rem;
+    line-height: 1.2;
+    color: var(--foreground);
+  }
+
+  .post-body h2 + * {
+    margin-top: 0.75em;
+  }
+
+  .post-body ul,
+  .post-body ol {
+    padding-left: 1.25em;
+  }
+
+  .post-body ul {
+    list-style: disc;
+  }
+
+  .post-body ol {
+    list-style: decimal;
+  }
+
+  .post-body li + li {
+    margin-top: 0.5em;
+  }
+
+  .post-body li::marker {
+    color: var(--muted);
+  }
+
+  .post-body strong {
+    font-weight: 600;
+  }
+
+  .post-body a {
+    text-decoration: underline;
+    text-decoration-color: var(--muted);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s ease;
+  }
+
+  .post-body a:hover {
+    text-decoration-color: var(--primary);
+  }
+
+  .post-body hr {
+    margin: 2.5em 0;
+    border-color: var(--border);
+  }
+}

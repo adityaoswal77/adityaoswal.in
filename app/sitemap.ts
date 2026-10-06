@@ -1,7 +1,17 @@
 import { MetadataRoute } from "next";
+import { getPosts } from "@/content/writing";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://adityaoswal.in";
+
+  const posts: MetadataRoute.Sitemap = getPosts()
+    .filter((post) => !post.draft)
+    .map((post) => ({
+      url: `${baseUrl}/writing/${post.slug}`,
+      lastModified: new Date(post.date),
+      changeFrequency: "yearly",
+      priority: 0.7,
+    }));
 
   return [
     {
@@ -40,6 +50,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.7,
     },
+    {
+      url: `${baseUrl}/writing`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    ...posts,
     {
       url: `${baseUrl}/links`,
       lastModified: new Date(),
