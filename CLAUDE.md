@@ -101,7 +101,7 @@ Per-project pastels are in `lib/data.ts` (`pastel` / `pastelHover` — flat base
 - `<PostLink slug>` links to another post only once it's published (plain text otherwise). `<Placeholder>[KEY]</Placeholder>` highlights unfilled numbers.
 - **Projects** (`/projects`) read `SIDE_PROJECTS` in `lib/data.ts`; a project lists posts whose `projects` includes its slug. Placeholder stats and the Friday email line (`IP_SIGNUP_URL`) are hidden in production until filled.
 - Verified facts (Oct 2026, from PostHog/Supabase/Vercel): Interesting Places has 428 places in India + Singapore only (Malaysia 0 published), the Telegram bot is owner-only (not community intake), there is no public email signup yet. Freshfolios' studio redesign is on an unmerged branch; freshfolios.com still serves the directory, with no public teardowns or industry pages. Don't reintroduce "Malaysia", "community-curated" or Freshfolios teardown/industry claims without the user confirming they've changed.
-- Per-post OG image: `app/writing/[slug]/opengraph-image.tsx` (`next/og`). `/blogs` redirects to `/writing`. Navbar desktop links start at `lg` (7 items overflow at `md`).
+- Per-post OG image: `app/writing/[slug]/opengraph-image.tsx` (`next/og`). `/blogs` redirects to `/writing`. Navbar is minimal: Work / Writing / Projects / About plus a "More" Headless UI `Menu` dropdown (Playground, Links); the logo is the Home link. Desktop links show from `md` and only just fit at 768px, so put any new item under More rather than adding a top-level link. Mobile and dropdown panels use a solid `bg-[var(--background)]`, because a `backdrop-blur` nested inside the blurred nav pill doesn't blur the page behind it.
 
 ## Short Links (`next.config.js` redirects)
 

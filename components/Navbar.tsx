@@ -1,7 +1,7 @@
 "use client";
 
-import { Disclosure } from "@headlessui/react";
-import { Menu as Bars3Icon, X as XMarkIcon } from "lucide-react";
+import { Disclosure, Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import { ChevronDown, Menu as Bars3Icon, X as XMarkIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -10,13 +10,15 @@ import { useTheme } from "next-themes";
 import { Sun, Moon } from "lucide-react";
 
 const navigation = [
-  { name: "Home", href: "/", current: false },
-  { name: "Work", href: "/work", current: false },
-  { name: "Writing", href: "/writing", current: false },
-  { name: "Projects", href: "/projects", current: false },
-  { name: "Playground", href: "/playground", current: false },
-  { name: "Links", href: "/links", current: false },
-  { name: "About", href: "/aboutme", current: false },
+  { name: "Work", href: "/work" },
+  { name: "Writing", href: "/writing" },
+  { name: "Projects", href: "/projects" },
+  { name: "About", href: "/aboutme" },
+];
+
+const moreNavigation = [
+  { name: "Playground", href: "/playground" },
+  { name: "Links", href: "/links" },
 ];
 
 const socialLinks = [
@@ -32,6 +34,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const moreActive = moreNavigation.some((item) => isActivePath(pathname, item.href));
 
   useEffect(() => {
     setMounted(true);
@@ -71,7 +74,7 @@ export default function Navbar() {
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-6">
           {navigation.map((item) => {
             const isActive = isActivePath(pathname, item.href);
             return (
@@ -93,6 +96,48 @@ export default function Navbar() {
               </Link>
             );
           })}
+
+          <Menu as="div" className="relative">
+            <MenuButton
+              className={`group text-sm font-medium transition-colors duration-300 rounded focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[color:var(--foreground)] ${moreActive ? "text-[var(--foreground)]" : "text-[var(--muted)] hover:text-[var(--foreground)] data-[open]:text-[var(--foreground)]"
+                }`}
+            >
+              <span className="flex items-center gap-1">
+                More
+                <ChevronDown
+                  className="w-3.5 h-3.5 transition-transform duration-200 group-data-[open]:rotate-180 motion-reduce:transition-none"
+                  aria-hidden="true"
+                />
+              </span>
+              {moreActive && (
+                <motion.div
+                  layoutId="navbar-active"
+                  className="h-px bg-[var(--foreground)] mt-0.5"
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                />
+              )}
+            </MenuButton>
+            <MenuItems
+              transition
+              className="absolute right-0 top-full mt-4 w-44 origin-top-right rounded-xl border border-[var(--border)] bg-[var(--background)] p-1.5 shadow-2xl focus:outline-none transition duration-150 ease-out data-[closed]:scale-95 data-[closed]:opacity-0 motion-reduce:transition-none"
+            >
+              {moreNavigation.map((item) => {
+                const isActive = isActivePath(pathname, item.href);
+                return (
+                  <MenuItem key={item.name}>
+                    <Link
+                      href={item.href}
+                      aria-current={isActive ? "page" : undefined}
+                      className={`block rounded-lg px-3 py-2 text-sm font-medium transition-colors data-[focus]:bg-[#2A2438]/5 dark:data-[focus]:bg-white/5 data-[focus]:text-[var(--foreground)] ${isActive ? "text-[var(--foreground)]" : "text-[var(--muted)]"
+                        }`}
+                    >
+                      {item.name}
+                    </Link>
+                  </MenuItem>
+                );
+              })}
+            </MenuItems>
+          </Menu>
         </div>
 
         {/* Theme Toggle Switch */}
@@ -144,7 +189,7 @@ export default function Navbar() {
           </button>
           <Link
             href="https://docs.google.com/document/d/1f5oV6IebgAPDjHWuhbLtVdXS0Z0eDX5Wmr3N8WIbHQU/edit?usp=sharing"
-            className="hidden lg:inline-flex bg-[var(--foreground)] text-[var(--background)] px-4 py-1.5 rounded-md text-[14px] font-bold uppercase tracking-wider hover:opacity-90 transition-all"
+            className="hidden md:inline-flex bg-[var(--foreground)] text-[var(--background)] px-4 py-1.5 rounded-md text-[14px] font-bold uppercase tracking-wider hover:opacity-90 transition-all"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -152,7 +197,7 @@ export default function Navbar() {
           </Link>
 
           {/* Mobile menu button */}
-          <div className="lg:hidden">
+          <div className="md:hidden">
             <Disclosure>
               {({ open }) => (
                 <>
@@ -173,10 +218,10 @@ export default function Navbar() {
                         initial={{ opacity: 0, scale: 0.95, y: -20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: -20 }}
-                        className="absolute top-full left-0 right-0 mt-4 p-4 bg-[var(--card)] backdrop-blur-xl rounded-3xl border border-[var(--border)] shadow-2xl transition-colors duration-300"
+                        className="absolute top-full left-0 right-0 mt-4 p-4 bg-[var(--background)] rounded-3xl border border-[var(--border)] shadow-2xl transition-colors duration-300"
                       >
                         <div className="space-y-1">
-                          {navigation.map((item) => (
+                          {[...navigation, ...moreNavigation].map((item) => (
                             <Disclosure.Button
                               key={item.name}
                               as={Link}
