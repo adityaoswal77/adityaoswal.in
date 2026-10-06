@@ -13,6 +13,7 @@ const navigation = [
   { name: "Home", href: "/", current: false },
   { name: "Work", href: "/work", current: false },
   { name: "Writing", href: "/writing", current: false },
+  { name: "Projects", href: "/projects", current: false },
   { name: "Playground", href: "/playground", current: false },
   { name: "Links", href: "/links", current: false },
   { name: "About", href: "/aboutme", current: false },
@@ -66,7 +67,7 @@ export default function Navbar() {
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-6 lg:gap-8">
+        <div className="hidden lg:flex items-center gap-6">
           {navigation.map((item) => {
             const isActive = pathname === item.href;
             return (
@@ -138,7 +139,7 @@ export default function Navbar() {
           </button>
           <Link
             href="https://docs.google.com/document/d/1f5oV6IebgAPDjHWuhbLtVdXS0Z0eDX5Wmr3N8WIbHQU/edit?usp=sharing"
-            className="hidden md:inline-flex bg-[var(--foreground)] text-[var(--background)] px-4 py-1.5 rounded-md text-[14px] font-bold uppercase tracking-wider hover:opacity-90 transition-all"
+            className="hidden lg:inline-flex bg-[var(--foreground)] text-[var(--background)] px-4 py-1.5 rounded-md text-[14px] font-bold uppercase tracking-wider hover:opacity-90 transition-all"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -146,7 +147,7 @@ export default function Navbar() {
           </Link>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <Disclosure>
               {({ open }) => (
                 <>

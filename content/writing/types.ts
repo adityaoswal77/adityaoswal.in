@@ -6,5 +6,6 @@ export type Post = {
   description: string;
   date: string;
   draft?: boolean;
+  projects?: string[];
   body: ReactNode;
 };

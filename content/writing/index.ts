@@ -1,3 +1,4 @@
+import { IS_PRODUCTION } from "@/lib/utils";
 import type { Post } from "./types";
 
 export type { Post };
@@ -5,7 +6,7 @@ export type { Post };
 const ALL_POSTS: Post[] = [];
 
 // Drafts show locally and on Vercel preview deploys, never in production.
-export const SHOW_DRAFTS = process.env.VERCEL_ENV !== "production";
+export const SHOW_DRAFTS = !IS_PRODUCTION;
 
 export function getPosts(): Post[] {
   return ALL_POSTS.filter((post) => SHOW_DRAFTS || !post.draft).sort((a, b) =>
@@ -21,6 +22,10 @@ export function getReadNext(slug: string, limit = 3): Post[] {
   return getPosts()
     .filter((post) => post.slug !== slug)
     .slice(0, limit);
+}
+
+export function getPostsForProject(projectSlug: string): Post[] {
+  return getPosts().filter((post) => post.projects?.includes(projectSlug));
 }
 
 export function formatDate(date: string): string {
