@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { formatDate, getPost, getPosts, getReadNext } from "@/content/writing";
 import { PostList } from "@/components/writing/PostList";
+import { SubscribeLine } from "@/components/writing/SubscribeLine";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -69,6 +70,8 @@ export default async function PostPage({ params }: Props) {
       </header>
 
       <div className="post-body">{post.body}</div>
+
+      <SubscribeLine />
 
       {readNext.length > 0 && (
         <nav aria-labelledby="read-next" className="mt-16 border-t border-[var(--border)] pt-8">

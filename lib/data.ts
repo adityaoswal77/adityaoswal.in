@@ -95,3 +95,5 @@ export const SIDE_PROJECTS: SideProject[] = [
         caseStudy: "/playground/freshfolios",
     },
 ];
+
+export const IP_SIGNUP_URL = "[IP_SIGNUP_URL]";

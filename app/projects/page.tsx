@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { SIDE_PROJECTS } from "@/lib/data";
 import { IS_PRODUCTION, isPlaceholder } from "@/lib/utils";
 import { getPostsForProject } from "@/content/writing";
+import { Placeholder } from "@/components/writing/Placeholder";
 
 const description = "Things I'm building on my own time, what state they're in, and where to find them.";
 
@@ -67,15 +68,13 @@ export default function ProjectsPage() {
 
               {showStat && (
                 <p className="mb-0 mt-3 text-sm text-[var(--muted)]">
-                  <span
-                    className={
-                      statPending
-                        ? "rounded bg-amber-500/[0.15] px-1 py-0.5 font-mono text-xs text-amber-700 dark:text-amber-300"
-                        : "font-semibold tabular-nums text-[var(--foreground)]"
-                    }
-                  >
-                    {project.stat.value}
-                  </span>{" "}
+                  {statPending ? (
+                    <Placeholder>{project.stat.value}</Placeholder>
+                  ) : (
+                    <span className="font-semibold tabular-nums text-[var(--foreground)]">
+                      {project.stat.value}
+                    </span>
+                  )}{" "}
                   {project.stat.label}
                 </p>
               )}
