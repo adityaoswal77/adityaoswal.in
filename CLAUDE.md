@@ -96,7 +96,7 @@ Per-project pastels are in `lib/data.ts` (`pastel` / `pastelHover` — flat base
 
 - **Posts** are TSX files in `content/writing/<slug>.tsx` exporting `post: Post` (slug, title, description, date, draft, projects, body JSX). Register each in `ALL_POSTS` in `content/writing/index.ts`. No markdown/MDX parser — don't add one without asking.
 - **Drafts** (`draft: true`) show locally and on Vercel previews with a Draft tag, never in production (`VERCEL_ENV`), and are excluded from the sitemap. Publish = set `draft: false` and the real date.
-- Writing pages use the body font (Inter) only: no Instrument Serif headings, no mono labels. The global `h1, h2` rule sets the serif, so writing headings carry `font-sans` and `.post-body h2` sets `font-family: inherit`.
+- Writing and /projects pages use the body font (Inter) only: no Instrument Serif headings, no mono labels. The global `h1, h2` rule sets the serif, so writing headings carry `font-sans` and `.post-body h2` sets `font-family: inherit`.
 - Post body is styled by `.post-body` in `globals.css` (plain `h2`/`p`/`ul`/`a`); use curly quotes/apostrophes in JSX prose. Section headers are short plain claims (not the literal case-study rule).
 - **Post voice**: simple, informal and casual, like talking to a friend. Short sentences, everyday words, no metaphorical or "writerly" phrasing (the user rejected lines like "places worth going out of your way for", "built the machine before the audience", "garage door open"). Same tone for page intros on /writing and /projects.
 - `<PostLink slug>` links to another post only once it's published (plain text otherwise). `<Placeholder>[KEY]</Placeholder>` highlights unfilled numbers.
