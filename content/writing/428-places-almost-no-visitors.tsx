@@ -1,15 +1,13 @@
 import Link from "next/link";
-import { Placeholder } from "@/components/writing/Placeholder";
-import { PostLink } from "@/components/writing/PostLink";
 import type { Post } from "./types";
 
 export const post: Post = {
   slug: "428-places-almost-no-visitors",
   title: "428 places, almost no visitors",
   description:
-    "A retro on Interesting Places, a community-curated directory of 428+ places across India, Singapore and Malaysia: what I built, the numbers, why it didn’t get traction, and what I’m changing.",
+    "A retro on Interesting Places, a directory of 428 places across India and Singapore: what I built, the numbers, why it didn’t get traction, and what I’m changing.",
   date: "2026-10-06",
-  draft: true,
+  draft: false,
   projects: ["interesting-places"],
   body: (
     <>
@@ -17,12 +15,11 @@ export const post: Post = {
         <a href="https://interestingplaces.in" target="_blank" rel="noopener noreferrer">
           Interesting Places
         </a>{" "}
-        is a directory of places worth going out of your way for. It has 428+ of them across India,
-        Singapore and Malaysia, sent in by the people who found them.
+        is a directory of places worth going out of your way for. It has 428 of them across India and
+        Singapore.
       </p>
       <p>
-        Almost nobody visits it. In the last 30 days it had <Placeholder>[IP_VISITORS_LAST_30D]</Placeholder>{" "}
-        visitors.
+        Almost nobody visits it. In the last 30 days it had 90 visitors.
       </p>
       <p>This is the retro. Some of it is a little embarrassing, which is sort of the point.</p>
 
@@ -30,16 +27,17 @@ export const post: Post = {
       <p>Most of my time went into making it easy to add places and keep the directory clean:</p>
       <ul>
         <li>
-          <strong>A Telegram intake bot.</strong> Anyone can send a place to the bot. It collects the
-          details and drops the submission into a queue.
+          <strong>A Telegram bot.</strong> My own shortcut for adding places. I send it a place and it
+          goes straight into the directory.
         </li>
         <li>
           <strong>An AI concierge.</strong> Instead of scrolling a list, you ask for what you’re in the
           mood for and it answers from the places in the directory.
         </li>
         <li>
-          <strong>An admin publish pipeline.</strong> I review what comes in, tidy it up and publish it
-          to the site.
+          <strong>An admin publish pipeline.</strong> For places other people submit through the site: I
+          review them, tidy them up and publish them. It hasn’t had anything to publish yet, because
+          nobody has submitted one.
         </li>
       </ul>
       <p>
@@ -50,24 +48,19 @@ export const post: Post = {
       <h2>The numbers are small, so here they are</h2>
       <ul>
         <li>
-          <strong>Places listed:</strong> 428+
+          <strong>Places listed:</strong> 428
         </li>
         <li>
-          <strong>Visitors in the last 30 days:</strong> <Placeholder>[IP_VISITORS_LAST_30D]</Placeholder>
+          <strong>Visitors in the last 30 days:</strong> 90
         </li>
         <li>
-          <strong>Places submitted through the Telegram bot:</strong>{" "}
-          <Placeholder>[IP_TELEGRAM_SUBMISSIONS]</Placeholder>
+          <strong>Where they came from:</strong> 82 of the 90 came direct
         </li>
         <li>
-          <strong>Questions asked to the AI concierge:</strong>{" "}
-          <Placeholder>[IP_CONCIERGE_QUESTIONS]</Placeholder>
+          <strong>Questions asked to the AI concierge:</strong> 10
         </li>
         <li>
-          <strong>Biggest traffic source:</strong> <Placeholder>[IP_TOP_TRAFFIC_SOURCE]</Placeholder>
-        </li>
-        <li>
-          <strong>Time spent building it:</strong> <Placeholder>[IP_BUILD_TIME]</Placeholder>
+          <strong>Time since I started building it:</strong> about 7 months
         </li>
       </ul>
 
@@ -86,8 +79,8 @@ export const post: Post = {
       </p>
       <ul>
         <li>
-          <strong>I had no way to reach anyone.</strong> No list, no regular writing. Every visitor had
-          to find the site on their own, and the few who did had no reason to return.
+          <strong>I had no way to reach anyone.</strong> No list, no regular writing. 82 of the 90
+          visitors came direct, which probably means people I sent the link to myself.
         </li>
         <li>
           <strong>I built with the garage door closed.</strong> Nobody watched the bot or the concierge
@@ -98,8 +91,9 @@ export const post: Post = {
           day is easy to miss.
         </li>
         <li>
-          <strong>A stranger from search lands with zero context.</strong> Someone who finds one place
-          page on Google doesn’t know what the site is or why they should look at a second page.
+          <strong>A stranger from search lands with zero context.</strong> Search sent almost nobody, and
+          someone who does find one place page on Google doesn’t know what the site is or why they
+          should look at a second page.
         </li>
         <li>
           <strong>Nobody searches for a directory.</strong> People search for things to do in a city.
@@ -119,8 +113,8 @@ export const post: Post = {
           is and what else is in it, for people who arrive from search.
         </li>
         <li>
-          <strong>City guides.</strong> Places grouped by city, starting with{" "}
-          <Placeholder>[IP_FIRST_CITY_GUIDE]</Placeholder>. Cities are what people search for, and a guide
+          <strong>City guides.</strong> Places grouped by city, starting with Bangalore, which has more
+          places than any other city in the directory. Cities are what people search for, and a guide
           gives a visitor an obvious second page.
         </li>
       </ul>
@@ -135,9 +129,7 @@ export const post: Post = {
         <a href="https://interestingplaces.in" target="_blank" rel="noopener noreferrer">
           interestingplaces.in
         </a>
-        . Everything else I’m building is on <Link href="/projects">Projects</Link>. If you want the
-        playbook I’m following now, read{" "}
-        <PostLink slug="my-playbook-for-shipping-side-projects">my playbook for shipping side projects</PostLink>.
+        . Everything else I’m building is on <Link href="/projects">Projects</Link>.
       </p>
     </>
   ),

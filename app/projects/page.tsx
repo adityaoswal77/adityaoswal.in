@@ -46,8 +46,8 @@ export default function ProjectsPage() {
       <ul role="list" className="divide-y divide-[var(--border)] border-y border-[var(--border)]">
         {SIDE_PROJECTS.map((project) => {
           const posts = getPostsForProject(project.slug);
-          const statPending = isPlaceholder(project.stat.value);
-          const showStat = !(statPending && IS_PRODUCTION);
+          const { stat } = project;
+          const statPending = stat ? isPlaceholder(stat.value) : false;
 
           return (
             <li key={project.slug} className="py-6">
@@ -66,16 +66,16 @@ export default function ProjectsPage() {
 
               <p className="mb-0 mt-1 text-[var(--foreground)]">{project.summary}</p>
 
-              {showStat && (
+              {stat && !(statPending && IS_PRODUCTION) && (
                 <p className="mb-0 mt-3 text-sm text-[var(--muted)]">
                   {statPending ? (
-                    <Placeholder>{project.stat.value}</Placeholder>
+                    <Placeholder>{stat.value}</Placeholder>
                   ) : (
                     <span className="font-semibold tabular-nums text-[var(--foreground)]">
-                      {project.stat.value}
+                      {stat.value}
                     </span>
                   )}{" "}
-                  {project.stat.label}
+                  {stat.label}
                 </p>
               )}
 

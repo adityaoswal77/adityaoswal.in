@@ -25,8 +25,8 @@ export const post: Post = {
         . Read his first. This is my version, with my own projects and my own mistakes in it.
       </p>
       <p>
-        The two projects I’ll keep coming back to: Interesting Places, a community-curated directory of
-        428+ places across India, Singapore and Malaysia, and Freshfolios, a design studio that pitches
+        The two projects I’ll keep coming back to: Interesting Places, a directory of 428 places across
+        India and Singapore, and Freshfolios, a design studio that pitches
         listed Indian companies.
       </p>
 

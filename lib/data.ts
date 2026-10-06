@@ -70,7 +70,7 @@ export type SideProject = {
     title: string;
     summary: string;
     status: string;
-    stat: { value: string; label: string };
+    stat?: { value: string; label: string };
     url: string;
     caseStudy?: string;
 };
@@ -79,9 +79,9 @@ export const SIDE_PROJECTS: SideProject[] = [
     {
         slug: "interesting-places",
         title: "Interesting Places",
-        summary: "428+ places across India, Singapore and Malaysia",
+        summary: "428 places across India and Singapore",
         status: "Growing it",
-        stat: { value: "[IP_VISITORS_LAST_30D]", label: "visitors in the last 30 days" },
+        stat: { value: "90", label: "visitors in the last 30 days" },
         url: "https://interestingplaces.in",
         caseStudy: "/playground/interestingplaces",
     },
@@ -89,8 +89,7 @@ export const SIDE_PROJECTS: SideProject[] = [
         slug: "freshfolios",
         title: "Freshfolios",
         summary: "Design studio for listed Indian companies",
-        status: "Live",
-        stat: { value: "[FF_TEARDOWNS_PUBLISHED]", label: "public teardowns" },
+        status: "Relaunching",
         url: "https://freshfolios.com",
         caseStudy: "/playground/freshfolios",
     },
