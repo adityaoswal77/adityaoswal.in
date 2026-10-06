@@ -11,12 +11,12 @@ import { Sun, Moon } from "lucide-react";
 
 const navigation = [
   { name: "Work", href: "/work" },
-  { name: "Writing", href: "/writing" },
   { name: "Projects", href: "/projects" },
   { name: "About", href: "/aboutme" },
 ];
 
 const moreNavigation = [
+  { name: "Writing", href: "/writing" },
   { name: "Playground", href: "/playground" },
   { name: "Links", href: "/links" },
 ];
