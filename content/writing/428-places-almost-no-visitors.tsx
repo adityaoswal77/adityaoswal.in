@@ -5,47 +5,41 @@ export const post: Post = {
   slug: "428-places-almost-no-visitors",
   title: "428 places, almost no visitors",
   description:
-    "A retro on Interesting Places, a directory of 428 places across India and Singapore: what I built, the numbers, why it didn’t get traction, and what I’m changing.",
+    "A look back at Interesting Places, my list of 428 places across India and Singapore: what I built, the numbers, why barely anyone visits, and what I’m changing.",
   date: "2026-10-06",
   draft: false,
   projects: ["interesting-places"],
   body: (
     <>
       <p>
+        So I built{" "}
         <a href="https://interestingplaces.in" target="_blank" rel="noopener noreferrer">
           Interesting Places
-        </a>{" "}
-        is a directory of places worth going out of your way for. It has 428 of them across India and
-        Singapore.
+        </a>
+        . It’s a list of 428 places to eat and visit across India and Singapore.
       </p>
-      <p>
-        Almost nobody visits it. In the last 30 days it had 90 visitors.
-      </p>
-      <p>This is the retro. Some of it is a little embarrassing, which is sort of the point.</p>
+      <p>Barely anyone uses it. 90 people visited in the last 30 days.</p>
+      <p>Here’s what I built, what went wrong, and what I’m trying next.</p>
 
-      <h2>I built the machine before the audience</h2>
-      <p>Most of my time went into making it easy to add places and keep the directory clean:</p>
+      <h2>I built the tools before I had any users</h2>
+      <p>Most of my time went into the stuff behind the site:</p>
       <ul>
         <li>
-          <strong>A Telegram bot.</strong> My own shortcut for adding places. I send it a place and it
-          goes straight into the directory.
+          <strong>A Telegram bot.</strong> I send it a place and it gets added to the site. Only I can
+          use it.
         </li>
         <li>
-          <strong>An AI concierge.</strong> Instead of scrolling a list, you ask for what you’re in the
-          mood for and it answers from the places in the directory.
+          <strong>An AI concierge.</strong> You tell it what you’re looking for and it suggests places
+          from the list.
         </li>
         <li>
-          <strong>An admin publish pipeline.</strong> For places other people submit through the site: I
-          review them, tidy them up and publish them. It hasn’t had anything to publish yet, because
-          nobody has submitted one.
+          <strong>An admin publish pipeline.</strong> If someone submits a place through the site, I can
+          review it and publish it. Nobody has submitted one yet.
         </li>
       </ul>
-      <p>
-        All three work. None of them bring anyone to the site, which, looking back, was the actual
-        job.
-      </p>
+      <p>All of it works. None of it gets people to the site, and that was the real problem.</p>
 
-      <h2>The numbers are small, so here they are</h2>
+      <h2>The numbers are small</h2>
       <ul>
         <li>
           <strong>Places listed:</strong> 428
@@ -64,9 +58,9 @@ export const post: Post = {
         </li>
       </ul>
 
-      <h2>Nobody was told, and nobody came back</h2>
+      <h2>Why I think nobody’s coming</h2>
       <p>
-        Brian Lovin wrote{" "}
+        I read Brian Lovin’s{" "}
         <a
           href="https://brianlovin.com/writing/my-playbook-for-shipping-side-projects"
           target="_blank"
@@ -74,62 +68,55 @@ export const post: Post = {
         >
           My playbook for shipping side projects
         </a>{" "}
-        in 2021. Reading it now is a bit like reading a list of the things I skipped. Here’s why I think
-        Interesting Places didn’t get traction:
+        and it was basically a list of things I didn’t do. My honest take:
       </p>
       <ul>
         <li>
-          <strong>I had no way to reach anyone.</strong> No list, no regular writing. 82 of the 90
-          visitors came direct, which probably means people I sent the link to myself.
+          <strong>I had no way to reach people.</strong> No email list, no posts, nothing. 82 of the 90
+          visitors came direct, so it’s mostly people I sent the link to.
         </li>
         <li>
-          <strong>I built with the garage door closed.</strong> Nobody watched the bot or the concierge
-          take shape, so nobody was waiting when they were done.
+          <strong>I built it quietly.</strong> I didn’t share anything while building it, so nobody was
+          waiting for it.
         </li>
         <li>
-          <strong>I launched once.</strong> One post, then back to building features. A single launch
-          day is easy to miss.
+          <strong>I only shared it once.</strong> One post, then straight back to building. Easy to miss.
         </li>
         <li>
-          <strong>A stranger from search lands with zero context.</strong> Search sent almost nobody, and
-          someone who does find one place page on Google doesn’t know what the site is or why they
-          should look at a second page.
+          <strong>People from Google don’t know what the site is.</strong> Search sends almost nobody.
+          And if someone does land on a place page, nothing tells them what the site is or what else is
+          on it.
         </li>
         <li>
-          <strong>Nobody searches for a directory.</strong> People search for things to do in a city.
-          428 places in one big list doesn’t match how anyone looks for a place.
+          <strong>Nobody searches for a big list.</strong> People search for things to do in a city. A
+          list of 428 places doesn’t match that.
         </li>
       </ul>
 
-      <h2>Give people a reason to come back</h2>
-      <p>Here’s what I’m changing, in order:</p>
+      <h2>Here’s what I’m changing</h2>
       <ul>
         <li>
-          <strong>An email list.</strong> Five interesting places every Friday. It’s a channel I own, and
-          it gives me a weekly reason to keep adding places.
+          <strong>An email list.</strong> 5 interesting places every Friday. That way I can actually
+          reach people, and it pushes me to keep adding places.
         </li>
         <li>
-          <strong>A long-tail banner.</strong> A small banner on every place page that says what the site
-          is and what else is in it, for people who arrive from search.
+          <strong>A banner on every place page.</strong> One line saying what the site is and what else
+          is there, for people coming in from Google.
         </li>
         <li>
-          <strong>City guides.</strong> Places grouped by city, starting with Bangalore, which has more
-          places than any other city in the directory. Cities are what people search for, and a guide
-          gives a visitor an obvious second page.
+          <strong>City guides.</strong> Places grouped by city, starting with Bangalore since it has the
+          most places. People search by city, and a guide gives them more to look at.
         </li>
       </ul>
-      <p>
-        I’ll post the numbers again once these have had time to work. If they’re still small, you’ll get
-        that post too.
-      </p>
+      <p>I’ll share the numbers again once these are live. Even if they’re still bad.</p>
 
       <hr />
       <p>
-        Interesting Places is live at{" "}
+        Interesting Places is at{" "}
         <a href="https://interestingplaces.in" target="_blank" rel="noopener noreferrer">
           interestingplaces.in
         </a>
-        . Everything else I’m building is on <Link href="/projects">Projects</Link>.
+        . Everything else I’m working on is on <Link href="/projects">Projects</Link>.
       </p>
     </>
   ),

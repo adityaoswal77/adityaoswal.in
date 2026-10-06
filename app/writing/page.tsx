@@ -3,7 +3,7 @@ import { getPosts } from "@/content/writing";
 import { PostList } from "@/components/writing/PostList";
 
 const description =
-  "Notes from designing, building and launching side projects, written while the work is still happening.";
+  "Posts about the side projects I’m building: what I made, how it’s going, and what I’d do differently.";
 
 export const metadata: Metadata = {
   title: "Writing",

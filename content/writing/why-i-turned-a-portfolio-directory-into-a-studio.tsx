@@ -7,7 +7,7 @@ export const post: Post = {
   slug: "why-i-turned-a-portfolio-directory-into-a-studio",
   title: "Why I turned a portfolio directory into a studio",
   description:
-    "Freshfolios started as a portfolio directory with affiliate content and no organic traffic. It’s now a design studio that pitches listed Indian companies. What I kept, what I cut, and what I’m testing next.",
+    "Freshfolios started as a portfolio directory with affiliate links and got almost no traffic. Now it’s a design studio for listed Indian companies. What I kept, what I cut, and what I’m trying next.",
   date: "2026-10-13",
   draft: true,
   projects: ["freshfolios"],
@@ -17,40 +17,38 @@ export const post: Post = {
         <a href="https://freshfolios.com" target="_blank" rel="noopener noreferrer">
           Freshfolios
         </a>{" "}
-        used to be a directory of designer portfolios, with some affiliate content on the side. It got
-        almost no organic traffic: <Placeholder>[FF_OLD_MONTHLY_ORGANIC_VISITORS]</Placeholder> visitors a
-        month from search, at its best.
+        started as a directory of designer portfolios, plus some affiliate content. Almost nobody found
+        it through search: <Placeholder>[FF_OLD_MONTHLY_ORGANIC_VISITORS]</Placeholder> visitors a month
+        at best.
       </p>
       <p>
-        Now it’s a design studio. It pitches website and branding work to companies listed on Indian
-        stock exchanges, and the site’s job is to back up the pitch.
+        Now it’s a design studio. I pitch website and branding work to companies listed on Indian stock
+        exchanges, and the site is there to back that up.
       </p>
-      <p>Same name, same domain, very different reason to exist. Here’s how that happened.</p>
+      <p>Same name, same domain, totally different idea. Here’s how I got here.</p>
 
-      <h2>A directory with no traffic is a hobby</h2>
+      <h2>A directory with no traffic doesn’t work</h2>
       <p>
-        A directory is useful when lots of people use it, and lots of people use it when it’s useful. I
-        never got out of that loop.
+        A directory is only useful if lots of people use it. And people only use it if it’s useful. I
+        never got past that.
       </p>
       <p>
-        The affiliate content had the same problem. Affiliate posts only earn when search sends people
-        to them. Without traffic they’re ads nobody sees.
+        The affiliate posts had the same problem. They only make money if people find them on Google.
+        Nobody did.
       </p>
       <p>
-        I could have kept adding portfolios and hoping. Instead I asked a simpler question: who would pay
-        for the thing I’m good at, and what would they need to see first?
+        So instead of adding more portfolios and hoping, I asked myself: who would actually pay for what
+        I’m good at, and what would they want to see first?
       </p>
 
-      <h2>Keep the part that was actually yours</h2>
-      <p>Not everything went in the bin:</p>
+      <h2>What I kept</h2>
       <ul>
         <li>
-          <strong>The name and the domain.</strong> Freshfolios still works as a name for a studio that
-          cares about how work is presented.
+          <strong>The name and the domain.</strong> Freshfolios still works as a name for a design studio.
         </li>
         <li>
-          <strong>The eye.</strong> Curating a directory meant looking closely at a lot of work and
-          deciding what was good about it. That habit is the whole studio.
+          <strong>Looking at a lot of work.</strong> Running the directory meant going through tons of
+          portfolios and figuring out what made them good. That’s basically the studio now.
         </li>
         <li>
           <strong>
@@ -59,14 +57,14 @@ export const post: Post = {
         </li>
       </ul>
 
-      <h2>Cut anything that only works with traffic</h2>
+      <h2>What I cut</h2>
       <ul>
         <li>
-          <strong>The directory.</strong> It needed an audience I didn’t have.
+          <strong>The directory.</strong> It needed traffic I didn’t have.
         </li>
         <li>
-          <strong>The affiliate content.</strong> Same problem, plus it made the site look like it was
-          selling something other than design.
+          <strong>The affiliate content.</strong> Same problem. It also made the site look like it was
+          selling tools, not design.
         </li>
         <li>
           <strong>
@@ -75,37 +73,35 @@ export const post: Post = {
         </li>
       </ul>
 
-      <h2>Make the site do the selling</h2>
+      <h2>The site has to show why I’m worth hiring</h2>
       <p>
-        A cold pitch to a listed company is a stranger asking for money. The site has to answer “why
-        you?” before anyone asks. Two things do that now:
+        When I pitch a listed company, I’m a stranger asking for their money. The site needs to answer
+        “why you?” before they ask. Two things should help:
       </p>
       <ul>
         <li>
-          <strong>Industry pages.</strong> One page per sector I pitch to, about what websites in that
-          sector get right and wrong.
+          <strong>Industry pages.</strong> One page per industry I pitch to, about what their websites
+          get right and wrong.
         </li>
         <li>
-          <strong>Public teardowns.</strong> I take a listed company’s website and write up what I’d
-          change and why, in the open. So far: <Placeholder>[FF_TEARDOWNS_PUBLISHED]</Placeholder>{" "}
-          teardowns.
+          <strong>Public teardowns.</strong> I pick a listed company’s website and write up what I’d
+          change and why. So far: <Placeholder>[FF_TEARDOWNS_PUBLISHED]</Placeholder>.
         </li>
       </ul>
       <p>
-        Both are useful to someone who never hires me, which is the point. They’re also the kind of page
-        a stranger can find from search and understand without context.
+        Both are useful even to people who never hire me. And someone landing on them from Google gets
+        what they are right away.
       </p>
 
-      <h2>Test one thing at a time</h2>
-      <p>What I’m testing next:</p>
+      <h2>What I’m trying next</h2>
       <ul>
         <li>
-          <strong>Teardown as the pitch.</strong> Whether sending a company its own teardown gets more
-          replies than a plain cold email.
+          <strong>Sending a teardown as the pitch.</strong> Does a company reply more if I send them a
+          teardown of their own site instead of a normal cold email?
         </li>
         <li>
-          <strong>Industry pages in search.</strong> Whether they pull in the organic traffic the
-          directory never did.
+          <strong>Industry pages on Google.</strong> Do they bring in the search traffic the directory
+          never got?
         </li>
         <li>
           <strong>
@@ -113,7 +109,11 @@ export const post: Post = {
           </strong>
         </li>
       </ul>
-      <p>I’ll write up the results either way. Pitched so far: <Placeholder>[FF_COMPANIES_PITCHED]</Placeholder> companies, <Placeholder>[FF_REPLIES]</Placeholder> replies.</p>
+      <p>
+        I’ll write up how it goes either way. So far I’ve pitched{" "}
+        <Placeholder>[FF_COMPANIES_PITCHED]</Placeholder> companies and got{" "}
+        <Placeholder>[FF_REPLIES]</Placeholder> replies.
+      </p>
 
       <hr />
       <p>
@@ -121,9 +121,9 @@ export const post: Post = {
         <a href="https://freshfolios.com" target="_blank" rel="noopener noreferrer">
           freshfolios.com
         </a>
-        . For the other side project that taught me the same lesson, read{" "}
+        . I learned the same thing from another side project, which I wrote about in{" "}
         <PostLink slug="428-places-almost-no-visitors">428 places, almost no visitors</PostLink>.
-        Everything I’m building is on <Link href="/projects">Projects</Link>.
+        Everything I’m working on is on <Link href="/projects">Projects</Link>.
       </p>
     </>
   ),
