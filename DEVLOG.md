@@ -66,3 +66,7 @@
 - Left for the owner to confirm: reply-time, 30-day fix-window, fixed-price and team-size wording in `src/data/studio.ts`, and the About page origin line.
 - `studio.freshfolios.com` is a separate Vercel project and still needs a redirect to freshfolios.com.
 
+### Projects page
+
+- Added Puzzle Gallery (puzzlegallery.vercel.app) to `/projects`: a searchable list of daily puzzle games. The count (100 puzzles, 12 categories) comes from `data/puzzles.ts` in the puzzle.gallery repo as of 27 Sep, so it needs updating when puzzles are added. Status is "Live", taken from the request rather than checked, because the site is blocked from the sandbox.
+
