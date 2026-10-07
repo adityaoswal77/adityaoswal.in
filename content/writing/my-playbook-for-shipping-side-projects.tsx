@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Placeholder } from "@/components/writing/Placeholder";
 import { PostLink } from "@/components/writing/PostLink";
 import type { Post } from "./types";
 
@@ -94,10 +93,6 @@ export const post: Post = {
       <p>
         For this writing section, “done” was a list page, a projects page and one post. Not three posts.
         One. The rest come out weekly.
-      </p>
-
-      <p>
-        <Placeholder>[PLAYBOOK_CHITTI_SECTION_OR_REMOVE]</Placeholder>
       </p>
 
       <hr />
