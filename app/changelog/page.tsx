@@ -17,6 +17,31 @@ interface Entry {
 
 const CHANGELOG: Entry[] = [
   {
+    date: "2026-10-06",
+    hash: "6c302e3",
+    title: "Navbar cut down to four links and a More menu; writing and projects pages use one font",
+    changes: [
+      { type: "refactor", description: "Desktop nav went from seven links to Work, Projects and About plus a More menu holding Writing, Playground and Links. Home is gone from the bar since the logo already links home. The menu is a Headless UI Menu (already a dependency), so it is keyboard accessible" },
+      { type: "fix", description: "The mobile menu pill had no background because `bg-[var(--card)]/90` compiles to nothing in Tailwind 3 (opacity modifiers on CSS vars are dropped), and the open menu panel let page text show through. Both now use a solid background" },
+      { type: "fix", description: "Menu button had no visible keyboard focus, and the active nav state missed nested routes like /writing/<slug> and had no aria-current. All three fixed" },
+      { type: "refactor", description: "Writing and Projects pages use the body font (Inter) only. The serif page titles, small mono labels and all-caps headings are gone from those pages" },
+    ],
+  },
+  {
+    date: "2026-10-06",
+    hash: "3cdd835",
+    title: "Writing section and Projects page added — the site is now a hub for what I build",
+    changes: [
+      { type: "feat", description: "/writing: a single narrow column of posts (title and date), post pages with a Read next list, a per-post share image, canonical and article metadata. Posts are TSX files in `content/writing`, so no markdown or MDX parser was added. Drafts show on local and preview builds and are hidden in production, including from the sitemap" },
+      { type: "feat", description: "/projects: Interesting Places and Freshfolios, each with a one-line description, status, one number, the live link, a case study link and any related posts. Unfilled placeholder values are hidden in production" },
+      { type: "feat", description: "A Friday email line sits at the end of every post. It stays hidden until there is a real signup URL, since no public signup exists yet" },
+      { type: "content", description: "First post, 428 places, almost no visitors, is live in a plain, casual voice. Two more posts are written as drafts" },
+      { type: "content", description: "Numbers and claims were checked against PostHog, Supabase and Vercel before publishing: the Telegram bot is an owner-only tool rather than community intake, and there is no public email signup yet. Malaysia currently has no published places, so /projects and the posts say India and Singapore" },
+      { type: "seo", description: "/blogs now redirects to /writing. Writing and Projects are in the sitemap" },
+      { type: "fix", description: "Accessibility pass on the new pages: link underlines that passed 3:1 contrast in both themes, screen-reader text for new-tab and per-project links, list semantics kept in Safari, and scroll padding so focused links are not hidden under the fixed nav" },
+    ],
+  },
+  {
     date: "2026-08-11",
     hash: "landing-page-perf-pass",
     title: "Landing page lag traced and fixed — repaints, layout thrash, and wasted WebGL work",
