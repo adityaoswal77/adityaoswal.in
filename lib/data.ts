@@ -93,6 +93,14 @@ export const SIDE_PROJECTS: SideProject[] = [
         url: "https://freshfolios.com",
         caseStudy: "/playground/freshfolios",
     },
+    {
+        slug: "puzzle-gallery",
+        title: "Puzzle Gallery",
+        summary: "A searchable list of daily puzzle games, like Wordle and Connections",
+        status: "Live",
+        stat: { value: "100", label: "puzzles listed" },
+        url: "https://puzzlegallery.vercel.app",
+    },
 ];
 
 export const IP_SIGNUP_URL = "[IP_SIGNUP_URL]";
