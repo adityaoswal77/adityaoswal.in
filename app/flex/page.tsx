@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { ArrowUpRight } from "lucide-react";
 
+const EMBED_URL = "https://adi-os.neetorecord.com/embeds/162f1ea8-fcd6-40d5-b03d-032c44dfccae";
+
 const LINKS = [
   {
     label: "Live website",
@@ -43,6 +45,16 @@ export default function FlexPage() {
       <p className="mb-12 max-w-xl text-lg leading-relaxed text-[var(--muted)]">
         The live website, a recording walking through it, and the Figma file with all the assets.
       </p>
+
+      <div className="mb-8 aspect-video w-full overflow-hidden rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] dark:rounded-2xl">
+        <iframe
+          src={EMBED_URL}
+          title="Flex assignment walkthrough recording"
+          allowFullScreen
+          loading="lazy"
+          className="h-full w-full border-0"
+        />
+      </div>
 
       <ul className="divide-y divide-[var(--border)] overflow-hidden rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] dark:rounded-2xl">
         {LINKS.map((link) => (
