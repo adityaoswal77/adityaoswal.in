@@ -4,8 +4,6 @@ import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 
 import { ArrowUpRight, ArrowDown } from "lucide-react";
 import Link from "next/link";
-import VariableFontHoverByRandomLetter from "@/fancy/components/text/variable-font-hover-by-random-letter";
-import BreathingText from "@/components/fancy/text/breathing-text";
 import { useTheme } from "next-themes";
 import dynamic from "next/dynamic";
 import { gsap } from "gsap";
@@ -189,7 +187,6 @@ const BentoGrid = () => {
   const headingRef = useRef<HTMLHeadingElement>(null);
 
   useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const ctx = gsap.context(() => {
       const cards = gsap.utils.toArray(".project-card");

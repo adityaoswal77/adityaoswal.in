@@ -52,7 +52,7 @@ export const PROJECTS = [
         title: "Freshfolios",
         category: "Side Project",
         span: "md:col-span-2",
-        description: "A platform for designers to showcase their work.",
+        description: "A design studio for listed Indian companies.",
         color: "from-rose-600",
         accent: "#e11d48",
         pastel: "#FFD6E0",
