@@ -54,7 +54,7 @@ const Hero = () => {
             </div>
             <div className="h-px w-8 bg-[var(--border)]" />
             <span className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)]">
-              Premium Feature / 2024
+              Premium Feature / 2024 &amp; 2025
             </span>
           </div>
 
@@ -71,7 +71,7 @@ const Hero = () => {
             ref={descriptionRef}
             className="text-lg md:text-2xl font-medium leading-relaxed text-[var(--muted)] max-w-3xl"
           >
-            A personalized year-end retrospective for KardiaCare Premium subscribers — turning clinical ECG data into an emotive, shareable narrative that drives retention and organic growth.
+            A personalized year-end retrospective for KardiaCare Premium subscribers — turning clinical ECG data into a personal, shareable story.
           </p>
 
           <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 pt-16 border-t border-[var(--border)]">
@@ -88,8 +88,8 @@ const Hero = () => {
               <dd className="text-xl font-bold text-[var(--foreground)]">Growth & Retention</dd>
             </div>
             <div>
-              <dt className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-3">Impact</dt>
-              <dd className="text-xl font-bold text-[var(--foreground)]">Social Growth Loop</dd>
+              <dt className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-3">Shipped</dt>
+              <dd className="text-xl font-bold text-[var(--foreground)]">2024 &amp; 2025</dd>
             </div>
           </dl>
         </div>
@@ -221,7 +221,7 @@ const Strategy = () => (
         {[
           { title: 'Celebratory', desc: 'Every data point feels like a victory, not a clinical record.' },
           { title: 'Personal', desc: 'Hyper-specific stats that feel one-to-one, not templated.' },
-          { title: 'Premium', desc: 'Visual polish that makes the $10/month feel obviously worth it.' },
+          { title: 'Premium', desc: 'Visual polish that makes the subscription feel obviously worth it.' },
           { title: 'Shareable', desc: 'Built-in social share flow — every card is export-ready.' },
         ].map((item, i) => (
           <li key={i} className="py-5 first:pt-0 last:pb-0 text-lg text-[var(--muted)] font-medium leading-relaxed">
@@ -258,7 +258,7 @@ const TheDesign = () => (
         <div className="order-2 md:order-1 flex justify-center">
           <PhoneMockup
             src="/assets/year-in-review/02-ekg-profile.png"
-            alt="EKG Profile screen showing donut chart with 300 total EKGs"
+            alt="Your Year in EKGs screen with a donut chart of total EKGs broken down by result"
             caption="Your EKG Profile"
           />
         </div>
@@ -266,7 +266,7 @@ const TheDesign = () => (
           <span className="text-[13px] uppercase tracking-[0.3em] font-bold text-[var(--muted)]">02 — Your EKG Profile</span>
           <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tight text-[var(--foreground)]">By the Numbers</h3>
           <p className="text-lg text-[var(--muted)] font-medium leading-relaxed">
-            A donut chart shows total ECGs taken across all devices, followed by a breakdown of recording habits — most active days (Monday &amp; Friday), peak times (9AM &amp; 10PM), and monthly trends over the year. Clinical data, reframed as personal achievements.
+            A donut chart shows total ECGs taken across all devices, followed by a breakdown of recording habits — most active days, peak times, and monthly trends over the year. Clinical data, reframed as personal achievements.
           </p>
           <ul className="space-y-3 text-[var(--muted)] font-medium text-sm pt-2">
             {['Total ECGs across all Kardia devices', 'Most active recording days and times', 'Month-by-month recording trend chart'].map((s, i) => (
@@ -282,16 +282,16 @@ const TheDesign = () => (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
         <div className="space-y-6">
           <span className="text-[13px] uppercase tracking-[0.3em] font-bold text-[var(--muted)]">03 — Heart Stats</span>
-          <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tight text-[var(--foreground)]">Heart Rate &amp; Blood Pressure</h3>
+          <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tight text-[var(--foreground)]">Blood Pressure</h3>
           <p className="text-lg text-[var(--muted)] font-medium leading-relaxed">
-            Average readings over the year (108/74 mmHg), trend lines, and streak data — surfaced as milestones, not clinical reports. Positively framed even when readings are routine, celebrating consistency as a health win.
+            Average systolic and diastolic readings, a month-by-month trend chart, and the days and times you checked most — surfaced as milestones, not clinical reports. Positively framed even when readings are routine, celebrating consistency as a health win.
           </p>
         </div>
         <div className="flex justify-center">
           <PhoneMockup
             src="/assets/year-in-review/03-heart-stats.png"
-            alt="Heart Rate and Blood Pressure stats screen"
-            caption="Heart Stats"
+            alt="Your Year in Blood Pressure screen with average systolic and diastolic readings and a monthly trend chart"
+            caption="Blood Pressure"
           />
         </div>
       </div>
@@ -300,7 +300,7 @@ const TheDesign = () => (
         <div className="order-2 md:order-1 flex justify-center">
           <PhoneMockup
             src="/assets/year-in-review/04-kardia-care-value.png"
-            alt="KardiaCare value section showing $507 in Clinician Reviews and TeleConnect consultations"
+            alt="Your Year in Kardia Services screen showing the value of Clinician Reviews and TeleConnect consultations"
             caption="Your KardiaCare Value"
           />
         </div>
@@ -308,19 +308,8 @@ const TheDesign = () => (
           <span className="text-[13px] uppercase tracking-[0.3em] font-bold text-[var(--muted)]">04 — KardiaCare Value</span>
           <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tight text-[var(--foreground)]">What You Got</h3>
           <p className="text-lg text-[var(--muted)] font-medium leading-relaxed">
-            The highest-stakes section for retention. A dollar-value breakdown of every premium benefit used — Clinician Reviews ($507 in value, 13 reviews) and TeleConnect Consultations ($138, 2 sessions). Progress bars make the value tangible.
+            The highest-stakes section for retention. A dollar-value breakdown of every premium benefit used — Clinician Reviews and TeleConnect Consultations, each with the count and what it was worth. Progress bars make the value tangible.
           </p>
-          <div className="grid grid-cols-2 gap-8 pt-4 border-t border-[var(--border)]">
-            {[
-              { value: '$507', label: 'Clinician Review Value' },
-              { value: '$138', label: 'TeleConnect Value' },
-            ].map((m, i) => (
-              <div key={i} className="pt-6 space-y-1">
-                <div className="text-3xl font-black text-[var(--foreground)]">{m.value}</div>
-                <p className="text-[13px] font-bold uppercase tracking-widest text-[var(--muted)]">{m.label}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
 
@@ -374,7 +363,7 @@ const Impact = () => {
     <Section title="The Impact">
       <div className="space-y-24">
         <p className="text-2xl text-[var(--foreground)] opacity-80 font-medium max-w-4xl leading-relaxed">
-          Year in Review moved from a scheduled feature to an annual ritual — something premium subscribers now anticipate. The campaign drove a 21.9% CTR across 73,718 impressions with zero paid spend.
+          Year in Review shipped two years running, in 2024 and 2025. The campaign drove a 21.9% CTR across 73,718 impressions with zero paid spend.
         </p>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-[var(--border)] border-t border-b border-[var(--border)] py-12">
@@ -385,37 +374,6 @@ const Impact = () => {
               <p className="text-[13px] text-[var(--muted)] font-medium leading-relaxed">{metric.desc}</p>
             </div>
           ))}
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
-          <div className="space-y-8">
-            <h4 className="text-[13px] uppercase tracking-[0.3em] font-bold text-[var(--muted)]">Retention</h4>
-            <ul className="space-y-6">
-              {[
-                'Definitive increase in annual premium renewals post-launch',
-                'High replay value — many users revisited the experience multiple times',
-                'Became a benchmark internally for future growth design initiatives',
-              ].map((s, i) => (
-                <li key={i} className="text-[var(--muted)] font-medium leading-relaxed border-t border-[var(--border)] pt-6 first:border-0 first:pt-0">
-                  {s}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="space-y-8">
-            <h4 className="text-[13px] uppercase tracking-[0.3em] font-bold text-[var(--muted)]">Growth</h4>
-            <ul className="space-y-6">
-              {[
-                'Viral social cards drove new premium trial sign-ups through organic loops',
-                'Positive community response elevated brand sentiment heading into Q1',
-                'Shared cards outperformed all paid acquisition creative that quarter',
-              ].map((s, i) => (
-                <li key={i} className="text-[var(--muted)] font-medium leading-relaxed border-t border-[var(--border)] pt-6 first:border-0 first:pt-0">
-                  {s}
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
       </div>
     </Section>
@@ -430,14 +388,14 @@ const Reflection = () => (
           The hardest design constraint was trust. Healthcare data is sensitive — users needed to feel seen, not surveilled. Every choice of language and framing mattered more than the visual design.
         </p>
         <p className="text-lg text-[var(--muted)] leading-relaxed font-medium">
-          The project also taught me that growth design doesn&apos;t have to be extractive. The most effective retention mechanism we built was simply showing users the value they&apos;d already received — no dark patterns, no manufactured urgency. Just honest reflection.
+          The project also taught me that growth design doesn&apos;t have to be extractive. The retention lever we leaned on was simply showing users the value they&apos;d already received — no dark patterns, no manufactured urgency. Just honest reflection.
         </p>
       </div>
       <div className="space-y-0">
         {[
-          { label: 'Tone over aesthetics', desc: 'We spent more time on copy direction than visual polish. The warmth of the language did more to drive completion than the animation.' },
-          { label: 'Data ≠ insight', desc: '300 ECGs is a number. "You recorded most on Mondays" is a story. The translation layer was the design challenge.' },
-          { label: 'Share triggers are earned', desc: 'Users shared because the data was genuinely surprising and personal — not because we added a share button.' },
+          { label: 'Tone over aesthetics', desc: 'We spent more time on copy direction than visual polish. The warmth of the language mattered as much as any animation.' },
+          { label: 'Data ≠ insight', desc: 'A total ECG count is a number. "You recorded most on Mondays" is a story. The translation layer was the design challenge.' },
+          { label: 'Share triggers are earned', desc: "A share button alone doesn't make people share. The data has to feel surprising and personal first." },
         ].map((item, i) => (
           <div key={i} className="py-8 border-t border-[var(--border)] space-y-2">
             <span className="text-[var(--foreground)] font-bold uppercase tracking-widest text-[13px] block">{item.label}</span>
@@ -452,11 +410,11 @@ const Reflection = () => (
 const NextProject = () => (
   <section className="px-6 py-40 bg-[var(--background)] border-t border-[var(--border)]">
     <div className="max-w-6xl mx-auto">
-      <Link href="/work/website-redesign" className="group block text-center">
+      <Link href="/work/kardia-design-system" className="group block text-center">
         <p className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-8 block">Next Story</p>
         <div className="flex flex-col items-center gap-12">
           <h2 className="text-5xl md:text-9xl font-black uppercase tracking-normal text-[var(--foreground)] group-hover:italic transition-all duration-500 group-hover:opacity-70">
-            Website Redesign
+            Design System
           </h2>
           <div className="w-20 h-20 rounded-full bg-[var(--foreground)] flex items-center justify-center text-[var(--background)] group-hover:scale-110 transition-transform duration-500">
             <ArrowUpRight className="w-10 h-10" />
