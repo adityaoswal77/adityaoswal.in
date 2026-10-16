@@ -39,7 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/work/neon-fintech`,
+      url: `${baseUrl}/work/year-in-review`,
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.7,
