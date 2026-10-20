@@ -36,12 +36,12 @@ export function GuestStepper({ size = "sm", accent }: { size?: "sm" | "lg"; acce
       }`}
     >
       <div
-        className={`relative shrink-0 overflow-hidden rounded-[2rem] border-[6px] border-[#2A2438] bg-white shadow-[0_18px_40px_-16px_rgba(217,119,6,0.55)] dark:border-zinc-700 dark:bg-zinc-950 dark:shadow-none ${
+        className={`relative shrink-0 overflow-hidden rounded-[2rem] border-[6px] border-[#090F05] bg-white shadow-[0_18px_40px_-16px_rgba(217,119,6,0.55)] dark:border-zinc-700 dark:bg-zinc-950 dark:shadow-none ${
           size === "lg" ? "h-[440px] w-[220px]" : "h-[380px] w-[188px]"
         }`}
       >
         <div
-          className="absolute left-1/2 top-1.5 z-10 h-1.5 w-12 -translate-x-1/2 rounded-full bg-[#2A2438] dark:bg-zinc-700"
+          className="absolute left-1/2 top-1.5 z-10 h-1.5 w-12 -translate-x-1/2 rounded-full bg-[#090F05] dark:bg-zinc-700"
           aria-hidden="true"
         />
         {real ? (
@@ -58,7 +58,7 @@ export function GuestStepper({ size = "sm", accent }: { size?: "sm" | "lg"; acce
               key={step}
               {...fade}
               transition={{ duration: 0.22 }}
-              className="flex h-full flex-col px-4 pb-4 pt-8 text-[#2A2438] dark:text-white"
+              className="flex h-full flex-col px-4 pb-4 pt-8 text-[#090F05] dark:text-white"
               aria-live="polite"
             >
               <div className="flex items-center gap-1" aria-hidden="true">
@@ -66,7 +66,7 @@ export function GuestStepper({ size = "sm", accent }: { size?: "sm" | "lg"; acce
                   <span
                     key={i}
                     className={`h-1 flex-1 rounded-full ${
-                      i <= step ? "bg-[#d97706]" : "bg-[#2A2438]/10 dark:bg-white/10"
+                      i <= step ? "bg-[#d97706]" : "bg-[#090F05]/10 dark:bg-white/10"
                     }`}
                   />
                 ))}
@@ -83,10 +83,10 @@ export function GuestStepper({ size = "sm", accent }: { size?: "sm" | "lg"; acce
                         role="radio"
                         aria-checked={who === v}
                         onClick={() => setWho(v)}
-                        className={`flex items-center justify-between rounded-xl border px-3 py-3 text-left text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A2438] dark:focus-visible:ring-white ${
+                        className={`flex items-center justify-between rounded-xl border px-3 py-3 text-left text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#090F05] dark:focus-visible:ring-white ${
                           who === v
-                            ? "border-[#d97706] bg-[#FFE8A3] dark:border-amber-500/60 dark:bg-amber-500/10"
-                            : "border-[#E9E2F2] bg-white dark:border-white/10 dark:bg-white/[0.03]"
+                            ? "border-[#d97706] bg-[#E8F3DA] dark:border-amber-500/60 dark:bg-amber-500/10"
+                            : "border-[#E2EADA] bg-white dark:border-white/10 dark:bg-white/[0.03]"
                         }`}
                       >
                         {v === "me" ? "Me" : "Guest"}
@@ -94,11 +94,11 @@ export function GuestStepper({ size = "sm", accent }: { size?: "sm" | "lg"; acce
                           className={`flex h-4 w-4 items-center justify-center rounded-full border ${
                             who === v
                               ? "border-[#d97706] bg-[#d97706] dark:border-amber-500 dark:bg-amber-500"
-                              : "border-[#2A2438]/30 dark:border-white/30"
+                              : "border-[#090F05]/30 dark:border-white/30"
                           }`}
                           aria-hidden="true"
                         >
-                          {who === v && <Check className="h-3 w-3 text-[#2A2438]" strokeWidth={3} />}
+                          {who === v && <Check className="h-3 w-3 text-[#090F05]" strokeWidth={3} />}
                         </span>
                       </button>
                     ))}
@@ -109,7 +109,7 @@ export function GuestStepper({ size = "sm", accent }: { size?: "sm" | "lg"; acce
               {step === 1 && (
                 <>
                   <p className="mt-6 text-lg font-bold leading-tight">{who === "guest" ? "Guest" : "Me"}</p>
-                  <p className="mt-2 text-xs leading-relaxed text-[#6E6580] dark:text-zinc-400">
+                  <p className="mt-2 text-xs leading-relaxed text-[#4A5B38] dark:text-zinc-400">
                     {who === "guest"
                       ? "Rest two fingers on the sensors and stay still."
                       : "Recording for your own history. Go back to the start and pick Guest to try the new flow."}
@@ -118,7 +118,7 @@ export function GuestStepper({ size = "sm", accent }: { size?: "sm" | "lg"; acce
                     {[0, 1].map((i) => (
                       <span
                         key={i}
-                        className="h-14 w-14 rounded-full border-2 border-dashed border-[#d97706] bg-[#FFE8A3]/70 dark:border-amber-500/70 dark:bg-amber-500/10"
+                        className="h-14 w-14 rounded-full border-2 border-dashed border-[#d97706] bg-[#E8F3DA]/70 dark:border-amber-500/70 dark:bg-amber-500/10"
                       />
                     ))}
                   </div>
@@ -128,7 +128,7 @@ export function GuestStepper({ size = "sm", accent }: { size?: "sm" | "lg"; acce
               {step === 2 && (
                 <>
                   <p className="mt-6 text-lg font-bold leading-tight">Recording</p>
-                  <p className="mt-2 text-xs text-[#6E6580] dark:text-zinc-400">Hold still.</p>
+                  <p className="mt-2 text-xs text-[#4A5B38] dark:text-zinc-400">Hold still.</p>
                   <svg viewBox="0 0 240 80" className="mt-6 w-full" role="img" aria-label="EKG trace being drawn">
                     <motion.path
                       d={EKG_PATH}
@@ -151,10 +151,10 @@ export function GuestStepper({ size = "sm", accent }: { size?: "sm" | "lg"; acce
                     className="mt-6 flex h-10 w-10 items-center justify-center rounded-full bg-[#D3EEC8] dark:bg-emerald-500/15"
                     aria-hidden="true"
                   >
-                    <Check className="h-5 w-5 text-[#2A2438] dark:text-emerald-400" strokeWidth={3} />
+                    <Check className="h-5 w-5 text-[#090F05] dark:text-emerald-400" strokeWidth={3} />
                   </span>
                   <p className="mt-4 text-lg font-bold leading-tight">Saved to guest, not your history</p>
-                  <p className="mt-2 text-xs leading-relaxed text-[#6E6580] dark:text-zinc-400">
+                  <p className="mt-2 text-xs leading-relaxed text-[#4A5B38] dark:text-zinc-400">
                     {who === "guest"
                       ? "Your own recordings stay untouched."
                       : "Pick Guest in the first step to see this flow."}
@@ -170,7 +170,7 @@ export function GuestStepper({ size = "sm", accent }: { size?: "sm" | "lg"; acce
         <button
           type="button"
           onClick={next}
-          className="inline-flex items-center justify-center gap-2 rounded-full bg-[#FF5C39] px-5 py-2.5 text-sm font-bold text-[#2A2438] transition-transform hover:-rotate-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A2438] focus-visible:ring-offset-2 dark:rounded-lg dark:bg-white dark:font-mono dark:text-black dark:hover:rotate-0 dark:focus-visible:ring-white dark:focus-visible:ring-offset-black motion-reduce:transition-none"
+          className="inline-flex items-center justify-center gap-2 rounded-full bg-[#B2EB76] px-5 py-2.5 text-sm font-bold text-[#090F05] transition-transform hover:-rotate-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#090F05] focus-visible:ring-offset-2 dark:rounded-lg dark:bg-white dark:font-mono dark:text-black dark:hover:rotate-0 dark:focus-visible:ring-white dark:focus-visible:ring-offset-black motion-reduce:transition-none"
         >
           {last ? (
             <>
@@ -187,12 +187,12 @@ export function GuestStepper({ size = "sm", accent }: { size?: "sm" | "lg"; acce
             type="button"
             onClick={() => setReal((r) => !r)}
             aria-pressed={real}
-            className="rounded-full border border-[#2A2438]/25 px-4 py-2 text-xs font-bold text-[#2A2438] transition-colors hover:bg-white/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A2438] dark:rounded-lg dark:border-white/20 dark:font-mono dark:text-white dark:hover:bg-white/10 dark:focus-visible:ring-white"
+            className="rounded-full border border-[#090F05]/25 px-4 py-2 text-xs font-bold text-[#090F05] transition-colors hover:bg-white/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#090F05] dark:rounded-lg dark:border-white/20 dark:font-mono dark:text-white dark:hover:bg-white/10 dark:focus-visible:ring-white"
           >
             {real ? "Back to the prototype" : "See the real screen"}
           </button>
         )}
-        <p className="text-center text-[11px] font-medium text-[#6E6580] dark:font-mono dark:text-zinc-500">
+        <p className="text-center text-[11px] font-medium text-[#4A5B38] dark:font-mono dark:text-zinc-500">
           Step {step + 1} of {STEP_COUNT}
         </p>
       </div>

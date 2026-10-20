@@ -33,7 +33,7 @@ export function ProjectMedia({ project, sizes }: { project: Project; sizes: stri
   const label = `${project.title} interface preview`;
 
   return (
-    <div className="relative h-full w-full overflow-hidden rounded-[inherit] border border-[#2A2438]/10 bg-[var(--pastel)] dark:border-white/10 dark:bg-[var(--tint)]">
+    <div className="relative h-full w-full overflow-hidden rounded-[inherit] border border-[#090F05]/10 bg-[var(--pastel)] dark:border-white/10 dark:bg-[var(--tint)]">
       {phone ? (
         <div className="absolute inset-x-[26%] top-[12%] bottom-0">
           <Image src={project.mockup} alt={label} fill sizes={sizes} className="object-cover object-top" />

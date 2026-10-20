@@ -90,7 +90,7 @@ export function WorkCard({
     <Link
       href={project.href || "#"}
       {...('external' in project && project.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-      className={`group block relative ${heightClassName} overflow-hidden rounded-[1.5rem] dark:rounded-[1rem] border border-[var(--border)] bg-[var(--card)] transition-all duration-700 hover:border-[#2A2438]/15 dark:hover:border-white/15 hover:shadow-[0_20px_48px_-24px_rgba(42,36,56,0.22)] dark:hover:shadow-[0_20px_48px_-24px_rgba(0,0,0,0.8)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A2438] focus-visible:ring-offset-2 dark:focus-visible:ring-white ${className}`}
+      className={`group block relative ${heightClassName} overflow-hidden rounded-[1.5rem] dark:rounded-[1rem] border border-[var(--border)] bg-[var(--card)] transition-all duration-700 hover:border-[#090F05]/15 dark:hover:border-white/15 hover:shadow-[0_20px_48px_-24px_rgba(9,15,5,0.22)] dark:hover:shadow-[0_20px_48px_-24px_rgba(0,0,0,0.8)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#090F05] focus-visible:ring-offset-2 dark:focus-visible:ring-white ${className}`}
     >
       {/* Light: soft per-project pastel gradient, slowly adrift, a touch quicker on hover, faint accent inset border.
           The drift is a transform on an oversized child rather than an animated background-position, so it
@@ -101,17 +101,17 @@ export function WorkCard({
         <div
           className="absolute left-0 top-[-60%] h-[220%] w-[220%] animate-[gradient-drift_14s_ease-in-out_infinite] group-hover:[animation-duration:9s] motion-reduce:animate-none"
           style={{
-            backgroundImage: `linear-gradient(120deg, color-mix(in srgb, ${project.pastel} 55%, #FDFBF7) 0%, color-mix(in srgb, ${project.pastel} 22%, #FDFBF7) 50%, color-mix(in srgb, ${project.pastel} 55%, #FDFBF7) 100%)`,
+            backgroundImage: `linear-gradient(120deg, color-mix(in srgb, ${project.pastel} 55%, #FFFFFF) 0%, color-mix(in srgb, ${project.pastel} 22%, #FFFFFF) 50%, color-mix(in srgb, ${project.pastel} 55%, #FFFFFF) 100%)`,
           }}
         />
       </div>
       <div
         className="absolute inset-0 dark:hidden rounded-[1.5rem] pointer-events-none"
-        style={{ boxShadow: `inset 0 0 0 1px ${project.accent}1f` }}
+        style={{ boxShadow: "inset 0 0 0 1px #18280E14" }}
       />
       <div
         className="absolute inset-0 dark:hidden rounded-[1.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ease-out pointer-events-none"
-        style={{ boxShadow: `inset 0 0 0 1px ${project.accent}40` }}
+        style={{ boxShadow: "inset 0 0 0 1px #18280E33" }}
       />
 
       {/* Dark: black glass surface + faint accent glow — same motion language as the light gradient above,
@@ -146,7 +146,7 @@ export function WorkCard({
         }`}>
         <div
           className={`relative ml-auto h-full w-full ${hasMockupBg ? "max-w-[440px]" : isPhoneMockup ? "max-w-none" : "max-w-[520px]"} overflow-hidden ${mockupRadius} ${hasMockupBg
-            ? "border border-[#2A2438]/10 dark:border-white/10 bg-white dark:bg-zinc-900 shadow-[0_-16px_48px_rgba(42,36,56,0.16)] dark:shadow-[0_-16px_48px_rgba(0,0,0,0.6)]"
+            ? "border border-[#090F05]/10 dark:border-white/10 bg-white dark:bg-zinc-900 shadow-[0_-16px_48px_rgba(9,15,5,0.16)] dark:shadow-[0_-16px_48px_rgba(0,0,0,0.6)]"
             : ""
             }`}
         >
@@ -173,7 +173,7 @@ export function WorkCard({
 
       {/* Text */}
       <div className="relative z-20 p-8 md:p-10 pr-24">
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] font-bold uppercase tracking-[0.15em] text-[#2A2438]/60 dark:text-white/50">
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] font-bold uppercase tracking-[0.15em] text-[#090F05]/60 dark:text-white/50">
           {categories.map((cat, i) => (
             <span key={cat} className="flex items-center gap-2">
               {i > 0 && <span className="h-1 w-1 rounded-full bg-current opacity-60" aria-hidden="true" />}
@@ -181,16 +181,16 @@ export function WorkCard({
             </span>
           ))}
         </div>
-        <h3 className="mt-3 text-2xl md:text-3xl font-bold tracking-tight text-[#2A2438] dark:text-white">
+        <h3 className="mt-3 text-2xl md:text-3xl font-bold tracking-tight text-[#090F05] dark:text-white">
           {project.title}
         </h3>
-        <p className="mt-2 mb-0 text-sm font-medium leading-relaxed max-w-sm text-[#2A2438]/70 dark:text-white/60 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 [@media(hover:none)]:opacity-100 [@media(hover:none)]:translate-y-0 transition-all duration-700 ease-out motion-reduce:transition-none">
+        <p className="mt-2 mb-0 text-sm font-medium leading-relaxed max-w-sm text-[#090F05]/70 dark:text-white/60 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 [@media(hover:none)]:opacity-100 [@media(hover:none)]:translate-y-0 transition-all duration-700 ease-out motion-reduce:transition-none">
           {project.description}
         </p>
       </div>
 
       <div className="absolute top-8 right-8 z-20 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 [@media(hover:none)]:opacity-100 [@media(hover:none)]:translate-y-0 transition-all duration-500 motion-reduce:transition-none">
-        <div className="w-10 h-10 rounded-full border border-[#2A2438]/10 bg-[#FDFBF7]/80 text-[#2A2438] backdrop-blur-sm dark:border-white/15 dark:bg-white/10 dark:text-white flex items-center justify-center">
+        <div className="w-10 h-10 rounded-full border border-[#090F05]/10 bg-[#FFFFFF]/80 text-[#090F05] backdrop-blur-sm dark:border-white/15 dark:bg-white/10 dark:text-white flex items-center justify-center">
           <ArrowUpRight className="w-5 h-5" aria-hidden="true" />
         </div>
       </div>

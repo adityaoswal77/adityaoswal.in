@@ -30,7 +30,7 @@ vercel --prod    # deploy to production
 The theme toggle is a **persona switch**, not a color inversion. Both hero backgrounds react to the cursor — dark as pixels, light as paint ("same hand, different tool").
 
 - **Dark (default)** = the design engineer: black, Dither WebGL pixel wave, mono chips, glass surfaces, white text.
-- **Light** = the playful designer: pastels + one pop color, `PastelField` gouache blobs, sticker-tilted chips, highlighter sweeps, colored (never gray) shadows.
+- **Light** = Spade-inspired green and white (staging, Oct 2026; replaced the pastel + tangerine "playful designer" persona): white page, mint hero panel, near-black green ink, one lime accent, thin 1px line graphics (grids, corner-ticked label cards, edge rulers), mono labels/CTAs, Faculty Glyphic headings.
 
 Wiring: `next-themes` with `attribute="class"` → `.dark`/`.light` on `<html>`; Tailwind `darkMode: 'class'`. Tokens live in `app/globals.css` (`:root` = dark, `.light` overrides).
 
@@ -38,24 +38,26 @@ Wiring: `next-themes` with `attribute="class"` → `.dark`/`.light` on `<html>`;
 
 | Token | Value | Role |
 |---|---|---|
-| `--background` | `#FDFBF7` | gallery white (not cream) |
-| `--foreground` | `#2A2438` | warm violet-ink |
-| `--muted` | `#6E6580` | tinted gray |
-| `--border` | `#E9E2F2` | lavender-tinted |
-| pop | `#FF5C39` | tangerine — CTAs, highlighter, selection, pulse dot |
-| pastels | `#FFE8A3` butter · `#CBD5FF` periwinkle · `#FFD6E0` blush · `#D3EEC8` pistachio · `#C7E4FF` sky · `#C9F0DC` mint | blobs, card bases, chips |
+| `--background` | `#FFFFFF` | page |
+| `--foreground` | `#090F05` | near-black green ink (also the hard-coded light ink literal, replacing `#2A2438`) |
+| `--muted` | `#4A5B38` | olive secondary text |
+| `--border` | `#E2EADA` | green-tinted hairline |
+| `--mint` | `#F4FAED` | hero panel |
+| `--forest` / `--primary` | `#18280E` | primary CTA background, scroll band, card borders |
+| `--lime` | `#B2EB76` | the one accent: CTA text on forest, highlighter, selection (text on lime is ink) |
 
-Per-project pastels are in `lib/data.ts` (`pastel` / `pastelHover` — flat base, saturated cousin on hover).
+Per-project tints in `lib/data.ts` (`pastel`) are now four greens; `accent` still drives dark mode only.
+
+- **Headings**: `:where(.light) h1, h2` use Faculty Glyphic (single weight, `font-synthesis: none`, so bold/italic utilities render regular). `:where()` keeps specificity low so `font-sans` on writing pages still wins. Dark keeps Instrument Serif. Mono is Geist Mono (loaded in the same Google Fonts import).
+- **Line graphics**: `components/LineGraphics.tsx` — `LineCard` (mono label + value, 1px border, corner ticks), `HeroPanel` (light hero backdrop: mint panel, masked 56px grid, edge rulers, label cards that drift on scroll and follow the cursor slightly, `xl+` only) and `ScrollBand` (forest band after Collaborations; label cards rise/fade with section scroll progress; dark variant is zinc-950 + violet). All motion is off under reduced motion.
 
 ### Patterns
 
 - **Authoring rule**: light styles are the default classes, dark keeps the original design behind `dark:` variants (e.g. `hidden dark:block` for black overlays, `dark:hidden` for pastel layers).
-- **Homepage Hero backdrop**: dark = `Dither` (WebGL pixel wave). Light = `WarpBackground` (`components/ui/warp-background.tsx`) — a 3D perspective grid tunnel with beams falling toward the vanishing point, `gridColor="var(--border)"` (lavender), beams in the light-persona palette (tangerine pop first, then pastels). Rendered only when `isLight` (`app/page.tsx` Hero backdrop `div`); dark keeps Dither. The CTA/heading accent/badge dot still use the one-off blue (`#2554EB`), not tangerine. `.marker-highlight` and `PastelField.tsx` remain **unused/orphaned** — don't re-wire them into Hero without asking. (Earlier the light hero was a flat `var(--background)` with no animated backdrop; the warp backdrop superseded that on user request.)
-- **Light hero edge fade**: the warp grid's near-plane creates a hard rectangular "window" edge in the middle of the viewport (an artifact of the CSS 3D perspective technique, not a real container border). Two `isLight`-only overlay `div`s on top of it soften this: a `backdrop-blur-md` ring masked with `[mask-image:radial-gradient(ellipse_65%_65%_at_center,transparent_35%,black_100%)]` (blur only kicks in away from center) plus a matching `radial-gradient(transparent 40%, var(--background) 100%)` vignette. Both need `-webkit-mask-image` alongside `mask-image` for Safari. Tune by eye against the actual rendered corner — the visible "window" size doesn't map cleanly to simple percent-of-viewport math because of the perspective transform.
-- **`WarpBackground` was ported from Tailwind v4 → v3**: the 21st.dev/Magic UI source used v4-only utilities (`size-full`, `bg-size-[]`, `perspective-()`, `transform-3d`, `@container`, `left-(--x)`) — all rewritten as v3 arbitrary properties (`[container-type:size]`, `[perspective:var(--perspective)]`, `[transform-style:preserve-3d]`, `left-[var(--x)]`, etc.). Beams are **deterministic** (delay/aspect/color derived from index, not `Math.random`) to avoid SSR hydration mismatch, and animation is gated on `useReducedMotion`. Import is `framer-motion`, not `motion/react`. Installed via the public Magic UI registry (`https://magicui.design/r/warp-background`) — the 21st.dev URL 404s without auth.
+- **Homepage Hero backdrop**: dark = `Dither` (WebGL pixel wave). Light = `HeroPanel` from `components/LineGraphics.tsx` (replaced `WarpBackground` and its blur/vignette overlays, which are no longer used on the homepage). Light CTAs are forest `#18280E` with lime mono text; "Product designer" carries a lime highlighter band.
 - **`.marker-highlight`** (globals.css): tangerine highlighter sweep behind a headline word; animates in light only, static fill under reduced motion, no-op in dark. Not currently used anywhere (see Hero exception above).
-- **Text on tangerine is ink `#2A2438`, never white** — white fails WCAG AA (3.07:1); ink passes (4.86:1).
-- Playful touches live in light only: `-rotate-2` sticker chips, `hover:-rotate-1` CTA tilt, `rounded-[1.5rem]` cards (dark stays `1rem`).
+- **Text on lime `#B2EB76` is ink `#090F05`; lime text only on forest `#18280E`** — lime on white fails contrast.
+- Light keeps `rounded-[1.5rem]` cards (dark stays `1rem`); the old sticker tilts and CTA hover tilt are gone from the homepage hero.
 
 ### Tailwind gotchas (learned the hard way)
 

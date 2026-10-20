@@ -24,7 +24,7 @@ export function SpecimenWork() {
 
   return (
     <div className="mx-auto max-w-6xl px-6 pb-24 pt-32 md:pt-40">
-      <h1 className="text-4xl font-black tracking-tight text-[#2A2438] dark:text-white md:text-6xl">Work</h1>
+      <h1 className="text-4xl font-black tracking-tight text-[#090F05] dark:text-white md:text-6xl">Work</h1>
       <p className="mt-3 max-w-xl text-[var(--muted)]">
         Each project comes with a small working piece of it. Filter by type, try it, then read the case study.
       </p>
@@ -36,10 +36,10 @@ export function SpecimenWork() {
             type="button"
             aria-pressed={selected === category}
             onClick={() => setSelected(category)}
-            className={`rounded-full border px-4 py-2 text-xs font-bold uppercase tracking-widest transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A2438] dark:rounded-md dark:font-mono dark:focus-visible:ring-white ${
+            className={`rounded-full border px-4 py-2 text-xs font-bold uppercase tracking-widest transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#090F05] dark:rounded-md dark:font-mono dark:focus-visible:ring-white ${
               selected === category
-                ? "-rotate-1 border-[#2A2438] bg-[#FF5C39] text-[#2A2438] dark:rotate-0 dark:border-white dark:bg-white dark:text-black"
-                : `${i % 2 ? "rotate-1" : "-rotate-1"} border-[var(--border)] bg-white/70 text-[#6E6580] hover:text-[#2A2438] dark:rotate-0 dark:bg-transparent dark:text-zinc-400 dark:hover:text-white`
+                ? "-rotate-1 border-[#090F05] bg-[#B2EB76] text-[#090F05] dark:rotate-0 dark:border-white dark:bg-white dark:text-black"
+                : `${i % 2 ? "rotate-1" : "-rotate-1"} border-[var(--border)] bg-white/70 text-[#4A5B38] hover:text-[#090F05] dark:rotate-0 dark:bg-transparent dark:text-zinc-400 dark:hover:text-white`
             }`}
           >
             {category}

@@ -63,7 +63,7 @@ export default function FlexPage() {
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center justify-between gap-4 p-5 transition-colors hover:bg-[#2A2438]/[0.03] dark:hover:bg-white/[0.04]"
+              className="group flex items-center justify-between gap-4 p-5 transition-colors hover:bg-[#090F05]/[0.03] dark:hover:bg-white/[0.04]"
             >
               <span className="min-w-0">
                 <span className="block font-semibold text-[var(--foreground)]">{link.label}</span>
@@ -72,7 +72,7 @@ export default function FlexPage() {
                   {getDomain(link.url)}
                 </span>
               </span>
-              <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-[var(--border)] bg-[#2A2438]/5 transition-colors group-hover:bg-[#2A2438] group-hover:text-[#FDFBF7] dark:bg-white/5 dark:group-hover:bg-white dark:group-hover:text-black">
+              <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-[var(--border)] bg-[#090F05]/5 transition-colors group-hover:bg-[#090F05] group-hover:text-[#FFFFFF] dark:bg-white/5 dark:group-hover:bg-white dark:group-hover:text-black">
                 <ArrowUpRight className="h-4 w-4" aria-hidden />
               </span>
             </a>

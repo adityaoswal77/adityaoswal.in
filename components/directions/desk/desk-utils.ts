@@ -12,7 +12,7 @@ export const HAND =
   "[font-family:'Segoe_Print','Bradley_Hand','Marker_Felt','Comic_Sans_MS',cursive] dark:font-mono";
 
 export const FOCUS_RING =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A2438] focus-visible:ring-offset-2 dark:focus-visible:ring-white dark:focus-visible:ring-offset-black";
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#090F05] focus-visible:ring-offset-2 dark:focus-visible:ring-white dark:focus-visible:ring-offset-black";
 
 export const LINKEDIN_URL = "https://www.linkedin.com/in/oswaladitya/";
 export const RESUME_URL = "/r";

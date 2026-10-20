@@ -49,7 +49,7 @@ function Segmented<T extends string>({
   onChange: (v: T) => void;
 }) {
   return (
-    <div role="radiogroup" aria-label={label} className="inline-flex rounded-full border border-[#2A2438]/15 bg-white/70 p-0.5 dark:rounded-lg dark:border-white/10 dark:bg-white/5">
+    <div role="radiogroup" aria-label={label} className="inline-flex rounded-full border border-[#090F05]/15 bg-white/70 p-0.5 dark:rounded-lg dark:border-white/10 dark:bg-white/5">
       {options.map((o) => (
         <button
           key={o.value}
@@ -57,10 +57,10 @@ function Segmented<T extends string>({
           role="radio"
           aria-checked={value === o.value}
           onClick={() => onChange(o.value)}
-          className={`rounded-full px-3 py-1.5 text-xs font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A2438] dark:rounded-md dark:font-mono dark:focus-visible:ring-white ${
+          className={`rounded-full px-3 py-1.5 text-xs font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#090F05] dark:rounded-md dark:font-mono dark:focus-visible:ring-white ${
             value === o.value
-              ? "bg-[#FF5C39] text-[#2A2438] dark:bg-white dark:text-black"
-              : "text-[#6E6580] hover:text-[#2A2438] dark:text-zinc-400 dark:hover:text-white"
+              ? "bg-[#B2EB76] text-[#090F05] dark:bg-white dark:text-black"
+              : "text-[#4A5B38] hover:text-[#090F05] dark:text-zinc-400 dark:hover:text-white"
           }`}
         >
           {o.label}
@@ -148,13 +148,13 @@ export function TokenPlayground({ size = "sm" }: { size?: "sm" | "lg" }) {
           </div>
         </div>
 
-        <dl className="grid grid-cols-2 gap-x-3 gap-y-1.5 font-mono text-[11px] text-[#6E6580] dark:text-zinc-400">
+        <dl className="grid grid-cols-2 gap-x-3 gap-y-1.5 font-mono text-[11px] text-[#4A5B38] dark:text-zinc-400">
           {tokenRows.map(([role, token]) => (
             <div key={role} className="flex items-center gap-2">
               <span className="h-3 w-3 shrink-0 rounded-sm border border-black/10 dark:border-white/20" style={{ backgroundColor: token.hex }} aria-hidden="true" />
               <dt className="sr-only">{role}</dt>
               <dd className="truncate">
-                {role} <span className="text-[#2A2438] dark:text-white">{token.name}</span>
+                {role} <span className="text-[#090F05] dark:text-white">{token.name}</span>
               </dd>
             </div>
           ))}

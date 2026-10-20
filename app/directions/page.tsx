@@ -32,7 +32,7 @@ export default function DirectionsPage() {
             <li key={d.href}>
               <Link
                 href={d.href}
-                className="group flex items-center justify-between gap-6 py-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A2438] dark:focus-visible:ring-white rounded"
+                className="group flex items-center justify-between gap-6 py-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#090F05] dark:focus-visible:ring-white rounded"
               >
                 <div>
                   <p className="text-xl font-semibold">{d.title}</p>

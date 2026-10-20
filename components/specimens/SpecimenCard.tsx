@@ -42,21 +42,21 @@ export function SpecimenCard({ project, size = "sm", index = 0 }: { project: Pro
         {categories.map((cat) => (
           <span
             key={cat}
-            className={`${tilt} inline-block rounded-full bg-white/80 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-[#2A2438] shadow-[0_3px_0_var(--sp-shadow)] dark:rotate-0 dark:rounded-md dark:border dark:border-white/15 dark:bg-transparent dark:font-mono dark:font-medium dark:text-white/60 dark:shadow-none`}
+            className={`${tilt} inline-block rounded-full bg-white/80 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-[#090F05] shadow-[0_3px_0_var(--sp-shadow)] dark:rotate-0 dark:rounded-md dark:border dark:border-white/15 dark:bg-transparent dark:font-mono dark:font-medium dark:text-white/60 dark:shadow-none`}
           >
             {cat}
           </span>
         ))}
       </div>
-      <h3 className="mt-3 text-2xl font-bold tracking-tight text-[#2A2438] dark:text-white md:text-3xl">{project.title}</h3>
-      <p className="mt-2 text-sm font-medium leading-relaxed text-[#2A2438]/75 dark:text-white/60">{project.description}</p>
+      <h3 className="mt-3 text-2xl font-bold tracking-tight text-[#090F05] dark:text-white md:text-3xl">{project.title}</h3>
+      <p className="mt-2 text-sm font-medium leading-relaxed text-[#090F05]/75 dark:text-white/60">{project.description}</p>
     </div>
   );
 
   const link = (
     <Link
       href={project.href}
-      className="inline-flex items-center gap-2 self-start rounded-full bg-[#FF5C39] px-5 py-2.5 text-sm font-bold text-[#2A2438] shadow-[0_6px_0_-2px_var(--sp-shadow)] transition-transform hover:-rotate-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A2438] focus-visible:ring-offset-2 dark:rounded-lg dark:bg-white dark:font-mono dark:text-black dark:shadow-none dark:hover:rotate-0 dark:focus-visible:ring-white dark:focus-visible:ring-offset-black motion-reduce:transition-none"
+      className="inline-flex items-center gap-2 self-start rounded-full bg-[#B2EB76] px-5 py-2.5 text-sm font-bold text-[#090F05] shadow-[0_6px_0_-2px_var(--sp-shadow)] transition-transform hover:-rotate-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#090F05] focus-visible:ring-offset-2 dark:rounded-lg dark:bg-white dark:font-mono dark:text-black dark:shadow-none dark:hover:rotate-0 dark:focus-visible:ring-white dark:focus-visible:ring-offset-black motion-reduce:transition-none"
     >
       Read case study <ArrowRight className="h-4 w-4" aria-hidden="true" />
       <span className="sr-only"> for {project.title}</span>

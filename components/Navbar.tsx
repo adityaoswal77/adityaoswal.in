@@ -128,7 +128,7 @@ export default function Navbar() {
                     <Link
                       href={item.href}
                       aria-current={isActive ? "page" : undefined}
-                      className={`block rounded-lg px-3 py-2 text-sm font-medium transition-colors data-[focus]:bg-[#2A2438]/5 dark:data-[focus]:bg-white/5 data-[focus]:text-[var(--foreground)] ${isActive ? "text-[var(--foreground)]" : "text-[var(--muted)]"
+                      className={`block rounded-lg px-3 py-2 text-sm font-medium transition-colors data-[focus]:bg-[#090F05]/5 dark:data-[focus]:bg-white/5 data-[focus]:text-[var(--foreground)] ${isActive ? "text-[var(--foreground)]" : "text-[var(--muted)]"
                         }`}
                     >
                       {item.name}
@@ -228,8 +228,8 @@ export default function Navbar() {
                               href={item.href}
                               aria-current={isActivePath(pathname, item.href) ? "page" : undefined}
                               className={`block w-full px-4 py-3 text-sm font-bold uppercase tracking-widest rounded-xl transition-all duration-300 ${isActivePath(pathname, item.href)
-                                ? "text-[var(--foreground)] bg-[#2A2438]/5 dark:bg-white/5"
-                                : "text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[#2A2438]/5 dark:hover:bg-white/5"
+                                ? "text-[var(--foreground)] bg-[#090F05]/5 dark:bg-white/5"
+                                : "text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[#090F05]/5 dark:hover:bg-white/5"
                                 }`}
                             >
                               {item.name}

@@ -10,7 +10,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { PROJECTS } from "@/lib/data";
 import { WorkCard } from "@/components/WorkCard";
-import { WarpBackground } from "@/components/ui/warp-background";
+import { HeroPanel, ScrollBand } from "@/components/LineGraphics";
 
 gsap.registerPlugin(ScrollTrigger);
 import Collaborations from "@/components/Collaborations";
@@ -57,13 +57,7 @@ const Hero = () => {
     >
       <div className="absolute inset-0 z-0">
         {!mounted ? null : isLight ? (
-          <WarpBackground
-            className="h-full w-full rounded-none border-0 p-0 bg-[var(--background)]"
-            gridColor="var(--border)"
-            perspective={120}
-            beamsPerSide={4}
-            beamDuration={4}
-          />
+          <HeroPanel />
         ) : (
           <Dither
             baseColor={[0, 0, 0]}
@@ -78,34 +72,6 @@ const Hero = () => {
             mouseRadius={0.4}
           />
         )}
-        {/* Light: soften the grid's hard frame edge — blur ring, then fade to page background */}
-        {isLight && (
-          <>
-            {/* The mask already keeps the center 35%-of-ellipse fully transparent — backdrop-filter
-                still computes over that dead area first, since mask-image is applied after the filter
-                pass. clip-path cuts that guaranteed-invisible center out of the element's paint bounds
-                before the blur runs, so the browser has less backdrop to sample/blur — a genuine (if
-                bounded, since the falloff itself spans most of the box) reduction in work, not just a
-                different way of hiding it. The clip rectangle (34%-66%) is inset from the mask's true
-                transparent ellipse (~22.75% half-extent) so it never eats into the visible gradient. */}
-            <div
-              className="absolute inset-0 pointer-events-none backdrop-blur-md [mask-image:radial-gradient(ellipse_65%_65%_at_center,transparent_35%,black_100%)] [-webkit-mask-image:radial-gradient(ellipse_65%_65%_at_center,transparent_35%,black_100%)]"
-              style={{
-                clipPath:
-                  "polygon(evenodd, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 34% 34%, 34% 66%, 66% 66%, 66% 34%, 34% 34%, 0% 0%)",
-                WebkitClipPath:
-                  "polygon(evenodd, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 34% 34%, 34% 66%, 66% 66%, 66% 34%, 34% 34%, 0% 0%)",
-              }}
-            />
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background:
-                  "radial-gradient(ellipse 65% 65% at center, transparent 40%, var(--background) 100%)",
-              }}
-            />
-          </>
-        )}
       </div>
       <div className="atmospheric-glow z-[1] hidden dark:block" />
 
@@ -113,10 +79,10 @@ const Hero = () => {
         {/* Badge */}
         <div
           ref={badgeRef}
-          className="mb-8 px-3 sm:px-4 py-1.5 rounded-full border border-[#2A2438]/15 bg-[#FFE8A3]/70 dark:border-white/10 dark:bg-white/[0.08] backdrop-blur-lg flex items-center gap-2"
+          className="mb-8 px-3 sm:px-4 py-1.5 rounded-md border border-[#18280E]/15 bg-white/80 dark:rounded-full dark:border-white/10 dark:bg-white/[0.08] backdrop-blur-lg flex items-center gap-2"
         >
-          <div className="w-1.5 h-1.5 rounded-full bg-[#2554EB] dark:bg-violet-900 motion-safe:animate-pulse" />
-          <span className="text-[14px] uppercase tracking-tight sm:tracking-[0.1em] font-bold text-[var(--foreground)] dark:text-[var(--muted)]">
+          <div className="w-1.5 h-1.5 rounded-full bg-[#B2EB76] ring-1 ring-[#18280E]/40 dark:ring-0 dark:bg-violet-900 motion-safe:animate-pulse" />
+          <span className="font-mono text-[13px] uppercase tracking-[0.08em] font-medium text-[var(--foreground)] dark:font-sans dark:text-[14px] dark:font-bold dark:tracking-tight dark:sm:tracking-[0.1em] dark:text-[var(--muted)]">
             <span className="sm:hidden">Bangalore · Worldwide</span>
             <span className="hidden sm:inline">Based in Bangalore · Working Globally</span>
           </span>
@@ -124,12 +90,12 @@ const Hero = () => {
 
         {/* Headline */}
         <div ref={headingRef} className="mb-8">
-          <h1 className="text-[2.5rem] sm:text-6xl md:text-8xl lg:text-[8rem] font-semibold leading-[0.9] tracking-wide text-[var(--foreground)]">
+          <h1 className="text-[2.5rem] sm:text-6xl md:text-7xl lg:text-[6.5rem] leading-[0.95] text-[var(--foreground)] dark:md:text-8xl dark:lg:text-[8rem] dark:font-semibold dark:leading-[0.9] dark:tracking-wide">
             I&apos;m Aditya,
             <br />
-            <span className="italic font-light text-[var(--muted)] tracking-normal capitalize">
+            <span className="text-[var(--muted)] capitalize dark:italic dark:font-light dark:tracking-normal">
               {" "}
-              <span className="text-[#2554EB] dark:text-inherit">Product designer</span> + Engineer
+              <span className="text-[var(--foreground)] bg-[linear-gradient(transparent_64%,#B2EB76_64%,#B2EB76_92%,transparent_92%)] dark:bg-none dark:text-inherit">Product designer</span> + Engineer
             </span>
           </h1>
         </div>
@@ -138,7 +104,7 @@ const Hero = () => {
         <div ref={actionsRef} className="flex flex-col sm:flex-row items-center gap-4 pointer-events-auto">
           <Link
             href="/#work"
-            className="group relative flex items-center gap-2 bg-[#2554EB] text-white dark:bg-[var(--foreground)] dark:text-[var(--background)] px-6 py-3 sm:px-8 sm:py-4 rounded-2xl font-bold uppercase text-[14px] tracking-wider hover:opacity-90 hover:-rotate-1 dark:hover:rotate-0 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2554EB] focus-visible:ring-offset-2 dark:focus-visible:ring-white"
+            className="group relative flex items-center gap-2 bg-[#18280E] text-[#B2EB76] font-mono font-medium text-[15px] tracking-tight rounded-lg px-6 py-3 hover:bg-[#090F05] dark:bg-[var(--foreground)] dark:text-[var(--background)] dark:font-sans dark:font-bold dark:uppercase dark:text-[14px] dark:tracking-wider dark:rounded-2xl sm:dark:px-8 sm:dark:py-4 dark:hover:bg-[var(--foreground)] dark:hover:opacity-90 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#18280E] focus-visible:ring-offset-2 dark:focus-visible:ring-white"
           >
             View My Projects
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
@@ -147,7 +113,7 @@ const Hero = () => {
             rel="noopener noreferrer"
             target="_blank"
             href="https://www.linkedin.com/in/oswaladitya/"
-            className="flex items-center gap-2 bg-[#2A2438]/5 dark:bg-white/5 backdrop-blur-md border border-[var(--border)] text-[var(--foreground)] px-6 py-3 sm:px-8 sm:py-4 rounded-2xl font-bold uppercase text-[14px] tracking-wider hover:bg-[#2A2438]/10 dark:hover:bg-white/10 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A2438] focus-visible:ring-offset-2 dark:focus-visible:ring-white"
+            className="flex items-center gap-2 bg-[#090F05]/[0.04] dark:bg-white/5 backdrop-blur-md border border-[#18280E]/10 dark:border-[var(--border)] text-[var(--foreground)] font-mono font-medium text-[15px] tracking-tight rounded-lg px-6 py-3 dark:font-sans dark:font-bold dark:uppercase dark:text-[14px] dark:tracking-wider dark:rounded-2xl sm:dark:px-8 sm:dark:py-4 hover:bg-[#090F05]/[0.08] dark:hover:bg-white/10 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#090F05] focus-visible:ring-offset-2 dark:focus-visible:ring-white"
           >
             Contact Me
           </Link>
@@ -176,7 +142,7 @@ const Hero = () => {
           instead of two halves the backdrop-filter cost for this band with no visible seam. */}
       <div className="absolute bottom-0 left-0 right-0 h-48 z-10 pointer-events-none overflow-hidden">
         <div className="absolute inset-0 backdrop-blur-2xl [mask-image:linear-gradient(to_bottom,transparent_0%,black_60%,black_100%)]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#FDFBF7]/30 dark:via-black/30 to-[var(--background)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#FFFFFF]/30 dark:via-black/30 to-[var(--background)]" />
       </div>
     </section>
   );
@@ -272,9 +238,10 @@ const BentoGrid = () => {
 export default function Home() {
 
   return (
-    <div className="font-sans antialiased text-[var(--foreground)] selection:bg-[#FF5C39] selection:text-[#2A2438] dark:selection:bg-indigo-500 dark:selection:text-white">
+    <div className="font-sans antialiased text-[var(--foreground)] selection:bg-[#B2EB76] selection:text-[#090F05] dark:selection:bg-indigo-500 dark:selection:text-white">
       <Hero />
       <Collaborations />
+      <ScrollBand />
       <BentoGrid />
     </div>
   );

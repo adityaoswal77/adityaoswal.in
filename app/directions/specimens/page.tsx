@@ -6,7 +6,7 @@ import { SpecimenCard } from "@/components/specimens/SpecimenCard";
 
 export default function SpecimensHomePage() {
   return (
-    <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)] selection:bg-[#FF5C39] selection:text-[#2A2438] dark:selection:bg-indigo-500 dark:selection:text-white">
+    <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)] selection:bg-[#B2EB76] selection:text-[#090F05] dark:selection:bg-indigo-500 dark:selection:text-white">
       <SpecimenHero />
 
       <section id="work" className="mx-auto max-w-6xl px-6 pb-24">
@@ -17,7 +17,7 @@ export default function SpecimensHomePage() {
           </div>
           <Link
             href="/directions/specimens/work"
-            className="inline-flex items-center gap-2 text-sm font-semibold underline decoration-[#FF5C39] decoration-2 underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A2438] dark:font-mono dark:decoration-white/40 dark:focus-visible:ring-white"
+            className="inline-flex items-center gap-2 text-sm font-semibold underline decoration-[#B2EB76] decoration-2 underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#090F05] dark:font-mono dark:decoration-white/40 dark:focus-visible:ring-white"
           >
             All work <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>

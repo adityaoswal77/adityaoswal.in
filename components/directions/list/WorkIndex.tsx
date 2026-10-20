@@ -25,7 +25,7 @@ const TITLE_SIZE = {
 function CategoryChip({ category, className = "" }: { category: string; className?: string }) {
   return (
     <span
-      className={`inline-block w-fit whitespace-nowrap rounded-full bg-[var(--pastel)] px-3 py-1 text-sm font-medium text-[#2A2438] -rotate-2 dark:rotate-0 dark:rounded-none dark:bg-transparent dark:px-0 dark:py-0 dark:font-mono dark:uppercase dark:tracking-[0.12em] dark:text-white/60 ${className}`}
+      className={`inline-block w-fit whitespace-nowrap rounded-full bg-[var(--pastel)] px-3 py-1 text-sm font-medium text-[#090F05] -rotate-2 dark:rotate-0 dark:rounded-none dark:bg-transparent dark:px-0 dark:py-0 dark:font-mono dark:uppercase dark:tracking-[0.12em] dark:text-white/60 ${className}`}
     >
       {category}
     </span>
@@ -81,7 +81,7 @@ function Row({
       <div className="relative flex items-start gap-4 py-7 md:grid md:grid-cols-[4.5rem_minmax(0,1fr)_auto_3rem] md:items-center md:gap-x-6 md:py-10">
         <span
           aria-hidden="true"
-          className="hidden font-mono text-sm tabular-nums text-[var(--muted)] transition-[color,text-shadow] duration-300 group-data-[active=true]:text-[#2A2438] md:block dark:group-data-[active=true]:[color:color-mix(in_srgb,var(--accent)_55%,white)] dark:group-data-[active=true]:[text-shadow:0_0_18px_var(--accent)]"
+          className="hidden font-mono text-sm tabular-nums text-[var(--muted)] transition-[color,text-shadow] duration-300 group-data-[active=true]:text-[#090F05] md:block dark:group-data-[active=true]:[color:color-mix(in_srgb,var(--accent)_55%,white)] dark:group-data-[active=true]:[text-shadow:0_0_18px_var(--accent)]"
         >
           {indexLabel(project)}
         </span>
@@ -96,7 +96,7 @@ function Row({
           <h3 className={`${TITLE_SIZE[size]} font-semibold leading-[0.98] tracking-[-0.045em] [font-family:var(--font-geist)]`}>
             <Link
               href={project.href}
-              className="text-[#2A2438] outline-none after:absolute after:inset-0 after:content-[''] focus-visible:after:ring-2 focus-visible:after:ring-inset focus-visible:after:ring-[#2A2438] dark:text-white dark:focus-visible:after:ring-white dark:group-data-[active=true]:[text-shadow:0_0_36px_var(--accent)]"
+              className="text-[#090F05] outline-none after:absolute after:inset-0 after:content-[''] focus-visible:after:ring-2 focus-visible:after:ring-inset focus-visible:after:ring-[#090F05] dark:text-white dark:focus-visible:after:ring-white dark:group-data-[active=true]:[text-shadow:0_0_36px_var(--accent)]"
             >
               <span className="bg-no-repeat transition-[background-size] duration-500 ease-out [-webkit-box-decoration-break:clone] [background-image:linear-gradient(var(--pastel),var(--pastel))] [background-position:0_88%] [background-size:0%_58%] [box-decoration-break:clone] group-data-[active=true]:[background-size:100%_58%] motion-reduce:transition-none dark:[background-image:none]">
                 {project.title}
@@ -111,17 +111,17 @@ function Row({
         <div className="flex shrink-0 items-center justify-end">
           <ArrowUpRight
             aria-hidden="true"
-            className={`${SHOW_ON_HOVER_DEVICES} h-7 w-7 text-[var(--muted)] transition-[transform,color] duration-300 group-data-[active=true]:-translate-y-1 group-data-[active=true]:translate-x-1 group-data-[active=true]:text-[#2A2438] md:h-9 md:w-9 dark:group-data-[active=true]:text-white`}
+            className={`${SHOW_ON_HOVER_DEVICES} h-7 w-7 text-[var(--muted)] transition-[transform,color] duration-300 group-data-[active=true]:-translate-y-1 group-data-[active=true]:translate-x-1 group-data-[active=true]:text-[#090F05] md:h-9 md:w-9 dark:group-data-[active=true]:text-white`}
           />
           <button
             type="button"
             aria-expanded={open}
             aria-controls={panelId}
             onClick={() => setOpen((v) => !v)}
-            className={`relative z-10 ${HIDE_ON_HOVER_DEVICES} grid h-11 w-11 place-items-center rounded-full border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A2438] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)] dark:focus-visible:ring-white ${
+            className={`relative z-10 ${HIDE_ON_HOVER_DEVICES} grid h-11 w-11 place-items-center rounded-full border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#090F05] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)] dark:focus-visible:ring-white ${
               open
-                ? "border-transparent bg-[#FF5C39] text-[#2A2438] dark:bg-white dark:text-black"
-                : "border-[#2A2438]/25 text-[#2A2438] dark:border-white/25 dark:text-white"
+                ? "border-transparent bg-[#B2EB76] text-[#090F05] dark:bg-white dark:text-black"
+                : "border-[#090F05]/25 text-[#090F05] dark:border-white/25 dark:text-white"
             }`}
           >
             <Plus
@@ -152,7 +152,7 @@ function Row({
               </div>
               <Link
                 href={project.href}
-                className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#FF5C39] px-5 py-3 text-sm font-semibold text-[#2A2438] transition-transform hover:-rotate-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A2438] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)] dark:bg-white dark:text-black dark:hover:rotate-0 dark:focus-visible:ring-white"
+                className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#B2EB76] px-5 py-3 text-sm font-semibold text-[#090F05] transition-transform hover:-rotate-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#090F05] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)] dark:bg-white dark:text-black dark:hover:rotate-0 dark:focus-visible:ring-white"
               >
                 Read case study
                 <ArrowRight aria-hidden="true" className="h-4 w-4" />

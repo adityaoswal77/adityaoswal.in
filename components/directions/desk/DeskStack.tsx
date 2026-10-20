@@ -11,7 +11,7 @@ export function DeskStack() {
   return (
     <section
       aria-label="Desk"
-      className={`${STACK_ONLY} relative overflow-x-clip px-6 pb-16 pt-28 [background-image:radial-gradient(#E9E2F2_1.4px,transparent_1.4px)] [background-size:24px_24px] dark:[background-image:linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] dark:[background-size:32px_32px]`}
+      className={`${STACK_ONLY} relative overflow-x-clip px-6 pb-16 pt-28 [background-image:radial-gradient(#E2EADA_1.4px,transparent_1.4px)] [background-size:24px_24px] dark:[background-image:linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] dark:[background-size:32px_32px]`}
     >
       <div className="relative mx-auto max-w-sm">
         <FlowerSticker className="pointer-events-none absolute -right-2 -top-4 w-14 rotate-[-10deg]" />

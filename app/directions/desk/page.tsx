@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function DeskPage() {
   return (
-    <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)] selection:bg-[#FF5C39] selection:text-[#2A2438] dark:selection:bg-violet-500 dark:selection:text-white">
+    <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)] selection:bg-[#B2EB76] selection:text-[#090F05] dark:selection:bg-violet-500 dark:selection:text-white">
       <DeskCanvas />
       <DeskStack />
       <WorkList />

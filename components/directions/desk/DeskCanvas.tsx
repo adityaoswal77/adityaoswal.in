@@ -176,7 +176,7 @@ export function DeskCanvas() {
   return (
     <section
       aria-label="Desk"
-      className={`${DESK_ONLY} relative overflow-x-clip pt-28 [background-image:radial-gradient(#E9E2F2_1.4px,transparent_1.4px)] [background-size:24px_24px] dark:[background-image:linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] dark:[background-size:40px_40px]`}
+      className={`${DESK_ONLY} relative overflow-x-clip pt-28 [background-image:radial-gradient(#E2EADA_1.4px,transparent_1.4px)] [background-size:24px_24px] dark:[background-image:linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] dark:[background-size:40px_40px]`}
     >
       <div
         aria-hidden="true"
@@ -190,14 +190,14 @@ export function DeskCanvas() {
         <DeskIntro className="absolute left-[5%] top-[3%] z-[1] w-[28%]" />
 
         <div className="absolute right-4 top-0 z-[200] flex items-center gap-2">
-          <p className="flex items-center gap-1.5 rounded-full border border-[#2A2438]/15 bg-white/80 px-3 py-1.5 text-xs font-bold text-[#2A2438] dark:rounded-md dark:border-white/15 dark:bg-black/70 dark:font-mono dark:text-white/80">
+          <p className="flex items-center gap-1.5 rounded-full border border-[#090F05]/15 bg-white/80 px-3 py-1.5 text-xs font-bold text-[#090F05] dark:rounded-md dark:border-white/15 dark:bg-black/70 dark:font-mono dark:text-white/80">
             <Hand className="h-3.5 w-3.5" aria-hidden="true" />
             Drag things around
           </p>
           <button
             type="button"
             onClick={tidy}
-            className={`flex items-center gap-1.5 rounded-full bg-[#FF5C39] px-3.5 py-1.5 text-xs font-bold text-[#2A2438] hover:-rotate-1 motion-reduce:hover:rotate-0 dark:rounded-md dark:border dark:border-violet-400/50 dark:bg-violet-500/10 dark:font-mono dark:text-violet-200 dark:hover:bg-violet-500/25 ${FOCUS_RING}`}
+            className={`flex items-center gap-1.5 rounded-full bg-[#B2EB76] px-3.5 py-1.5 text-xs font-bold text-[#090F05] hover:-rotate-1 motion-reduce:hover:rotate-0 dark:rounded-md dark:border dark:border-violet-400/50 dark:bg-violet-500/10 dark:font-mono dark:text-violet-200 dark:hover:bg-violet-500/25 ${FOCUS_RING}`}
           >
             <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
             Tidy up

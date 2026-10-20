@@ -17,7 +17,7 @@ export function PlacesMini({ video, size = "sm" }: { video: string; size?: "sm" 
 
   return (
     <div className={`grid gap-3 p-4 ${size === "lg" ? "md:grid-cols-[1fr_1.15fr]" : "sm:grid-cols-2"}`}>
-      <div className={`relative overflow-hidden rounded-xl border border-[#4C63D2]/25 bg-[#2A2438] dark:rounded-lg dark:border-white/10 dark:bg-black ${size === "lg" ? "h-[320px] md:h-full md:min-h-[340px]" : "h-[220px] sm:h-full sm:min-h-[260px]"}`}>
+      <div className={`relative overflow-hidden rounded-xl border border-[#4C63D2]/25 bg-[#090F05] dark:rounded-lg dark:border-white/10 dark:bg-black ${size === "lg" ? "h-[320px] md:h-full md:min-h-[340px]" : "h-[220px] sm:h-full sm:min-h-[260px]"}`}>
         <SpecimenVideo
           src={video}
           label="Screen recording of the Interesting Places app"
@@ -52,8 +52,8 @@ export function PlacesMini({ video, size = "sm" }: { video: string; size?: "sm" 
                 <span
                   className={`flex h-7 w-7 items-center justify-center rounded-full border-2 transition-transform duration-200 motion-reduce:transition-none ${
                     on
-                      ? "scale-110 border-[#2A2438] bg-[#FF5C39] text-[#2A2438] dark:border-white dark:bg-white dark:text-black"
-                      : "border-[#2A2438]/40 bg-white text-[#4C63D2] dark:border-white/30 dark:bg-zinc-900 dark:text-white/70"
+                      ? "scale-110 border-[#090F05] bg-[#B2EB76] text-[#090F05] dark:border-white dark:bg-white dark:text-black"
+                      : "border-[#090F05]/40 bg-white text-[#4C63D2] dark:border-white/30 dark:bg-zinc-900 dark:text-white/70"
                   }`}
                 >
                   <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
@@ -71,9 +71,9 @@ export function PlacesMini({ video, size = "sm" }: { video: string; size?: "sm" 
           aria-live="polite"
           className="rounded-xl border border-[#4C63D2]/25 bg-white/80 p-3 dark:rounded-lg dark:border-white/10 dark:bg-white/5"
         >
-          <p className="text-sm font-bold text-[#2A2438] dark:text-white">{place.name}</p>
-          <p className="mt-0.5 font-mono text-[11px] uppercase tracking-wider text-[#6E6580] dark:text-zinc-400">{place.region}</p>
-          <p className="mt-1.5 text-xs leading-relaxed text-[#2A2438]/80 dark:text-zinc-300">{place.note}</p>
+          <p className="text-sm font-bold text-[#090F05] dark:text-white">{place.name}</p>
+          <p className="mt-0.5 font-mono text-[11px] uppercase tracking-wider text-[#4A5B38] dark:text-zinc-400">{place.region}</p>
+          <p className="mt-1.5 text-xs leading-relaxed text-[#090F05]/80 dark:text-zinc-300">{place.note}</p>
         </div>
       </div>
     </div>

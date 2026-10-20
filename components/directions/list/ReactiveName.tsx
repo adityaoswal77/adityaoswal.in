@@ -62,7 +62,7 @@ function Letter({
     <span ref={ref} className="inline-block">
       <motion.span
         style={style}
-        className="inline-block will-change-transform [color:color-mix(in_srgb,#FF5C39_calc(var(--n,0)*100%),#2A2438)] dark:[color:#fff] dark:[text-shadow:0_0_calc(var(--n,0)*36px)_rgba(255,255,255,calc(var(--n,0)*0.55))]"
+        className="inline-block will-change-transform [color:color-mix(in_srgb,#B2EB76_calc(var(--n,0)*100%),#090F05)] dark:[color:#fff] dark:[text-shadow:0_0_calc(var(--n,0)*36px)_rgba(255,255,255,calc(var(--n,0)*0.55))]"
       >
         {char}
       </motion.span>
