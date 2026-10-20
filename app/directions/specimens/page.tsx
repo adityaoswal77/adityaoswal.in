@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { PROJECTS } from "@/lib/data";
-import { SpecimenHero } from "@/components/directions/specimens/SpecimenHero";
-import { SpecimenCard } from "@/components/directions/specimens/SpecimenCard";
+import { SpecimenHero } from "@/components/specimens/SpecimenHero";
+import { SpecimenCard } from "@/components/specimens/SpecimenCard";
 
 export default function SpecimensHomePage() {
   return (

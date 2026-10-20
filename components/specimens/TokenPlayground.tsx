@@ -7,20 +7,34 @@ import { Heart } from "lucide-react";
 type Mode = "light" | "dark";
 type Brand = "brand" | "premium";
 
-const TOKENS: Record<Brand, Record<Mode, { primary: string; onPrimary: string; soft: string }>> = {
+type Token = { name: string; hex: string };
+
+const TOKENS: Record<Brand, Record<Mode, { primary: Token; onPrimary: Token; soft: Token }>> = {
   brand: {
-    light: { primary: "#2C7BE5", onPrimary: "#FFFFFF", soft: "#E3EEFC" },
-    dark: { primary: "#5B9BF0", onPrimary: "#0E1420", soft: "#1B2B45" },
+    light: { primary: { name: "brand.600", hex: "#113A69" }, onPrimary: { name: "white", hex: "#FFFFFF" }, soft: { name: "brand.100", hex: "#F2F7FD" } },
+    dark: { primary: { name: "brand.300", hex: "#478FE1" }, onPrimary: { name: "brand.900", hex: "#030A12" }, soft: { name: "brand.500", hex: "#174E8C" } },
   },
   premium: {
-    light: { primary: "#6D3FC0", onPrimary: "#FFFFFF", soft: "#ECE3FA" },
-    dark: { primary: "#A98BEF", onPrimary: "#140E24", soft: "#2A1F45" },
+    light: { primary: { name: "premium.600", hex: "#6B4983" }, onPrimary: { name: "white", hex: "#FFFFFF" }, soft: { name: "premium.100", hex: "#EBE4F3" } },
+    dark: { primary: { name: "premium.300", hex: "#C2A0D9" }, onPrimary: { name: "premium.900", hex: "#1B1023" }, soft: { name: "premium.800", hex: "#3E2550" } },
   },
 };
 
-const SURFACES: Record<Mode, { bg: string; card: string; text: string; muted: string; line: string }> = {
-  light: { bg: "#F4F7FB", card: "#FFFFFF", text: "#1B2433", muted: "#5B6677", line: "#DCE3EE" },
-  dark: { bg: "#0E1420", card: "#172033", text: "#E8EDF5", muted: "#9AA6B8", line: "#27324A" },
+const SURFACES: Record<Mode, { bg: Token; card: Token; text: Token; muted: string; line: string }> = {
+  light: {
+    bg: { name: "brand.0", hex: "#F8FBFE" },
+    card: { name: "white", hex: "#FFFFFF" },
+    text: { name: "neutral.900", hex: "#182C3D" },
+    muted: "#182C3DB3",
+    line: "#C6CCD2",
+  },
+  dark: {
+    bg: { name: "brand.800", hex: "#061323" },
+    card: { name: "brand.700", hex: "#0C2746" },
+    text: { name: "brand.100", hex: "#F2F7FD" },
+    muted: "#B9D4F3",
+    line: "#174E8C",
+  },
 };
 
 function Segmented<T extends string>({
@@ -63,7 +77,7 @@ export function TokenPlayground({ size = "sm" }: { size?: "sm" | "lg" }) {
   const t = TOKENS[brand][mode];
   const s = SURFACES[mode];
 
-  const tokenRows: [string, string][] = [
+  const tokenRows: [string, Token][] = [
     ["primary", t.primary],
     ["surface", s.card],
     ["background", s.bg],
@@ -96,15 +110,15 @@ export function TokenPlayground({ size = "sm" }: { size?: "sm" | "lg" }) {
 
         <div
           className="rounded-2xl border p-4 transition-colors duration-300 motion-reduce:transition-none"
-          style={{ backgroundColor: s.bg, borderColor: s.line }}
+          style={{ backgroundColor: s.bg.hex, borderColor: s.line }}
         >
           <div
-            className="rounded-xl border p-4 transition-colors duration-300 motion-reduce:transition-none"
-            style={{ backgroundColor: s.card, borderColor: s.line, color: s.text }}
+            className="rounded-[8px] border p-4 transition-colors duration-300 motion-reduce:transition-none"
+            style={{ backgroundColor: s.card.hex, borderColor: s.line, color: s.text.hex }}
           >
             <span
               className="inline-block rounded-full px-2.5 py-1 text-[11px] font-bold transition-colors duration-300 motion-reduce:transition-none"
-              style={{ backgroundColor: t.soft, color: t.primary }}
+              style={{ backgroundColor: t.soft.hex, color: t.primary.hex }}
             >
               {brand === "brand" ? "KardiaMobile" : "KardiaCare"}
             </span>
@@ -115,8 +129,8 @@ export function TokenPlayground({ size = "sm" }: { size?: "sm" | "lg" }) {
             <div className="mt-4 flex items-center gap-2">
               <button
                 type="button"
-                className="rounded-xl px-4 py-2.5 text-sm font-bold transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 motion-reduce:transition-none"
-                style={{ backgroundColor: t.primary, color: t.onPrimary, ["--tw-ring-color" as string]: t.primary, ["--tw-ring-offset-color" as string]: s.card }}
+                className="rounded-[4px] px-4 py-2.5 text-sm font-bold transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 motion-reduce:transition-none"
+                style={{ backgroundColor: t.primary.hex, color: t.onPrimary.hex, ["--tw-ring-color" as string]: t.primary.hex, ["--tw-ring-offset-color" as string]: s.card.hex }}
               >
                 Continue
               </button>
@@ -126,7 +140,7 @@ export function TokenPlayground({ size = "sm" }: { size?: "sm" | "lg" }) {
                 aria-label="Favourite"
                 onClick={() => setLiked((l) => !l)}
                 className="flex h-10 w-10 items-center justify-center rounded-xl border transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 motion-reduce:transition-none"
-                style={{ borderColor: t.primary, color: t.primary, backgroundColor: liked ? t.soft : "transparent", ["--tw-ring-color" as string]: t.primary, ["--tw-ring-offset-color" as string]: s.card }}
+                style={{ borderColor: t.primary.hex, color: t.primary.hex, backgroundColor: liked ? t.soft.hex : "transparent", ["--tw-ring-color" as string]: t.primary.hex, ["--tw-ring-offset-color" as string]: s.card.hex }}
               >
                 <Heart className="h-4 w-4" fill={liked ? "currentColor" : "none"} aria-hidden="true" />
               </button>
@@ -135,12 +149,12 @@ export function TokenPlayground({ size = "sm" }: { size?: "sm" | "lg" }) {
         </div>
 
         <dl className="grid grid-cols-2 gap-x-3 gap-y-1.5 font-mono text-[11px] text-[#6E6580] dark:text-zinc-400">
-          {tokenRows.map(([name, value]) => (
-            <div key={name} className="flex items-center gap-2">
-              <span className="h-3 w-3 shrink-0 rounded-sm border border-black/10 dark:border-white/20" style={{ backgroundColor: value }} aria-hidden="true" />
-              <dt className="sr-only">{name}</dt>
+          {tokenRows.map(([role, token]) => (
+            <div key={role} className="flex items-center gap-2">
+              <span className="h-3 w-3 shrink-0 rounded-sm border border-black/10 dark:border-white/20" style={{ backgroundColor: token.hex }} aria-hidden="true" />
+              <dt className="sr-only">{role}</dt>
               <dd className="truncate">
-                {name} <span className="text-[#2A2438] dark:text-white">{value}</span>
+                {role} <span className="text-[#2A2438] dark:text-white">{token.name}</span>
               </dd>
             </div>
           ))}

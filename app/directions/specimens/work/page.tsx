@@ -1,4 +1,4 @@
-import { SpecimenWork } from "@/components/directions/specimens/SpecimenWork";
+import { SpecimenWork } from "@/components/specimens/SpecimenWork";
 
 export default function SpecimensWorkPage() {
   return (

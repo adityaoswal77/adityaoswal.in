@@ -4,7 +4,7 @@ export const PROJECTS = [
         title: "Interesting Places",
         category: "Side Project",
         span: "md:col-span-2",
-        description: "Discovering and sharing interesting places around the world.",
+        description: "A handpicked, veg-friendly guide to places to eat in India and Singapore.",
         color: "from-indigo-600",
         accent: "#4C63D2",
         pastel: "#CBD5FF",

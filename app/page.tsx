@@ -9,7 +9,7 @@ import dynamic from "next/dynamic";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { PROJECTS } from "@/lib/data";
-import { WorkCard } from "@/components/WorkCard";
+import { SpecimenCard } from "@/components/specimens/SpecimenCard";
 import { WarpBackground } from "@/components/ui/warp-background";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -252,14 +252,11 @@ const BentoGrid = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {PROJECTS.map((project) => (
-            <WorkCard
-              key={project.id}
-              project={project}
-              className={`project-card ${project.span}`}
-              heightClassName="h-[380px] md:h-[500px]"
-            />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {PROJECTS.map((project, i) => (
+            <div key={project.id} className="project-card">
+              <SpecimenCard project={project} index={i} />
+            </div>
           ))}
         </div>
       </div>

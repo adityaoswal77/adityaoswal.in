@@ -5,14 +5,14 @@ import { MapPin } from "lucide-react";
 import { SpecimenVideo } from "./SpecimenVideo";
 
 const PLACES = [
-  { id: "jaipur", name: "Hawa Mahal", region: "Jaipur, India", note: "A pink sandstone facade built so people could watch the street unseen.", x: 30, y: 24 },
-  { id: "hampi", name: "Hampi", region: "Karnataka, India", note: "Boulder-strewn ruins of the Vijayanagara capital.", x: 34, y: 56 },
-  { id: "dhanushkodi", name: "Dhanushkodi", region: "Tamil Nadu, India", note: "A ghost town at the tip of Pamban island.", x: 48, y: 82 },
-  { id: "gardens", name: "Gardens by the Bay", region: "Singapore", note: "Supertree structures and conservatories on the waterfront.", x: 84, y: 70 },
+  { id: "darshan", name: "Darshan Restaurant", region: "Pune", note: "Restaurant", x: 26, y: 34 },
+  { id: "aeka", name: "Aeka's Coffee - Creaticity", region: "Pune", note: "Café", x: 38, y: 26 },
+  { id: "ck-foods", name: "CK Foods Vada Pav", region: "Bengaluru", note: "Street food", x: 52, y: 74 },
+  { id: "mountain-bee", name: "Mountain Bee Kombucha Hive", region: "Bengaluru", note: "Café", x: 64, y: 82 },
 ] as const;
 
 export function PlacesMini({ video, size = "sm" }: { video: string; size?: "sm" | "lg" }) {
-  const [active, setActive] = useState<string>(PLACES[1].id);
+  const [active, setActive] = useState<string>(PLACES[0].id);
   const place = PLACES.find((p) => p.id === active) ?? PLACES[0];
 
   return (
@@ -62,7 +62,7 @@ export function PlacesMini({ video, size = "sm" }: { video: string; size?: "sm" 
             );
           })}
           <span className="pointer-events-none absolute bottom-2 left-2 font-mono text-[10px] uppercase tracking-widest text-[#4C63D2]/70 dark:text-white/40">
-            Sample pins
+            From the guide
           </span>
         </div>
 
