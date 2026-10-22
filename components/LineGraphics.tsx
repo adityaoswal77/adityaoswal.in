@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import {
   motion,
   useMotionValue,
@@ -11,25 +11,18 @@ import {
   type MotionValue,
 } from "framer-motion";
 
-type Tone = "light" | "band";
-
 export function LineCard({
   label,
   value,
-  tone = "light",
   className = "",
 }: {
   label: string;
   value: string;
-  tone?: Tone;
   className?: string;
 }) {
-  const box =
-    tone === "light"
-      ? "border-[#18280E]/20 bg-white/75 text-[#090F05] backdrop-blur-[2px]"
-      : "border-white/20 bg-[#18280E]/60 text-white/85 dark:border-white/15 dark:bg-black/60";
-  const tick = tone === "light" ? "border-[#18280E]/60" : "border-[#B2EB76]/70 dark:border-white/50";
-  const labelColor = tone === "light" ? "text-[#4A5B38]" : "text-[#B2EB76]/80 dark:text-violet-300/80";
+  const box = "border-[#18280E]/20 bg-white/75 text-[#090F05] backdrop-blur-[2px]";
+  const tick = "border-[#18280E]/60";
+  const labelColor = "text-[#4A5B38]";
 
   return (
     <div className={`relative border px-3.5 py-2.5 font-mono ${box} ${className}`}>
@@ -144,75 +137,5 @@ export function HeroPanel() {
         </div>
       </div>
     </div>
-  );
-}
-
-const BAND_CARDS = [
-  { label: "Role", value: "Product designer", pos: "left-[6%] top-[12%]", from: 160 },
-  { label: "Company", value: "AliveCor", pos: "right-[8%] top-[10%]", from: 220 },
-  { label: "Product", value: "KardiaMobile", pos: "left-[14%] top-[30%]", from: 120 },
-  { label: "System", value: "Kardia design system", pos: "right-[5%] top-[34%]", from: 260 },
-  { label: "Side project", value: "Interesting Places", pos: "left-[5%] top-[70%]", from: 300 },
-  { label: "Studio", value: "Freshfolios", pos: "right-[12%] top-[72%]", from: 180 },
-  { label: "Based", value: "Bangalore", pos: "left-[40%] top-[86%]", from: 240 },
-];
-
-function BandCard({
-  card,
-  progress,
-  reduce,
-}: {
-  card: (typeof BAND_CARDS)[number];
-  progress: MotionValue<number>;
-  reduce: boolean;
-}) {
-  const y = useTransform(progress, [0, 0.5, 1], [card.from, 0, -card.from * 0.6]);
-  const opacity = useTransform(progress, [0.1, 0.35, 0.75, 0.95], [0, 1, 1, 0]);
-  return (
-    <motion.div className={`absolute ${card.pos}`} style={reduce ? undefined : { y, opacity }}>
-      <LineCard label={card.label} value={card.value} tone="band" />
-    </motion.div>
-  );
-}
-
-export function ScrollBand() {
-  const ref = useRef<HTMLElement>(null);
-  const reduce = useReducedMotion() ?? false;
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const textY = useTransform(scrollYProgress, [0, 1], [60, -60]);
-
-  return (
-    <section ref={ref} className="px-3 py-10 md:px-8 md:py-16 bg-[var(--background)]">
-      <div className="relative flex min-h-[70vh] items-center justify-center overflow-hidden rounded-[1.25rem] bg-[#18280E] px-6 py-24 dark:rounded-[1rem] dark:border dark:border-white/10 dark:bg-zinc-950 md:min-h-[90vh]">
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 [mask-image:radial-gradient(ellipse_80%_70%_at_center,black_30%,transparent_95%)] [-webkit-mask-image:radial-gradient(ellipse_80%_70%_at_center,black_30%,transparent_95%)]"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)",
-            backgroundSize: "64px 64px",
-          }}
-        />
-        <div aria-hidden="true" className="hidden md:block">
-          {BAND_CARDS.map((card) => (
-            <BandCard key={card.label} card={card} progress={scrollYProgress} reduce={reduce} />
-          ))}
-        </div>
-
-        <motion.div className="relative z-10 max-w-3xl text-center" style={reduce ? undefined : { y: textY }}>
-          <h2 className="m-0 text-3xl leading-tight text-white sm:text-4xl md:text-5xl">
-            I design healthcare products at AliveCor,{" "}
-            <span className="text-[#B2EB76] dark:text-violet-300">and I build what I design.</span>
-          </h2>
-          <ul className="mt-10 flex flex-wrap justify-center gap-2 md:hidden">
-            {BAND_CARDS.slice(0, 4).map((card) => (
-              <li key={card.label}>
-                <LineCard label={card.label} value={card.value} tone="band" />
-              </li>
-            ))}
-          </ul>
-        </motion.div>
-      </div>
-    </section>
   );
 }

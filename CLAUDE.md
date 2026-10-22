@@ -49,7 +49,7 @@ Wiring: `next-themes` with `attribute="class"` → `.dark`/`.light` on `<html>`;
 Per-project tints in `lib/data.ts` (`pastel`) are now four greens; `accent` still drives dark mode only.
 
 - **Headings**: `:where(.light) h1, h2` use Faculty Glyphic (single weight, `font-synthesis: none`, so bold/italic utilities render regular). `:where()` keeps specificity low so `font-sans` on writing pages still wins. Dark keeps Instrument Serif. Mono is Geist Mono (loaded in the same Google Fonts import).
-- **Line graphics**: `components/LineGraphics.tsx` — `LineCard` (mono label + value, 1px border, corner ticks), `HeroPanel` (light hero backdrop: mint panel, masked 56px grid, edge rulers, label cards that drift on scroll and follow the cursor slightly, `xl+` only) and `ScrollBand` (forest band after Collaborations; label cards rise/fade with section scroll progress; dark variant is zinc-950 + violet). All motion is off under reduced motion.
+- **Line graphics**: `components/LineGraphics.tsx` — `LineCard` (mono label + value, 1px border, corner ticks), `HeroPanel` (light hero backdrop: mint panel, masked 56px grid, edge rulers, label cards that drift on scroll and follow the cursor slightly, `xl+` only). All motion is off under reduced motion. A forest `ScrollBand` section after Collaborations was tried and removed: its label cards repeated the hero's, so the page read as two heroes. Keep hero facts in one place.
 
 ### Patterns
 

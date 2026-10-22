@@ -10,7 +10,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { PROJECTS } from "@/lib/data";
 import { WorkCard } from "@/components/WorkCard";
-import { HeroPanel, ScrollBand } from "@/components/LineGraphics";
+import { HeroPanel } from "@/components/LineGraphics";
 
 gsap.registerPlugin(ScrollTrigger);
 import Collaborations from "@/components/Collaborations";
@@ -241,7 +241,6 @@ export default function Home() {
     <div className="font-sans antialiased text-[var(--foreground)] selection:bg-[#B2EB76] selection:text-[#090F05] dark:selection:bg-indigo-500 dark:selection:text-white">
       <Hero />
       <Collaborations />
-      <ScrollBand />
       <BentoGrid />
     </div>
   );
