@@ -11,18 +11,33 @@ import {
   type MotionValue,
 } from "framer-motion";
 
+export type LineCardTone = "light" | "dark";
+
+const CARD_TONES: Record<LineCardTone, { box: string; tick: string; label: string }> = {
+  light: {
+    box: "border-[#18280E]/20 bg-white/75 text-[#090F05] backdrop-blur-[2px]",
+    tick: "border-[#18280E]/60",
+    label: "text-[#4A5B38]",
+  },
+  dark: {
+    box: "border-white/20 bg-black/50 text-zinc-100 backdrop-blur",
+    tick: "border-white/50",
+    label: "text-violet-300/80",
+  },
+};
+
 export function LineCard({
   label,
   value,
   className = "",
+  tone = "light",
 }: {
   label: string;
   value: string;
   className?: string;
+  tone?: LineCardTone;
 }) {
-  const box = "border-[#18280E]/20 bg-white/75 text-[#090F05] backdrop-blur-[2px]";
-  const tick = "border-[#18280E]/60";
-  const labelColor = "text-[#4A5B38]";
+  const { box, tick, label: labelColor } = CARD_TONES[tone];
 
   return (
     <div className={`relative border px-3.5 py-2.5 font-mono ${box} ${className}`}>
@@ -60,41 +75,34 @@ function EdgeRuler({ side }: { side: "left" | "right" }) {
   );
 }
 
-const HERO_CARDS = [
-  { label: "Role", value: "Product designer", pos: "left-[9%] top-[19%]", depth: 1 },
-  { label: "Currently", value: "AliveCor", pos: "right-[9%] top-[23%]", depth: 0.6 },
-  { label: "Focus", value: "Healthcare · Design systems", pos: "left-[11%] top-[74%]", depth: 0.8 },
-  { label: "Based", value: "Bangalore", pos: "right-[12%] top-[78%]", depth: 1.2 },
+const HERO_FACTS = [
+  { label: "Role", value: "Product designer", depth: 1 },
+  { label: "Currently", value: "AliveCor", depth: 0.6 },
+  { label: "Focus", value: "Healthcare · Design systems", depth: 0.8 },
+  { label: "Based", value: "Bangalore", depth: 1.2 },
 ];
+
+const HERO_CARD_POS: Record<LineCardTone, string[]> = {
+  light: ["left-[9%] top-[19%]", "right-[9%] top-[23%]", "left-[11%] top-[74%]", "right-[12%] top-[78%]"],
+  dark: ["left-[2.5%] top-[17%]", "right-[2.5%] top-[22%]", "left-[3%] top-[72%]", "right-[3.5%] top-[77%]"],
+};
+
+const HERO_CARDS = HERO_FACTS.map((fact, i) => ({
+  ...fact,
+  light: HERO_CARD_POS.light[i],
+  dark: HERO_CARD_POS.dark[i],
+}));
 
 const PLUS_MARKS = ["left-[24%] top-[34%]", "right-[26%] top-[40%]", "left-[30%] top-[86%]", "right-[22%] top-[64%]"];
 
-function HeroCard({
-  card,
-  scrollY,
-  pointerX,
-  pointerY,
-  reduce,
-}: {
-  card: (typeof HERO_CARDS)[number];
+type HeroMotion = {
   scrollY: MotionValue<number>;
   pointerX: MotionValue<number>;
   pointerY: MotionValue<number>;
   reduce: boolean;
-}) {
-  const scrollShift = useTransform(scrollY, [0, 800], [0, -140 * card.depth]);
-  const px = useTransform(pointerX, (v) => v * 10 * card.depth);
-  const py = useTransform(pointerY, (v) => v * 8 * card.depth);
-  const y = useTransform([scrollShift, py], ([a, b]: number[]) => a + b);
+};
 
-  return (
-    <motion.div className={`absolute ${card.pos}`} style={reduce ? undefined : { x: px, y }}>
-      <LineCard label={card.label} value={card.value} />
-    </motion.div>
-  );
-}
-
-export function HeroPanel() {
+function useHeroMotion(): HeroMotion {
   const reduce = useReducedMotion() ?? false;
   const { scrollY } = useScroll();
   const rawX = useMotionValue(0);
@@ -111,6 +119,47 @@ export function HeroPanel() {
     window.addEventListener("pointermove", onMove, { passive: true });
     return () => window.removeEventListener("pointermove", onMove);
   }, [reduce, rawX, rawY]);
+
+  return { scrollY, pointerX, pointerY, reduce };
+}
+
+function HeroCard({
+  card,
+  tone,
+  scrollY,
+  pointerX,
+  pointerY,
+  reduce,
+}: HeroMotion & {
+  card: (typeof HERO_CARDS)[number];
+  tone: LineCardTone;
+}) {
+  const scrollShift = useTransform(scrollY, [0, 800], [0, -140 * card.depth]);
+  const px = useTransform(pointerX, (v) => v * 10 * card.depth);
+  const py = useTransform(pointerY, (v) => v * 8 * card.depth);
+  const y = useTransform([scrollShift, py], ([a, b]: number[]) => a + b);
+
+  return (
+    <motion.div className={`absolute ${card[tone]}`} style={reduce ? undefined : { x: px, y }}>
+      <LineCard label={card.label} value={card.value} tone={tone} className={tone === "dark" ? "max-w-[11rem]" : ""} />
+    </motion.div>
+  );
+}
+
+export function HeroCardsDark() {
+  const motionProps = useHeroMotion();
+
+  return (
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[11] hidden xl:block">
+      {HERO_CARDS.map((card) => (
+        <HeroCard key={card.label} card={card} tone="dark" {...motionProps} />
+      ))}
+    </div>
+  );
+}
+
+export function HeroPanel() {
+  const motionProps = useHeroMotion();
 
   return (
     <div aria-hidden="true" className="absolute inset-0">
@@ -132,7 +181,7 @@ export function HeroPanel() {
         ))}
         <div className="hidden xl:block">
           {HERO_CARDS.map((card) => (
-            <HeroCard key={card.label} card={card} scrollY={scrollY} pointerX={pointerX} pointerY={pointerY} reduce={reduce} />
+            <HeroCard key={card.label} card={card} tone="light" {...motionProps} />
           ))}
         </div>
       </div>

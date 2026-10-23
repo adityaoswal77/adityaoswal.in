@@ -92,22 +92,28 @@ function PixelChar({ facingRight, isWalking }: { facingRight: boolean; isWalking
 }
 
 // Chat FAB — fixed bottom-right on every breakpoint; the desktop character docks on top of it
-function ChatFab({ onClick }: { onClick: () => void }) {
+function ChatFab({ onClick, open }: { onClick: () => void; open: boolean }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      aria-label="Chat with Adi.Os"
-      className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-[var(--foreground)] text-[var(--background)] shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-150"
+      aria-label={open ? "Close chat" : "Chat with Adi.Os"}
+      className={`${open ? "max-md:hidden " : ""}fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-[var(--foreground)] text-[var(--background)] shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-150`}
     >
-      <svg width="28" height="28" viewBox="0 0 8 12" style={{ imageRendering: "pixelated" }}>
-        <rect x="2" y="0" width="4" height="4" fill="currentColor" />
-        <rect x="2.5" y="1.5" width="1" height="1" fill="var(--foreground)" style={{ fill: "var(--background)" }} />
-        <rect x="4.5" y="1.5" width="1" height="1" style={{ fill: "var(--background)" }} />
-        <rect x="1" y="4" width="6" height="4" fill="currentColor" />
-        <rect x="1.5" y="8" width="2" height="3" fill="currentColor" />
-        <rect x="4.5" y="8" width="2" height="3" fill="currentColor" />
-      </svg>
+      {open ? (
+        <svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" aria-hidden="true">
+          <path d="M3 3l10 10M13 3L3 13" />
+        </svg>
+      ) : (
+        <svg width="28" height="28" viewBox="0 0 8 12" style={{ imageRendering: "pixelated" }}>
+          <rect x="2" y="0" width="4" height="4" fill="currentColor" />
+          <rect x="2.5" y="1.5" width="1" height="1" fill="var(--foreground)" style={{ fill: "var(--background)" }} />
+          <rect x="4.5" y="1.5" width="1" height="1" style={{ fill: "var(--background)" }} />
+          <rect x="1" y="4" width="6" height="4" fill="currentColor" />
+          <rect x="1.5" y="8" width="2" height="3" fill="currentColor" />
+          <rect x="4.5" y="8" width="2" height="3" fill="currentColor" />
+        </svg>
+      )}
     </button>
   );
 }
@@ -397,7 +403,7 @@ export function WanderingCharacter() {
       </button>
 
       {/* Chat FAB — always mounted; desktop character docks on top of it when pinned */}
-      {!chatOpen && <ChatFab onClick={openChat} />}
+      <ChatFab onClick={chatOpen ? closeChat : openChat} open={chatOpen} />
 
       {/* Desktop wandering character — painted after the FAB so it visibly sits in/on it when docked */}
       <div aria-hidden="true" className="hidden md:block fixed inset-0 pointer-events-none z-40">

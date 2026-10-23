@@ -10,7 +10,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { PROJECTS } from "@/lib/data";
 import { WorkCard } from "@/components/WorkCard";
-import { HeroPanel } from "@/components/LineGraphics";
+import { HeroPanel, HeroCardsDark } from "@/components/LineGraphics";
 
 gsap.registerPlugin(ScrollTrigger);
 import Collaborations from "@/components/Collaborations";
@@ -73,6 +73,7 @@ const Hero = () => {
           />
         )}
       </div>
+      {mounted && !isLight && <HeroCardsDark />}
       <div className="atmospheric-glow z-[1] hidden dark:block" />
 
       <div className="relative z-10 flex flex-col items-center text-center max-w-4xl pointer-events-none">
@@ -183,7 +184,7 @@ const BentoGrid = () => {
           },
         });
         words.forEach((word, i) => {
-          tl.fromTo(word, { y: "110%" }, { y: "0%", ease: "power3.out", duration: 0.5 }, i * 0.2);
+          tl.fromTo(word, { y: "140%" }, { y: "0%", ease: "power3.out", duration: 0.5 }, i * 0.2);
         });
       }
     }, containerRef);
@@ -207,7 +208,7 @@ const BentoGrid = () => {
               className="text-4xl sm:text-5xl md:text-7xl font-black uppercase leading-[0.9] text-[var(--foreground)]"
             >
               {["Past", "&", "Current", "Projects"].map((word) => (
-                <span key={word} className="overflow-hidden inline-block align-bottom mr-[0.22em] last:mr-0">
+                <span key={word} className="overflow-hidden inline-block align-bottom mr-[0.22em] last:mr-0 pb-[0.2em] -mb-[0.2em]">
                   <span className="word-reveal inline-block">{word}</span>
                 </span>
               ))}

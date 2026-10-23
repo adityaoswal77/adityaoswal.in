@@ -25,7 +25,7 @@ export default function WorkPage() {
       },
     });
     words.forEach((word, i) => {
-      tl.fromTo(word, { y: "110%" }, { y: "0%", ease: "power3.out", duration: 0.5 }, i * 0.25);
+      tl.fromTo(word, { y: "140%" }, { y: "0%", ease: "power3.out", duration: 0.5 }, i * 0.25);
     });
     return () => { tl.kill(); };
   }, []);
@@ -56,11 +56,11 @@ export default function WorkPage() {
             ref={headingRef}
             className="text-[2.5rem] sm:text-6xl md:text-[8rem] font-black uppercase tracking-normal leading-[0.85] text-[var(--foreground)]"
           >
-            <span className="overflow-hidden inline-block align-bottom mr-[0.2em]">
+            <span className="overflow-hidden inline-block align-bottom mr-[0.2em] pb-[0.2em] -mb-[0.2em]">
               <span className="word-reveal inline-block">Selected</span>
             </span>
             <br />
-            <span className="overflow-hidden inline-block align-bottom italic font-light text-[var(--muted)]">
+            <span className="overflow-hidden inline-block align-bottom pb-[0.2em] -mb-[0.2em] italic font-light text-[var(--muted)]">
               <span className="word-reveal inline-block">projects</span>
             </span>
           </h1>
