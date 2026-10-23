@@ -275,9 +275,6 @@ export function AdiOs({ open, onClose }: AdiOsProps) {
                 </button>
               </form>
             )}
-            <p className="mt-2 text-center font-mono text-[9px] uppercase tracking-widest text-[var(--muted)] opacity-60">
-              Powered by Claude
-            </p>
           </div>
         </motion.div>
       )}

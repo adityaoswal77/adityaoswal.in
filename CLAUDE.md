@@ -117,7 +117,7 @@ Per-project tints in `lib/data.ts` (`pastel`) are now four greens; `accent` stil
 
 - **Component**: `components/AdiOs.tsx` — slide-in drawer, powered by `useChat` from `@ai-sdk/react`
 - **API route**: `app/api/chat/route.ts` — uses `streamText` + `toTextStreamResponse()` + `TextStreamChatTransport`
-- **Model**: `meta/llama-3.1-8b-instruct` via NVIDIA API (`@ai-sdk/openai` with custom base URL)
+- **Model**: `nv-mistralai/mistral-nemo-12b-instruct` via NVIDIA API (`@ai-sdk/openai` with custom base URL); override with the `NVIDIA_CHAT_MODEL` env var. NVIDIA retires hosted models without much notice — `meta/llama-3.1-8b-instruct` has returned `410 Gone` since 2026-08-26 and silently killed the chat (curl `https://integrate.api.nvidia.com/v1/models` to see what is live). `streamText` reports API errors via `onError` rather than throwing, so the route treats an empty stream as failure and sends the fallback
 - **Env var**: `NVIDIA_API_KEY` — set in Vercel for **Production only** (not Development); local `.env.local` will be empty
 - **Session limit**: 10 user messages per session
 - **Fallback**: if the API errors (no credits, invalid key), the stream catches the error and injects a humorous message with a LinkedIn link instead of silence
