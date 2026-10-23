@@ -214,7 +214,7 @@ const SideProjects = () => {
           <Link
             key={project.href}
             href={project.href}
-            className="group flex items-start justify-between gap-6 p-8 rounded-lg border border-[var(--border)] bg-[var(--card)] hover:border-[#2A2438]/20 dark:hover:border-white/20 transition-all duration-300"
+            className="group flex items-start justify-between gap-6 p-8 rounded-lg border border-[var(--border)] bg-[var(--card)] hover:border-[#090F05]/20 dark:hover:border-white/20 transition-all duration-300"
           >
             <div className="space-y-3">
               <div className="flex items-center gap-2">
@@ -333,7 +333,7 @@ const InteractiveSkills = () => {
     <button
       type="button"
       onClick={() => setIsPhysics((p) => !p)}
-      className="flex items-center gap-3 px-4 py-2 rounded-full border border-[var(--border)] bg-[var(--card)] hover:border-[#2A2438]/20 dark:hover:border-white/20 transition-colors duration-200"
+      className="flex items-center gap-3 px-4 py-2 rounded-full border border-[var(--border)] bg-[var(--card)] hover:border-[#090F05]/20 dark:hover:border-white/20 transition-colors duration-200"
     >
       <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-[var(--muted)]">
         {isPhysics ? "Simple" : "Physics"}
@@ -388,7 +388,7 @@ const InteractiveSkills = () => {
           {skills.map((skill, i) => (
             <span
               key={i}
-              className="px-4 py-2 rounded-full border border-[var(--border)] bg-[var(--card)] text-[12px] font-bold uppercase tracking-widest text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[#2A2438]/20 dark:hover:border-white/20 transition-colors duration-200"
+              className="px-4 py-2 rounded-full border border-[var(--border)] bg-[var(--card)] text-[12px] font-bold uppercase tracking-widest text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[#090F05]/20 dark:hover:border-white/20 transition-colors duration-200"
             >
               {skill}
             </span>
@@ -439,7 +439,7 @@ const Toolstack = () => {
 export default function AboutPage() {
 
   return (
-    <div className="font-sans antialiased bg-[var(--background)] text-[var(--foreground)] selection:bg-[#FF5C39] selection:text-[#2A2438] dark:selection:bg-indigo-500 dark:selection:text-white min-h-screen transition-colors duration-300">
+    <div className="font-sans antialiased bg-[var(--background)] text-[var(--foreground)] selection:bg-[#B2EB76] selection:text-[#090F05] dark:selection:bg-indigo-500 dark:selection:text-white min-h-screen transition-colors duration-300">
       <div className="w-full relative">
         <Hero />
         <AboutOverview />

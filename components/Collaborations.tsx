@@ -43,7 +43,7 @@ const Collaborations = () => {
                     {duplicatedCompanies.map((company, index) => (
                         <div
                             key={index}
-                            className="flex-shrink-0 w-40 h-24 md:w-52 md:h-28 flex items-center justify-center rounded-xl border border-[var(--border)] dark:border-white/10 bg-[#E9E2F2]/40 dark:bg-white/[0.04] grayscale opacity-60 hover:grayscale-0 hover:opacity-100 hover:border-[#2A2438]/30 dark:hover:border-white/30 transition-all duration-500"
+                            className="flex-shrink-0 w-40 h-24 md:w-52 md:h-28 flex items-center justify-center rounded-xl border border-[var(--border)] dark:border-white/10 bg-[#E2EADA]/40 dark:bg-white/[0.04] grayscale opacity-60 hover:grayscale-0 hover:opacity-100 hover:border-[#090F05]/30 dark:hover:border-white/30 transition-all duration-500"
                         >
                             <Image
                                 src={company.src}

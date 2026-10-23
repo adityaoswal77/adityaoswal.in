@@ -18,7 +18,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        mono: ['Geist Mono', 'JetBrains Mono', 'monospace'],
       },
       keyframes: {
         'gradient-x': {

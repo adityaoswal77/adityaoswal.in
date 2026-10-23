@@ -30,7 +30,7 @@ vercel --prod    # deploy to production
 The theme toggle is a **persona switch**, not a color inversion. Both hero backgrounds react to the cursor — dark as pixels, light as paint ("same hand, different tool").
 
 - **Dark (default)** = the design engineer: black, Dither WebGL pixel wave, mono chips, glass surfaces, white text.
-- **Light** = the playful designer: pastels + one pop color, `PastelField` gouache blobs, sticker-tilted chips, highlighter sweeps, colored (never gray) shadows.
+- **Light** = Spade-inspired green and white (staging, Oct 2026; replaced the pastel + tangerine "playful designer" persona): white page, mint hero panel, near-black green ink, one lime accent, thin 1px line graphics (grids, corner-ticked label cards, edge rulers), mono labels/CTAs, Faculty Glyphic headings.
 
 Wiring: `next-themes` with `attribute="class"` → `.dark`/`.light` on `<html>`; Tailwind `darkMode: 'class'`. Tokens live in `app/globals.css` (`:root` = dark, `.light` overrides).
 
@@ -38,24 +38,27 @@ Wiring: `next-themes` with `attribute="class"` → `.dark`/`.light` on `<html>`;
 
 | Token | Value | Role |
 |---|---|---|
-| `--background` | `#FDFBF7` | gallery white (not cream) |
-| `--foreground` | `#2A2438` | warm violet-ink |
-| `--muted` | `#6E6580` | tinted gray |
-| `--border` | `#E9E2F2` | lavender-tinted |
-| pop | `#FF5C39` | tangerine — CTAs, highlighter, selection, pulse dot |
-| pastels | `#FFE8A3` butter · `#CBD5FF` periwinkle · `#FFD6E0` blush · `#D3EEC8` pistachio · `#C7E4FF` sky · `#C9F0DC` mint | blobs, card bases, chips |
+| `--background` | `#FFFFFF` | page |
+| `--foreground` | `#090F05` | near-black green ink (also the hard-coded light ink literal, replacing `#2A2438`) |
+| `--muted` | `#4A5B38` | olive secondary text |
+| `--border` | `#E2EADA` | green-tinted hairline |
+| `--mint` | `#F4FAED` | hero panel |
+| `--forest` / `--primary` | `#18280E` | primary CTA background, scroll band, card borders |
+| `--lime` | `#B2EB76` | the one accent: CTA text on forest, highlighter, selection (text on lime is ink) |
 
-Per-project pastels are in `lib/data.ts` (`pastel` / `pastelHover` — flat base, saturated cousin on hover).
+Per-project tints in `lib/data.ts` (`pastel`) are now four greens; `accent` still drives dark mode only.
+
+- **Headings**: `:where(.light) h1, h2` use Faculty Glyphic (single weight, `font-synthesis: none`, so bold/italic utilities render regular). `:where()` keeps specificity low so `font-sans` on writing pages still wins. Dark keeps Instrument Serif. Mono is Geist Mono (loaded in the same Google Fonts import).
+- **Line graphics**: `components/LineGraphics.tsx` — `LineCard` (mono label + value, 1px border, corner ticks), `HeroPanel` (light hero backdrop: mint panel, masked 56px grid, edge rulers, label cards that drift on scroll and follow the cursor slightly, `xl+` only). All motion is off under reduced motion. A forest `ScrollBand` section after Collaborations was tried and removed: its label cards repeated the hero's, so the page read as two heroes. Keep hero facts in one place.
 
 ### Patterns
 
 - **Authoring rule**: light styles are the default classes, dark keeps the original design behind `dark:` variants (e.g. `hidden dark:block` for black overlays, `dark:hidden` for pastel layers).
-- **Homepage Hero backdrop**: dark = `Dither` (WebGL pixel wave). Light = `WarpBackground` (`components/ui/warp-background.tsx`) — a 3D perspective grid tunnel with beams falling toward the vanishing point, `gridColor="var(--border)"` (lavender), beams in the light-persona palette (tangerine pop first, then pastels). Rendered only when `isLight` (`app/page.tsx` Hero backdrop `div`); dark keeps Dither. The CTA/heading accent/badge dot still use the one-off blue (`#2554EB`), not tangerine. `.marker-highlight` and `PastelField.tsx` remain **unused/orphaned** — don't re-wire them into Hero without asking. (Earlier the light hero was a flat `var(--background)` with no animated backdrop; the warp backdrop superseded that on user request.)
-- **Light hero edge fade**: the warp grid's near-plane creates a hard rectangular "window" edge in the middle of the viewport (an artifact of the CSS 3D perspective technique, not a real container border). Two `isLight`-only overlay `div`s on top of it soften this: a `backdrop-blur-md` ring masked with `[mask-image:radial-gradient(ellipse_65%_65%_at_center,transparent_35%,black_100%)]` (blur only kicks in away from center) plus a matching `radial-gradient(transparent 40%, var(--background) 100%)` vignette. Both need `-webkit-mask-image` alongside `mask-image` for Safari. Tune by eye against the actual rendered corner — the visible "window" size doesn't map cleanly to simple percent-of-viewport math because of the perspective transform.
-- **`WarpBackground` was ported from Tailwind v4 → v3**: the 21st.dev/Magic UI source used v4-only utilities (`size-full`, `bg-size-[]`, `perspective-()`, `transform-3d`, `@container`, `left-(--x)`) — all rewritten as v3 arbitrary properties (`[container-type:size]`, `[perspective:var(--perspective)]`, `[transform-style:preserve-3d]`, `left-[var(--x)]`, etc.). Beams are **deterministic** (delay/aspect/color derived from index, not `Math.random`) to avoid SSR hydration mismatch, and animation is gated on `useReducedMotion`. Import is `framer-motion`, not `motion/react`. Installed via the public Magic UI registry (`https://magicui.design/r/warp-background`) — the 21st.dev URL 404s without auth.
+- **Homepage Hero backdrop**: dark = `Dither` (WebGL pixel wave). Light = `HeroPanel` from `components/LineGraphics.tsx` (replaced `WarpBackground` and its blur/vignette overlays, which are no longer used on the homepage). Light CTAs are forest `#18280E` with lime mono text; "Product designer" carries a lime highlighter band.
+- **Dark hero label cards**: `HeroCardsDark` in `components/LineGraphics.tsx` floats the same four facts as light mode over the Dither (black/glass `bg-black/50 backdrop-blur`, `border-white/20`, violet-300 labels). `LineCard` takes `tone="light" | "dark"`; `useHeroMotion()` (scroll drift + spring pointer follow, off under reduced motion) is shared with `HeroPanel`. `xl+` only, `aria-hidden`, rendered after the backdrop container at `z-[11]` so the bottom frosted band doesn't blur it.
 - **`.marker-highlight`** (globals.css): tangerine highlighter sweep behind a headline word; animates in light only, static fill under reduced motion, no-op in dark. Not currently used anywhere (see Hero exception above).
-- **Text on tangerine is ink `#2A2438`, never white** — white fails WCAG AA (3.07:1); ink passes (4.86:1).
-- Playful touches live in light only: `-rotate-2` sticker chips, `hover:-rotate-1` CTA tilt, `rounded-[1.5rem]` cards (dark stays `1rem`).
+- **Text on lime `#B2EB76` is ink `#090F05`; lime text only on forest `#18280E`** — lime on white fails contrast.
+- Light keeps `rounded-[1.5rem]` cards (dark stays `1rem`); the old sticker tilts and CTA hover tilt are gone from the homepage hero.
 
 ### Tailwind gotchas (learned the hard way)
 
@@ -63,12 +66,15 @@ Per-project pastels are in `lib/data.ts` (`pastel` / `pastelHover` — flat base
 - **`/8` is not a valid opacity step** — use `/[0.08]`. An invalid `dark:` override lets the light class leak into dark mode.
 - Use `motion-safe:animate-bounce` / `motion-safe:animate-pulse`, not the bare utilities.
 - `.atmospheric-glow` needs `--primary-rgb` (defined per theme in globals.css).
+- **`overflow-hidden` word-reveal spans clip descenders** (the J in Faculty Glyphic lost its tail). Give each word span `pb-[0.2em] -mb-[0.2em]` (room for the descender, line spacing unchanged) and start the GSAP reveal at `y: "140%"`, not `110%`, so the taller box still hides the word before it animates in. Used in `app/page.tsx` (BentoGrid), `app/work/page.tsx` and `components/Footer.tsx`.
+- **Don't run `npm run build` while `npm run dev` is running.** Both write `.next`; the dev server then fails with `__webpack_modules__[moduleId] is not a function` or `Cannot find module './873.js'`. Stop dev, delete `.next`, restart.
 - **Animated/transformed child inside a rounded `overflow-hidden` parent can bleed past the radius on hover** (Chromium compositing quirk — seen on `WorkCard`'s light gradient layer once `group-hover:scale-[...]` was added, corner turned square instead of following the card's rounded clip). Fix: give the animated child its own matching `rounded-[...] dark:rounded-[...]` so it self-clips instead of relying solely on the ancestor's `overflow-hidden`.
 
 ### Work cards (`app/work/page.tsx`)
 
-- **Light background** = a vibrant per-project gradient — stops are `pastelHover` at 0%/100% with `color-mix(in srgb, pastel 65%, #FDFBF7)` in the middle; `background-size:220%_220%` with an **always-on idle drift** (`animate-[background-gradient_9s_ease-in-out_infinite]`, the shared keyframe also used by `AnimatedGradient`) that speeds up to `2.2s` and scales `1.015` on hover (`motion-reduce` disables both). The gradient layer carries its own `rounded-[1.5rem] dark:rounded-[1rem]` matching the card — see the Tailwind gotcha above on why (hover-scale bleeding past the parent's clip otherwise). Plus a per-project **accent border**: a static inset ring `${accent}33` (~20%), and a second light-only inset ring `${accent}66` (~40%) that fades in on hover. Both are inline `boxShadow` (hex8 alpha — NOT Tailwind `/opacity` on vars, which compiles to nothing). Dark stays surface + accent-tint gradient, untouched. Ink text; plain-text category labels with dot separators (no mono pills).
-- Each card shows a **framed mockup screen** anchored to the bottom edge (cropped bleed, rounded top corners, `blur-[3px]` tease). Hover reveal: screen sharpens + rises, description fades in, ink arrow chip appears.
+- **Light background** = a soft per-project wash — `linear-gradient(120deg, color-mix(pastel 55%, #FFFFFF), color-mix(pastel 22%, #FFFFFF), color-mix(pastel 55%, #FFFFFF))` on an oversized child (`h-[220%] w-[220%]`) that drifts via `animate-[gradient-drift_14s…]` (9s on hover) and scales only `1.008` on hover (`motion-reduce` disables both). `pastel` per project in `lib/data.ts` is now one of four greens; `pastelHover` is no longer used by the card. The gradient layer keeps its own `rounded-[1.5rem] dark:rounded-[1rem]` so the hover scale self-clips (see the Tailwind gotcha). Borders are forest inset rings `#18280E14` at rest and `#18280E33` on hover (inline `boxShadow`, hex8 alpha — NOT Tailwind `/opacity` on vars). Dark is the surface plus a faint accent gradient (`${accent}26/0a/26`) and `${accent}1f` → `${accent}4d` rings. Ink text; plain-text category labels with dot separators (no mono pills). The tone was deliberately lowered after the first vibrant version read as childlike.
+- **Touch**: `[@media(hover:none)]` variants keep the description and arrow chip visible and un-blur the mockup, since there is no hover to reveal them. The arrow chip is a 40px glass circle, not a solid disc.
+- Each card shows a **framed mockup screen** anchored to the bottom edge (cropped bleed, rounded top corners, `blur-[2px]` tease). Hover reveal: screen sharpens + rises a little (`-translate-y-6/8/10`, ease-out, no spring), description fades in, arrow chip appears.
 - Mockup path per project = `mockup` in `lib/data.ts`; empty string → `SkeletonScreen` (CSS-drawn fake UI tinted with the project `accent` + `pastel`). Paths ending `.mov`/`.mp4`/`.webm` render as `<video autoPlay loop muted playsInline>` instead of `next/image` — same blur/sharpen hover treatment either way.
 - **Two mockup layouts, switched by `mockupBg` in `lib/data.ts`** (`WorkCard.tsx` branches on `hasMockupBg`):
   - **Framed** (`mockupBg` unset/true): white/zinc card frame + shadow, `object-cover object-top`, box `top-[60%] bottom-0`, hover `-translate-y-12 scale-[1.04]`. The asset fills + crops inside the frame.
@@ -85,6 +91,8 @@ Per-project pastels are in `lib/data.ts` (`pastel` / `pastelHover` — flat base
 - ✅ `kardia-design-system` case study made discoverable — it had a page + `layout.tsx` metadata but was missing from `lib/data.ts` PROJECTS (no `/work` card) and `app/sitemap.ts` (invisible to crawlers); both added. "Kardia" dropped from the visible title everywhere (hero, watermark, tab title, work card) — reads "Design System" only; the route/URL and in-body product references are unchanged. Note: `website-redesign` and `year-in-review` have the same missing-from-PROJECTS/sitemap gap — not fixed yet, flagged for a follow-up if the user wants those surfaced too
 - ✅ `kardia-design-system` work card: mockup swapped to `kardia-ds-card.png` (a real device-frame screenshot of the KardiaCare app, replacing the popup-tutorial exhibit), resized `md:col-span-2` → `md:col-span-1` to match Guest User EKG's width, now the first card in `/work`'s second row
 - ✅ `kardia-design-system` work card mockup swapped again to `Mockup-DS-crop.png` (a cropped version of the user-supplied `/assets/kardia-ds/Mockup-DS.png` 3D device render) with `mockupFit: "phone"`, matching Guest User EKG's treatment exactly. The raw `Mockup-DS.png` has ~20% built-in transparent/soft-shadow padding around the phone (unlike Guest EKG's `after.png`, which bleeds edge-to-edge with zero padding) — since `object-cover` with `object-top` scales by width with no horizontal crop, that padding renders directly as wasted space instead of getting cropped away, making the phone look ~30% smaller than Guest EKG's despite both cards sharing an identical box size. Fixed by cropping the source PNG itself (via PIL, alpha-threshold ~20 bbox to trim the padding while keeping a soft shadow fringe) rather than patching the shared CSS — the raw asset is left untouched for future re-exports. If retouching this asset again: check `getbbox()` at a few alpha thresholds first, since a naive `alpha > 0` bbox includes the full soft-shadow tail and won't reveal the padding problem.
+- ✅ Redesign (Oct 2026): green/white light mode, calmer work cards, dark hero label cards, floating chat card, descender fix, chat model fix — shipped to `main` via PR from `release/redesign`. The three prototype pages (`/directions/*`, `components/directions`, `components/specimens`) exist only on the `staging` branch and are to be deleted there once a direction is chosen.
+- ✅ A forest-green dark mode (`#18280E`, then `#0E1A08`) was tried locally and dropped; dark stays black. If revisited: the Dither shader quantizes colour, so a dark green `baseColor` rounds to black — tint with a `mix-blend-screen` overlay and keep `waveColor` channels ≤ ~0.2.
 - ⏳ Optional deeper playful treatments (beyond tokens) for inner pages if desired
 - ⏳ Same card-grid → paragraph+bullets simplification not yet applied beyond the quote sections on `guest-user`, `neon-fintech`, `website-redesign` (their Approach/Impact/Features sections still use grids)
 - ✅ Resume link refreshed to the current Google Doc (updated in `next.config.js`'s `/r` redirect, `components/Navbar.tsx`, `components/Footer.tsx`) and the Adi.Os chatbot's knowledge base (`app/api/chat/route.ts`) synced to the updated resume content, with its tone loosened to be more casual/chill
@@ -113,12 +121,12 @@ Per-project pastels are in `lib/data.ts` (`pastel` / `pastelHover` — flat base
 
 ## Adi.Os Chatbot
 
-- **Component**: `components/AdiOs.tsx` — slide-in drawer, powered by `useChat` from `@ai-sdk/react`
-- **API route**: `app/api/chat/route.ts` — uses `streamText` + `toTextStreamResponse()` + `TextStreamChatTransport`
-- **Model**: `meta/llama-3.1-8b-instruct` via NVIDIA API (`@ai-sdk/openai` with custom base URL)
-- **Env var**: `NVIDIA_API_KEY` — set in Vercel for **Production only** (not Development); local `.env.local` will be empty
+- **Component**: `components/AdiOs.tsx` — floating card (bottom-right, `md:w-[25rem]`; bottom sheet with a backdrop below `md`), non-modal, Escape closes, powered by `useChat` from `@ai-sdk/react`. `WanderingCharacter.tsx` owns open/close and keeps `ChatFab` on screen as a close button while open. No "Powered by" line
+- **API route**: `app/api/chat/route.ts` — `streamText` piped through a hand-built `ReadableStream` (plain text), consumed by `TextStreamChatTransport`
+- **Model**: `nv-mistralai/mistral-nemo-12b-instruct` via NVIDIA API (`@ai-sdk/openai` with custom base URL); override with the `NVIDIA_CHAT_MODEL` env var. NVIDIA retires hosted models without much notice — `meta/llama-3.1-8b-instruct` has returned `410 Gone` since 2026-08-26 and silently killed the chat (curl `https://integrate.api.nvidia.com/v1/models` to see what is live). `streamText` reports API errors via `onError` rather than throwing, so the route treats an empty stream as failure and sends the fallback
+- **Env vars**: `NVIDIA_API_KEY` — set in Vercel for **Production only** (not Development or Preview, so chat can't answer on staging until it is added there); local `.env.local` (copy `.env.example`, gitignored) starts empty. `NVIDIA_CHAT_MODEL` — optional model override
 - **Session limit**: 10 user messages per session
-- **Fallback**: if the API errors (no credits, invalid key), the stream catches the error and injects a humorous message with a LinkedIn link instead of silence
+- **Fallback**: if the API errors (retired model, no credits, invalid or missing key), the route injects a humorous message with a LinkedIn link instead of silence. `streamText` does NOT throw on API errors (it calls `onError` and ends `textStream`), so the route treats an empty stream as failure as well as a thrown error
 - **Blob logging**: chat questions logged to Vercel Blob (`BLOB_READ_WRITE_TOKEN` required); non-critical, failures are swallowed
 
 ## SEO / Metadata

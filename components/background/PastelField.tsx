@@ -11,11 +11,11 @@ import {
 } from "framer-motion";
 
 const BLOBS = [
-  { color: "#FFE8A3", size: "max(48vw, 320px)", top: "-12%", left: "-10%", depth: 28, drift: 26, duration: 18, opacity: 0.6 },
+  { color: "#E8F3DA", size: "max(48vw, 320px)", top: "-12%", left: "-10%", depth: 28, drift: 26, duration: 18, opacity: 0.6 },
   { color: "#CBD5FF", size: "max(42vw, 300px)", top: "-2%", left: "56%", depth: 46, drift: 34, duration: 22, opacity: 0.55 },
   { color: "#FFD6E0", size: "max(40vw, 290px)", top: "44%", left: "6%", depth: 38, drift: 30, duration: 20, opacity: 0.55 },
   { color: "#D3EEC8", size: "max(36vw, 260px)", top: "52%", left: "58%", depth: 22, drift: 22, duration: 24, opacity: 0.5 },
-  { color: "#FF5C39", size: "max(16vw, 140px)", top: "34%", left: "44%", depth: 60, drift: 40, duration: 16, opacity: 0.16 },
+  { color: "#B2EB76", size: "max(16vw, 140px)", top: "34%", left: "44%", depth: 60, drift: 40, duration: 16, opacity: 0.16 },
 ];
 
 type Blob = (typeof BLOBS)[number];

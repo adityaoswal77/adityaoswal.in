@@ -7,6 +7,10 @@ const nvidia = createOpenAI({
 });
 import { put } from "@vercel/blob";
 
+// NVIDIA retires hosted models (llama-3.1-8b-instruct returned 410 Gone from 2026-08-26);
+// set NVIDIA_CHAT_MODEL in Vercel to switch models without a code change.
+const DEFAULT_MODEL = "nv-mistralai/mistral-nemo-12b-instruct";
+
 const SYSTEM_PROMPT = `You are Adi.Os — a tiny pixel art character who lives on Aditya Oswal's portfolio site. You answer questions about Aditya in a warm, chill, slightly playful way — more like a friend who knows him well than a corporate assistant. You speak in first person on behalf of Aditya ("Aditya does X", not "I do X") unless it's natural to say "he".
 
 Here's everything you know about Aditya:
@@ -144,7 +148,7 @@ export async function POST(req: Request) {
   const FALLBACK = "Oof — Adi.Os has used up all his brain tokens for now. 🪫 Reach out to Aditya directly on [LinkedIn](https://linkedin.com/in/oswaladitya) in the meantime!";
 
   const result = streamText({
-    model: nvidia.chat("meta/llama-3.1-8b-instruct"),
+    model: nvidia.chat(process.env.NVIDIA_CHAT_MODEL || DEFAULT_MODEL),
     system: SYSTEM_PROMPT,
     messages: await convertToModelMessages(messages),
     onError: ({ error }) => {
@@ -152,16 +156,21 @@ export async function POST(req: Request) {
     },
   });
 
+  // streamText reports API failures through onError and ends textStream quietly instead of
+  // throwing, so an empty stream is the failure signal as well as a thrown error.
   const stream = new ReadableStream({
     async start(controller) {
       const enc = new TextEncoder();
+      let sent = false;
       try {
         for await (const chunk of result.textStream) {
+          if (chunk) sent = true;
           controller.enqueue(enc.encode(chunk));
         }
       } catch {
-        controller.enqueue(enc.encode(FALLBACK));
+        sent = false;
       }
+      if (!sent) controller.enqueue(enc.encode(FALLBACK));
       controller.close();
     },
   });

@@ -205,7 +205,7 @@ const ProblemStatement = () => {
 
 const Approach = () => {
   return (
-    <Section title="The Strategy" className="bg-[#2A2438]/5 dark:bg-white/5">
+    <Section title="The Strategy" className="bg-[#090F05]/5 dark:bg-white/5">
       <div className="space-y-24">
         <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[var(--border)]">
           {[
@@ -300,7 +300,7 @@ const Impact = () => {
   ];
 
   return (
-    <Section title="The Result" className="bg-[#2A2438]/5 dark:bg-white/5">
+    <Section title="The Result" className="bg-[#090F05]/5 dark:bg-white/5">
       <div className="space-y-24">
         <p className="text-2xl text-[var(--foreground)] opacity-80 font-medium max-w-4xl leading-relaxed">
           The transformation delivered immediate business value, turning the website into a primary driver for lead generation.
