@@ -17,6 +17,57 @@ interface Entry {
 
 const CHANGELOG: Entry[] = [
   {
+    date: "2026-10-23",
+    hash: "509c180",
+    title: "Chatbot fixed after NVIDIA retired its model; failures now show a message instead of nothing",
+    changes: [
+      { type: "fix", description: "NVIDIA ended life for meta/llama-3.1-8b-instruct on 26 August and answers every request with 410 Gone, so the Adi.Os chat has been silent since then. The route now uses nv-mistralai/mistral-nemo-12b-instruct, and `NVIDIA_CHAT_MODEL` lets me change it in Vercel without a code change" },
+      { type: "fix", description: "The AI SDK reports API errors through a callback and ends the text stream without throwing, so the fallback message never ran and the chat just showed nothing. An empty stream now counts as a failure and sends the fallback" },
+      { type: "refactor", description: "Removed the \"Powered by Claude\" line from the chat card" },
+    ],
+  },
+  {
+    date: "2026-10-23",
+    hash: "38a572a",
+    title: "Chat is now a floating card, the dark hero gets the label cards, and the clipped J is fixed",
+    changes: [
+      { type: "feat", description: "Adi.Os is a floating card at the bottom right (a bottom sheet on phones) instead of a full-height sidebar: avatar header, tinted greeting, suggestion chips, a rounded input with a square send button, and Escape to close. The page stays usable while it is open, and the chat button turns into a close button" },
+      { type: "feat", description: "The dark hero shows the same four corner-ticked label cards as light mode (role, company, focus, location). They drift on scroll and follow the cursor slightly, only at wide screens, and stay still with reduced motion" },
+      { type: "fix", description: "Headings that reveal word by word clipped the tail of the J in PROJECTS (and the p and y in other words) because each word sits in an overflow-hidden box. The boxes now have bottom padding with a matching negative margin, so descenders fit and line spacing is unchanged. Applied to the homepage, /work and the footer" },
+    ],
+  },
+  {
+    date: "2026-10-20",
+    hash: "a70cb12",
+    title: "Light mode redesigned: green and white, line graphics, new heading font",
+    changes: [
+      { type: "feat", description: "Light mode moves from pastels and tangerine to a green and white palette inspired by spade.com: a white page, near-black green ink, a mint hero panel, forest buttons with lime text, and one lime accent. Dark mode keeps its black look" },
+      { type: "feat", description: "The light hero has a masked grid, ruler ticks on the page edges and floating label cards, with a lime highlighter under \"Product designer\". Headings use Faculty Glyphic and small labels use Geist Mono" },
+      { type: "refactor", description: "About 45 files had the old ink, cream, lavender and tangerine colour values swapped for the new palette, so inner pages follow the new theme. The per-project card tints are now four greens" },
+      { type: "refactor", description: "A forest band with the same label cards was added below the logos, then removed on 22 October because it made the homepage read as two heroes" },
+    ],
+  },
+  {
+    date: "2026-10-20",
+    hash: "942cfd9",
+    title: "Work cards toned down: softer gradients, calmer hover, readable on touch",
+    changes: [
+      { type: "refactor", description: "Light card gradients are a soft wash of each project's tint instead of saturated stops, with a slower drift, fainter borders and a smaller hover lift. Dark cards use a faint accent glow. The arrow chip is a small glass circle instead of a solid disc" },
+      { type: "fix", description: "On touch screens the description and arrow are visible without hover, and the mockup is no longer blurred" },
+      { type: "fix", description: "The /work glow was sized to 100vw, which caused horizontal scroll on phones. It now matches the page width" },
+      { type: "content", description: "Freshfolios is described as a design studio for listed Indian companies, and Interesting Places as a handpicked, veg-friendly guide to places to eat in India and Singapore" },
+    ],
+  },
+  {
+    date: "2026-10-16",
+    hash: "39fdd9b",
+    title: "Three redesign directions built as hidden prototypes",
+    changes: [
+      { type: "feat", description: "/directions/specimens (interactive project cards), /directions/list (a typographic project list with cursor-following previews) and /directions/desk (draggable polaroids and stickers) were built side by side to compare. They are hidden from search engines and meant to be deleted once a direction is chosen" },
+      { type: "refactor", description: "Removed unused imports and a duplicate GSAP plugin registration from the homepage" },
+    ],
+  },
+  {
     date: "2026-10-06",
     hash: "6c302e3",
     title: "Navbar cut down to four links and a More menu; writing and projects pages use one font",

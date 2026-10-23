@@ -70,3 +70,37 @@
 
 - Added Puzzle Gallery (puzzlegallery.vercel.app) to `/projects`: a searchable list of daily puzzle games. The count (100 puzzles, 12 categories) comes from `data/puzzles.ts` in the puzzle.gallery repo as of 27 Sep, so it needs updating when puzzles are added. Status is "Live", taken from the request rather than checked, because the site is blocked from the sandbox.
 
+---
+
+## 2026-10-23
+
+### Homepage and work redesign (staging branch, not on main yet)
+
+Light mode wasn't getting traction, so the homepage and `/work` were reworked over 16–23 Oct. Everything is on the `staging` branch and a Vercel Preview; `main` is untouched.
+
+- **Three directions first** (16 Oct): built `/directions/specimens`, `/directions/list` and `/directions/desk` side by side with three parallel Sonnet agents, from Mobbin and recent.design references (Godly now redirects to recent.design). They are `noindex` prototypes.
+- **Live specimen cards** were tried on `/work` and the homepage and rejected as too bright and childlike. The original `WorkCard` came back, toned down: soft green wash instead of saturated stops, slower drift, fainter borders, gentler hover, glass arrow chip. On touch screens the description and arrow now show without hover.
+- **Light mode retheme** (20 Oct), inspired by spade.com: white page, mint hero panel, near-black green ink `#090F05`, forest `#18280E`, one lime accent `#B2EB76`, Faculty Glyphic headings, Geist Mono labels. About 45 files had the old ink, cream, lavender and tangerine hex values swapped. Dark mode is unchanged.
+- **Hero line graphics**: `components/LineGraphics.tsx`. A scroll band with the same label cards was added then removed (22 Oct) because it read as a second hero. Dark mode got the same floating cards (23 Oct).
+- **Forest dark mode** was tried locally (`#18280E`, then a darker `#0E1A08`) and dropped; dark stays black.
+- **Adi.Os chat** is now a floating card instead of a full-height sidebar, modelled on yinyeeho.com's Sesame chat. The chat button stays on screen and becomes a close button while it is open. "Powered by Claude" removed.
+- **Clipped "J"**: headings with an `overflow-hidden` word reveal cut off descenders in Faculty Glyphic. Fixed with `pb-[0.2em] -mb-[0.2em]` on each word span and a GSAP start offset of 140%.
+
+### Chat outage
+
+- NVIDIA ended life for `meta/llama-3.1-8b-instruct` on 2026-08-26 and returns `410 Gone`, so the chat has been broken since then on every environment that had a key.
+- `streamText` reports API errors through `onError` and ends `textStream` without throwing, so the route's `catch` never ran and the chat showed nothing. An empty stream now counts as failure and sends the fallback message.
+- Model is now `nv-mistralai/mistral-nemo-12b-instruct`, overridable with `NVIDIA_CHAT_MODEL`. Checked that it exists on NVIDIA's API (a dummy key gets 403, the old model 410). Not checked end to end: there is no key in the local environment, and the Preview environment may not have one either.
+
+### Dev notes
+
+- A webpack error (`__webpack_modules__[moduleId] is not a function`, then `Cannot find module './873.js'`) came from running `npm run build` while `npm run dev` was running; both write `.next`. Stopping dev, deleting `.next` and restarting fixed it.
+- Added `.env.example` and a gitignored `.env.local` placeholder.
+- Dark hero cards were checked at 1440x900 and 1280x720: they sit in the side margins, clear of the headline.
+
+### Open
+
+- Nothing from this redesign is on `main`. Decide whether to ship all of it, or only the chat fix (`app/api/chat/route.ts`), which production needs regardless.
+- Paste a real `NVIDIA_API_KEY` into `.env.local` (and the Vercel Preview environment) and confirm a real chat reply.
+- Remove `/directions` and `components/directions` once a direction is chosen; `components/specimens` is only used by `/directions/specimens`.
+- Case-study fixes (Year in Review images, unconfirmed stats on Neon Fintech and Website Redesign) are in PR #17, separate from this work.
