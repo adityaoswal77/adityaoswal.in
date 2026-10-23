@@ -74,11 +74,11 @@
 
 ## 2026-10-23
 
-### Homepage and work redesign (staging branch, not on main yet)
+### Homepage and work redesign
 
-Light mode wasn't getting traction, so the homepage and `/work` were reworked over 16–23 Oct. Everything is on the `staging` branch and a Vercel Preview; `main` is untouched.
+Light mode wasn't getting traction, so the homepage and `/work` were reworked over 16–23 Oct on the `staging` branch and checked as a Vercel Preview, then shipped to `main` through a pull request from `release/redesign`. The prototype pages stayed on `staging`.
 
-- **Three directions first** (16 Oct): built `/directions/specimens`, `/directions/list` and `/directions/desk` side by side with three parallel Sonnet agents, from Mobbin and recent.design references (Godly now redirects to recent.design). They are `noindex` prototypes.
+- **Three directions first** (16 Oct): built three prototype pages (live specimens, a typographic list, a draggable desk) side by side with three parallel Sonnet agents, from Mobbin and recent.design references (Godly now redirects to recent.design). They were `noindex` and live only on the `staging` branch (`app/directions`, `components/directions`, `components/specimens`); they are not on `main`.
 - **Live specimen cards** were tried on `/work` and the homepage and rejected as too bright and childlike. The original `WorkCard` came back, toned down: soft green wash instead of saturated stops, slower drift, fainter borders, gentler hover, glass arrow chip. On touch screens the description and arrow now show without hover.
 - **Light mode retheme** (20 Oct), inspired by spade.com: white page, mint hero panel, near-black green ink `#090F05`, forest `#18280E`, one lime accent `#B2EB76`, Faculty Glyphic headings, Geist Mono labels. About 45 files had the old ink, cream, lavender and tangerine hex values swapped. Dark mode is unchanged.
 - **Hero line graphics**: `components/LineGraphics.tsx`. A scroll band with the same label cards was added then removed (22 Oct) because it read as a second hero. Dark mode got the same floating cards (23 Oct).
@@ -100,7 +100,7 @@ Light mode wasn't getting traction, so the homepage and `/work` were reworked ov
 
 ### Open
 
-- Nothing from this redesign is on `main`. Decide whether to ship all of it, or only the chat fix (`app/api/chat/route.ts`), which production needs regardless.
+- Merge the release PR once the preview looks right, and add `NVIDIA_API_KEY` to Vercel Production (and Preview) so the chat answers for real.
 - Paste a real `NVIDIA_API_KEY` into `.env.local` (and the Vercel Preview environment) and confirm a real chat reply.
-- Remove `/directions` and `components/directions` once a direction is chosen; `components/specimens` is only used by `/directions/specimens`.
+- Delete the prototypes from `staging` (`app/directions`, `components/directions`, `components/specimens`) once a direction is chosen.
 - Case-study fixes (Year in Review images, unconfirmed stats on Neon Fintech and Website Redesign) are in PR #17, separate from this work.

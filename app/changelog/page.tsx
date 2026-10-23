@@ -59,15 +59,6 @@ const CHANGELOG: Entry[] = [
     ],
   },
   {
-    date: "2026-10-16",
-    hash: "39fdd9b",
-    title: "Three redesign directions built as hidden prototypes",
-    changes: [
-      { type: "feat", description: "/directions/specimens (interactive project cards), /directions/list (a typographic project list with cursor-following previews) and /directions/desk (draggable polaroids and stickers) were built side by side to compare. They are hidden from search engines and meant to be deleted once a direction is chosen" },
-      { type: "refactor", description: "Removed unused imports and a duplicate GSAP plugin registration from the homepage" },
-    ],
-  },
-  {
     date: "2026-10-06",
     hash: "6c302e3",
     title: "Navbar cut down to four links and a More menu; writing and projects pages use one font",
