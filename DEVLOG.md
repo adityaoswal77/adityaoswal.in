@@ -110,7 +110,7 @@ Light mode wasn't getting traction, so the homepage and `/work` were reworked ov
 
 ### Open
 
-- The redesign is live in production (deployed from `staging` with `vercel --prod`) but is not merged into `main`, so a git-based deploy from `main` would roll it back. Merge `staging` into `main`.
+- The redesign is live in production and `staging` is merged into `main` (fast-forward, 1 Nov). Push `main` to trigger a git-based production deploy.
 - Rotate the Cloudflare API token and update it in Vercel.
 - Fill `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN` into the local `.env.local` to test chat locally.
 - Update the resume Google Doc for the 28 Oct end date.

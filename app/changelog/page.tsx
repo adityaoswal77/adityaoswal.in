@@ -18,6 +18,14 @@ interface Entry {
 const CHANGELOG: Entry[] = [
   {
     date: "2026-11-01",
+    hash: "a15bd26",
+    title: "Redesign merged into main",
+    changes: [
+      { type: "refactor", description: "The staging branch is merged into main, so main now matches what is live: the green and white light mode, the floating Adi.Os chat with its Cloudflare and NVIDIA provider chain, the open-to-work status, and no globe intro. Deploying from main no longer rolls the redesign back" },
+    ],
+  },
+  {
+    date: "2026-11-01",
     hash: "a65e13c",
     title: "Redesign and chat fix go live; the site now says open to work",
     changes: [
