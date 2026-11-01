@@ -25,7 +25,6 @@ app/
   blogs/              # Redirects to /writing
   career-odyssey/     # Career timeline
   changelog/          # Site changelog
-  directions/         # Three redesign prototypes (noindex): specimens, list, desk
   api/chat/           # Adi.Os chat endpoint (NVIDIA API, streamed)
   links/              # Links page
   layout.tsx          # Root layout (Navbar, Footer, WanderingCharacter, ThemeProvider)
@@ -37,8 +36,6 @@ components/
   AdiOs.tsx           # Floating chat card (bottom-right; bottom sheet on mobile)
   LineGraphics.tsx    # Hero label cards + light hero panel (grid, rulers)
   WorkCard.tsx        # Work card: per-project tint, hover reveal, mockup
-  specimens/          # Interactive project cards (used by /directions/specimens)
-  directions/         # Throwaway redesign prototypes (list, desk)
   writing/            # PostList, PostLink, Placeholder, SubscribeLine
   Collaborations.tsx
   GradientBlinds.tsx
