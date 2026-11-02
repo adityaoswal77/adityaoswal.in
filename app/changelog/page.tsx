@@ -17,6 +17,26 @@ interface Entry {
 
 const CHANGELOG: Entry[] = [
   {
+    date: "2026-11-01",
+    hash: "a15bd26",
+    title: "Redesign merged into main",
+    changes: [
+      { type: "refactor", description: "The staging branch is merged into main, so main now matches what is live: the green and white light mode, the floating Adi.Os chat with its Cloudflare and NVIDIA provider chain, the open-to-work status, and no globe intro. Deploying from main no longer rolls the redesign back" },
+    ],
+  },
+  {
+    date: "2026-11-01",
+    hash: "a65e13c",
+    title: "Redesign and chat fix go live; the site now says open to work",
+    changes: [
+      { type: "fix", description: "The Adi.Os chat tries Cloudflare Workers AI first and NVIDIA second, and shows a fallback message if both fail. The old production build was still on the retired NVIDIA model, so chat returned nothing online" },
+      { type: "feat", description: "The green and white light mode, calmer work cards, dark hero label cards and floating chat card are now in production" },
+      { type: "content", description: "The hero card, site description, About page and chatbot now say open to work, freelance and new roles. The AliveCor role ends Oct '26" },
+      { type: "perf", description: "Removed the full-screen globe intro that held every page back for at least 2.5 seconds. The globe now only shows while a route is genuinely loading" },
+      { type: "refactor", description: "Removed the marker before hero card labels and deleted the unused redesign prototypes" },
+    ],
+  },
+  {
     date: "2026-10-23",
     hash: "509c180",
     title: "Chatbot fixed after NVIDIA retired its model; failures now show a message instead of nothing",
@@ -56,6 +76,15 @@ const CHANGELOG: Entry[] = [
       { type: "fix", description: "On touch screens the description and arrow are visible without hover, and the mockup is no longer blurred" },
       { type: "fix", description: "The /work glow was sized to 100vw, which caused horizontal scroll on phones. It now matches the page width" },
       { type: "content", description: "Freshfolios is described as a design studio for listed Indian companies, and Interesting Places as a handpicked, veg-friendly guide to places to eat in India and Singapore" },
+    ],
+  },
+  {
+    date: "2026-10-16",
+    hash: "39fdd9b",
+    title: "Three redesign directions built as hidden prototypes",
+    changes: [
+      { type: "feat", description: "/directions/specimens (interactive project cards), /directions/list (a typographic project list with cursor-following previews) and /directions/desk (draggable polaroids and stickers) were built side by side to compare. They are hidden from search engines and meant to be deleted once a direction is chosen" },
+      { type: "refactor", description: "Removed unused imports and a duplicate GSAP plugin registration from the homepage" },
     ],
   },
   {

@@ -72,8 +72,8 @@ const Hero = () => {
 
             <dl className="grid grid-cols-1 sm:grid-cols-2 gap-12 pt-12 border-t border-[var(--border)]">
               <div ref={descriptionRef}>
-                <dt className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-3">Current Role</dt>
-                <dd className="text-xl font-bold text-[var(--foreground)]">Product Designer @ AliveCor</dd>
+                <dt className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-3">Status</dt>
+                <dd className="text-xl font-bold text-[var(--foreground)]">Open to work · Freelance · New roles</dd>
               </div>
               <div>
                 <dt className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-3">Location</dt>
@@ -245,7 +245,7 @@ const WorkExperience = () => {
     {
       role: "Product Designer",
       company: "AliveCor Inc.",
-      period: "Mar '25 – Present",
+      period: "Mar '25 – Oct '26",
       description: "Own end-to-end design for KardiaStation Mobile (12-lead EKG recording, used by providers across the US, Canada, Europe, and India) and mobile product design for KardiaRx, a clinical research platform with CVS, Walgreens, and Pfizer. Built and scaled the cross-platform Kardia Mobile Design System across iOS and Android, driving adoption across four product teams. Designed AI-powered internal tools adopted across Product, Design, Marketing, QA, Clinical, and Business teams. Redesigned EKG report templates, cutting printing and mailing costs by $200K+ annually. Conceived and shipped Kardia Year in Review, driving a 21% click-through rate."
     },
     {

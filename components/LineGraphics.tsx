@@ -45,10 +45,7 @@ export function LineCard({
       <span aria-hidden="true" className={`absolute -right-px -top-px h-2 w-2 border-r border-t ${tick}`} />
       <span aria-hidden="true" className={`absolute -bottom-px -left-px h-2 w-2 border-b border-l ${tick}`} />
       <span aria-hidden="true" className={`absolute -bottom-px -right-px h-2 w-2 border-b border-r ${tick}`} />
-      <p className={`m-0 text-[11px] uppercase tracking-[0.12em] ${labelColor}`}>
-        <span aria-hidden="true">▸ </span>
-        {label}
-      </p>
+      <p className={`m-0 text-[11px] uppercase tracking-[0.12em] ${labelColor}`}>{label}</p>
       <p className="m-0 mt-0.5 text-[13px] tracking-tight text-inherit">{value}</p>
     </div>
   );
@@ -77,7 +74,7 @@ function EdgeRuler({ side }: { side: "left" | "right" }) {
 
 const HERO_FACTS = [
   { label: "Role", value: "Product designer", depth: 1 },
-  { label: "Currently", value: "AliveCor", depth: 0.6 },
+  { label: "Status", value: "Open to work", depth: 0.6 },
   { label: "Focus", value: "Healthcare · Design systems", depth: 0.8 },
   { label: "Based", value: "Bangalore", depth: 1.2 },
 ];

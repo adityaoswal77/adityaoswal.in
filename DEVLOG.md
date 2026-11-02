@@ -74,11 +74,11 @@
 
 ## 2026-10-23
 
-### Homepage and work redesign
+### Homepage and work redesign (staging branch, not on main yet)
 
-Light mode wasn't getting traction, so the homepage and `/work` were reworked over 16–23 Oct on the `staging` branch and checked as a Vercel Preview, then shipped to `main` through a pull request from `release/redesign`. The prototype pages stayed on `staging`.
+Light mode wasn't getting traction, so the homepage and `/work` were reworked over 16–23 Oct. Everything is on the `staging` branch and a Vercel Preview; `main` is untouched.
 
-- **Three directions first** (16 Oct): built three prototype pages (live specimens, a typographic list, a draggable desk) side by side with three parallel Sonnet agents, from Mobbin and recent.design references (Godly now redirects to recent.design). They were `noindex` and live only on the `staging` branch (`app/directions`, `components/directions`, `components/specimens`); they are not on `main`.
+- **Three directions first** (16 Oct): built `/directions/specimens`, `/directions/list` and `/directions/desk` side by side with three parallel Sonnet agents, from Mobbin and recent.design references (Godly now redirects to recent.design). They were `noindex` prototypes and were deleted on 1 Nov, before the production deploy.
 - **Live specimen cards** were tried on `/work` and the homepage and rejected as too bright and childlike. The original `WorkCard` came back, toned down: soft green wash instead of saturated stops, slower drift, fainter borders, gentler hover, glass arrow chip. On touch screens the description and arrow now show without hover.
 - **Light mode retheme** (20 Oct), inspired by spade.com: white page, mint hero panel, near-black green ink `#090F05`, forest `#18280E`, one lime accent `#B2EB76`, Faculty Glyphic headings, Geist Mono labels. About 45 files had the old ink, cream, lavender and tangerine hex values swapped. Dark mode is unchanged.
 - **Hero line graphics**: `components/LineGraphics.tsx`. A scroll band with the same label cards was added then removed (22 Oct) because it read as a second hero. Dark mode got the same floating cards (23 Oct).
@@ -92,6 +92,16 @@ Light mode wasn't getting traction, so the homepage and `/work` were reworked ov
 - `streamText` reports API errors through `onError` and ends `textStream` without throwing, so the route's `catch` never ran and the chat showed nothing. An empty stream now counts as failure and sends the fallback message.
 - Model is now `nv-mistralai/mistral-nemo-12b-instruct`, overridable with `NVIDIA_CHAT_MODEL`. Checked that it exists on NVIDIA's API (a dummy key gets 403, the old model 410). Not checked end to end: there is no key in the local environment, and the Preview environment may not have one either.
 
+### Chat provider chain and production deploy (1 Nov)
+
+- NVIDIA kept breaking, so `app/api/chat/route.ts` now tries Cloudflare Workers AI first (`llama-3.1-8b`, then `llama-3.3-70b`), then NVIDIA, then the fallback message. `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN` were added in Vercel for Production, Preview and Development.
+- Production had still been running the old build, so chat returned an empty stream online. Deployed the `staging` code with `vercel --prod` (project linked with `vercel link`); a live question to Adi.Os got a real answer afterwards.
+- Deployed from the working folder, not from a git branch, so production only matches git once these changes are committed.
+- Removed the full-screen globe intro (`components/PageLoader.tsx`): it forced a 2.5 s minimum plus fades on every hard load and hid the page behind it while nothing was loading. `GlobeLoader` stays as the route-level `app/loading.tsx` fallback.
+- Removed the `▸` marker from the hero label cards.
+- Status changed to open to work after the AliveCor role ended on 28 Oct 2026: hero card now reads "Status / Open to work", site description, `/aboutme` status and role dates, and the chatbot prompt were updated. The case studies, logo marquee and `/career-odyssey` timeline were left as past work.
+- A real Cloudflare account ID and token had been pasted into `.env.example`. Blanked before committing. Treat that token as exposed and rotate it.
+
 ### Dev notes
 
 - A webpack error (`__webpack_modules__[moduleId] is not a function`, then `Cannot find module './873.js'`) came from running `npm run build` while `npm run dev` was running; both write `.next`. Stopping dev, deleting `.next` and restarting fixed it.
@@ -100,7 +110,8 @@ Light mode wasn't getting traction, so the homepage and `/work` were reworked ov
 
 ### Open
 
-- Merge the release PR once the preview looks right, and add `NVIDIA_API_KEY` to Vercel Production (and Preview) so the chat answers for real.
-- Paste a real `NVIDIA_API_KEY` into `.env.local` (and the Vercel Preview environment) and confirm a real chat reply.
-- Delete the prototypes from `staging` (`app/directions`, `components/directions`, `components/specimens`) once a direction is chosen.
+- The redesign is live in production and `staging` is merged into `main` (fast-forward, 1 Nov). Push `main` to trigger a git-based production deploy.
+- Rotate the Cloudflare API token and update it in Vercel.
+- Fill `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN` into the local `.env.local` to test chat locally.
+- Update the resume Google Doc for the 28 Oct end date.
 - Case-study fixes (Year in Review images, unconfirmed stats on Neon Fintech and Website Redesign) are in PR #17, separate from this work.
