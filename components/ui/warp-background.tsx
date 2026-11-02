@@ -19,7 +19,7 @@ interface WarpBackgroundProps extends HTMLAttributes<HTMLDivElement> {
 
 // Light-persona beams: tangerine pop first, then the pastel family (see CLAUDE.md palette).
 const LIGHT_BEAM_COLORS = [
-  "#FF5C39", // tangerine pop
+  "#B2EB76", // tangerine pop
   "#FFD666", // butter
   "#CBD5FF", // periwinkle
   "#FFD6E0", // blush

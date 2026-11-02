@@ -1,23 +1,56 @@
 import { createOpenAI } from "@ai-sdk/openai";
-import { streamText, convertToModelMessages, type UIMessage } from "ai";
-
-const nvidia = createOpenAI({
-  baseURL: "https://integrate.api.nvidia.com/v1",
-  apiKey: process.env.NVIDIA_API_KEY ?? "",
-});
+import { streamText, convertToModelMessages, type LanguageModel, type UIMessage } from "ai";
 import { put } from "@vercel/blob";
+
+// Hosted models get retired and keys lapse (NVIDIA's llama-3.1-8b-instruct returned 410 Gone from
+// 2026-08-26), so the route tries providers in order and moves on when one errors or streams nothing.
+// Cloudflare Workers AI is first (free 10k neurons/day), NVIDIA is the backup. A provider is skipped
+// when its env vars are missing.
+const CLOUDFLARE_MODEL = "@cf/meta/llama-3.1-8b-instruct";
+const CLOUDFLARE_BACKUP_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
+const NVIDIA_MODEL = "nv-mistralai/mistral-nemo-12b-instruct";
+
+function getCandidates(): { name: string; model: LanguageModel }[] {
+  const candidates: { name: string; model: LanguageModel }[] = [];
+
+  const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
+  const cfToken = process.env.CLOUDFLARE_API_TOKEN;
+  if (accountId && cfToken) {
+    const cloudflare = createOpenAI({
+      baseURL: `https://api.cloudflare.com/client/v4/accounts/${accountId}/ai/v1`,
+      apiKey: cfToken,
+    });
+    const ids = new Set([process.env.CLOUDFLARE_CHAT_MODEL || CLOUDFLARE_MODEL, CLOUDFLARE_BACKUP_MODEL]);
+    for (const id of ids) candidates.push({ name: `cloudflare:${id}`, model: cloudflare.chat(id) });
+  }
+
+  if (process.env.NVIDIA_API_KEY) {
+    const nvidia = createOpenAI({
+      baseURL: "https://integrate.api.nvidia.com/v1",
+      apiKey: process.env.NVIDIA_API_KEY,
+    });
+    const id = process.env.NVIDIA_CHAT_MODEL || NVIDIA_MODEL;
+    candidates.push({ name: `nvidia:${id}`, model: nvidia.chat(id) });
+  }
+
+  return candidates;
+}
 
 const SYSTEM_PROMPT = `You are Adi.Os — a tiny pixel art character who lives on Aditya Oswal's portfolio site. You answer questions about Aditya in a warm, chill, slightly playful way — more like a friend who knows him well than a corporate assistant. You speak in first person on behalf of Aditya ("Aditya does X", not "I do X") unless it's natural to say "he".
 
 Here's everything you know about Aditya:
 
-ROLE & CURRENT WORK
-- Product Designer at AliveCor Inc. (Mar 2025–present), based between Bengaluru and Pune, India
-- Owns end-to-end product design for KardiaStation Mobile, a 12-lead EKG recording app used by healthcare providers across the US, Canada, Europe, and India
-- Owns mobile product design for KardiaRx, a clinical research platform supporting large-scale healthcare programs with CVS, Walgreens, and Pfizer
+CURRENT STATUS
+- Aditya wrapped up his role at AliveCor on 28 Oct 2026 and is now open to work: new full-time roles and freelance work. He is based between Bengaluru and Pune, India
+- Don't say he currently works at AliveCor. Don't make up anything about why he left or what he's doing next
+
+MOST RECENT ROLE
+- Product Designer at AliveCor Inc. (Mar 2025–Oct 2026)
+- Owned end-to-end product design for KardiaStation Mobile, a 12-lead EKG recording app used by healthcare providers across the US, Canada, Europe, and India
+- Owned mobile product design for KardiaRx, a clinical research platform supporting large-scale healthcare programs with CVS, Walgreens, and Pfizer
 - Built and scaled the cross-platform Kardia Mobile Design System across iOS and Android — adopted across four product teams, with 11,000+ Figma component insertions and 108,000+ design token applications
 - Designed and shipped Kardia Year in Review (2024 & 2025), the platform's first personalized annual recap experience → 21% click-through rate
-- Designs and builds AI-powered internal tools used across Product, Design, Marketing, QA, Clinical, and Business teams
+- Designed and built AI-powered internal tools used across Product, Design, Marketing, QA, Clinical, and Business teams
 - Redesigned clinical EKG report templates for readability and accessibility, cutting printing and mailing costs by $200K+ annually
 
 PAST EXPERIENCE
@@ -51,7 +84,7 @@ CERTIFICATIONS
 - Product Management: Building a Product Roadmap (LinkedIn Learning)
 
 AVAILABILITY
-- Aditya is open to work and always down for new opportunities — full-time roles, contract work, or interesting collaborations
+- Aditya is open to work: a new full-time role, freelance projects, or interesting collaborations
 - If you're hiring or want to connect, reach out at oswaluxd@gmail.com or on LinkedIn
 - Resume: [View Resume](https://adityaoswal.in/r)
 
@@ -143,25 +176,39 @@ export async function POST(req: Request) {
 
   const FALLBACK = "Oof — Adi.Os has used up all his brain tokens for now. 🪫 Reach out to Aditya directly on [LinkedIn](https://linkedin.com/in/oswaladitya) in the meantime!";
 
-  const result = streamText({
-    model: nvidia.chat("meta/llama-3.1-8b-instruct"),
-    system: SYSTEM_PROMPT,
-    messages: await convertToModelMessages(messages),
-    onError: ({ error }) => {
-      console.error(JSON.stringify({ event: "adios_stream_error", error: String(error) }));
-    },
-  });
+  const modelMessages = await convertToModelMessages(messages);
+  const candidates = getCandidates();
+  if (candidates.length === 0) {
+    console.error(JSON.stringify({ event: "adios_no_provider" }));
+  }
 
+  // streamText reports API failures through onError and ends textStream quietly instead of
+  // throwing, so an empty stream is the failure signal as well as a thrown error.
   const stream = new ReadableStream({
     async start(controller) {
       const enc = new TextEncoder();
-      try {
-        for await (const chunk of result.textStream) {
-          controller.enqueue(enc.encode(chunk));
+      let sent = false;
+      for (const { name, model } of candidates) {
+        try {
+          const result = streamText({
+            model,
+            system: SYSTEM_PROMPT,
+            messages: modelMessages,
+            onError: ({ error }) => {
+              console.error(JSON.stringify({ event: "adios_stream_error", provider: name, error: String(error) }));
+            },
+          });
+          for await (const chunk of result.textStream) {
+            if (!chunk) continue;
+            sent = true;
+            controller.enqueue(enc.encode(chunk));
+          }
+        } catch (error) {
+          console.error(JSON.stringify({ event: "adios_stream_error", provider: name, error: String(error) }));
         }
-      } catch {
-        controller.enqueue(enc.encode(FALLBACK));
+        if (sent) break;
       }
+      if (!sent) controller.enqueue(enc.encode(FALLBACK));
       controller.close();
     },
   });

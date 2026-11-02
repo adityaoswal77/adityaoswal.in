@@ -49,7 +49,7 @@ export default function Footer() {
       },
     });
     words.forEach((word, i) => {
-      tl.fromTo(word, { y: "110%" }, { y: "0%", ease: "power3.out", duration: 0.6 }, i * 0.12);
+      tl.fromTo(word, { y: "140%" }, { y: "0%", ease: "power3.out", duration: 0.6 }, i * 0.12);
     });
     return () => { tl.kill(); };
   }, []);
@@ -79,14 +79,14 @@ export default function Footer() {
               className="text-4xl sm:text-5xl md:text-7xl xl:text-[6rem] font-black uppercase leading-[0.9] tracking-tight text-[var(--foreground)]"
             >
               {["Let's", "build"].map((word) => (
-                <span key={word} className="overflow-hidden inline-block align-bottom mr-[0.22em]">
+                <span key={word} className="overflow-hidden inline-block align-bottom mr-[0.22em] pb-[0.2em] -mb-[0.2em]">
                   <span className="word-reveal inline-block">{word}</span>
                 </span>
               ))}
               <br />
               <span className="italic font-light text-[var(--muted)]">
                 {["something", "crazy."].map((word) => (
-                  <span key={word} className="overflow-hidden inline-block align-bottom mr-[0.22em] last:mr-0 pb-[0.15em]">
+                  <span key={word} className="overflow-hidden inline-block align-bottom mr-[0.22em] last:mr-0 pb-[0.2em] -mb-[0.2em]">
                     <span className="word-reveal inline-block">{word}</span>
                   </span>
                 ))}

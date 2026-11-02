@@ -72,8 +72,8 @@ const Hero = () => {
 
             <dl className="grid grid-cols-1 sm:grid-cols-2 gap-12 pt-12 border-t border-[var(--border)]">
               <div ref={descriptionRef}>
-                <dt className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-3">Current Role</dt>
-                <dd className="text-xl font-bold text-[var(--foreground)]">Product Designer @ AliveCor</dd>
+                <dt className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-3">Status</dt>
+                <dd className="text-xl font-bold text-[var(--foreground)]">Open to work · Freelance · New roles</dd>
               </div>
               <div>
                 <dt className="text-[14px] uppercase tracking-[0.2em] font-bold text-[var(--muted)] mb-3">Location</dt>
@@ -214,7 +214,7 @@ const SideProjects = () => {
           <Link
             key={project.href}
             href={project.href}
-            className="group flex items-start justify-between gap-6 p-8 rounded-lg border border-[var(--border)] bg-[var(--card)] hover:border-[#2A2438]/20 dark:hover:border-white/20 transition-all duration-300"
+            className="group flex items-start justify-between gap-6 p-8 rounded-lg border border-[var(--border)] bg-[var(--card)] hover:border-[#090F05]/20 dark:hover:border-white/20 transition-all duration-300"
           >
             <div className="space-y-3">
               <div className="flex items-center gap-2">
@@ -245,7 +245,7 @@ const WorkExperience = () => {
     {
       role: "Product Designer",
       company: "AliveCor Inc.",
-      period: "Mar '25 – Present",
+      period: "Mar '25 – Oct '26",
       description: "Own end-to-end design for KardiaStation Mobile (12-lead EKG recording, used by providers across the US, Canada, Europe, and India) and mobile product design for KardiaRx, a clinical research platform with CVS, Walgreens, and Pfizer. Built and scaled the cross-platform Kardia Mobile Design System across iOS and Android, driving adoption across four product teams. Designed AI-powered internal tools adopted across Product, Design, Marketing, QA, Clinical, and Business teams. Redesigned EKG report templates, cutting printing and mailing costs by $200K+ annually. Conceived and shipped Kardia Year in Review, driving a 21% click-through rate."
     },
     {
@@ -333,7 +333,7 @@ const InteractiveSkills = () => {
     <button
       type="button"
       onClick={() => setIsPhysics((p) => !p)}
-      className="flex items-center gap-3 px-4 py-2 rounded-full border border-[var(--border)] bg-[var(--card)] hover:border-[#2A2438]/20 dark:hover:border-white/20 transition-colors duration-200"
+      className="flex items-center gap-3 px-4 py-2 rounded-full border border-[var(--border)] bg-[var(--card)] hover:border-[#090F05]/20 dark:hover:border-white/20 transition-colors duration-200"
     >
       <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-[var(--muted)]">
         {isPhysics ? "Simple" : "Physics"}
@@ -388,7 +388,7 @@ const InteractiveSkills = () => {
           {skills.map((skill, i) => (
             <span
               key={i}
-              className="px-4 py-2 rounded-full border border-[var(--border)] bg-[var(--card)] text-[12px] font-bold uppercase tracking-widest text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[#2A2438]/20 dark:hover:border-white/20 transition-colors duration-200"
+              className="px-4 py-2 rounded-full border border-[var(--border)] bg-[var(--card)] text-[12px] font-bold uppercase tracking-widest text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[#090F05]/20 dark:hover:border-white/20 transition-colors duration-200"
             >
               {skill}
             </span>
@@ -439,7 +439,7 @@ const Toolstack = () => {
 export default function AboutPage() {
 
   return (
-    <div className="font-sans antialiased bg-[var(--background)] text-[var(--foreground)] selection:bg-[#FF5C39] selection:text-[#2A2438] dark:selection:bg-indigo-500 dark:selection:text-white min-h-screen transition-colors duration-300">
+    <div className="font-sans antialiased bg-[var(--background)] text-[var(--foreground)] selection:bg-[#B2EB76] selection:text-[#090F05] dark:selection:bg-indigo-500 dark:selection:text-white min-h-screen transition-colors duration-300">
       <div className="w-full relative">
         <Hero />
         <AboutOverview />

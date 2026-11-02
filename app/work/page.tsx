@@ -25,7 +25,7 @@ export default function WorkPage() {
       },
     });
     words.forEach((word, i) => {
-      tl.fromTo(word, { y: "110%" }, { y: "0%", ease: "power3.out", duration: 0.5 }, i * 0.25);
+      tl.fromTo(word, { y: "140%" }, { y: "0%", ease: "power3.out", duration: 0.5 }, i * 0.25);
     });
     return () => { tl.kill(); };
   }, []);
@@ -41,13 +41,13 @@ export default function WorkPage() {
   }, [selectedCategory]);
 
   return (
-    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] selection:bg-[#FF5C39] selection:text-[#2A2438] dark:selection:bg-indigo-500 dark:selection:text-white transition-colors duration-300">
-      <div className="atmospheric-glow opacity-50" />
+    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] selection:bg-[#B2EB76] selection:text-[#090F05] dark:selection:bg-indigo-500 dark:selection:text-white transition-colors duration-300">
+      <div className="atmospheric-glow opacity-50 !w-full" />
 
       <div className="max-w-7xl mx-auto px-6 pt-32 pb-24 relative z-10">
         <div className="mb-20">
           <div className="flex items-center gap-2 mb-6">
-            <div className="w-1.5 h-1.5 rounded-full bg-[#FF5C39] dark:bg-violet-500" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[#B2EB76] dark:bg-violet-500" />
             <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-[var(--muted)]">
               Portfolio
             </span>
@@ -56,11 +56,11 @@ export default function WorkPage() {
             ref={headingRef}
             className="text-[2.5rem] sm:text-6xl md:text-[8rem] font-black uppercase tracking-normal leading-[0.85] text-[var(--foreground)]"
           >
-            <span className="overflow-hidden inline-block align-bottom mr-[0.2em]">
+            <span className="overflow-hidden inline-block align-bottom mr-[0.2em] pb-[0.2em] -mb-[0.2em]">
               <span className="word-reveal inline-block">Selected</span>
             </span>
             <br />
-            <span className="overflow-hidden inline-block align-bottom italic font-light text-[var(--muted)]">
+            <span className="overflow-hidden inline-block align-bottom pb-[0.2em] -mb-[0.2em] italic font-light text-[var(--muted)]">
               <span className="word-reveal inline-block">projects</span>
             </span>
           </h1>
@@ -76,9 +76,9 @@ export default function WorkPage() {
                   key={category}
                   type="button"
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 rounded-full border text-[10px] uppercase tracking-widest font-bold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A2438] dark:focus-visible:ring-white ${selectedCategory === category
-                    ? "border-[#2A2438] bg-[#2A2438] text-[#FDFBF7] -rotate-1 dark:rotate-0 dark:border-violet-500/50 dark:bg-violet-500/10 dark:text-violet-500 dark:shadow-[0_0_20px_rgba(139,92,246,0.15)]"
-                    : "border-[var(--border)] bg-transparent text-[var(--muted)] hover:border-[#2A2438]/30 dark:hover:border-white/20 hover:text-[var(--foreground)]"
+                  className={`px-4 py-2 rounded-full border text-[10px] uppercase tracking-widest font-bold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#090F05] dark:focus-visible:ring-white ${selectedCategory === category
+                    ? "border-[#090F05] bg-[#090F05] text-[#FFFFFF] -rotate-1 dark:rotate-0 dark:border-violet-500/50 dark:bg-violet-500/10 dark:text-violet-500 dark:shadow-[0_0_20px_rgba(139,92,246,0.15)]"
+                    : "border-[var(--border)] bg-transparent text-[var(--muted)] hover:border-[#090F05]/30 dark:hover:border-white/20 hover:text-[var(--foreground)]"
                     }`}
                 >
                   {category}

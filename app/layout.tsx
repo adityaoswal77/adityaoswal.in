@@ -5,7 +5,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { PageLoadProvider } from "@/components/PageLoader";
 import { WanderingCharacter } from "@/components/WanderingCharacter";
 
 const siteUrl = "https://adityaoswal.in";
@@ -17,7 +16,7 @@ export const metadata: Metadata = {
     template: "%s | Aditya Oswal",
   },
   description:
-    "Aditya Oswal is a UX Designer, Product Designer, and Design Engineer based in Bangalore, India. Specializing in UI/UX design, design systems, nocode development, and interactive web experiences. Currently at Alivecor.",
+    "Aditya Oswal is a UX Designer, Product Designer, and Design Engineer based in Bangalore, India. Specializing in UI/UX design, design systems, nocode development, and interactive web experiences. Open to full-time roles and freelance work.",
   keywords: [
     "Aditya Oswal",
     "UX Designer",
@@ -128,14 +127,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           >
             Skip to main content
           </a>
-          <PageLoadProvider>
-            <Navbar />
-            <main id="main-content">
-              {children}
-            </main>
-            <Footer />
-            <WanderingCharacter />
-          </PageLoadProvider>
+          <Navbar />
+          <main id="main-content">
+            {children}
+          </main>
+          <Footer />
+          <WanderingCharacter />
           <Analytics />
           <SpeedInsights />
         </ThemeProvider>

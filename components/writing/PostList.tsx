@@ -8,7 +8,7 @@ export function PostList({ posts }: { posts: Post[] }) {
         <li key={post.slug}>
           <Link
             href={`/writing/${post.slug}`}
-            className="group flex flex-col gap-1 rounded-lg px-3 py-3 transition-colors hover:bg-[#2A2438]/[0.04] dark:hover:bg-white/[0.05] sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+            className="group flex flex-col gap-1 rounded-lg px-3 py-3 transition-colors hover:bg-[#090F05]/[0.04] dark:hover:bg-white/[0.05] sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
           >
             <span className="font-medium text-[var(--foreground)] underline-offset-4 decoration-[var(--muted)] group-hover:underline group-focus-visible:underline">
               {post.title}
