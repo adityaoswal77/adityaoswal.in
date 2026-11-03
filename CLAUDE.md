@@ -15,7 +15,7 @@ vercel --prod    # deploy to production
 ## Conventions
 
 - Named exports for all components (no default exports)
-- Use `dark:` Tailwind variants for every colored element — dark mode is the default
+- Use `dark:` Tailwind variants for every colored element — light is the default theme for first-time visitors (`defaultTheme="light"`, `enableSystem={false}` in `app/layout.tsx`); a saved toggle choice wins
 - Use Framer Motion for interactive/animated components; GSAP for scroll-driven or timeline animations
 - No unnecessary comments, docstrings, or type annotations on unchanged code
 - Images: always include `alt` text
@@ -29,7 +29,7 @@ vercel --prod    # deploy to production
 
 The theme toggle is a **persona switch**, not a color inversion. Both hero backgrounds react to the cursor — dark as pixels, light as paint ("same hand, different tool").
 
-- **Dark (default)** = the design engineer: black, Dither WebGL pixel wave, mono chips, glass surfaces, white text.
+- **Dark** = the design engineer: black, Dither WebGL pixel wave, mono chips, glass surfaces, white text.
 - **Light** = Spade-inspired green and white (staging, Oct 2026; replaced the pastel + tangerine "playful designer" persona): white page, mint hero panel, near-black green ink, one lime accent, thin 1px line graphics (grids, corner-ticked label cards, edge rulers), mono labels/CTAs, Faculty Glyphic headings.
 
 Wiring: `next-themes` with `attribute="class"` → `.dark`/`.light` on `<html>`; Tailwind `darkMode: 'class'`. Tokens live in `app/globals.css` (`:root` = dark, `.light` overrides).

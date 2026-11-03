@@ -11,7 +11,7 @@ export const PROJECTS = [
         pastelHover: "#B2EB76",
         href: "/playground/interestingplaces",
         image: "/assets/img4.jpg",
-        mockup: "/assets/interestingplaces-video.mov",
+        mockup: "/assets/interestingplaces-preview.webp",
         mockupRadius: "rounded-t-[0.5rem]",
         mockupBg: false,
     },

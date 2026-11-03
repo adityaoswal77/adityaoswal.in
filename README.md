@@ -5,7 +5,7 @@ Personal portfolio for [Aditya Oswal](https://adityaoswal.in) — Product Design
 ## Stack
 
 - **Framework**: Next.js 15 (App Router), React 19, TypeScript
-- **Styling**: Tailwind CSS v3, dark mode default (`darkMode: 'class'`)
+- **Styling**: Tailwind CSS v3, light mode by default, dark via the toggle (`darkMode: 'class'`)
 - **Fonts**: Inter (body), Geist (small headings), Instrument Serif (dark headings), Faculty Glyphic (light headings), Geist Mono (mono)
 - **Animation**: GSAP, Framer Motion
 - **3D / Physics**: Three.js, @react-three/fiber, @react-three/drei, Matter.js
