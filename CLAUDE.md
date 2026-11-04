@@ -118,6 +118,7 @@ Per-project tints in `lib/data.ts` (`pastel`) are now four greens; `accent` stil
 ## Short Links (`next.config.js` redirects)
 
 - `/r` → Google Doc resume (direct)
+- `/deck` → Google Drive portfolio deck PDF (direct, temporary redirect). Deliberately not linked anywhere on the site (no nav item, no sitemap entry) — it is a share link only. Replace the deck via Drive's "Manage versions" so the link stays valid; changing to a different file means editing the ID in `next.config.js` and redeploying
 - `/blogs` → `/writing`
 - `/resume` → `/?utm_source=resume&utm_medium=document`
 - `/linkedin`, `/twitter`, `/instagram`, `/github`, `/luma` → homepage with UTM params

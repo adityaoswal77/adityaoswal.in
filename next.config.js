@@ -17,6 +17,11 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: "/deck",
+        destination: "https://drive.google.com/file/d/1m0K-KAGhfX3h3W5G42y4fkcQj8e0_kZQ/view?usp=sharing",
+        permanent: false,
+      },
+      {
         source: "/blogs",
         destination: "/writing",
         permanent: false,
