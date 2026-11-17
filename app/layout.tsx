@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { WanderingCharacter } from "@/components/WanderingCharacter";
+import { HideOnInstead } from "@/components/HideOnInstead";
 
 const siteUrl = "https://adityaoswal.in";
 
@@ -127,12 +128,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           >
             Skip to main content
           </a>
-          <Navbar />
+          <HideOnInstead><Navbar /></HideOnInstead>
           <main id="main-content">
             {children}
           </main>
-          <Footer />
-          <WanderingCharacter />
+          <HideOnInstead><Footer /></HideOnInstead>
+          <HideOnInstead><WanderingCharacter /></HideOnInstead>
           <Analytics />
           <SpeedInsights />
         </ThemeProvider>
