@@ -272,7 +272,7 @@ export function Prototype() {
       <div className="mt-3 flex flex-col gap-0.5">
         {GROUPS.map((g) => {
           const isOpen = !!open[g.id];
-          const rows = g.id === "needs" ? rowsFor("needs").slice(0, 3) : rowsFor(g.id).slice(0, 5);
+          const rows = rowsFor(g.id).slice(0, 5);
           return (
             <div key={g.id}>
               <button
