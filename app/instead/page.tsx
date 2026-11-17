@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Figma, Play, Presentation } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Figma, Presentation } from "lucide-react";
+import { VideoCard } from "@/components/instead/VideoCard";
 
-const LOOM_URL = "";
 const PRESENTATION_URL =
   "https://docs.google.com/presentation/d/1TZURlb3_cpXzvMrEApRGSUkpryuZ_R8yJksIymIpoWA/edit?usp=sharing";
 const FIGMA_URL = "https://www.figma.com/design/wNo5GKzuE5zmNkeB0PB5A5/Instead?node-id=40-3245";
@@ -10,7 +10,6 @@ const FOCUS =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#24282C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F6F0]";
 
 const LINKS = [
-  { label: "Walkthrough video", hint: "A short Loom tour", href: LOOM_URL, Icon: Play },
   { label: "Presentation", hint: "Slides for the exercise", href: PRESENTATION_URL, Icon: Presentation },
   { label: "Figma file", hint: "Final design and exploration", href: FIGMA_URL, Icon: Figma },
 ];
@@ -45,6 +44,7 @@ export default function InsteadLanding() {
       </Link>
 
       <div className="mt-4 grid gap-4 md:grid-cols-3">
+        <VideoCard className="relative block rounded-[24px] border-[0.5px] border-[#D6D5CB] bg-[#FBFBF7] p-5" />
         {LINKS.map(({ label, hint, href, Icon }) => {
           const disabled = !href;
           const body = (
