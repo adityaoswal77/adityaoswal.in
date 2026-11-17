@@ -196,6 +196,9 @@ export function Prototype() {
   const sidebar = (
     <aside className="flex h-full w-[296px] shrink-0 flex-col overflow-y-auto p-5">
       <div className="flex items-center gap-2">
+        <Link href="/instead" aria-label="Back to overview" title="Back to overview" className={`-ml-1 ${ICON_BTN}`}>
+          <ArrowLeft className="h-4 w-4" aria-hidden />
+        </Link>
         <span className="text-[26px] font-black leading-none tracking-tight">instead</span>
         <span className="rounded-full bg-[#C2EF72] px-2 py-0.5 text-[11px] font-bold">Pro</span>
         <button type="button" aria-label="Collapse sidebar" onClick={() => setLeftOpen(false)} className={`ml-auto ${ICON_BTN}`}>
@@ -638,18 +641,16 @@ export function Prototype() {
           <main className="flex h-full min-w-0 flex-1 flex-col">
             <div className="flex h-12 shrink-0 items-center gap-2 px-3">
               {!leftOpen && (
-                <button type="button" aria-label="Open sidebar" onClick={() => setLeftOpen(true)} className={`flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:bg-[#EFEEE6] active:bg-[#E3E2D8] ${FOCUS}`}>
-                  <PanelLeftOpen className="h-4 w-4" />
-                </button>
+                <>
+                  <Link href="/instead" aria-label="Back to overview" title="Back to overview" className={`flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:bg-[#EFEEE6] active:bg-[#E3E2D8] ${FOCUS}`}>
+                    <ArrowLeft className="h-4 w-4" aria-hidden />
+                  </Link>
+                  <button type="button" aria-label="Open sidebar" onClick={() => setLeftOpen(true)} className={`flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:bg-[#EFEEE6] active:bg-[#E3E2D8] ${FOCUS}`}>
+                    <PanelLeftOpen className="h-4 w-4" />
+                  </button>
+                </>
               )}
               <span className="flex-1" />
-              <Link
-                href="/instead"
-                className={`flex items-center gap-1.5 rounded-full ${LINE} bg-[#FBFBF7] px-3 py-1.5 text-xs text-[#24282C]/80 transition-colors hover:bg-white hover:text-[#24282C] ${FOCUS}`}
-              >
-                <ArrowLeft className="h-3.5 w-3.5" aria-hidden />
-                Back to overview
-              </Link>
               <button
                 type="button"
                 aria-label={rightOpen ? "Close side panel" : "Open side panel"}
