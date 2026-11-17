@@ -120,6 +120,7 @@ Per-project tints in `lib/data.ts` (`pastel`) are now four greens; `accent` stil
 - `/r` → Google Doc resume (direct)
 - `/deck` → Google Drive portfolio deck PDF (direct, temporary redirect). Deliberately not linked anywhere on the site (no nav item, no sitemap entry) — it is a share link only. Replace the deck via Drive's "Manage versions" so the link stays valid; changing to a different file means editing the ID in `next.config.js` and redeploying
 - `/blogs` → `/writing`
+- `/instead` → Instead take-home showcase (Nov 2026): landing page with Loom/deck/Figma links (`LOOM_URL` etc. constants at the top of `app/instead/page.tsx`) and `/instead/prototype`, a static clickable prototype (`components/instead/`). Own branding (Lato + Libre Baskerville, sand/charcoal/lime) via `app/instead/layout.tsx`; portfolio Navbar/Footer/WanderingCharacter hidden there through `components/HideOnInstead.tsx`. Public by link (no password), `noindex`, not in the sitemap
 - `/resume` → `/?utm_source=resume&utm_medium=document`
 - `/linkedin`, `/twitter`, `/instagram`, `/github`, `/luma` → homepage with UTM params
 
