@@ -87,8 +87,25 @@ export const DECISIONS = [
 
 export const CHIPS: { label: string; prompt: string }[] = [
   { label: "Onboard a client", prompt: "Onboard a new client: " },
-  { label: "Gather documents", prompt: "Gather missing documents from clients for the 2026 return: " },
-  { label: "Prep an extension", prompt: "Prep an extension for these clients: " },
-  { label: "Run a strategy analysis", prompt: "Run a year-end strategy analysis for: " },
-  { label: "Send estimate reminders", prompt: "Send Q4 estimate reminders to: " },
+  { label: "Gather documents", prompt: "Gather missing documents for the 2026 return from: @" },
+  { label: "Prep an extension", prompt: "Prep an extension for these clients: @" },
+  { label: "Run a strategy analysis", prompt: "Run a year-end strategy analysis for: @" },
+  { label: "Send estimate reminders", prompt: "Send Q4 estimate reminders to: @" },
+];
+
+export type FileItem = { id: string; name: string; size: string; client: string; date: string; type: "pdf" | "xlsx" | "docx" };
+
+export const FIRM = "Firm";
+
+export const FILES: FileItem[] = [
+  { id: "f1", name: "2025 Form 1065 draft.pdf", size: "1.8 MB", client: "Aditya & Oswal Partners", date: "Nov 12", type: "pdf" },
+  { id: "f2", name: "Partner K-1 packet.pdf", size: "940 KB", client: "Aditya & Oswal Partners", date: "Nov 9", type: "pdf" },
+  { id: "f3", name: "CP2000 notice.pdf", size: "312 KB", client: "Bhatia Household", date: "Nov 6", type: "pdf" },
+  { id: "f4", name: "2025 1099-B Schwab.pdf", size: "1.1 MB", client: "Bhatia Household", date: "Oct 30", type: "pdf" },
+  { id: "f5", name: "Q3 trial balance.xlsx", size: "86 KB", client: "Filbert Holdings", date: "Nov 10", type: "xlsx" },
+  { id: "f6", name: "K-1 address change letter.pdf", size: "148 KB", client: "Filbert Holdings", date: "Nov 13", type: "pdf" },
+  { id: "f7", name: "Payroll summary 2025.xlsx", size: "212 KB", client: "Northgate Dental Group", date: "Nov 4", type: "xlsx" },
+  { id: "f8", name: "Engagement letter template.docx", size: "42 KB", client: FIRM, date: "Sep 18", type: "docx" },
+  { id: "f9", name: "2026 tax calendar.pdf", size: "220 KB", client: FIRM, date: "Oct 2", type: "pdf" },
+  { id: "f10", name: "Client intake checklist.docx", size: "58 KB", client: FIRM, date: "Aug 21", type: "docx" },
 ];
