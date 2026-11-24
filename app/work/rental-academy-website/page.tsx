@@ -70,7 +70,7 @@ const SHOTS = {
     src: `${ASSET_DIR}/mobile-call-step-1.webp`,
     width: 780,
     height: 1688,
-    alt: "Booking form step 1 on a phone: answer chips, city and budget fields, and a disabled Continue button until a budget band is chosen.",
+    alt: "Booking form step 1 on a phone: answer chips, city and budget fields, and a disabled Continue button until a city and a budget band are filled in.",
   },
 };
 
