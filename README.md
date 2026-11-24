@@ -27,6 +27,8 @@ app/
   changelog/          # Site changelog
   api/chat/           # Adi.Os chat endpoint (NVIDIA API, streamed)
   links/              # Links page
+  link-previews/      # Dev-only Link Previews tool (page.dev.tsx), 404 in production
+  api/link-previews/  # Dev-only save, upload, video and source endpoints
   layout.tsx          # Root layout (Navbar, Footer, WanderingCharacter, ThemeProvider)
 components/
   AdityaHoverText.tsx # Per-letter hover → image effect in hero
@@ -37,15 +39,21 @@ components/
   LineGraphics.tsx    # Hero label cards + light hero panel (grid, rulers)
   WorkCard.tsx        # Work card: per-project tint, hover reveal, mockup
   writing/            # PostList, PostLink, Placeholder, SubscribeLine
+  link-previews/      # Link Previews tool UI (dev-only)
   Collaborations.tsx
   GradientBlinds.tsx
 content/
   writing/            # One TSX file per post, registered in index.ts
 lib/
   data.ts             # Project/work data and SIDE_PROJECTS
+  link-previews/      # Share image templates, capture, manifest helpers, linkPreview()
+og/
+  sources/            # Source images for the share images
+og-images.json        # Share image manifest (pages, titles, crops, saved versions)
 public/
   Aditya/             # Per-letter images for hover effect (A1-A2, D1-D2, etc.)
-  assets/             # Project images, OG image
+  assets/             # Project images
+  og/                 # Saved share images, one 2400×1260 PNG per page
 ```
 
 ## Commands
@@ -66,6 +74,7 @@ vercel --prod     # Deploy to production
 - **Dither background** — WebGL dither effect on the dark hero that reacts to mouse
 - **Dark/light mode** — dark default (black, mono, glass). Light is green and white: white page, mint hero panel, forest `#18280E` buttons with a lime `#B2EB76` accent, thin line graphics and Faculty Glyphic headings
 - **Hero label cards** — corner-ticked cards (role, company, focus, location) float over both heroes at `xl+`, drift on scroll and follow the cursor slightly
+- **Share images** — every public page has its own link preview image. Edit them at `localhost:3000/link-previews` while `npm run dev` runs (dev only, 404 in production), then save; the PNGs land in `public/og/` and `og-images.json` is updated. New pages get an entry in `og-images.json` and `linkPreview()` in their metadata
 - **Adi.Os chat** — floating chat card, powered by the NVIDIA API, 10 messages per session, with a fallback message if the API fails
 
 ## Environment

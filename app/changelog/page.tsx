@@ -17,6 +17,17 @@ interface Entry {
 
 const CHANGELOG: Entry[] = [
   {
+    date: "2026-11-24",
+    hash: "2fa7dca",
+    title: "Every page has its own link preview",
+    changes: [
+      { type: "seo", description: "Sharing a link now shows an image made for that page instead of one photo for the whole site. Each public page has its own share image in the site's type and colours, built from the page's own imagery, and pages without a strong image get a clean type-only card" },
+      { type: "seo", description: "Open Graph and Twitter tags now point to those images on every page, with the page's own title and description. The Links and Career Odyssey pages had no metadata of their own and now have a title and description" },
+      { type: "feat", description: "A local-only tool at /link-previews lets me edit each title, crop the image and pick a template, then saves the images as static files. It does not exist in production" },
+      { type: "refactor", description: "The generated per-post image is now only a fallback, used for posts that don't have a saved image yet" },
+    ],
+  },
+  {
     date: "2026-11-01",
     hash: "a15bd26",
     title: "Redesign merged into main",

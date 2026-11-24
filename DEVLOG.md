@@ -115,3 +115,20 @@ Light mode wasn't getting traction, so the homepage and `/work` were reworked ov
 - Fill `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN` into the local `.env.local` to test chat locally.
 - Update the resume Google Doc for the 28 Oct end date.
 - Case-study fixes (Year in Review images, unconfirmed stats on Neon Fintech and Website Redesign) are in PR #17, separate from this work.
+
+---
+
+## 2026-11-24
+
+### Link previews (share images)
+
+- Ran `npx skills@latest add joshpuckett/skills` and set up its `link-previews` skill. It lives in `.agents/skills/link-previews`, symlinked into `.claude/skills`, with `skills-lock.json`.
+- Built the setup the skill describes: `og-images.json` manifest, `og/sources/`, templates (Plate, Poster, Inset) in `lib/link-previews/templates.tsx`, title fitting and an in-browser capture, a dev-only tool at `/link-previews`, and save, upload, video and source endpoints. No new dependencies.
+- Dev-only: the tool and endpoints are `*.dev.tsx` / `*.dev.ts` files that `next.config.js` only includes for `next dev` (`pageExtensions` by build phase). `HideOnInstead` also hides the nav, footer and wandering character on `/link-previews`.
+- Fonts: the capture needs a readable `@font-face`, and the `@import` in `globals.css` is cross-origin, so the tool adds its own `<link crossorigin>` for Faculty Glyphic.
+- Choices made with Aditya: Faculty Glyphic for titles, include the noindex pages (`/instead`, `/instead/prototype`, `/flex`) and the public pages missing from the sitemap, home as a dark sheet of four work mockups.
+- 20 pages saved. Type-only: `/work`, `/writing`, `/projects`, `/links`, `/changelog`, `/flex`, `/instead`, `/instead/prototype`, the post, and three case studies (neon-fintech and website-redesign only have placeholder renders, year-in-review's images are missing from `public`).
+- Wiring: `linkPreview(path, { title, description })` in `lib/link-previews/metadata.ts` for pages and layouts, `shareImage("/")` for the root layout. `/links` and `/career-odyssey` got layouts with a title and description. The published post uses its saved image; drafts keep the old `opengraph-image.tsx`.
+- Checked: `tsc` and lint clean on the new files, every page's og and twitter tags, saved PNGs are 2400×1260 and serve as `image/png`, and the tool page and every endpoint return 404 from `next start`. The full `next build` fails in this sandbox on `app/icon.tsx` (it fetches cdn.jsdelivr.net, which is blocked here), so production was checked on a copy without that route.
+- Not tested: upload, drag and drop, and video, since there were no new real files to use.
+- Sitemap vs manifest: the sitemap lists 10 of the 20 pages. Three are noindex on purpose; the other seven were already missing from it.
