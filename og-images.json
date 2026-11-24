@@ -251,6 +251,40 @@
       "savedHash": "a68033c6"
     },
     {
+      "id": "work-ai-tax-workspace",
+      "path": "/work/ai-tax-workspace",
+      "title": "AI Tax Workspace",
+      "group": "Work",
+      "theme": "light",
+      "layout": "type-and-image",
+      "image": {
+        "src": "og/sources/work-ai-tax-workspace.png",
+        "focus": {
+          "x": 0.5,
+          "y": 0
+        }
+      },
+      "version": "15689c16fad2",
+      "savedHash": "872e75d3"
+    },
+    {
+      "id": "work-rental-academy-website",
+      "path": "/work/rental-academy-website",
+      "title": "Rental Academy Website",
+      "group": "Work",
+      "theme": "light",
+      "layout": "type-and-image",
+      "image": {
+        "src": "og/sources/work-rental-academy-website.png",
+        "focus": {
+          "x": 0,
+          "y": 0
+        }
+      },
+      "version": "396991f5490c",
+      "savedHash": "a84f00ec"
+    },
+    {
       "id": "writing-428-places-almost-no-visitors",
       "path": "/writing/428-places-almost-no-visitors",
       "title": "428 places, almost no visitors",
