@@ -18,6 +18,16 @@ interface Entry {
 const CHANGELOG: Entry[] = [
   {
     date: "2026-11-24",
+    hash: "4f85cf1",
+    title: "Two new case studies",
+    changes: [
+      { type: "feat", description: "Two concept case studies are up: a chat-first AI home screen for tax professionals, and a landing site with a booking flow for a short-term rental academy. Both say plainly that they are concept work, not shipped and not tested with users" },
+      { type: "content", description: "The screens use neutral names, and the original page's testimonials, founder section and figures are left out. Where something was drafted with AI or not built, the page says so" },
+      { type: "seo", description: "Both have their own share image, sitemap entry and work card. The Work page gets Product Design, Concept and Web Design filters" },
+    ],
+  },
+  {
+    date: "2026-11-24",
     hash: "2fa7dca",
     title: "Every page has its own link preview",
     changes: [

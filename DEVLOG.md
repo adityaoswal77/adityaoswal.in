@@ -132,3 +132,13 @@ Light mode wasn't getting traction, so the homepage and `/work` were reworked ov
 - Checked: `tsc` and lint clean on the new files, every page's og and twitter tags, saved PNGs are 2400×1260 and serve as `image/png`, and the tool page and every endpoint return 404 from `next start`. The full `next build` fails in this sandbox on `app/icon.tsx` (it fetches cdn.jsdelivr.net, which is blocked here), so production was checked on a copy without that route.
 - Not tested: upload, drag and drop, and video, since there were no new real files to use.
 - Sitemap vs manifest: the sitemap lists 10 of the 20 pages. Three are noindex on purpose; the other seven were already missing from it.
+
+### Two concept case studies
+
+- Added `/work/ai-tax-workspace` and `/work/rental-academy-website`, written from the owner's two walkthrough transcripts, a deck, design files and a coded landing page. Both are generic and labelled Concept: no company, product, founder, city, price or count from the source briefs, no testimonials.
+- Process: one Opus planner wrote the flow, then Sonnet workers ran in parallel with strict file ownership (two researchers, three screenshot makers, two page writers, a private documentation writer). The orchestrator checked every image by eye, ran a banned-term sweep over the diff and fixed what the workers got wrong or could not verify.
+- Screenshots: the clickable prototype and five design directions were re-skinned with a neutral wordmark and neutral client names before capture; the landing page was run from a scratch copy with the traceable text, founders section, metrics and testimonials removed. Each capture script asserts that no banned term is left on the page.
+- Fixes after review: a sentence about professional guidance on AI was removed because its source was never opened, "most" became "many", and a claim about when the Continue button is disabled was corrected against the code.
+- Share images saved for both, work cards added (they also appear in the home grid because one list feeds both), sitemap updated.
+- Checked: `tsc`, lint, banned-term sweep, browser check at 1440 and 390 in light and dark with reduced motion (no overflow, broken images or console errors), og tags. Not checked: the full production build still fails in this sandbox on an unrelated route; research sources could not be opened here.
+- Source material (briefs, transcripts, links, name map) is in a private Notion page, not in this repo.
