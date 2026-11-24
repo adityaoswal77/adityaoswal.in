@@ -513,7 +513,7 @@ const BuiltSection = () => (
         ]}
       />
       <a
-        href="https://rental-academy-prototype.pages.dev"
+        href="https://rental-academy-site.pages.dev"
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex items-center gap-2 font-mono text-[14px] uppercase tracking-widest text-[var(--foreground)] underline underline-offset-4 decoration-[var(--border)] hover:decoration-[var(--foreground)] transition-colors"
