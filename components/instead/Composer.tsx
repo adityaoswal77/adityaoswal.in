@@ -215,7 +215,7 @@ export function Composer({ value, onChange, onSend, onFiles, inputRef, scope, co
           </ul>
         )}
         <label htmlFor="composer" className="sr-only">
-          Message Instead
+          Message the assistant
         </label>
         <textarea
           id="composer"
@@ -224,7 +224,7 @@ export function Composer({ value, onChange, onSend, onFiles, inputRef, scope, co
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onKeyDown={onKeyDown}
-          placeholder="Give Instead a task or question to work on…"
+          placeholder="Give the assistant a task or question to work on…"
           className="w-full resize-none bg-transparent text-base leading-6 outline-none placeholder:text-[#24282C]/45"
         />
 

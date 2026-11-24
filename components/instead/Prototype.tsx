@@ -40,7 +40,7 @@ import { RightPanel, toUpload, type PanelTab, type Upload } from "./RightPanel";
 import { Badge, FOCUS, LINE, type Attached } from "./ui";
 
 type Tab = "needs" | "workflows" | "clients";
-type Msg = { from: "you" | "instead"; text: string; files?: Attached[] };
+type Msg = { from: "you" | "assistant"; text: string; files?: Attached[] };
 type Thread = { id: string; title: string; scope: string; msgs: Msg[]; special?: "decisions" };
 
 const DOT: Record<Group, string> = {
@@ -72,7 +72,7 @@ function ClientRow({ c, onOpen }: { c: Client; onOpen: () => void }) {
   );
 }
 
-export function Prototype() {
+export function Prototype({ backHref }: { backHref: string }) {
   const [tab, setTab] = useState<Tab>("needs");
   const [open, setOpen] = useState<Record<string, boolean>>({ needs: true });
   const [showAllUp, setShowAllUp] = useState(false);
@@ -131,7 +131,7 @@ export function Prototype() {
       scope: c.name,
       msgs: [
         {
-          from: "instead",
+          from: "assistant",
           text: `${c.status}. ${c.group === "needs" ? "I put what I found together so you can decide quickly." : "Nothing is blocked on you right now. Ask me anything about this client."}`,
         },
       ],
@@ -142,14 +142,14 @@ export function Prototype() {
       title: n.title,
       scope: n.scope,
       special: n.special,
-      msgs: n.special ? [] : [{ from: "instead", text: n.detail }],
+      msgs: n.special ? [] : [{ from: "assistant", text: n.detail }],
     });
   const openWorkflow = (w: Workflow) =>
     openThread({
       id: w.id,
       title: w.name,
       scope: w.scope,
-      msgs: [{ from: "instead", text: `${w.name} is ${w.status === "Running" ? "running" : w.status === "Paused" ? "paused" : "waiting on you"}. ${w.done} of ${w.total} ${w.unit}. ${w.next}.` }],
+      msgs: [{ from: "assistant", text: `${w.name} is ${w.status === "Running" ? "running" : w.status === "Paused" ? "paused" : "waiting on you"}. ${w.done} of ${w.total} ${w.unit}. ${w.next}.` }],
     });
 
   const send = (v: string, files: Attached[], scope: string) => {
@@ -164,7 +164,7 @@ export function Prototype() {
     setTyping(true);
     replyTimer.current = setTimeout(() => {
       setThread((t) =>
-        t ? { ...t, msgs: [...t.msgs, { from: "instead", text: `On it. I'll scope this to ${scope} and come back with a plan.` }] } : t,
+        t ? { ...t, msgs: [...t.msgs, { from: "assistant", text: `On it. I'll scope this to ${scope} and come back with a plan.` }] } : t,
       );
       setTyping(false);
     }, 1000);
@@ -196,11 +196,10 @@ export function Prototype() {
   const sidebar = (
     <aside className="flex h-full w-[296px] shrink-0 flex-col overflow-y-auto p-5">
       <div className="flex items-center gap-2">
-        <Link href="/instead" aria-label="Back to overview" title="Back to overview" className={`-ml-1 ${ICON_BTN}`}>
+        <Link href={backHref} aria-label="Back to overview" title="Back to overview" className={`-ml-1 ${ICON_BTN}`}>
           <ArrowLeft className="h-4 w-4" aria-hidden />
         </Link>
-        <span className="text-[26px] font-black leading-none tracking-tight">instead</span>
-        <span className="rounded-full bg-[#C2EF72] px-2 py-0.5 text-[11px] font-bold">Pro</span>
+        <span className="text-[26px] font-black leading-none tracking-tight">workspace</span>
         <button type="button" aria-label="Collapse sidebar" onClick={() => setLeftOpen(false)} className={`ml-auto ${ICON_BTN}`}>
           <PanelLeftClose className="h-4 w-4" />
         </button>
@@ -352,7 +351,7 @@ export function Prototype() {
                 title: t.title,
                 scope: t.scope,
                 special: t.special,
-                msgs: t.special ? [] : [{ from: "instead", text: t.detail }],
+                msgs: t.special ? [] : [{ from: "assistant", text: t.detail }],
               })
             }
             className={`flex items-center gap-2 rounded-xl px-2 py-2 text-left text-[14.5px] transition-colors hover:bg-[#EFEEE6] ${FOCUS} ${thread?.id === t.id ? "bg-[#EFEEE6]" : ""}`}
@@ -365,10 +364,10 @@ export function Prototype() {
 
       <div className="mt-auto pt-6">
         <div className="rounded-[20px] bg-[#EFEEE6] p-4">
-          <p className="font-[family-name:var(--font-baskerville)] text-lg leading-tight">Aditya Oswal</p>
+          <p className="font-[family-name:var(--font-baskerville)] text-lg leading-tight">Sam Rivera</p>
           <div className="mt-3 flex items-center gap-3">
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#FBFBF7] text-[11px] font-bold">AO</span>
-            <span className="flex-1 text-sm text-[#24282C]/75">Oswal Tax Advisory</span>
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#FBFBF7] text-[11px] font-bold">SR</span>
+            <span className="flex-1 text-sm text-[#24282C]/75">Rivera Tax Advisory</span>
             <button type="button" aria-label="Account settings" onClick={() => toast()} className={ICON_BTN}>
               <SlidersHorizontal className="h-4 w-4 text-[#24282C]/70" />
             </button>
@@ -552,7 +551,7 @@ export function Prototype() {
           {thread.special === "decisions" && (
             <div className="max-w-[88%]">
               <p className="text-[15px] leading-relaxed">
-                The 2026 tax plan for Aditya &amp; Oswal Partners is ready. Three decisions need your approval before year end. Each one is a recommendation, and you can change any of them.
+                The 2026 tax plan for Harbor & Pine Partners is ready. Three decisions need your approval before year end. Each one is a recommendation, and you can change any of them.
               </p>
               <div className="mt-4 flex flex-col gap-3">
                 {DECISIONS.map((d, i) => {
@@ -612,7 +611,7 @@ export function Prototype() {
             ),
           )}
           {typing && (
-            <div role="status" aria-label="Instead is typing" className="flex h-6 items-center gap-1.5">
+            <div role="status" aria-label="Assistant is typing" className="flex h-6 items-center gap-1.5">
               {[0, 1, 2].map((i) => (
                 <span key={i} className="inst-dot h-2 w-2 rounded-full bg-[#24282C]/60" style={{ animationDelay: `${i * 0.15}s` }} />
               ))}
@@ -642,7 +641,7 @@ export function Prototype() {
             <div className="flex h-12 shrink-0 items-center gap-2 px-3">
               {!leftOpen && (
                 <>
-                  <Link href="/instead" aria-label="Back to overview" title="Back to overview" className={`flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:bg-[#EFEEE6] active:bg-[#E3E2D8] ${FOCUS}`}>
+                  <Link href={backHref} aria-label="Back to overview" title="Back to overview" className={`flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:bg-[#EFEEE6] active:bg-[#E3E2D8] ${FOCUS}`}>
                     <ArrowLeft className="h-4 w-4" aria-hidden />
                   </Link>
                   <button type="button" aria-label="Open sidebar" onClick={() => setLeftOpen(true)} className={`flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:bg-[#EFEEE6] active:bg-[#E3E2D8] ${FOCUS}`}>

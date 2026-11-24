@@ -191,7 +191,7 @@ export function RightPanel({ tab, onTab, uploads, onUpload, onOpenWorkflow, onAs
               <dd>{selected.date}</dd>
             </dl>
             <button type="button" onClick={() => onAsk(selected.name)} className={`mt-5 w-full rounded-full bg-[#C2EF72] px-4 py-2.5 text-sm font-bold text-[#24282C] transition-colors hover:bg-[#B3E45C] ${FOCUS}`}>
-              Ask Instead about this file
+              Ask the assistant about this file
             </button>
           </div>
         )}

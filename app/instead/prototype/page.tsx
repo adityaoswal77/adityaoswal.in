@@ -13,5 +13,5 @@ export const metadata: Metadata = {
 };
 
 export default function PrototypePage() {
-  return <Prototype />;
+  return <Prototype backHref="/instead" />;
 }

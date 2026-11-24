@@ -268,6 +268,17 @@
       "savedHash": "872e75d3"
     },
     {
+      "id": "work-ai-tax-workspace-prototype",
+      "path": "/work/ai-tax-workspace/prototype",
+      "title": "AI Workspace Prototype",
+      "group": "Work",
+      "theme": "light",
+      "layout": "type-only",
+      "image": null,
+      "version": "c421c4d63e13",
+      "savedHash": "bb98de17"
+    },
+    {
       "id": "work-rental-academy-website",
       "path": "/work/rental-academy-website",
       "title": "Rental Academy Website",

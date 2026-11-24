@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useLayoutEffect } from "react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { gsap } from "gsap";
@@ -675,6 +675,15 @@ const FinalDirectionSection = () => (
           I went with Ask first. It is not far from today’s home, but it has a lot of small differences. The message box stays in the middle, clients are grouped by status in the sidebar, a Needs you list sits under the message box, and workflows are one tab away.
         </Lead>
         <List items={FINAL_DIRECTION} />
+        <Link
+          href="/work/ai-tax-workspace/prototype"
+          target="_blank"
+          rel="noopener"
+          className="inline-flex items-center gap-2 font-mono text-[14px] uppercase tracking-widest text-[var(--foreground)] underline underline-offset-4 decoration-[var(--border)] hover:decoration-[var(--foreground)] transition-colors"
+        >
+          Open the clickable prototype
+          <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+        </Link>
       </div>
 
       <div className="space-y-16">
