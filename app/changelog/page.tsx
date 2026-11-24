@@ -18,6 +18,15 @@ interface Entry {
 const CHANGELOG: Entry[] = [
   {
     date: "2026-11-24",
+    hash: "f9259a6",
+    title: "Clickable prototype on the rental case study",
+    changes: [
+      { type: "feat", description: "The rental website case study now links to a live version of the coded page. It opens in a new tab" },
+      { type: "content", description: "The hosted copy leaves out prices, people and quotes, and is hidden from search" },
+    ],
+  },
+  {
+    date: "2026-11-24",
     hash: "32589f6",
     title: "Clickable prototype on the tax case study",
     changes: [
