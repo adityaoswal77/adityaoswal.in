@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
+import { linkPreview } from "@/lib/link-previews/metadata";
 import { ThemeController } from "@/components/ThemeController";
 import { ScrollProgress } from "@/components/ScrollProgress";
 
+const title = "Playground | Aditya Oswal";
+const description = "Design experiments and interactive components";
+
 export const metadata: Metadata = {
-  title: "Playground | Aditya Oswal",
-  description: "Design experiments and interactive components",
+  title,
+  description,
+  ...linkPreview("/playground", { title, description }),
 };
 
 export default function PlaygroundLayout({

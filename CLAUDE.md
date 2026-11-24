@@ -135,10 +135,27 @@ Per-project tints in `lib/data.ts` (`pastel`) are now four greens; `accent` stil
 - **Fallback**: if the API errors (retired model, no credits, invalid or missing key), the route injects a humorous message with a LinkedIn link instead of silence. `streamText` does NOT throw on API errors (it calls `onError` and ends `textStream`), so the route treats an empty stream as failure as well as a thrown error
 - **Blob logging**: chat questions logged to Vercel Blob (`BLOB_READ_WRITE_TOKEN` required); non-critical, failures are swallowed
 
+## Share images
+
+Every public page has a share image, made in the Link Previews tool and saved as a static file.
+
+- When you add, rename or remove a public page, update `og-images.json` in the same change: add an entry for a new page (a stable `id` made from its path, its path, real title and group, and an image from the page's own material copied into `og/sources/`), change only `path` when a page moves, remove the entry when a page is deleted.
+- Then open `http://localhost:3000/link-previews` on the dev server, check the image, and save it. Re-save when a page's title or main image changes.
+- Wire new pages with `linkPreview(path, { title, description })` from `lib/link-previews/metadata.ts` (spread it into the page or layout `metadata`) so they get the Open Graph and Twitter tags. The home page uses `shareImage("/")` in `app/layout.tsx`.
+- Never report a share image as done until its file exists.
+
+How it is laid out:
+
+- Images are saved to `public/og/<id>.png` (2400×1260), listed in `og-images.json` with their `version` and `savedHash`. Sources live in `og/sources/`; templates (Plate, Poster, Inset) are in `lib/link-previews/templates.tsx`; the tool UI is `components/link-previews/`.
+- The tool and its endpoints are dev-only. Files named `*.dev.tsx` / `*.dev.ts` (`app/link-previews/page.dev.tsx`, `app/api/link-previews/*/route.dev.ts`) are only picked up by `next dev` through `pageExtensions` in `next.config.js`, so production returns 404. `HideOnInstead` also hides the site chrome on `/link-previews`.
+- System fonts and colors (Faculty Glyphic, the light/dark inks, mint panel) are in the manifest's `system` block, copied from the light persona. Leave `system.color` at `#000000` unless asked.
+- Draft posts have no entry and keep using `app/writing/[slug]/opengraph-image.tsx`; a published post with an entry uses its saved image instead. Add an entry when a post is published.
+- Platforms cache link previews: an old image on an already-shared link is not a failed save. The `?v=` on each image URL helps once the page is fetched again.
+
 ## SEO / Metadata
 
 - Site URL: `https://adityaoswal.in`
-- OG image: `/assets/aditya.jpg`
+- OG image: per-page files in `public/og/` (see Share images); `/assets/aditya.jpg` is the fallback for pages with no saved image
 - Twitter: `@oswaluxd`
 - Each page should export its own `metadata` object using Next.js `title.template`
 
@@ -147,6 +164,7 @@ Per-project tints in `lib/data.ts` (`pastel`) are now four greens; `accent` stil
 - **Hook**: TypeScript type-check runs after every file edit
 - **Skill** `/new-component`: scaffold a Tailwind + Framer Motion component
 - **Skill** `/deploy`: runs `vercel --prod`
+- **Skill** `/link-previews` (installed from `joshpuckett/skills`, in `.agents/skills/link-previews`): upkeep for share images; see Share images
 - **Subagent** `ui-reviewer`: audits components for a11y, dark mode, responsive design
 - **MCP** context7: live docs for Next.js, React, Framer Motion, Three.js, etc.
 - **MCP** Playwright: browser automation and visual testing — dumps console logs/snapshots/screenshots into `.playwright-mcp/`, which is gitignored; safe to delete anytime

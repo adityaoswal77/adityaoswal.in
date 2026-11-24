@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { linkPreview } from "@/lib/link-previews/metadata";
 import { ArrowUpRight } from "lucide-react";
 
 const EMBED_URL = "https://adi-os.neetorecord.com/embeds/162f1ea8-fcd6-40d5-b03d-032c44dfccae";
@@ -21,10 +22,14 @@ const LINKS = [
   },
 ];
 
+const title = "Flex Assignment";
+const description = "Live website, walkthrough recording and Figma file for the Flex assignment.";
+
 export const metadata: Metadata = {
-  title: "Flex Assignment",
-  description: "Live website, walkthrough recording and Figma file for the Flex assignment.",
+  title,
+  description,
   robots: { index: false, follow: false },
+  ...linkPreview("/flex", { title, description }),
 };
 
 function getDomain(url: string): string {

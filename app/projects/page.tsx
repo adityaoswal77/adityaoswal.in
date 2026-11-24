@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { linkPreview } from "@/lib/link-previews/metadata";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { SIDE_PROJECTS } from "@/lib/data";
@@ -12,21 +13,7 @@ export const metadata: Metadata = {
   title: "Projects",
   description,
   alternates: { canonical: "/projects" },
-  openGraph: {
-    title: "Projects | Aditya Oswal",
-    description,
-    url: "/projects",
-    siteName: "Aditya Oswal",
-    type: "website",
-    images: ["/assets/aditya.jpg"],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Projects | Aditya Oswal",
-    description,
-    creator: "@oswaluxd",
-    images: ["/assets/aditya.jpg"],
-  },
+  ...linkPreview("/projects", { title: "Projects | Aditya Oswal", description }),
 };
 
 export default function ProjectsPage() {

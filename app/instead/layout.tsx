@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { linkPreview } from "@/lib/link-previews/metadata";
 import { Lato, Libre_Baskerville } from "next/font/google";
 
 const lato = Lato({
@@ -14,9 +15,14 @@ const baskerville = Libre_Baskerville({
   display: "swap",
 });
 
+const title = "Instead · Product Designer Exercise";
+const description = "Reimagining how a Pro lands in Instead: walkthrough video, presentation, Figma file and a clickable prototype.";
+
 export const metadata: Metadata = {
-  title: "Instead · Product Designer Exercise",
+  title,
+  description,
   robots: { index: false, follow: false },
+  ...linkPreview("/instead", { title, description }),
 };
 
 export default function InsteadLayout({ children }: { children: React.ReactNode }) {

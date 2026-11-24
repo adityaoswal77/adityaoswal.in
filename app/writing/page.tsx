@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { linkPreview } from "@/lib/link-previews/metadata";
 import { getPosts } from "@/content/writing";
 import { PostList } from "@/components/writing/PostList";
 
@@ -9,21 +10,7 @@ export const metadata: Metadata = {
   title: "Writing",
   description,
   alternates: { canonical: "/writing" },
-  openGraph: {
-    title: "Writing | Aditya Oswal",
-    description,
-    url: "/writing",
-    siteName: "Aditya Oswal",
-    type: "website",
-    images: ["/assets/aditya.jpg"],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Writing | Aditya Oswal",
-    description,
-    creator: "@oswaluxd",
-    images: ["/assets/aditya.jpg"],
-  },
+  ...linkPreview("/writing", { title: "Writing | Aditya Oswal", description }),
 };
 
 export default function WritingPage() {

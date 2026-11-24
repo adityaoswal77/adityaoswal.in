@@ -1,0 +1,310 @@
+{
+  "system": {
+    "template": "plate",
+    "color": "#000000",
+    "domain": "adityaoswal.in",
+    "font": {
+      "family": "Faculty Glyphic",
+      "titleWeight": 400,
+      "labelWeight": 400
+    },
+    "colors": {
+      "light": {
+        "background": "#ffffff",
+        "ink": "#090f05",
+        "label": "#4a5b38"
+      },
+      "dark": {
+        "background": "#000000",
+        "ink": "#ffffff",
+        "label": "#a1a1aa"
+      },
+      "panel": "#f4faed"
+    },
+    "margin": 56,
+    "textBottom": 80,
+    "panelGap": 48,
+    "panelWidth": 540,
+    "labelSize": 24,
+    "labelLineHeight": 1.3,
+    "labelGap": 48,
+    "lineHeight": 0.9,
+    "titleSize": {
+      "min": 40,
+      "max": 150
+    },
+    "maxLines": 4
+  },
+  "entries": [
+    {
+      "id": "home",
+      "path": "/",
+      "title": "UX Designer & Product Designer in Bangalore",
+      "group": "Pages",
+      "theme": "dark",
+      "layout": "type-and-image",
+      "image": {
+        "sheet": [
+          "og/sources/home-tile-guest-user.png",
+          "og/sources/home-tile-design-system.png",
+          "og/sources/home-tile-freshfolios.png",
+          "og/sources/home-tile-interesting-places.png"
+        ],
+        "columns": 2
+      },
+      "version": "51a78ac02692",
+      "savedHash": "77cb30b1"
+    },
+    {
+      "id": "aboutme",
+      "path": "/aboutme",
+      "title": "About Me",
+      "group": "Pages",
+      "theme": "light",
+      "layout": "type-and-image",
+      "image": {
+        "src": "og/sources/aboutme-portrait.jpg",
+        "focus": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      },
+      "version": "232bf332748d",
+      "savedHash": "68fcd056"
+    },
+    {
+      "id": "work",
+      "path": "/work",
+      "title": "Work & Case Studies",
+      "group": "Pages",
+      "theme": "light",
+      "layout": "type-only",
+      "image": null,
+      "version": "983d45718a61",
+      "savedHash": "44ba9184"
+    },
+    {
+      "id": "writing",
+      "path": "/writing",
+      "title": "Writing",
+      "group": "Pages",
+      "theme": "light",
+      "layout": "type-only",
+      "image": null,
+      "version": "29784b5ad5be",
+      "savedHash": "39780504"
+    },
+    {
+      "id": "projects",
+      "path": "/projects",
+      "title": "Projects",
+      "group": "Pages",
+      "theme": "light",
+      "layout": "type-only",
+      "image": null,
+      "version": "75c77b0e58db",
+      "savedHash": "9fe1d23c"
+    },
+    {
+      "id": "playground",
+      "path": "/playground",
+      "title": "Playground",
+      "group": "Pages",
+      "theme": "light",
+      "layout": "type-and-image",
+      "image": {
+        "src": "og/sources/playground-network-school.jpg",
+        "focus": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      },
+      "version": "1daf3ec57cb9",
+      "savedHash": "5da5422c"
+    },
+    {
+      "id": "links",
+      "path": "/links",
+      "title": "Resources & References",
+      "group": "Pages",
+      "theme": "light",
+      "layout": "type-only",
+      "image": null,
+      "version": "59f77c282c90",
+      "savedHash": "1aaec875"
+    },
+    {
+      "id": "career-odyssey",
+      "path": "/career-odyssey",
+      "title": "Career Odyssey",
+      "group": "Pages",
+      "theme": "light",
+      "layout": "type-and-image",
+      "image": {
+        "src": "og/sources/career-odyssey-2024.jpg",
+        "focus": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      },
+      "version": "def8ed6c0887",
+      "savedHash": "dc18e3a6"
+    },
+    {
+      "id": "changelog",
+      "path": "/changelog",
+      "title": "Changelog",
+      "group": "Pages",
+      "theme": "light",
+      "layout": "type-only",
+      "image": null,
+      "version": "139d1c7ab698",
+      "savedHash": "9bacd76e"
+    },
+    {
+      "id": "flex",
+      "path": "/flex",
+      "title": "Flex Assignment",
+      "group": "Pages",
+      "theme": "light",
+      "layout": "type-only",
+      "image": null,
+      "version": "a0aa65f70e5f",
+      "savedHash": "40338a90"
+    },
+    {
+      "id": "instead",
+      "path": "/instead",
+      "title": "Instead · Product Designer Exercise",
+      "group": "Pages",
+      "theme": "light",
+      "layout": "type-only",
+      "image": null,
+      "version": "c35300934b26",
+      "savedHash": "860dfb59"
+    },
+    {
+      "id": "work-guest-user",
+      "path": "/work/guest-user",
+      "title": "Guest Mode vs Ghost Mode",
+      "group": "Work",
+      "theme": "light",
+      "layout": "type-and-image",
+      "image": {
+        "src": "og/sources/work-guest-user-after.png",
+        "focus": {
+          "x": 0.5,
+          "y": 0.05
+        }
+      },
+      "version": "71d33c9bcd1c",
+      "savedHash": "e4955039"
+    },
+    {
+      "id": "work-kardia-design-system",
+      "path": "/work/kardia-design-system",
+      "title": "Design System",
+      "group": "Work",
+      "theme": "light",
+      "layout": "type-and-image",
+      "image": {
+        "src": "og/sources/work-kardia-design-system-mockup.png",
+        "focus": {
+          "x": 0.5,
+          "y": 0.1
+        }
+      },
+      "version": "9eed2133c0d2",
+      "savedHash": "0aafe43a"
+    },
+    {
+      "id": "work-neon-fintech",
+      "path": "/work/neon-fintech",
+      "title": "Neon Fintech",
+      "group": "Work",
+      "theme": "light",
+      "layout": "type-only",
+      "image": null,
+      "version": "4042b6fcf5ff",
+      "savedHash": "f230acb3"
+    },
+    {
+      "id": "work-website-redesign",
+      "path": "/work/website-redesign",
+      "title": "Website Redesign",
+      "group": "Work",
+      "theme": "light",
+      "layout": "type-only",
+      "image": null,
+      "version": "97e24c3aadeb",
+      "savedHash": "8dc02d62"
+    },
+    {
+      "id": "work-year-in-review",
+      "path": "/work/year-in-review",
+      "title": "Year in Review",
+      "group": "Work",
+      "theme": "light",
+      "layout": "type-only",
+      "image": null,
+      "version": "e12ae83f7e7c",
+      "savedHash": "a68033c6"
+    },
+    {
+      "id": "writing-428-places-almost-no-visitors",
+      "path": "/writing/428-places-almost-no-visitors",
+      "title": "428 places, almost no visitors",
+      "group": "Writing",
+      "theme": "light",
+      "layout": "type-only",
+      "image": null,
+      "version": "e23550bc9619",
+      "savedHash": "46772b14"
+    },
+    {
+      "id": "playground-freshfolios",
+      "path": "/playground/freshfolios",
+      "title": "Freshfolios",
+      "group": "Playground",
+      "theme": "light",
+      "layout": "type-and-image",
+      "image": {
+        "src": "og/sources/playground-freshfolios-preview.png",
+        "focus": {
+          "x": 0.2,
+          "y": 0.5
+        }
+      },
+      "version": "33d9fe6e7662",
+      "savedHash": "c64fa76a"
+    },
+    {
+      "id": "playground-interestingplaces",
+      "path": "/playground/interestingplaces",
+      "title": "Interesting Places",
+      "group": "Playground",
+      "theme": "light",
+      "layout": "type-and-image",
+      "image": {
+        "src": "og/sources/playground-interestingplaces-preview.webp",
+        "focus": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      },
+      "version": "f68320583643",
+      "savedHash": "27225e7c"
+    },
+    {
+      "id": "instead-prototype",
+      "path": "/instead/prototype",
+      "title": "Instead · Prototype",
+      "group": "Instead",
+      "theme": "light",
+      "layout": "type-only",
+      "image": null,
+      "version": "b456e75a8d36",
+      "savedHash": "7ab1fa8d"
+    }
+  ]
+}

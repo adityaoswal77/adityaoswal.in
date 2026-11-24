@@ -7,8 +7,10 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { WanderingCharacter } from "@/components/WanderingCharacter";
 import { HideOnInstead } from "@/components/HideOnInstead";
+import { shareImage } from "@/lib/link-previews/metadata";
 
 const siteUrl = "https://adityaoswal.in";
+const homeImage = shareImage("/");
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -53,7 +55,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
     images: [
-      {
+      homeImage ?? {
         url: "/assets/aditya.jpg",
         width: 1200,
         height: 630,
@@ -67,7 +69,7 @@ export const metadata: Metadata = {
     description:
       "UX Designer, Product Designer, and Design Engineer based in Bangalore. Specializing in UI/UX, design systems, and interactive web experiences.",
     creator: "@oswaluxd",
-    images: ["/assets/aditya.jpg"],
+    images: [homeImage ? { url: homeImage.url, alt: homeImage.alt } : "/assets/aditya.jpg"],
   },
   alternates: {
     canonical: siteUrl,

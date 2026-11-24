@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { shareImage } from "@/lib/link-previews/metadata";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { formatDate, getPost, getPosts, getReadNext } from "@/content/writing";
@@ -19,6 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return {};
 
   const url = `/writing/${post.slug}`;
+  const image = shareImage(url);
 
   return {
     title: post.title,
@@ -33,12 +35,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: "Aditya Oswal",
       publishedTime: post.date,
       authors: ["Aditya Oswal"],
+      ...(image ? { images: [image] } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.description,
       creator: "@oswaluxd",
+      ...(image ? { images: [{ url: image.url, alt: image.alt }] } : {}),
     },
   };
 }

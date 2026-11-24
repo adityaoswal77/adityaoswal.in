@@ -1,3 +1,5 @@
+const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async redirects() {
@@ -46,4 +48,10 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = (phase) => ({
+  ...nextConfig,
+  pageExtensions:
+    phase === PHASE_DEVELOPMENT_SERVER
+      ? ["dev.tsx", "dev.ts", "tsx", "ts", "jsx", "js"]
+      : ["tsx", "ts", "jsx", "js"],
+});
