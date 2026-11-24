@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useLayoutEffect } from "react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { ZoomableImage } from "@/components/ZoomableImage";
 import { gsap } from "gsap";
@@ -501,7 +501,7 @@ const BuiltSection = () => (
   <Section title="Built in Code">
     <div className="space-y-12">
       <Lead>
-        I built the page as a working front end rather than leaving it as static screens. It has not been shipped.
+        I built the page as a working front end rather than leaving it as static screens. It has not been shipped. The hosted copy is trimmed: it leaves out prices, people and quotes.
       </Lead>
       <List
         items={[
@@ -512,6 +512,15 @@ const BuiltSection = () => (
           { label: "Why build it", desc: "So the whole flow could be tried end to end, on desktop and on mobile." },
         ]}
       />
+      <a
+        href="https://rental-academy-prototype.pages.dev"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 font-mono text-[14px] uppercase tracking-widest text-[var(--foreground)] underline underline-offset-4 decoration-[var(--border)] hover:decoration-[var(--foreground)] transition-colors"
+      >
+        Open the live prototype
+        <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+      </a>
     </div>
   </Section>
 );
