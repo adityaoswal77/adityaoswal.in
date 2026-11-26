@@ -3,12 +3,13 @@ import { linkPreview } from "@/lib/link-previews/metadata";
 
 const title = "Neon Fintech — Product Design Case Study";
 const description =
-  "Case study: Product design for Neon Fintech. Designing intuitive financial experiences with a focus on clarity, trust, and user-centered interaction design.";
+  "Case study: Product design for Neon Fintech, a mobile banking app. Write-up in progress.";
 
 export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: "https://adityaoswal.in/work/neon-fintech" },
+  robots: { index: false, follow: true },
   ...linkPreview("/work/neon-fintech", { title, description }),
 };
 
